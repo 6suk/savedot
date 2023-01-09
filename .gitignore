@@ -2,6 +2,7 @@
 Exercise.java
 exercise/
 .project
+.DS_Store
 
 HELP.md
 target/
@@ -17,6 +18,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
+
 
 ### IntelliJ IDEA ###
 .idea
