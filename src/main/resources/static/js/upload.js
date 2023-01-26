@@ -13,16 +13,18 @@ columns.forEach((column) => {
         ctrl = evt.target;
 
       if (Sortable.utils.is(ctrl, '.remove')) {
-        item.parentNode.removeChild(item); // remove sortable item
+        item.parentNode.removeChild(item);
         filelist.splice(evt.oldIndex, 1); // 파일 리스트에서 삭제
       }
     },
 
+    // 리스트 순서 변경
     onEnd: function (evt) {
       let oldindex = evt.oldIndex;
       let newindex = evt.newIndex;
       let tmp = filelist.splice(oldindex, 1)[0];
       filelist.splice(newindex, 0, tmp);
+      console.log(filelist);
     },
   });
 });
@@ -41,12 +43,15 @@ document.addEventListener('mouseover', (event) => {
   if (event.target.className === 'inner') {
     const label = document.getElementById('label');
     label?.classList.add('label--hover');
-  } else if (event.target.className === 'allContainer') {
+  }
+  // sort 썸네일 이미지 마우스 오버 시 opacity
+  else if (event.target.className === 'allContainer') {
     event.target.querySelector('.container-img').style.opacity = '0.7';
     event.target.querySelector('.remove').style.opacity = '1';
-  } else if (event.target.className === 'remove') {
-    event.target.parentNode.querySelector('.container-img').style.opacity =
-      '0.7';
+  }
+  // sort 삭제버튼 마우스 오버 시 opacity
+  else if (event.target.className === 'remove') {
+    event.target.parentNode.querySelector('.container-img').style.opacity = '0.7';
     event.target.style.opacity = '0.5';
   }
 });
@@ -68,8 +73,8 @@ document.addEventListener('mouseout', (event) => {
 document.addEventListener('dragenter', (event) => {
   event.preventDefault();
   console.log('dragenter');
-  if (event.target.className === 'inner') {
-    event.target.style.opacity = '70%';
+  if ($(event.target).hasClass('inner')) {
+    $(event.target).css('opacity', '70%');
   }
 });
 
@@ -80,17 +85,19 @@ document.addEventListener('dragover', (event) => {
 document.addEventListener('dragleave', (event) => {
   event.preventDefault();
   console.log('dragleave');
-  if (event.target.className === 'inner') {
-    event.target.style.opacity = '100%';
+  if ($(event.target).hasClass('inner')) {
+    $(event.target).css('opacity', '100%');
   }
 });
 
 document.addEventListener('drop', (event) => {
   event.preventDefault();
   console.log('drop');
-  if (event.target.className === 'inner') {
+
+  if ($(event.target).hasClass('inner')) {
     const files = event.dataTransfer?.files;
-    event.target.style.opacity = '100%';
+    $(event.target).css('opacity', '100%');
+    $('.inner').removeClass('empty');
     handleUpdate([...files]);
   }
 });
@@ -118,19 +125,8 @@ function handleUpdate(fileList) {
       });
 
       const remove = el('div', { className: 'remove', id: 'remove' }, i);
-
-      const imgContainer = el(
-        'div',
-        { className: 'container-img', id: 'inputimg' },
-        img
-      );
-
-      const allContainer = el(
-        'div',
-        { className: 'allContainer' },
-        imgContainer,
-        remove
-      );
+      const imgContainer = el('div', { className: 'container-img', id: 'inputimg' }, img);
+      const allContainer = el('div', { className: 'allContainer' }, imgContainer, remove);
       preview.append(allContainer);
     });
     reader.readAsDataURL(file);
@@ -139,10 +135,7 @@ function handleUpdate(fileList) {
 }
 
 function el(nodeName, attributes, ...children) {
-  const node =
-    nodeName === 'fragment'
-      ? document.createDocumentFragment()
-      : document.createElement(nodeName);
+  const node = nodeName === 'fragment' ? document.createDocumentFragment() : document.createElement(nodeName);
 
   Object.entries(attributes).forEach(([key, value]) => {
     if (key === 'events') {
@@ -170,6 +163,69 @@ function el(nodeName, attributes, ...children) {
   return node;
 }
 
-function contentSave() {
+// require 검사 + SUBMIT
+$('#sendbtn').click(function () {
+  let inner = $('#inner');
+
+  //input value
+  let title = $('input[name=title]');
+  let category = $('input[name=category]:checked');
+  let category_control = $('label#category');
+  let area = $('input[name=area]');
+  let price1 = $('input[name=price1]');
+  let price2 = $('input[name=price2]');
+
+  //control
+  let check = [category, title, area, price1, price2];
+  let check_ = 0;
+
+  for (let i = 0; i < check.length; i++) {
+    let control = i === 0 ? category_control : check[i];
+    if (check[i].val() === '' || check[i].val() === null || check[i].val() === undefined) {
+      control.addClass('empty');
+    } else {
+      check_++;
+    }
+  }
+
+  if (filelist.length < 1) {
+    inner.addClass('empty');
+  } else {
+    check_++;
+  }
+
+  if (check_ === check.length + 1) {
+    matesubmit();
+  }
+});
+
+// require 값 채워질 때
+$(function () {
+  let category_control = $('label#category');
+  let img_control = $('#inner');
+
+  $('input[name=title], input[name=area], input[name=price1], input[name=price2]').on('input', function () {
+    $(this).removeClass('empty');
+  });
+
+  $('input[name=category]').change(function () {
+    if ($(this).length > 0) {
+      category_control.removeClass('empty');
+    }
+  });
+});
+
+function matesubmit() {
+  console.log('실행');
+  let formData = new FormData($('#mateform')[0]);
+  formData.append('category', $('input[name=category]:checked').val());
+  filelist.forEach((x) => formData.append('imgs', x));
+  formData.append('img', filelist[0]);
   console.log(filelist);
+
+  fetch('/mate', {
+    method: 'POST',
+    cache: 'no-cache',
+    body: formData,
+  });
 }

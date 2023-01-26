@@ -30,8 +30,9 @@
   </head>
   <body>
     <!-- TOP -->
-    <nav class="navbar navbar-expand navbar-light fixed-top mb-5">
-      <div class="container-fluid">
+    <nav class="navbar navbar-expand navbar-light fixed-top">
+      <!-- <div class="container-fluid"> -->
+      <div class="container-lg justify-content-lg-between">
         <ul class="navbar-nav">
           <a class="navbar-brand" href="#">
             <img src="/img/logo.png" class="logo" />
@@ -118,7 +119,7 @@
           <div class="row viewcard-group">
             <div class="col-lg viewcard mypage-card" id="card1">
               <div class="mypage-card-left">
-                <p class="mypage-card-toptxt" id="card1-top">ddd</p>
+                <p class="mypage-card-toptxt" id="card1-top"></p>
                 <div class="emojitxt">
                   <img src="" id="card1-emoji" />
                   <span id="card1-emoji-txt"></span>
@@ -148,4 +149,5 @@
     </div>
   </body>
 </html>
+
 

@@ -1,10 +1,9 @@
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css');
+@import url(maincolor.css);
 
 * {
-  font-family: 'Pretendard Variable', Pretendard, -apple-system,
-    BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
-    'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue',
+    'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', sans-serif;
   color: #333;
 }
 
@@ -16,52 +15,6 @@ a {
   text-decoration: none;
   color: #333;
   user-select: none;
-}
-
-/*Color*/
-
-:root {
-  --main-color: #4880ee;
-  --main-color-hover: #366cd8;
-  --main-color-rgb: 72, 128, 238;
-  --sub-color: #e8f0fd;
-  --border-color: #dee2e6;
-  --gray-color: rgba(66, 66, 66);
-  --lgray-color: #999;
-}
-
-.graytxt {
-  color: var(--gray-color);
-}
-.l-graytxt {
-  color: var(--lgray-color);
-}
-
-.maintxt {
-  color: var(--main-color);
-}
-
-.maincolor {
-  background: var(--main-color);
-  color: var(--sub-color);
-}
-
-.subcolor {
-  background: var(--sub-color);
-  color: var(--main-color);
-}
-
-.graycolor {
-  background: #dcdcdc;
-  color: var(--lgray-color);
-}
-
-.font-12 {
-  font-size: 12px;
-}
-
-.font-13 {
-  font-size: 13px;
 }
 
 /* TOP */
@@ -80,6 +33,7 @@ a {
   justify-content: space-between;
   padding-top: 1rem;
   padding-bottom: 1rem;
+  margin-bottom: 4rem;
 
   /* add */
   background-color: transparent;
@@ -227,8 +181,8 @@ aside {
 .icon-btn p {
   font-size: 14px;
   color: var(--gray-color);
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
   font-weight: 500;
 }
 
@@ -258,4 +212,66 @@ aside {
 
 .hide {
   display: none;
+}
+
+/** content */
+.content-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1.5rem;
+}
+
+.empty {
+  border: 1px solid var(--error-color) !important;
+}
+
+/**태그 형식 input*/
+
+.form-tag {
+  /* padding: 15px 10px; */
+}
+.form-tag input[type='radio'],
+.form-tag input[type='checkbox'] {
+  display: none;
+}
+.form-tag input[type='radio'] + label,
+.form-tag input[type='checkbox'] + label {
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 5px;
+  margin-right: 5px;
+  padding-inline: 1rem;
+  padding-block: 0.4rem;
+}
+.form-tag input[type='radio'] + label,
+.form-tag input[type='checkbox'] + label {
+  background-color: #eee;
+  color: var(--gray-color);
+  border: 1px solid transparent;
+  transition: all ease 0.3s 0s;
+}
+
+.form-tag input[type='radio']:hover + label,
+.form-tag input[type='checkbox']:hover + label {
+  background-color: #dcdcdc;
+}
+
+.form-tag input[type='radio']:checked + label,
+.form-tag input[type='checkbox']:checked + label {
+  background-color: var(--sub-color);
+  color: var(--main-color);
+  transition: all ease 0.3s 0s;
+  font-weight: 600;
+}
+
+.form-tag input[type='radio']:checked:hover + label,
+.form-tag input[type='checkbox']:checked:hover + label {
+  background-color: var(--sub-color-hover);
+  color: var(--main-color);
+}
+
+.form-tag-title {
 }

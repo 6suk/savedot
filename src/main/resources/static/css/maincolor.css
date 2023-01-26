@@ -1,0 +1,48 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css');
+
+/*Color*/
+:root {
+  --main-color: #4880ee;
+  --main-color-hover: #366cd8;
+  --main-color-rgb: 72, 128, 238;
+  --sub-color: #e8f0fd;
+  --sub-color-hover: #ddeaff;
+  --border-color: rgb(219, 219, 219);
+  --gray-color: rgba(66, 66, 66);
+  --lgray-color: #999;
+  --error-color: rgb(255, 119, 119);
+}
+
+.graytxt {
+  color: var(--gray-color);
+}
+.l-graytxt {
+  color: var(--lgray-color);
+}
+
+.maintxt {
+  color: var(--main-color);
+}
+
+.maincolor {
+  background: var(--main-color);
+  color: var(--sub-color);
+}
+
+.subcolor {
+  background: var(--sub-color);
+  color: var(--main-color);
+}
+
+.graycolor {
+  background: #dcdcdc;
+  color: var(--lgray-color);
+}
+
+.font-12 {
+  font-size: 12px;
+}
+
+.font-13 {
+  font-size: 13px;
+}

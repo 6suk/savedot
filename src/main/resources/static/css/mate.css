@@ -1,9 +1,10 @@
-@import url(mainStyle.css);
+@import url(maincolor.css);
 
 /* write */
 .writebox {
   display: flex;
   gap: 2rem;
+  flex-direction: column;
 }
 .inputbox {
   flex: 1 0 0px;
@@ -21,7 +22,6 @@
 
 .imgbox-img {
   margin: 0px;
-  padding: 0px 0px 60%;
   border: none;
   background: none;
   font: inherit;
@@ -31,19 +31,8 @@
   border-radius: 4px;
   box-sizing: border-box;
   cursor: pointer;
-  height: 100%;
-}
-
-.mate-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.container {
-  width: clamp(0px, 100%, 512px);
-  margin: 32px auto;
-  text-align: center;
+  height: auto;
+  aspect-ratio: 4/3;
 }
 
 @media (any-hover: hover) {
@@ -80,7 +69,7 @@
   display: flex;
   grid-template-columns: repeat(5, 1fr);
   gap: 16px;
-  padding: 16px;
+  padding: 16px 16px 0 16px;
   border-radius: 4px;
   align-items: center;
 }
@@ -99,7 +88,8 @@
   object-fit: cover;
   top: 50%;
   left: 50%;
-  height: 100%;
+  max-height: 100%;
+  min-width: 100%;
   transform: translate(-50%, -50%);
 }
 
@@ -117,8 +107,8 @@
   font-stretch: inherit;
   line-height: inherit;
   font-family: inherit;
-  margin: 5px;
-  padding: 5px;
+  margin: 5px 5px 0 5px;
+  padding: 5px 5px 0 5px;
   transition: opacity 0.1s ease 0s;
   border-radius: 4px;
   font-size: 24px;

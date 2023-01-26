@@ -8,26 +8,49 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.mulcam.finalproject.entity.Mate;
 import com.mulcam.finalproject.entity.Test;
+import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.ReverseGeocode;
 
 @Controller
 public class TestController {
 	
 	@Autowired
+	MateService mateService;
+	
+	@Autowired
 	ReverseGeocode reverseGeocode;
 	
+	/** Mate Write 테스트 */
+	@GetMapping("/mate")
+	public String mateForm() {
+		return "matetest";
+	}
+	
+	@PostMapping("/mate")
+	public String mate(Mate mate) {
+		System.out.println(mate.toString());
+		mateService.saveImgs(mate.getImgs());
+		return "matetest";
+	}
+	
+	
+	/** Reverse Geocode 테스트 */
 	@GetMapping("/rege")
 	@ResponseBody
-	public String reGeodoce() {
+	public String reGeoCode() {
 		String lat = "35.110912";//위도
 		String lon = "126.8744192";//경도
 		
 		return reverseGeocode.getArea(lat,lon);
 	}
 	
+	/** MyPage 테스트 */
 	@GetMapping("/test")
 	public String test(Model model) {
 		return "test";
@@ -36,7 +59,6 @@ public class TestController {
 	@PostMapping("/test")
 	@ResponseBody
 	public Test get(Model model, int ver) {
-		System.out.println(ver);
 		List<Test> list = new ArrayList<>();
 		Test test1 = new Test();
 		test1.setVer(0);
@@ -68,7 +90,6 @@ public class TestController {
 		list.add(test3);
 		
 		model.addAttribute("data", list.get(ver));
-		
 		return list.get(ver);
 	}
 	
