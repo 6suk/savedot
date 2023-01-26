@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.mulcam.finalproject.entity.Mate;
+import com.mulcam.finalproject.entity.MateVO;
 import com.mulcam.finalproject.entity.Test;
 import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.ReverseGeocode;
@@ -33,7 +33,7 @@ public class TestController {
 	}
 	
 	@PostMapping("/mate")
-	public String mate(Mate mate) {
+	public String mate(MateVO mate) {
 		System.out.println(mate.toString());
 		mateService.saveImgs(mate.getImgs());
 		return "matetest";

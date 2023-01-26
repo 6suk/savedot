@@ -4,9 +4,7 @@ let filelist = [];
 
 columns.forEach((column) => {
   sortable = new Sortable(column, {
-    group: 'shared',
     animation: 150,
-    ghostClass: 'blue-background-class',
     filter: '.remove',
     onFilter: function (evt) {
       var item = evt.item,
@@ -24,7 +22,6 @@ columns.forEach((column) => {
       let newindex = evt.newIndex;
       let tmp = filelist.splice(oldindex, 1)[0];
       filelist.splice(newindex, 0, tmp);
-      console.log(filelist);
     },
   });
 });
@@ -128,9 +125,9 @@ function handleUpdate(fileList) {
       const imgContainer = el('div', { className: 'container-img', id: 'inputimg' }, img);
       const allContainer = el('div', { className: 'allContainer' }, imgContainer, remove);
       preview.append(allContainer);
+      filelist.push(file);
     });
     reader.readAsDataURL(file);
-    filelist.push(file);
   });
 }
 
@@ -193,6 +190,7 @@ $('#sendbtn').click(function () {
   } else {
     check_++;
   }
+  console.log(check_);
 
   if (check_ === check.length + 1) {
     matesubmit();
@@ -220,12 +218,14 @@ function matesubmit() {
   let formData = new FormData($('#mateform')[0]);
   formData.append('category', $('input[name=category]:checked').val());
   filelist.forEach((x) => formData.append('imgs', x));
-  formData.append('img', filelist[0]);
-  console.log(filelist);
 
   fetch('/mate', {
     method: 'POST',
     cache: 'no-cache',
     body: formData,
   });
+}
+
+function test() {
+  console.log(filelist);
 }
