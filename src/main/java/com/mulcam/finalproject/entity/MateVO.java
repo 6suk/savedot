@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class Mate {
+public class MateVO {
 	private String area;
 	private String title;
 	private String price1;
@@ -14,10 +14,10 @@ public class Mate {
 	private String categoryName; // [조각메이트/OTT메이트]
 	private List<MultipartFile> imgs;
 
-	public Mate() {
+	public MateVO() {
 	};
 
-	public Mate(String area, String title, String price1, String price2, String content, int category,
+	public MateVO(String area, String title, String price1, String price2, String content, int category,
 			String categoryName, List<MultipartFile> imgs) {
 		super();
 		this.area = area;
