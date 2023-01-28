@@ -1,4 +1,4 @@
-package com.mulcam.finalproject.service;
+package com.mulcam.finalproject.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
