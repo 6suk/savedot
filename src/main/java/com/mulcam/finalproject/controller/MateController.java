@@ -38,7 +38,7 @@ public class MateController {
 
 //		User u = userService.findById("ko").get();
 //		userService.delete(u);
-		return "matetest";
+		return "test/matetest";
 	}
 
 	@PostMapping("/mate")
@@ -56,7 +56,7 @@ public class MateController {
 
 			mateService.save(mate, files);
 		}
-		return "matetest";
+		return "test/matetest";
 	}
 
 	@GetMapping("/detail")
@@ -69,7 +69,7 @@ public class MateController {
 		System.out.println(mateDTO);
 		model.addAttribute("mate", mateDTO);
 
-		return "viewtest";
+		return "test/viewtest";
 	}
 	
 	@RequestMapping("/apply/{mid}")

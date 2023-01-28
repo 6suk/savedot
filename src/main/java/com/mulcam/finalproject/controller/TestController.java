@@ -53,7 +53,7 @@ public class TestController {
 	/** MyPage 테스트 */
 	@GetMapping("/test")
 	public String test(Model model) {
-		return "test";
+		return "test/test";
 	}
 	
 	@PostMapping("/test")
