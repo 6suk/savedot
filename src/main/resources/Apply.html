@@ -1,12 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <link rel="stylesheet" href="../resources/static/css/bootstrap.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/354b0809a2.js" crossorigin="anonymous"></script>
     <link
@@ -15,11 +13,11 @@
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="/css/mainStyle.css" />
-    <link rel="stylesheet" href="/css/card.css" />
-    <link rel="stylesheet" href="/css/mate.css" />
-    <script src="/js/card.js"></script>
-    <script src="/js/mate.js"></script>
+    <link rel="stylesheet" href="../resources/static/css/mainStyle.css" />
+    <link rel="stylesheet" href="../resources/static/css/card.css" />
+    <link rel="stylesheet" href="../resources/static/css/mate.css" />
+    <script src="../resources/static/js/card.js"></script>
+    <script src="../resources/static/js/mate.js"></script>
     <title>FinalProject</title>
   </head>
   <body>
@@ -28,7 +26,7 @@
       <div class="container-lg justify-content-lg-between">
         <ul class="navbar-nav">
           <a class="navbar-brand" href="#">
-            <img src="/img/logo.png" class="logo" />
+            <img src="../resources/static/img/logo.png" class="logo" />
           </a>
           <li class="nav-item">
             <a class="nav-link active" href="#">Home</a>
@@ -78,21 +76,11 @@
             <label for="ott" id="category">OTT 메이트</label>
           </div>
           <input type="button" id="sendbtn" class="btn btn-main main" value="등록하기" />
+          <!-- 테스트용 -->
+          <!-- <input type="button" class="btn btn-main main" value="등록하기" onclick="test()"/> -->
         </div>
 
         <div class="writebox flex-lg-row">
-          <div class="imgbox">
-            <label class="imgbox-img label" id="label" for="input">
-              <div class="inner" id="inner">
-                <i class="fa-solid fa-camera"></i>
-                <span class="graytxt pt-2">사진 올리기</span>
-                <span class="l-graytxt font-12">(최대 5장)</span>
-              </div>
-            </label>
-            <input id="input" class="input" accept="image/*" type="file" multiple="true" hidden="true" name="img" />
-            <div class="preview" id="preview" hidden></div>
-          </div>
-          <form id="mateform" class="inputbox">
           <div class="inputbox">
             <input type="text" class="form-control text" placeholder="지역*" name="area" />
             <input class="form-control text" type="text" name="title" placeholder="제목*" />
@@ -100,14 +88,19 @@
             <input class="form-control text" type="number" name="price2" placeholder="판매가격*" />
             <textarea class="form-control" name="content" cols="30" rows="10" placeholder="본문"></textarea>
           </div>
+          <form id="mateform" class="inputbox">
+            <div class="inputbox">
+              <input type="text" class="form-control text" placeholder="지역*" name="area" />
+              <input class="form-control text" type="text" name="title" placeholder="제목*" />
+              <input class="form-control text" type="number" name="price1" placeholder="구매가격*" />
+              <input class="form-control text" type="number" name="price2" placeholder="판매가격*" />
+              <textarea class="form-control" name="content" cols="30" rows="10" placeholder="본문"></textarea>
+            </div>
+          </form>
         </div>
-      </form>
       </section>
     </div>
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
-  <script src="/js/upload.js"></script>
+  <script src="../resources/static/js/upload.js"></script>
 </html>
-
-
-

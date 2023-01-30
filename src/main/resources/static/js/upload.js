@@ -217,7 +217,9 @@ function matesubmit() {
   console.log('실행');
   let formData = new FormData($('#mateform')[0]);
   formData.append('category', $('input[name=category]:checked').val());
-  filelist.forEach((x) => formData.append('imgs', x));
+  filelist.forEach((x) => {
+    formData.append('reqimgs', x);
+  });
 
   fetch('/mate', {
     method: 'POST',

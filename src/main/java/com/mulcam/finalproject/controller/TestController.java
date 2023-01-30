@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.mulcam.finalproject.entity.MateVO;
+import com.mulcam.finalproject.entity.Mate;
 import com.mulcam.finalproject.entity.Test;
 import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.ReverseGeocode;
@@ -21,24 +21,24 @@ import com.mulcam.finalproject.service.ReverseGeocode;
 public class TestController {
 	
 	@Autowired
-	MateService mateService;
-	
-	@Autowired
 	ReverseGeocode reverseGeocode;
 	
-	/** Mate Write 테스트 */
-	@GetMapping("/mate")
-	public String mateForm() {
-		return "matetest";
-	}
+	@Autowired
+	MateService mateService;
 	
-	@PostMapping("/mate")
-	public String mate(MateVO mate) {
-		System.out.println(mate.toString());
-		mateService.saveImgs(mate.getImgs());
-		return "matetest";
-	}
-	
+//	@GetMapping("/jpa")
+//	public String jpaGet() {
+//		Mate mate = Mate.builder()
+//				.area("광주광역시")
+//				.category(0)
+//				.content("샬라샬라")
+//				.price1(12000)
+//				.price2(6000)
+//				.title("title");
+//		
+//		mateService.save(null);
+//		return null;
+//	}
 	
 	/** Reverse Geocode 테스트 */
 	@GetMapping("/rege")
@@ -53,7 +53,7 @@ public class TestController {
 	/** MyPage 테스트 */
 	@GetMapping("/test")
 	public String test(Model model) {
-		return "test";
+		return "test/test";
 	}
 	
 	@PostMapping("/test")
