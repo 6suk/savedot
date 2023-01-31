@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.fasterxml.uuid.Generators;
 import com.mulcam.finalproject.entity.Test;
+import com.mulcam.finalproject.service.ReverseGeocodeUtil;
 
 public class ConsoleTest {
 
@@ -24,7 +25,6 @@ public class ConsoleTest {
 			System.out.println(uuid);
 		}
 	
-		
 
 	}
 

@@ -10,13 +10,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mulcam.finalproject.dto.LocationDTO;
 import com.mulcam.finalproject.dto.MateDTO;
 import com.mulcam.finalproject.entity.Mate;
-import com.mulcam.finalproject.entity.MateImg;
 import com.mulcam.finalproject.entity.User;
 import com.mulcam.finalproject.service.MateService;
+import com.mulcam.finalproject.service.ReverseGeocodeUtil;
 import com.mulcam.finalproject.service.UserService;
 
 @Controller
@@ -28,6 +30,9 @@ public class MateController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	ReverseGeocodeUtil reverseGeocodeUtil;
 
 	@GetMapping("/mate")
 	public String writeGet() {
@@ -38,7 +43,7 @@ public class MateController {
 
 //		User u = userService.findById("ko").get();
 //		userService.delete(u);
-		return "test/matetest";
+		return "mate/write";
 	}
 
 	@PostMapping("/mate")
@@ -54,10 +59,19 @@ public class MateController {
 			ModelMapper modelMapper = new ModelMapper();
 			Mate mate = modelMapper.map(mateDTO, Mate.class);
 
+			System.out.println(mateDTO);
 			mateService.save(mate, files);
 		}
-		return "test/matetest";
+		return "mate/write";
 	}
+	
+	@PostMapping("/write/location")	
+	@ResponseBody
+	public LocationDTO getLocation(LocationDTO param, Model model) {
+		param = reverseGeocodeUtil.getArea(param);
+		return param;
+	}
+	
 
 	@GetMapping("/detail")
 	public String detail(Model model) {

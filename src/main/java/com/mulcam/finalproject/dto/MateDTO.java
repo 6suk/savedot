@@ -42,5 +42,6 @@ public class MateDTO {
 		this.category = category;
 		categoryName = categoryNames[category];
 	}
+	
 
 }
