@@ -165,21 +165,22 @@ $('#sendbtn').click(function () {
   let inner = $('#inner');
 
   //input value
-  let title = $('input[name=title]');
   let category = $('input[name=category]:checked');
   let category_control = $('label#category');
-  let area = $('input[name=area]');
+  let title = $('input[name=title]');
+  let area = $('#area2 option:selected');
+  let area_control = $('.input-btn');
   let price1 = $('input[name=price1]');
   let price2 = $('input[name=price2]');
 
   //control
   let check = [category, title, area, price1, price2];
+  let control = [category_control, title, area_control, price1, price2];
   let check_ = 0;
 
   for (let i = 0; i < check.length; i++) {
-    let control = i === 0 ? category_control : check[i];
     if (check[i].val() === '' || check[i].val() === null || check[i].val() === undefined) {
-      control.addClass('empty');
+      control[i].addClass('empty');
     } else {
       check_++;
     }
@@ -191,6 +192,7 @@ $('#sendbtn').click(function () {
     check_++;
   }
   console.log(check_);
+  console.log(check_.length);
 
   if (check_ === check.length + 1) {
     matesubmit();
@@ -214,9 +216,10 @@ $(function () {
 });
 
 function matesubmit() {
-  console.log('실행');
   let formData = new FormData($('#mateform')[0]);
   formData.append('category', $('input[name=category]:checked').val());
+  console.log($('#area2 option:selected').val());
+  formData.append('area', $('#area2 option:selected').val());
   filelist.forEach((x) => {
     formData.append('reqimgs', x);
   });

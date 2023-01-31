@@ -47,7 +47,7 @@ public class Mate {
 	@ColumnDefault("0")
 	private int category;
 
-	@Column(length = 10)
+	@Column(length = 30)
 	@NotNull
 	private String area;
 

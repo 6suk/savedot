@@ -86,6 +86,7 @@ a {
 
 .multiple-btn {
   display: flex;
+  gap: 0.2rem;
 }
 
 .btn.main {
@@ -225,6 +226,7 @@ aside {
 
 .empty {
   border: 1px solid var(--error-color) !important;
+  border-radius: 0.25rem;
 }
 
 /**태그 형식 input*/
@@ -483,6 +485,68 @@ aside {
 .remove i {
   pointer-events: none;
   color: rgb(117, 117, 117);
+}
+
+.input-btn {
+  display: flex;
+}
+
+.input-btn input[type='text'],
+.input-btn select:first-child {
+  border-radius: 0.25rem 0 0 0.25rem;
+  border: 0 0 1px 1px;
+}
+
+.input-btn select:disabled {
+  background-color: rgb(247, 248, 250);
+}
+.input-btn select {
+  border-radius: 0;
+  border-right: 0;
+}
+
+.input-btn-ele {
+  flex-direction: column;
+  font-size: 15px;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  border-right: 0;
+  gap: 0.1rem;
+}
+
+.input-btn i {
+  margin-top: 0.3rem;
+  color: rgba(var(--main-color-rgb), 0.6);
+  transition: all ease 0.3s 0s;
+}
+
+.input-btn-ele:hover p,
+.input-btn-ele:hover i {
+  color: rgba(var(--main-color-rgb), 0.9);
+  transition: all ease 0.3s 0s;
+}
+
+.input-btn p {
+  font-size: 12px;
+  color: rgba(var(--main-color-rgb), 0.6);
+  transition: all ease 0.3s 0s;
+}
+
+.input-btn div[type='button']:last-child {
+  border-radius: 0 0.25rem 0.25rem 0;
+  border: 1px solid var(--border-color);
+}
+
+/* select {
+  color: #9e9e9e;
+} */
+
+option:not(:first-of-type) {
+  color: black;
 }
 
 /* ////////////////////////////////////  MATE WRTIE >> //////////////////////////////////// */
