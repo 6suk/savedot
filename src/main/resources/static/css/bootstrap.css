@@ -623,15 +623,22 @@ progress {
 .container-lg,
 .container-md,
 .container-sm,
-.container-nonaside {
+.container-nonaside,
+.container-nonaside-sm {
   width: 100%;
   padding-right: var(--bs-gutter-x, 0.75rem);
   padding-left: var(--bs-gutter-x, 0.75rem);
   margin-right: auto;
   margin-left: auto;
+  transition: opacity 1s cubic-bezier(0, 0, 0.2, 1);
 }
 
+/* .container-nonaside-sm {
+  transition: opacity 1s cubic-bezier(0, 0, 0.2, 1);
+} */
+
 @media (min-width: 576px) {
+  .container-nonaside-sm,
   .container-nonaside,
   .container-sm,
   .container {
@@ -676,6 +683,10 @@ progress {
 
   .container-nonaside {
     max-width: 1020px;
+  }
+
+  .container-nonaside-sm {
+    max-width: 720px;
   }
 }
 .row {
@@ -2255,7 +2266,7 @@ progress {
 }
 .form-control:disabled,
 .form-control[readonly] {
-  background-color: #e9ecef;
+  background-color: rgb(247, 248, 250);
   opacity: 1;
 }
 
@@ -2446,7 +2457,7 @@ textarea.form-control-lg {
   background-image: none;
 }
 .form-select:disabled {
-  background-color: #e9ecef;
+  background-color: rgb(247, 248, 250);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23bdbdbd' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
 }
 .form-select:-moz-focusring {
@@ -3156,7 +3167,7 @@ fieldset:disabled .btn {
   color: #666;
   background-color: #dcdcdc;
   border-color: #dcdcdc;
-  box-shadow: 0 0 0 0.25rem rgba(130, 138, 145, 0.5);
+  /* box-shadow: 0 0 0 0.25rem rgba(130, 138, 145, 0.5); */
 }
 .btn-check:checked + .btn-gray,
 .btn-check:active + .btn-gray,
@@ -6187,6 +6198,8 @@ fieldset:disabled .btn {
 
 .carousel {
   position: relative;
+  /* 추가 */
+  aspect-ratio: 16/10;
 }
 
 .carousel.pointer-event {
@@ -6197,6 +6210,8 @@ fieldset:disabled .btn {
   position: relative;
   width: 100%;
   overflow: hidden;
+  /* 추가 */
+  aspect-ratio: inherit;
 }
 .carousel-inner::after {
   display: block;
@@ -6213,6 +6228,9 @@ fieldset:disabled .btn {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   transition: transform 0.6s ease-in-out;
+  /* 추가 */
+  aspect-ratio: inherit;
+  height: 100%;
 }
 @media (prefers-reduced-motion: reduce) {
   .carousel-item {

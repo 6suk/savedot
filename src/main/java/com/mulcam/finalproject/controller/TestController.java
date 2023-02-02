@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mulcam.finalproject.dto.LocationDTO;
+import com.mulcam.finalproject.dto.MypageSumDTO;
 import com.mulcam.finalproject.entity.Mate;
 import com.mulcam.finalproject.entity.Test;
 import com.mulcam.finalproject.service.MateService;
@@ -26,20 +28,6 @@ public class TestController {
 
 	@Autowired
 	MateService mateService;
-
-//	@GetMapping("/jpa")
-//	public String jpaGet() {
-//		Mate mate = Mate.builder()
-//				.area("광주광역시")
-//				.category(0)
-//				.content("샬라샬라")
-//				.price1(12000)
-//				.price2(6000)
-//				.title("title");
-//		
-//		mateService.save(null);
-//		return null;
-//	}
 
 	/** Reverse Geocode 테스트 */
 	@GetMapping("/rege")
@@ -70,45 +58,24 @@ public class TestController {
 	}
 
 	/** MyPage 테스트 */
-	@GetMapping("/test")
-	public String test(Model model) {
-		return "test/test";
+	@GetMapping("/mypage")
+	public String test() {
+		return "test/mypage";
 	}
 
-	@PostMapping("/test")
+	@PostMapping("/mypage")
 	@ResponseBody
-	public Test get(Model model, int ver) {
-		List<Test> list = new ArrayList<>();
-		Test test1 = new Test();
-		test1.setVer(0);
-		test1.setTop("오늘");
-		test1.setEmoji("poultry-leg_1f357.png");
-		test1.setEtxt("치킨 0.1마리");
-		test1.setBottom("약 0,000원을 아꼈어요!");
-		test1.setRight("주간");
-
-		Test test2 = new Test();
-		test2.setVer(1);
-		test2.setTop("한주간");
-		test2.setEmoji("beer-mug_1f37a.png");
-		test2.setEtxt("맥주 0.1마리");
-		test2.setBottom("약 0,000원을 아꼈어요!");
-		test2.setRight("월간");
-
-		Test test3 = new Test();
-		test3.setVer(2);
-		test3.setTop("한달간");
-		test3.setEmoji("red-apple_1f34e.png");
-		test3.setEtxt("0.01 아이패드");
-		test3.setBottom("약 33,000원을 아꼈어요!");
-		test3.setRight("일간");
-
-		list.add(test1);
-		list.add(test2);
-		list.add(test3);
-
-		model.addAttribute("data", list.get(ver));
-		return list.get(ver);
+	public MypageSumDTO get() {
+		// 로그인 유저 uid 받기가 있어야함. (아직 로그인 로직 없으니 임시로 설정할 것)
+		MypageSumDTO mypageSumDTO = MypageSumDTO.builder()	// 실제로는 서비스단에서 받아야함
+				.challengeToday(8000)
+				.challengeWeek(30000)
+				.challengeMonth(125400)
+				.mateToday(5000)
+				.mateWeek(15000)
+				.mateMonth(50000)
+				.build();
+		return mypageSumDTO;
 	}
 
 }
