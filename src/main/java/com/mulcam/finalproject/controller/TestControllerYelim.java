@@ -1,22 +1,13 @@
 package com.mulcam.finalproject.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.mulcam.finalproject.dto.LocationDTO;
 import com.mulcam.finalproject.dto.MypageSumDTO;
-import com.mulcam.finalproject.entity.Mate;
-import com.mulcam.finalproject.entity.Test;
 import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.ReverseGeocodeUtil;
 
