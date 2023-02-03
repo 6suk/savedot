@@ -20,5 +20,5 @@ public interface MateService {
 	public List<MateImg> LocalSaveFiles(List<MultipartFile> imgs);
 	
 	/** write : 게시글 DB 저장 */
-	public void save(Mate mate, List<MultipartFile> imgs);
+	public Long save(Mate mate, List<MultipartFile> imgs);
 }

@@ -24,6 +24,10 @@
   color: var(--main-color);
 }
 
+.subtxt {
+  color: var(--sub-color);
+}
+
 .maincolor {
   background: var(--main-color);
   color: var(--sub-color);

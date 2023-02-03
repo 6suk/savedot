@@ -13,10 +13,10 @@ import lombok.ToString;
 @ToString
 @Builder
 public class MypageSumDTO {
-	int challengeToday;
-	int challengeWeek;
-	int challengeMonth;
-	int mateToday;
-	int mateWeek;
-	int mateMonth;
+	private int challengeToday;
+	private int challengeWeek;
+	private int challengeMonth;
+	private int mateToday;
+	private int mateWeek;
+	private int mateMonth;
 }
