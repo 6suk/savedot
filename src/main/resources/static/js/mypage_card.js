@@ -37,11 +37,11 @@ $(function () {
 
 // 2. 데이터 가공 (챌린지)
 const DATE = ['오늘', '주간', '월간'];
-const RIGHT = ['일간', '주간', '월간'];
-const C_EMOJI = ['/emoji/poultry-leg.png', '/emoji/beer-mug.png', '/emoji/red-apple.png'];
-const C_MAIN_SUM = [18000, 2500, 1000000]; // 금액 기준
-const C_MAIN_LEFT = ['치킨 ', '맥주 ', ''];
-const C_MAIN_RIGHT = ['마리', '캔', ' 아이패드'];
+const RIGHT = ['주간', '월간', '일간'];
+const C_EMOJI = ['/emoji/beer-mug.png', '/emoji/poultry-leg.png', '/emoji/red-apple.png'];
+const C_MAIN_SUM = [2500, 18000, 1000000]; // 금액 기준
+const C_MAIN_LEFT = ['맥주 ', '치킨 ', ''];
+const C_MAIN_RIGHT = ['캔', '마리', ' 아이패드'];
 
 function challenge_change(i) {
   let top = '챌린지로 ' + DATE[i] + ' 아낀 비용';
@@ -58,10 +58,10 @@ function challenge_change(i) {
 }
 
 // 2. 데이터 가공 (메이트)
-const M_EMOJI = ['/emoji/poultry-leg.png', '/emoji/beer-mug.png', '/emoji/red-apple.png'];
-const M_MAIN_SUM = [18000, 2500, 1000000]; // 금액 기준
-const M_MAIN_LEFT = ['치킨 ', '맥주 ', ''];
-const M_MAIN_RIGHT = ['마리', '캔', ' 아이패드'];
+const M_EMOJI = ['/emoji/hot-beverage_2615.png', '/emoji/pizza_1f355.png', '/emoji/laptop_1f4bb.png'];
+const M_MAIN_SUM = [4500, 20000, 1400000]; // 금액 기준
+const M_MAIN_LEFT = ['커피 ', '피자 ', ''];
+const M_MAIN_RIGHT = ['잔', '판', ' 맥북 Air'];
 
 function mate_change(i) {
   let top = '조각 메이트로 ' + DATE[i] + ' 아낀 비용';
