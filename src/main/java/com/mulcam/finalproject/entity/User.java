@@ -28,5 +28,8 @@ public class User {
 	
 	@Column(nullable = false)
 	private String pwd;
-
+	
+	private String tel;
+	
+	private String nickname;
 }

@@ -16,9 +16,10 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
+    <!-- 
     <link rel="stylesheet" href="../resources/static/css/mainStyle.css" />
-    <link rel="stylesheet" href="../resources/static/css/card.css" />
+    <link rel="stylesheet" href="../resources/static/css/card.css" /> -->
+    <link rel="stylesheet" href="../resources/static/css/style.css" />
 
     <title>FinalProject</title>
   </head>
@@ -111,6 +112,7 @@
         <section class="col">
           <!-- // mypage - card -->
           <div class="row viewcard-group">
+            <!-- /////////// -->
             <div class="col-lg viewcard mypage-card" id="card1">
               <div class="mypage-card-left">
                 <p class="mypage-card-toptxt" id="card1-top"></p>
@@ -120,27 +122,26 @@
                 </div>
                 <p class="mypage-card-bottomtxt" id="card1-bottom"></p>
               </div>
-              <div class="mypage-card-right" id="card1-right">주간</div>
+              <div class="mypage-card-right" id="card1-right"></div>
             </div>
             <!-- /////////// -->
-            <div class="col-lg viewcard mypage-card">
+            <div class="col-lg viewcard mypage-card" id="card2">
               <div class="mypage-card-left">
-                <p class="mypage-card-toptxt">조각메이트로 오늘 아낀 비용</p>
+                <p class="mypage-card-toptxt" id="card2-top"></p>
                 <div class="emojitxt">
-                  <img
-                    src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/apple/325/cooking_1f373.png"
-                  />
-                  <span>0.5 계란 한 판</span>
+                  <img src="" id="card2-emoji" />
+                  <span id="card2-emoji-txt"></span>
                 </div>
-                <p class="mypage-card-bottomtxt">약 0,000원을 아꼈어요!</p>
+                <p class="mypage-card-bottomtxt" id="card2-bottom"></p>
               </div>
-              <div class="mypage-card-right">주간</div>
+              <div class="mypage-card-right" id="card2-right"></div>
             </div>
+            <!-- /////////// -->
           </div>
           <!-- mypage - card // -->
         </section>
       </div>
     </div>
-    <script src="../resources/static/js/card.js"></script>
+    <script src="../resources/static/js/mypage_card.js"></script>
   </body>
 </html>

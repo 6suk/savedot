@@ -21,7 +21,7 @@ import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.ReverseGeocodeUtil;
 
 @Controller
-public class TestController {
+public class TestControllerYelim {
 
 	@Autowired
 	ReverseGeocodeUtil reverseGeocode;

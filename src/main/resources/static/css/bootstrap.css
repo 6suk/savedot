@@ -2215,9 +2215,9 @@ progress {
   width: 100%;
   padding: 0.375rem 0.75rem;
   font-size: 15px;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1.5;
-  color: #212529;
+  /* color: #212529; */
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid var(--border-color);
@@ -2245,7 +2245,7 @@ progress {
 }
 
 .form-control:focus {
-  color: #212529;
+  /* color: #212529; */
   background-color: #fff;
   /* border: 1.5px solid var(--main-color); */
   /* border-color: var(--main-color); */
@@ -2275,7 +2275,7 @@ progress {
   margin: -0.375rem -0.75rem;
   -webkit-margin-end: 0.75rem;
   margin-inline-end: 0.75rem;
-  color: #212529;
+  /* color: #212529; */
   background-color: #e9ecef;
   pointer-events: none;
   border-color: inherit;
@@ -2299,7 +2299,7 @@ progress {
   margin: -0.375rem -0.75rem;
   -webkit-margin-end: 0.75rem;
   margin-inline-end: 0.75rem;
-  color: #212529;
+  /* color: #212529; */
   background-color: #e9ecef;
   pointer-events: none;
   border-color: inherit;
@@ -2328,7 +2328,7 @@ progress {
   padding: 0.375rem 0;
   margin-bottom: 0;
   line-height: 1.5;
-  color: #212529;
+  /* color: #212529; */
   background-color: transparent;
   border: solid transparent;
   border-width: 1px 0;
@@ -2411,9 +2411,9 @@ textarea.form-control-lg {
   padding: 0.375rem 2.25rem 0.375rem 0.75rem;
   -moz-padding-start: calc(0.75rem - 3px);
   font-size: 15px;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1.5;
-  color: #212529;
+  /* color: #212529; */
   background-color: #fff;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
   /* background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%234880eecc%0d%0a' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e"); */
@@ -2772,9 +2772,9 @@ textarea.form-control-lg {
   align-items: center;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1.5;
-  color: #212529;
+  /* color: #212529; */
   text-align: center;
   white-space: nowrap;
   background-color: #e9ecef;
@@ -5942,6 +5942,7 @@ fieldset:disabled .btn {
 }
 .tooltip {
   position: absolute;
+  font-size: 12px;
   z-index: 1080;
   display: block;
   margin: 0;
@@ -5991,7 +5992,7 @@ fieldset:disabled .btn {
 .bs-tooltip-auto[data-popper-placement^='top'] .tooltip-arrow::before {
   top: -1px;
   border-width: 0.4rem 0.4rem 0;
-  border-top-color: #000;
+  border-top-color: var(--lgray-color);
 }
 
 .bs-tooltip-end,
@@ -6008,7 +6009,7 @@ fieldset:disabled .btn {
 .bs-tooltip-auto[data-popper-placement^='right'] .tooltip-arrow::before {
   right: -1px;
   border-width: 0.4rem 0.4rem 0.4rem 0;
-  border-right-color: #000;
+  border-right-color: var(--lgray-color);
 }
 
 .bs-tooltip-bottom,
@@ -6023,7 +6024,7 @@ fieldset:disabled .btn {
 .bs-tooltip-auto[data-popper-placement^='bottom'] .tooltip-arrow::before {
   bottom: -1px;
   border-width: 0 0.4rem 0.4rem;
-  border-bottom-color: #000;
+  border-bottom-color: var(--lgray-color);
 }
 
 .bs-tooltip-start,
@@ -6040,16 +6041,19 @@ fieldset:disabled .btn {
 .bs-tooltip-auto[data-popper-placement^='left'] .tooltip-arrow::before {
   left: -1px;
   border-width: 0.4rem 0 0.4rem 0.4rem;
-  border-left-color: #000;
+  border-left-color: var(--lgray-color);
 }
 
 .tooltip-inner {
-  max-width: 200px;
-  padding: 0.25rem 0.5rem;
+  font-size: 13px;
+  font-weight: 300;
+  max-width: 300px;
+  padding: 0.6rem 0.6rem;
   color: #fff;
   text-align: center;
-  background-color: #000;
+  background-color: var(--lgray-color);
   border-radius: 0.25rem;
+  /* box-shadow: 2px 4px 14px rgb(0 0 0 / 8%); */
 }
 
 .popover {

@@ -38,17 +38,18 @@ public class MateServiceImpl implements MateService {
 		Long longId = Long.parseLong(id);
 		return mateRepository.findById(longId);
 	}
-
+	
 	@Override
 	public Optional<Mate> findById(Long id) {
 		return mateRepository.findById(id);
 	}
 
 	@Override
-	public void save(Mate mate, List<MultipartFile> imgs) {
+	public Long save(Mate mate, List<MultipartFile> imgs) {
 		List<MateImg> fileinfo = LocalSaveFiles(imgs);
 		mate.addImgList(fileinfo);
-		mateRepository.save(mate);
+		mate = mateRepository.save(mate);
+		return mate.getId();
 	}
 
 	@Override

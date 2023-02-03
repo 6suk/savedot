@@ -398,6 +398,7 @@ aside {
   flex: 1 0 0px;
   gap: 0.5rem;
   flex-direction: column;
+  height: 100%;
 }
 .imgbox-only {
   display: flex;
@@ -540,17 +541,65 @@ aside {
 }
 
 .input-btn-ele:hover * {
-  color: var(--main-color-hover);
+  color: var(--gray-color);
   transition: all ease 0.3s 0s;
 }
 
 .input-btn-ele * {
-  color: rgba(var(--main-color-rgb), 0.9);
+  color: var(--lgray-color);
   transition: all ease 0.3s 0s;
 }
 
 option:not(:first-of-type) {
   color: black;
+}
+
+.inner-btn {
+  position: absolute;
+  top: 50%;
+  right: calc(2%);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.input-inner-btn {
+  cursor: pointer;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  padding-inline: 1.4rem;
+  gap: 0.3rem;
+}
+
+.input-inner-btn * {
+  color: var(--lgray-color);
+  transition: all ease 0.3s 0s;
+}
+
+.input-inner-btn:hover * {
+  color: var(--gray-color);
+  transition: all ease 0.3s 0s;
+}
+
+.input-inner-btn::before {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: 25px;
+  background-color: var(--lgray-color);
+  margin-right: 1rem;
+  opacity: 0.4;
+}
+
+#wrap {
+  display: none;
+  width: 100%;
+  height: 480px;
+  position: relative;
+  box-shadow: 2px 4px 16px rgb(0 0 0 / 6%);
 }
 
 /* ////////////////////////////////////  MATE WRTIE >> //////////////////////////////////// */
@@ -727,7 +776,7 @@ button > i {
 .seletion-side-addr {
   display: none;
   position: absolute;
-  top: 0;
-  right: calc(20% - 345px);
+  top: 7.2rem;
+  right: calc(20% - 340px);
   width: calc(20%);
 }

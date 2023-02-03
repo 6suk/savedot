@@ -1,15 +1,21 @@
 let area1 = $('#area1');
 let area2 = $('#area2');
+let form = $('#applyform');
+
+function btntoggle() {
+  $('#self_write').toggle();
+  $('#getLocation').toggle();
+}
 
 //[위치 찾기]
 function success({ coords, timestamp }) {
   const latitude = coords.latitude; // 위도
   const longitude = coords.longitude; // 경도
   let areainput = $('input[name=area]');
-
+  btntoggle();
   $.ajax({
     type: 'post',
-    url: 'write/location',
+    url: '/location',
     data: { lat: latitude, lon: longitude, timestamp: timestamp },
     success: function (data) {
       area1.removeClass('empty-select');
@@ -18,6 +24,7 @@ function success({ coords, timestamp }) {
       area2.append(
         `<option value="${data['area1']} ${data['area2']}" id="area2_location_value" selected>${data['area2']}</option>`
       );
+      form.append(`<input type="hidden" name="area"value="${data['area1']} ${data['area2']}">`);
     },
   });
 }
@@ -36,6 +43,7 @@ $('#getLocation').click(function () {
 
 // [직접기입] : 전체 시 가져오기
 $('#self_write').click(function () {
+  btntoggle();
   area1.attr('disabled', false);
   area2.attr('disabled', false);
   $('.input-btn').removeClass('empty');

@@ -29,7 +29,11 @@ public class MateDTO {
 	private String content;
 	private int price1;
 	private int price2;
+	private int savePrice;
 	private LocalDateTime modDate;
+	private String placeName;
+	private String placeCoords;
+	private String placeAddr;
 	private int isDel;
 	private int viewCnt;
 	private int replyCnt;
@@ -43,5 +47,22 @@ public class MateDTO {
 		categoryName = categoryNames[category];
 	}
 	
+	public void setPrice1(int price1) {
+		this.price1 = price1;
+		if(this.price2 != 0) {
+			this.savePrice = price1 - price2;
+		}
+	}
+	public void setPrice2(int price2) {
+		this.price2 = price2;
+		if(this.price1 != 0) {
+			this.savePrice = price1 - price2;
+		}
+	}
+	
+	public void setSavePrice(int savePrice) {
+			this.savePrice = price1 - price2;
+	}
+
 
 }

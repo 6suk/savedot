@@ -1,7 +1,128 @@
+// file
 const columns = document.querySelectorAll('.preview');
 let sortable;
 let filelist = [];
 
+// SUBMIT!
+function matesubmit() {
+  let formData = new FormData($('#mateform')[0]);
+
+  //content <p>태그 추가
+  let txt = formData.get('content');
+  var txttostore = '<p>' + txt.replace(/\n/g, '</p>\n<p>') + '</p>';
+  formData.set('content', txttostore);
+
+  formData.append('category', $('input[name=category]:checked').val());
+  formData.append('area', $('#area2 option:selected').val());
+  filelist.forEach((x) => {
+    formData.append('reqimgs', x);
+  });
+
+  fetch('/mate', {
+    method: 'POST',
+    cache: 'no-cache',
+    body: formData,
+    redirect: 'follow',
+  })
+    .then((response) => {
+      if (response.redirected) {
+        window.location.href = response.url;
+      }
+    })
+    .catch(function (err) {
+      console.info(err + ' url: ' + url);
+    });
+}
+
+function test() {
+  console.log(filelist);
+}
+
+// required
+let required = $('.required');
+
+// require 검사 + SUBMIT
+$('#sendbtn').click(function () {
+  Array.from(required).forEach((x) => {});
+
+  let no_val = [];
+
+  // 1. radio 타입일 때
+  let radio_selected = new Array(0); // 선택된 Value Array
+  let radio = Array.from($('.required:radio'));
+  let tmp = '';
+  radio.forEach((x) => {
+    let name = $(x).attr('name');
+    if (tmp !== name) {
+      let radio_val = $('input[name=' + name + ']:checked');
+      tmp = name;
+      if (radio_val.length === 0) {
+        // value가 없을 경우
+        check = false;
+        no_val.push($(x));
+      } else {
+        // value가 있을 경우
+        radio_selected.push(radio_val); // 선택값 넣기
+        check = true;
+      }
+    }
+  });
+
+  // 2. 나머지 타입일 때
+  Array.from(required).forEach((x) => {
+    let input = $(x);
+    let type_ck = input.attr('type');
+
+    if (type_ck !== 'radio' && type_ck !== 'checkbox' && type_ck !== 'file') {
+      if (input.val() == null || input.val() == undefined || input.val() == '') {
+        // value가 없을 경우
+        no_val.push(input);
+      }
+    } else if (type_ck === 'file') {
+      if (filelist.length === 0) {
+        no_val.push(input);
+      }
+    }
+  });
+
+  // 결과
+  if (no_val.length > 0) {
+    // false. empty 추가
+    no_val.forEach((x) => {
+      let input = $(x);
+      if (
+        input.attr('type') === 'radio' ||
+        input.attr('type') === 'checkbox' ||
+        input.attr('type') === undefined ||
+        input.attr('type') === 'file'
+      ) {
+        input.parent().addClass('empty');
+      } else {
+        $(x).addClass('empty');
+      }
+    });
+  } else {
+    // true. submit
+    matesubmit();
+  }
+});
+
+// require 값 채워질 때 (이미지는 handleUpdate() 함수에)
+$(function () {
+  Array.from(required).forEach((x) => {
+    let input = $(x);
+    input.on({
+      input: function () {
+        $(this).removeClass('empty');
+      },
+      change: function () {
+        $(this).parent().removeClass('empty');
+      },
+    });
+  });
+});
+
+// IMG UPLOAD
 columns.forEach((column) => {
   sortable = new Sortable(column, {
     animation: 150,
@@ -13,6 +134,9 @@ columns.forEach((column) => {
       if (Sortable.utils.is(ctrl, '.remove')) {
         item.parentNode.removeChild(item);
         filelist.splice(evt.oldIndex, 1); // 파일 리스트에서 삭제
+        if (filelist.length === 0) {
+          document.querySelector('.preview').setAttribute('hidden', true);
+        }
       }
     },
 
@@ -69,7 +193,6 @@ document.addEventListener('mouseout', (event) => {
 
 document.addEventListener('dragenter', (event) => {
   event.preventDefault();
-  console.log('dragenter');
   if ($(event.target).hasClass('inner')) {
     $(event.target).css('opacity', '70%');
   }
@@ -81,7 +204,6 @@ document.addEventListener('dragover', (event) => {
 
 document.addEventListener('dragleave', (event) => {
   event.preventDefault();
-  console.log('dragleave');
   if ($(event.target).hasClass('inner')) {
     $(event.target).css('opacity', '100%');
   }
@@ -89,8 +211,6 @@ document.addEventListener('dragleave', (event) => {
 
 document.addEventListener('drop', (event) => {
   event.preventDefault();
-  console.log('drop');
-
   if ($(event.target).hasClass('inner')) {
     const files = event.dataTransfer?.files;
     $(event.target).css('opacity', '100%');
@@ -111,6 +231,10 @@ function handleUpdate(fileList) {
   fileList.forEach((file) => {
     const reader = new FileReader();
     reader.addEventListener('load', (event) => {
+      // requared
+      let imgbox = document.querySelector('.imgbox');
+      imgbox.classList.remove('empty');
+
       const img = el('img', {
         className: 'embed-img',
         src: event.target?.result,
@@ -158,79 +282,4 @@ function el(nodeName, attributes, ...children) {
     }
   });
   return node;
-}
-
-// require 검사 + SUBMIT
-$('#sendbtn').click(function () {
-  let inner = $('#inner');
-
-  //input value
-  let category = $('input[name=category]:checked');
-  let category_control = $('label#category');
-  let title = $('input[name=title]');
-  let area = $('#area2 option:selected');
-  let area_control = $('.input-btn');
-  let price1 = $('input[name=price1]');
-  let price2 = $('input[name=price2]');
-
-  //control
-  let check = [category, title, area, price1, price2];
-  let control = [category_control, title, area_control, price1, price2];
-  let check_ = 0;
-
-  for (let i = 0; i < check.length; i++) {
-    if (check[i].val() === '' || check[i].val() === null || check[i].val() === undefined) {
-      control[i].addClass('empty');
-    } else {
-      check_++;
-    }
-  }
-
-  if (filelist.length < 1) {
-    inner.addClass('empty');
-  } else {
-    check_++;
-  }
-  console.log(check_);
-  console.log(check_.length);
-
-  if (check_ === check.length + 1) {
-    matesubmit();
-  }
-});
-
-// require 값 채워질 때
-$(function () {
-  let category_control = $('label#category');
-  let img_control = $('#inner');
-
-  $('input[name=title], input[name=area], input[name=price1], input[name=price2]').on('input', function () {
-    $(this).removeClass('empty');
-  });
-
-  $('input[name=category]').change(function () {
-    if ($(this).length > 0) {
-      category_control.removeClass('empty');
-    }
-  });
-});
-
-function matesubmit() {
-  let formData = new FormData($('#mateform')[0]);
-  formData.append('category', $('input[name=category]:checked').val());
-  console.log($('#area2 option:selected').val());
-  formData.append('area', $('#area2 option:selected').val());
-  filelist.forEach((x) => {
-    formData.append('reqimgs', x);
-  });
-
-  fetch('/mate', {
-    method: 'POST',
-    cache: 'no-cache',
-    body: formData,
-  });
-}
-
-function test() {
-  console.log(filelist);
 }
