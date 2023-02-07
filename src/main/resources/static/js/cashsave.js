@@ -102,21 +102,11 @@ function handleUpdate(fileList) {
   });
   reader.readAsDataURL(fileList[0]);
 
-  console.log(fileList[0]);
   sendimg(fileList[0]);
 }
 
-function sendimg(file) {
-  $.ajax({
-    type: 'post',
-    url: 'write/location',
-    data: { img: file },
-    success: function (data) {
-      // input value 도출된 값을 넣어줘야겠죠?!
-      console.log(date);
-    },
-  });
-}
+
+
 
 function el(nodeName, attributes, ...children) {
   const node = nodeName === 'fragment' ? document.createDocumentFragment() : document.createElement(nodeName);
@@ -178,8 +168,6 @@ $('#sendbtn').click(function () {
   } else {
     check_++;
   }
-  console.log(check_);
-  console.log(check_.length);
 
   if (check_ === check.length + 1) {
     cashsubmit();
@@ -259,6 +247,41 @@ function cashsubmit() {
 }
 
 function test() {
-  console.log('sendfile');
-  console.log(sendfile);
+  // console.log('sendfile');
+  // console.log(sendfile);
+}
+
+
+function sendimg(file) {
+  let formdata = new FormData()
+  formdata.append('data', file)
+  
+  $.ajax({
+    type: 'post',
+    url: 'http://localhost:8080/ocr',
+    data: formdata,
+    contentType: false,
+    processData: false,
+    success: function (res) {
+
+      let data = JSON.parse(res);
+
+      let resultMemo = "";
+
+      for(let i=0; i<data.length; i++){
+        if(data[i].time != null){
+          $("#date").val(data[i].time);
+        }
+        if(data[i].price != null){
+          $("#amount").val(data[i].price);
+        }
+        if(data[i].inferText != null){
+          resultMemo += data[i].inferText + " ";
+        }
+      }
+
+      $("#memo").val(resultMemo);
+      console.log(data);
+    },
+  });
 }
