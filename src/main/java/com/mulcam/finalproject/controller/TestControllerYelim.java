@@ -49,24 +49,24 @@ public class TestControllerYelim {
 	}
 
 	/** MyPage 테스트 */
-	@GetMapping("/mypage")
-	public String test() {
-		return "test/mypage";
-	}
-
-	@PostMapping("/mypage")
-	@ResponseBody
-	public MypageSumDTO get() {
-		// 로그인 유저 uid 받기가 있어야함. (아직 로그인 로직 없으니 임시로 설정할 것)
-		MypageSumDTO mypageSumDTO = MypageSumDTO.builder()	// 실제로는 서비스단에서 받아야함
-				.challengeToday(8000)
-				.challengeWeek(30000)
-				.challengeMonth(125400)
-				.mateToday(5000)
-				.mateWeek(15000)
-				.mateMonth(50000)
-				.build();
-		return mypageSumDTO;
-	}
+//	@GetMapping("/mypage")
+//	public String test() {
+//		return "test/mypage";
+//	}
+//
+//	@PostMapping("/mypage")
+//	@ResponseBody
+//	public MypageSumDTO get() {
+//		// 로그인 유저 uid 받기가 있어야함. (아직 로그인 로직 없으니 임시로 설정할 것)
+//		MypageSumDTO mypageSumDTO = MypageSumDTO.builder()	// 실제로는 서비스단에서 받아야함
+//				.challengeToday(8000)
+//				.challengeWeek(30000)
+//				.challengeMonth(125400)
+//				.mateToday(5000)
+//				.mateWeek(15000)
+//				.mateMonth(50000)
+//				.build();
+//		return mypageSumDTO;
+//	}
 
 }
