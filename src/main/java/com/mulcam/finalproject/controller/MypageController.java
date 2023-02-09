@@ -16,13 +16,13 @@ public class MypageController {
 
 	/** MyPage 테스트 */
 	@GetMapping("/mypage")
-	public String test(Model model) {
+	public String mypageGet(Model model) {
 		return "mypage/mypage";
 	}
 
 	@PostMapping("/mypage")
 	@ResponseBody
-	public MypageSumDTO get(Model model) {
+	public MypageSumDTO mypagePost(Model model) {
 		MypageSumDTO mypageSumDTO = css.getSum("admin");
 		return mypageSumDTO;
 	}
