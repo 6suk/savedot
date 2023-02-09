@@ -8,7 +8,7 @@ import com.mulcam.finalproject.entity.Receipt;
 
 public interface ReceiptService {
 
-	Receipt getReceiptVO(int cashRid);
+	Receipt getReceiptVO(int cid);
 	void receiptSave(Receipt receiptVO);
 	void LocalSaveFiles(MultipartFile receiptImgs);
 

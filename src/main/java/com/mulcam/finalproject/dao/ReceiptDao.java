@@ -12,10 +12,10 @@ import com.mulcam.finalproject.entity.Receipt;
 @Mapper
 public interface ReceiptDao {
 	
-		@Select("select * from cashregister where cashRid=#{cashRid}")
+		@Select("select * from cash where cashRid=#{cid}")
 		public Receipt getReceiptVO(int cashRid);
 		
-		@Insert("INSERT INTO cashregister VALUES(DEFAULT, #{category}, #{cashDate}, #{amount}, #{cashContent}, #{memo}, #{uid})")
+		@Insert("INSERT INTO cash VALUES(DEFAULT, #{category}, #{regDate}, #{amount}, #{content}, #{memo}, #{uid})")
 		public void receiptSave(Receipt receiptVO);
 
 //		// img insert dao 필요 
