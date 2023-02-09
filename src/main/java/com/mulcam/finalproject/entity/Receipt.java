@@ -15,34 +15,34 @@ import lombok.ToString;
 @ToString
 public class Receipt {
 
-	private int cashRid;
-	private int category;// 0 = OCR , 1 = 지출, 2 = 수입 ( 1=지출,2=수입)
-	private String cashDate;
+	private int cid;
+	private int category;// 0 = OCR, 지출,1 = 수입 
+	private String regDate;
 	private LocalDate cashDateLocal;
 	private int amount;
-	private String cashContent; 
+	private String content; 
 	private String memo;
 	private String cashCategoryName;
 	private int uid;
 	
 	
 
-	public void setCashDate(String cashDate) {
-		this.cashDate = cashDate;
-		this.cashDateLocal = LocalDate.parse(cashDate);
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
+		this.cashDateLocal = LocalDate.parse(regDate);
 		
 	}
 	
 	public void setCategory(int category) {
-		String[] CashCategoryNames = {"OCR", "지출", "수입"};
+		String[] CashCategoryNames = {"지출", "수입"};
 		this.category = category;
 		cashCategoryName = CashCategoryNames[category];
 	}
 
-	public Receipt(String cashDate, int amount, String cashContent) {
-		this.cashDate = cashDate;
+	public Receipt(String regDate, int amount, String content) {
+		this.regDate = regDate;
 		this.amount = amount;
-		this.cashContent = cashContent;
+		this.content = content;
 	}
 	
 
