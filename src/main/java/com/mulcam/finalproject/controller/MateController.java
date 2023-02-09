@@ -38,35 +38,8 @@ public class MateController {
 	@Autowired
 	ReverseGeocodeUtil reverseGeocodeUtil;
 
-	@GetMapping("/mate/test")
-	public String writetest() {
-//		User user = new User();
-//		user.setId("ko");
-//		user.setPwd("ko");
-//		user.setNickname("프로 알뜰러");
-//		user.setTel("01012345678");
-//		User user2 = new User();
-//		user2.setId("admin");
-//		user2.setPwd("admin");
-//		user2.setNickname("관리자");
-//		user2.setTel("01012345689");
-//		userService.save(user2);
-//		userService.save(user);
-		
-//		User u = userService.findById("ko").get();
-//		userService.delete(u);
-		return "test/write";
-	}
-	
 	@GetMapping("/mate")
 	public String writeGet(Model model) {
-//		User user = new User();
-//		user.setId("ko");
-//		user.setPwd("ko");
-//		userService.save(user);
-
-//		User u = userService.findById("ko").get();
-//		userService.delete(u);
 		User user = userService.findById("ko").get(); // 추후 세션에서 가져오기
 		// mapper
 		ModelMapper modelMapper = new ModelMapper();
@@ -86,13 +59,9 @@ public class MateController {
 			ModelMapper modelMapper = new ModelMapper();
 			Mate mate = modelMapper.map(mateDTO, Mate.class);
 			Long mid = mateService.save(mate, files);
-			System.out.println(mate);
-			System.out.println(mateDTO);
 			
 			return "redirect:/detail/" + mid;
-			
-//			System.out.println(mate);
-//			return null;
+
 	}
 
 	@PostMapping("/location")

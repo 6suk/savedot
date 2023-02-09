@@ -19,6 +19,26 @@ public class TestControllerYelim {
 
 	@Autowired
 	MateService mateService;
+	
+	@GetMapping("/mate/test")
+	public String writetest() {
+//		User user = new User();
+//		user.setId("ko");
+//		user.setPwd("ko");
+//		user.setNickname("프로 알뜰러");
+//		user.setTel("01012345678");
+//		User user2 = new User();
+//		user2.setId("admin");
+//		user2.setPwd("admin");
+//		user2.setNickname("관리자");
+//		user2.setTel("01012345689");
+//		userService.save(user2);
+//		userService.save(user);
+		
+//		User u = userService.findById("ko").get();
+//		userService.delete(u);
+		return "test/write";
+	}
 
 	/** Reverse Geocode 테스트 */
 	@GetMapping("/rege")
