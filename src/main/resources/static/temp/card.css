@@ -1,0 +1,82 @@
+@import url(maincolor.css);
+
+.viewcard-group {
+  gap: 2rem;
+}
+
+@media (max-width: 992px) {
+  .viewcard-group {
+    margin-inline: 2rem;
+  }
+}
+
+.viewcard {
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 2px 4px 12px rgb(0 0 0 / 8%);
+  transition: all 0.3s cubic-bezier(0, 0, 0.5, 1);
+}
+
+.viewcard:hover {
+  box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.16);
+  transform: scale3d(1.01, 1.01, 1.01);
+}
+
+.mypage-card {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding-block: 1.5rem;
+  align-items: center;
+  padding-inline: 5rem;
+  user-select: none;
+}
+
+.mypage-card-right {
+  font-size: 14px;
+  color: var(--lgray-color);
+}
+
+.mypage-card-right::after {
+  color: var(--lgray-color);
+  opacity: 0.5;
+  font-family: 'Font Awesome 6 Free';
+  content: '\f105';
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.mypage-card-right i {
+  color: var(--lgray-color);
+  opacity: 0.5;
+}
+
+.viewcard p {
+  margin-block: 8px;
+}
+
+.mypage-card-toptxt {
+  font-weight: 600;
+}
+
+.mypage-card-bottomtxt {
+  color: #666;
+  font-size: 15px;
+}
+
+.emojitxt {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 0.5rem;
+}
+
+.emojitxt img {
+  height: 36px;
+}
+
+.emojitxt span {
+  font-size: 1.75rem;
+  font-weight: 800;
+}

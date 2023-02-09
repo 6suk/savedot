@@ -1,0 +1,42 @@
+   /* 테스트 질문 박스 */
+  .question-box {
+    max-width: 420px;
+    min-height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 25px #DDE2E8;
+    background-color: #FFFFFF;
+  }
+  
+  /* 테스트 질문 */
+  .question-box .question {
+    margin-bottom: 50px;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.5;
+    text-align: center;
+  }
+  /* 테스트 질문 선택버튼 */
+  .question-box .choice {
+    border-radius: 120px;
+    font-size: 22px;
+    min-width: 300px;
+  }
+
+  @media (max-width:640px) {
+  .question-box {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  }
+  .question-box .question {
+    font-size: 28px;
+  }
+  .question-box .choice {
+    font-size: 20px;
+  }

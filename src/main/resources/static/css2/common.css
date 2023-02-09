@@ -1,0 +1,58 @@
+/** 전체 적용 사항 **/
+body {
+    font-family: "Pretendard Variable", sans-serif;
+    background-color: #f9fcfe;
+    word-break: keep-all;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    padding-left: 40px;
+    padding-right:40px;
+  }
+
+img {
+    display: block;
+}
+
+/** 버튼 관련 적용 사항 **/
+
+  /* 공용 버튼 클래스에 대한 적용사항 */
+.btn {   
+    max-width: 500px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 20px;
+    margin-bottom: 35px;   
+    margin-left: auto;
+    margin-right: auto;
+    transition: 0.3s;
+}
+
+.btn-gray {
+    background-color: #F2F4F6;
+    box-shadow: 0 14px 0 #DFE1E2;
+    color: #444444;
+}
+.btn-gray:active {
+    box-shadow: 0 4px 0 #DFE1E2;
+    transform: translateY(10px);
+}
+
+@media (max-width: 640px) {
+    body {
+        padding-top: 50px;
+        margin-left: 20px;
+        margin-right: 20px;        
+    }
+    .page-title {
+        font-size: 40px;
+    }
+    .btn {
+        font-size: 34px;
+    }
+}
