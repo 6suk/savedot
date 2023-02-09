@@ -29,8 +29,8 @@ public class ReceiptServiceImpl implements ReceiptService {
 	private ReceiptDao receiptDao;
 
 	@Override
-	public Receipt getReceiptVO(int cashRid) {
-		Receipt receipt = receiptDao.getReceiptVO(cashRid);
+	public Receipt getReceiptVO(int cid) {
+		Receipt receipt = receiptDao.getReceiptVO(cid);
 		return receipt;
 	}
 

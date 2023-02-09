@@ -117,4 +117,8 @@ public class OcrUtil {
 		}
 		return false;
 	}
+	
+
+		
+	
 }

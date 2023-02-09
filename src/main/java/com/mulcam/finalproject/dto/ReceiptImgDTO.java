@@ -20,9 +20,9 @@ import lombok.ToString;
 public class ReceiptImgDTO {   /* controller */ 
 	
 	private MultipartFile receiptImgs;
-	private LocalDateTime cashDate;
+	private LocalDateTime regDate;
 	private int amount;
-	private String cashContent;
+	private String content;
 	private String memo;
 
 
