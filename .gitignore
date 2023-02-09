@@ -5,6 +5,7 @@ Exercise.java
 exercise/
 .project
 .DS_Store
+.metadata/
 
 HELP.md
 target/
