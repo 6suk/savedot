@@ -21,6 +21,6 @@ public class OcrDTO {
     private String resultType = "string";
     private String timestamp = "";
     private String version = "V1";
-    private List<ImageDTO> images;
+    private List<OcrImageDTO> images;
 
 }

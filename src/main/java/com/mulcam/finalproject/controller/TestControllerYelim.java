@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mulcam.finalproject.dto.LocationDTO;
-import com.mulcam.finalproject.entity.Receipt;
+import com.mulcam.finalproject.entity.Cash;
 import com.mulcam.finalproject.entity.User;
 import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.ReverseGeocodeUtil;
@@ -33,7 +33,7 @@ public class TestControllerYelim {
 	}
 	
 	@PostMapping("/cashsave/test")
-	public String datatest(Receipt receipt, MultipartFile saveimg) {
+	public String datatest(Cash receipt, MultipartFile saveimg) {
 		System.out.println(receipt);
 		System.out.println(saveimg);
 		return null;
