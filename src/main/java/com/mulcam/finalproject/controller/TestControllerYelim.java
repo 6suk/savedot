@@ -1,5 +1,7 @@
 package com.mulcam.finalproject.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,12 +9,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mulcam.finalproject.dto.ImageDTO;
 import com.mulcam.finalproject.dto.LocationDTO;
 import com.mulcam.finalproject.entity.Receipt;
+import com.mulcam.finalproject.entity.ReceiptImg;
 import com.mulcam.finalproject.entity.User;
 import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.ReverseGeocodeUtil;
 import com.mulcam.finalproject.service.UserService;
+import com.mulcam.finalproject.util.ImageUpload;
 
 @Controller
 public class TestControllerYelim {
@@ -26,6 +31,9 @@ public class TestControllerYelim {
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	ImageUpload imageUpload;
+	
 
 	@GetMapping("/cashsave/test")
 	public String datatestGet() {
@@ -33,10 +41,17 @@ public class TestControllerYelim {
 	}
 	
 	@PostMapping("/cashsave/test")
-	public String datatest(Receipt receipt, MultipartFile saveimg) {
+	public String datatest(Receipt receipt) {
+		List<MultipartFile> saveimg = receipt.getSaveimg();
+		
+		if(saveimg != null) {
+			List<ImageDTO> imgDTO = imageUpload.LocalSaveFiles(saveimg);
+			ReceiptImg receiptImgInfo = imgDTO.get(0).setReceiptImgInfo();
+			System.out.println(receiptImgInfo);
+		}
+		
 		System.out.println(receipt);
-		System.out.println(saveimg);
-		return null;
+		return "redirect:/cashsave/test";
 	}
 	
 	@GetMapping("/mate/test")

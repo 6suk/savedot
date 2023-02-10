@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.mulcam.finalproject.dto.ImageDTO;
+import com.mulcam.finalproject.dto.OcrImageDTO;
 import com.mulcam.finalproject.dto.OcrDTO;
 
 @Service
@@ -46,8 +46,8 @@ public class OcrUtil {
 
 		/* Body */
 		//set Image
-		List<ImageDTO> ocrData = new ArrayList<>();
-		ImageDTO imageDTO = new ImageDTO();
+		List<OcrImageDTO> ocrData = new ArrayList<>();
+		OcrImageDTO imageDTO = new OcrImageDTO();
 		imageDTO.setFormat(format);
 		imageDTO.setName("medium");
 		imageDTO.setData(receiptString);

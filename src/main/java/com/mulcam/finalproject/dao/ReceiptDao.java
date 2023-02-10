@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-import com.mulcam.finalproject.dto.ReceiptImgDTO;
 import com.mulcam.finalproject.entity.Receipt;
+import com.mulcam.finalproject.entity.ReceiptImg;
 
 @Mapper
 public interface ReceiptDao {
@@ -21,6 +21,8 @@ public interface ReceiptDao {
 //		// img insert dao 필요 
 //		@Insert("INSERT INTO receiptimg VALUES(DEFAULT,#{recieptExt}, #{receiptFilePath}, #{OriginalFileName}, #{saveFileName},#{receiptSaveDate},#{receiptSaveDate},#{uid},#{cashRid}")
 //		public void receiptImgSave(OcrImgVO receiptImg);
+		
+		
 
 
 }

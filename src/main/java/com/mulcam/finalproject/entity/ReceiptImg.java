@@ -1,12 +1,14 @@
-package com.mulcam.finalproject.dto;
+package com.mulcam.finalproject.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,13 +19,15 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ReceiptImgDTO {   /* controller */ 
+@Builder
+public class ReceiptImg {
 	
-	private MultipartFile receiptImgs;
-	private LocalDateTime regDate;
-	private int amount;
-	private String content;
-	private String memo;
-
-
+	private int iid;
+	private String fileName;
+	private String ext;
+	private String origFileName;
+	private String filePath;
+	private LocalDate saveDate;
+	private int cid;
+	
 }

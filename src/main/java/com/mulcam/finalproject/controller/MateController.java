@@ -58,9 +58,9 @@ public class MateController {
 			// mapper
 			ModelMapper modelMapper = new ModelMapper();
 			Mate mate = modelMapper.map(mateDTO, Mate.class);
-//			Long mid = mateService.save(mate, files);
+			Long mid = mateService.save(mate, files);
 			
-			return "redirect:/detail/" + 1;
+			return "redirect:/detail/" + mid;
 	}
 
 	@PostMapping("/location")

@@ -2,6 +2,9 @@ package com.mulcam.finalproject.entity;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +27,7 @@ public class Receipt {
 	private String memo;
 	private String cashCategoryName;
 	private int uid;
+	List<MultipartFile> saveimg;
 	
 	
 
