@@ -11,7 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ImageDTO {
+public class OcrImageDTO {
     private String format;
     private String name;
     private String data;

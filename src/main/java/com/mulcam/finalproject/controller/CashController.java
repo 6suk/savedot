@@ -6,20 +6,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.mulcam.finalproject.entity.Receipt;
-import com.mulcam.finalproject.service.OcrUtil;
-import com.mulcam.finalproject.service.ReceiptService;
+import com.mulcam.finalproject.entity.Cash;
+import com.mulcam.finalproject.service.CashOcrUtil;
+import com.mulcam.finalproject.service.CashService;
 
 @Controller
-public class ReceiptController {
+@RequestMapping("/cash")
+public class CashController {
 	
-	@Autowired private OcrUtil ocrUtil;
+	@Autowired private CashOcrUtil CashOcrUtil;
 	@Autowired
-	ReceiptService receiptService;
+	CashService cashService;
 	@Value("${naver.accessId}") private String accessId;
 	@Value("${naver.secretKey}") private String secretKey;
 	@Value("${spring.servlet.multipart.location}")
@@ -29,26 +31,26 @@ public class ReceiptController {
 /** 수입지출등록 **/
 	
 	/* 수입지출 등록 front page띄우기 */
-	@GetMapping("/cashsave")
+	@GetMapping("/write")
 	public String cashRegisterForm() {
-		return "/test/cashSave";
+		return "cash/write";
 
 	}
 	
-	@PostMapping("/cashsave") // 수입 지출 등록 
-	public String receiptRegister(Receipt receiptVO) {
-		receiptVO.setUid(1);
-		
-		receiptService.receiptSave(receiptVO);
-		System.out.println(receiptVO);
+	@PostMapping("/write") // 수입 지출 등록 
+	public String cashRegister(Cash cash,MultipartFile saveimg) {
+		cash.setUid("ko");
+		cashService.cashSave(cash);
+		System.out.println(cash);
+		System.out.println(saveimg);
 
-		return "";
+		return null;
 	}
 	
 	@PostMapping("/ocr")
 	@ResponseBody
 	public ResponseEntity<String> cashOcr(@RequestParam("data") MultipartFile multipartFile) throws Exception {
-		return ResponseEntity.ok().body(ocrUtil.getOcrResult(multipartFile));
+		return ResponseEntity.ok().body(CashOcrUtil.getOcrResult(multipartFile));
 	}
 	
 	

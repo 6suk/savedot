@@ -1,5 +1,7 @@
 package com.mulcam.finalproject.service;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -17,11 +19,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.mulcam.finalproject.dto.ImageDTO;
+import com.mulcam.finalproject.dto.OcrImageDTO;
 import com.mulcam.finalproject.dto.OcrDTO;
 
 @Service
-public class OcrUtil {
+public class CashOcrUtil {
 	
 
 	@Value("${apiURL}") private String apiURL;
@@ -46,8 +48,8 @@ public class OcrUtil {
 
 		/* Body */
 		//set Image
-		List<ImageDTO> ocrData = new ArrayList<>();
-		ImageDTO imageDTO = new ImageDTO();
+		List<OcrImageDTO> ocrData = new ArrayList<>();
+		OcrImageDTO imageDTO = new OcrImageDTO();
 		imageDTO.setFormat(format);
 		imageDTO.setName("medium");
 		imageDTO.setData(receiptString);
@@ -80,7 +82,8 @@ public class OcrUtil {
 		}
 		return jo3.getJSONArray("images").getJSONObject(0).getJSONArray("fields").toString();
 	}
-
+	
+	
 	public static boolean checkDate(String checkDate) {
 		checkDate = checkDate.replaceAll("년","-");
 		checkDate = checkDate.replaceAll("월","-");
@@ -108,7 +111,51 @@ public class OcrUtil {
 		return false;
 	}
 	
+	
+	public static boolean isContent(String content) {
+		
+		if(content.contains("매장")|| content.contains("상호")) {
+			
+		}
+		return false;
+	}
+	
+	
+	
+	public static byte[] ocrImgArray(String filePath) throws Exception {
+		byte[] returnValue = null;
+		
+		ByteArrayOutputStream baos = null;
+		FileInputStream fis = null;
+		
 
+		try {
+			baos = new ByteArrayOutputStream();
+			fis = new FileInputStream(filePath);
+			
+			byte[] buf = new byte[1024];
+			int read = 0;
+			
+			while((read=fis.read(buf,0,buf.length))!= -1) {
+				baos.write(buf, 0, read);
+			}
+			
+			returnValue = baos.toByteArray();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(baos != null) {
+				baos.close();
+			}
+			if(fis != null) {
+				fis.close();
+			}
+		}
+		
+		
+		return returnValue;
+	}
 		
 	
 }

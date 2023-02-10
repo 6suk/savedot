@@ -85,7 +85,7 @@ function cashsaveform_saveimg() {
   let formData = new FormData($('#cashsaveform')[0]);
   formData.append('saveimg', filelist[0]);
 
-  fetch('/cashsave/test', {
+  fetch('cash/write', {
     method: 'POST',
     cache: 'no-cache',
     body: formData,
