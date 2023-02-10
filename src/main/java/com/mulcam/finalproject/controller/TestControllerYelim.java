@@ -3,9 +3,12 @@ package com.mulcam.finalproject.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mulcam.finalproject.dto.LocationDTO;
+import com.mulcam.finalproject.entity.Receipt;
 import com.mulcam.finalproject.entity.User;
 import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.ReverseGeocodeUtil;
@@ -22,6 +25,19 @@ public class TestControllerYelim {
 	
 	@Autowired
 	UserService userService;
+	
+
+	@GetMapping("/cashsave/test")
+	public String datatestGet() {
+		return "cashsave/write";
+	}
+	
+	@PostMapping("/cashsave/test")
+	public String datatest(Receipt receipt, MultipartFile saveimg) {
+		System.out.println(receipt);
+		System.out.println(saveimg);
+		return null;
+	}
 	
 	@GetMapping("/mate/test")
 	public String writetest() {

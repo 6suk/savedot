@@ -2,6 +2,139 @@ const columns = document.querySelectorAll('.preview');
 let sendfile;
 let filelist = [];
 
+// require 검사 + SUBMIT
+$('#sendbtn').click(function () {
+  let check = requiredCheck(filelist);
+  console.log(check);
+  if (check) {
+    cashsubmit();
+  }
+});
+
+// 카테고리 클릭 시
+$(document).ready(function () {
+  $("input[name = 'category']").change(function () {
+    let category = $('input[name=category]:checked').val();
+    let label = $('#label');
+    let preview = $('#preview');
+    let inputText = $('.input-text');
+    let inputimg = $('#input');
+
+    switch (category) {
+      case '0': //영수증
+        //requird
+        inputText.removeClass('empty');
+        inputText.removeClass('required');
+        inputimg.addClass('required');
+        label.removeClass('none');
+        $('input.input-text').val('');
+        inputText.attr('disabled', true);
+        console.log(0);
+        break;
+
+      case '1': //지출 직접 기입
+        //requird
+        $('.imgbox-only').removeClass('empty');
+        inputText.removeClass('empty');
+        inputText.addClass('required');
+        inputimg.removeClass('required');
+        $('.embed-img').remove();
+        preview.attr('hidden', true);
+        label.attr('hidden', false);
+        label.addClass('none');
+        inputText.attr('disabled', false);
+        console.log(1);
+        break;
+
+      case '2': //수입 직접 기입
+        //requird
+        $('.imgbox-only').removeClass('empty');
+        inputText.removeClass('empty');
+        inputText.addClass('required');
+        inputimg.removeClass('required');
+        preview.attr('hidden', true);
+        label.attr('hidden', false);
+        label.addClass('none');
+        inputText.attr('disabled', false);
+        console.log(2);
+        break;
+    }
+  });
+});
+
+// SUBMIT!
+function cashsubmit() {
+  let category = $('input[name=category]:checked').val();
+  console.log(category);
+  let cashsaveform = $('#cashsaveform');
+  switch (category) {
+    case '0': // 영수증
+      cashsaveform_saveimg();
+      break;
+    case '1': // 지출 직접 기입
+      cashsaveform.submit();
+      break;
+    case '2': // 수입 직접 기입
+      cashsaveform.submit();
+      break;
+  }
+}
+
+// 영수증 이미지가 있을 때, SUBMIT!
+function cashsaveform_saveimg() {
+  let formData = new FormData($('#cashsaveform')[0]);
+  formData.append('saveimg', filelist[0]);
+
+  fetch('/cashsave/test', {
+    method: 'POST',
+    cache: 'no-cache',
+    body: formData,
+    redirect: 'follow',
+  })
+    .then((response) => {
+      if (response.redirected) {
+        window.location.href = response.url;
+      }
+    })
+    .catch(function (err) {
+      console.info(err + ' url: ' + url);
+    });
+}
+
+// 영수증 이미지 Ajax
+function sendimg(file) {
+  let formdata = new FormData();
+  formdata.append('data', file);
+
+  $.ajax({
+    type: 'post',
+    url: '/ocr',
+    data: formdata,
+    contentType: false,
+    processData: false,
+    success: function (res) {
+      let data = JSON.parse(res);
+
+      let resultMemo = '';
+
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].time != null) {
+          $('#date').val(data[i].time);
+        }
+        if (data[i].price != null) {
+          $('#amount').val(data[i].price);
+        }
+        if (data[i].inferText != null) {
+          resultMemo += data[i].inferText + ' ';
+        }
+      }
+
+      $('#memo').val(resultMemo);
+      console.log(data);
+    },
+  });
+}
+
 var input = document.getElementById('input');
 var initLabel = document.getElementById('label');
 let inner = document.getElementById('inner');
@@ -104,6 +237,7 @@ function handleUpdate(fileList) {
   reader.readAsDataURL(fileList[0]);
 
   filelist.push(fileList[0]);
+  console.log(fileList);
   sendimg(fileList[0]);
 }
 
@@ -134,121 +268,4 @@ function el(nodeName, attributes, ...children) {
     }
   });
   return node;
-}
-
-// require 검사 + SUBMIT
-$('#sendbtn').click(function () {
-  let check = requiredCheck(filelist);
-  if (check) {
-    cashsubmit(filelist);
-  }
-});
-
-// var ele = document.getElementById('date');
-// ele.onchange = function () {
-//   if (el.value === '') {
-//     el.classList.add('empty-text');
-//   } else {
-//     el.classList.remove('empty-text');
-//   }
-// };
-
-// 카테고리 클릭 시
-$(document).ready(function () {
-  $("input[name = 'category']").change(function () {
-    let category = $('input[name=category]:checked').val();
-    let label = $('#label');
-    let preview = $('#preview');
-    let inputText = $('.input-text');
-    let inputimg = $('#input');
-
-    switch (category) {
-      case '0': //영수증
-        //requird
-        inputText.removeClass('required');
-        inputimg.addClass('required');
-        label.removeClass('none');
-        $('input.input-text').val('');
-        inputText.attr('disabled', true);
-        console.log(0);
-        break;
-
-      case '1': //지출 직접 기입
-        //requird
-        $('.imgbox-only').removeClass('empty');
-        inputText.removeClass('empty');
-        inputText.addClass('required');
-        inputimg.removeClass('required');
-        $('.embed-img').remove();
-        preview.attr('hidden', true);
-        label.attr('hidden', false);
-        label.addClass('none');
-        inputText.attr('disabled', false);
-        console.log(1);
-        break;
-
-      case '2': //수입 직접 기입
-        //requird
-        $('.imgbox-only').removeClass('empty');
-        inputText.removeClass('empty');
-        inputText.addClass('required');
-        inputimg.removeClass('required');
-        preview.attr('hidden', true);
-        label.attr('hidden', false);
-        label.addClass('none');
-        inputText.attr('disabled', false);
-        console.log(2);
-        break;
-    }
-  });
-});
-
-function cashsubmit() {
-  let category = $('input[name=category]:checked').val();
-  switch (category) {
-    case 0: // 영수증
-      break;
-    case 1: // 지출 직접 기입
-      break;
-    case 2: // 수입 직접 기입
-      break;
-  }
-}
-
-function test() {
-  // console.log('sendfile');
-  // console.log(sendfile);
-}
-
-function sendimg(file) {
-  let formdata = new FormData();
-  formdata.append('data', file);
-
-  $.ajax({
-    type: 'post',
-    url: '/ocr',
-    data: formdata,
-    contentType: false,
-    processData: false,
-    success: function (res) {
-      let data = JSON.parse(res);
-
-      let resultMemo = '';
-
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].time != null) {
-          $('#date').val(data[i].time);
-        }
-        if (data[i].price != null) {
-          $('#amount').val(data[i].price);
-        }
-        if (data[i].inferText != null) {
-          resultMemo += data[i].inferText + ' ';
-        }
-      }
-
-      $('#memo').val(resultMemo);
-      console.log(data);
-    },
-  });
 }
