@@ -258,7 +258,7 @@ function sendimg(file) {
   
   $.ajax({
     type: 'post',
-    url: 'http://localhost:8080/ocr',
+    url: '/ocr',
     data: formdata,
     contentType: false,
     processData: false,
