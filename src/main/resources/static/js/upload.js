@@ -39,12 +39,13 @@ function test() {
 }
 
 // required
-let required = $('.required');
+let required;
 
 // require 검사 + SUBMIT
 $('#sendbtn').click(function () {
-  Array.from(required).forEach((x) => {});
+  required = $('.required');
 
+  Array.from(required).forEach((x) => {});
   let no_val = [];
 
   // 1. radio 타입일 때
@@ -101,6 +102,21 @@ $('#sendbtn').click(function () {
         $(x).addClass('empty');
       }
     });
+
+    // require 값 채워질 때 (이미지는 handleUpdate() 함수에)
+    $(function () {
+      Array.from(required).forEach((x) => {
+        let input = $(x);
+        input.on({
+          input: function () {
+            $(this).removeClass('empty');
+          },
+          change: function () {
+            $(this).parent().removeClass('empty');
+          },
+        });
+      });
+    });
   } else {
     // true. submit
     matesubmit();
@@ -108,19 +124,19 @@ $('#sendbtn').click(function () {
 });
 
 // require 값 채워질 때 (이미지는 handleUpdate() 함수에)
-$(function () {
-  Array.from(required).forEach((x) => {
-    let input = $(x);
-    input.on({
-      input: function () {
-        $(this).removeClass('empty');
-      },
-      change: function () {
-        $(this).parent().removeClass('empty');
-      },
-    });
-  });
-});
+// $(function () {
+//   Array.from(required).forEach((x) => {
+//     let input = $(x);
+//     input.on({
+//       input: function () {
+//         $(this).removeClass('empty');
+//       },
+//       change: function () {
+//         $(this).parent().removeClass('empty');
+//       },
+//     });
+//   });
+// });
 
 // IMG UPLOAD
 columns.forEach((column) => {
