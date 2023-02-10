@@ -16,5 +16,4 @@ public class OcrImageDTO {
     private String name;
     private String data;
     private String url;
-
 }

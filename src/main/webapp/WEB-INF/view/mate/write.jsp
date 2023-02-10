@@ -200,6 +200,7 @@
   <script src="/js/kakao_address.js"></script>
   <script src="/js/upload.js"></script>
   <script src="/js/mate.js"></script>
+  <script src="/js/required.js"></script>
   <script>
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {

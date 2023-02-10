@@ -1,5 +1,7 @@
 package com.mulcam.finalproject.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,12 +9,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mulcam.finalproject.dto.ImageDTO;
 import com.mulcam.finalproject.dto.LocationDTO;
+import com.mulcam.finalproject.entity.CashImg;
 import com.mulcam.finalproject.entity.Cash;
 import com.mulcam.finalproject.entity.User;
 import com.mulcam.finalproject.service.MateService;
-import com.mulcam.finalproject.service.ReverseGeocodeUtil;
 import com.mulcam.finalproject.service.UserService;
+import com.mulcam.finalproject.util.ImageUpload;
+import com.mulcam.finalproject.util.ReverseGeocodeUtil;
 
 @Controller
 public class TestControllerYelim {
@@ -22,23 +27,31 @@ public class TestControllerYelim {
 
 	@Autowired
 	MateService mateService;
-	
+
 	@Autowired
 	UserService userService;
-	
+
+	@Autowired
+	ImageUpload imageUpload;
 
 	@GetMapping("/cashsave/test")
 	public String datatestGet() {
 		return "cashsave/write";
 	}
-	
+
 	@PostMapping("/cashsave/test")
-	public String datatest(Cash receipt, MultipartFile saveimg) {
-		System.out.println(receipt);
-		System.out.println(saveimg);
-		return null;
+	public String datatest(Cash cash) {
+		List<MultipartFile> saveimg = cash.getSaveimg();
+		if (saveimg != null) {
+			List<ImageDTO> imgDTO = imageUpload.LocalSaveFiles(saveimg);
+			CashImg receiptImgInfo = imgDTO.get(0).setCashImgInfo();
+			System.out.println(receiptImgInfo);
+		}
+		
+		System.out.println(cash);
+		return "redirect:/cashsave/test";
 	}
-	
+
 	@GetMapping("/mate/test")
 	public String writetest() {
 		User user = new User();
@@ -53,7 +66,7 @@ public class TestControllerYelim {
 		user2.setTel("01012345689");
 		userService.save(user2);
 		userService.save(user);
-		
+
 //		User u = userService.findById("ko").get();
 //		userService.delete(u);
 		return "test/write";
@@ -66,7 +79,7 @@ public class TestControllerYelim {
 		LocationDTO dto1 = new LocationDTO();
 		dto1.setLat("37.28699209406186"); // 위도
 		dto1.setLon("127.01184649535573"); // 경도
-		
+
 		System.out.println("경기도 수원시 장안구 : " + reverseGeocode.getArea(dto1));
 
 		LocationDTO dto2 = new LocationDTO();
@@ -75,8 +88,8 @@ public class TestControllerYelim {
 		System.out.println("제주특별자치도 서귀포시 : " + reverseGeocode.getArea(dto2));
 
 		LocationDTO dto3 = new LocationDTO();
-		dto3.setLat("33.49975371296835"); //위도
-		dto3.setLon("126.51487649468552"); //경도
+		dto3.setLat("33.49975371296835"); // 위도
+		dto3.setLon("126.51487649468552"); // 경도
 		System.out.println("제주특별자치도 제주시 : " + reverseGeocode.getArea(dto3));
 
 		LocationDTO dto4 = new LocationDTO();

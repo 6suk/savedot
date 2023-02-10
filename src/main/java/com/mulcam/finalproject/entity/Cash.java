@@ -1,6 +1,9 @@
 package com.mulcam.finalproject.entity;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,6 +26,7 @@ public class Cash { /* cash db */
 	private String memo;
 	private String cashCategoryName;
 	private String uid;
+	List<MultipartFile> saveimg;
 	
 	
 

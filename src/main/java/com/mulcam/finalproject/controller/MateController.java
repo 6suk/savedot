@@ -22,8 +22,8 @@ import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.Mate;
 import com.mulcam.finalproject.entity.User;
 import com.mulcam.finalproject.service.MateService;
-import com.mulcam.finalproject.service.ReverseGeocodeUtil;
 import com.mulcam.finalproject.service.UserService;
+import com.mulcam.finalproject.util.ReverseGeocodeUtil;
 
 @Controller
 @RequestMapping("/mate")
@@ -58,9 +58,9 @@ public class MateController {
 			// mapper
 			ModelMapper modelMapper = new ModelMapper();
 			Mate mate = modelMapper.map(mateDTO, Mate.class);
-//			Long mid = mateService.save(mate, files);
+			Long mid = mateService.save(mate, files);
 			
-			return "redirect:/detail/" + 1;
+			return "redirect:/detail/" + mid;
 	}
 
 	@PostMapping("/location")
