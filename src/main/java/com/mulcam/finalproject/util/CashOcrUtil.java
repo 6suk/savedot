@@ -1,4 +1,4 @@
-package com.mulcam.finalproject.service;
+package com.mulcam.finalproject.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;

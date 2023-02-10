@@ -69,23 +69,26 @@ function cashsubmit() {
   let cashsaveform = $('#cashsaveform');
   switch (category) {
     case '0': // 영수증
-      cashsaveform_saveimg();
+      cashsaveform_submit(0);
       break;
     case '1': // 지출 직접 기입
-      cashsaveform.submit();
+      cashsaveform_submit(1);
       break;
     case '2': // 수입 직접 기입
-      cashsaveform.submit();
+      cashsaveform_submit(1);
       break;
   }
 }
 
 // 영수증 이미지가 있을 때, SUBMIT!
-function cashsaveform_saveimg() {
+function cashsaveform_submit(ver) {
   let formData = new FormData($('#cashsaveform')[0]);
-  formData.append('saveimg', filelist[0]);
 
-  fetch('cash/write', {
+  if (ver === 0) {
+    formData.append('saveimg', filelist[0]);
+  }
+
+  fetch('/cash/write', {
     method: 'POST',
     cache: 'no-cache',
     body: formData,
@@ -108,7 +111,7 @@ function sendimg(file) {
 
   $.ajax({
     type: 'post',
-    url: '/ocr',
+    url: '/cash/ocr',
     data: formdata,
     contentType: false,
     processData: false,

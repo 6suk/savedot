@@ -20,7 +20,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Builder
-public class ReceiptImg {
+public class CashImg {
 	
 	private int iid;
 	private String fileName;

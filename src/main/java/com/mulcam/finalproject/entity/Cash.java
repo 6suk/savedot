@@ -25,8 +25,8 @@ public class Cash { /* cash db */
 	private String content; 
 	private String memo;
 	private String cashCategoryName;
-	List<MultipartFile> saveimg;
 	private String uid;
+	List<MultipartFile> saveimg;
 	
 	
 
