@@ -3,13 +3,13 @@ package com.mulcam.finalproject.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mulcam.finalproject.dto.LocationDTO;
-import com.mulcam.finalproject.dto.MypageSumDTO;
+import com.mulcam.finalproject.entity.User;
 import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.ReverseGeocodeUtil;
+import com.mulcam.finalproject.service.UserService;
 
 @Controller
 public class TestControllerYelim {
@@ -20,20 +20,23 @@ public class TestControllerYelim {
 	@Autowired
 	MateService mateService;
 	
+	@Autowired
+	UserService userService;
+	
 	@GetMapping("/mate/test")
 	public String writetest() {
-//		User user = new User();
-//		user.setId("ko");
-//		user.setPwd("ko");
-//		user.setNickname("프로 알뜰러");
-//		user.setTel("01012345678");
-//		User user2 = new User();
-//		user2.setId("admin");
-//		user2.setPwd("admin");
-//		user2.setNickname("관리자");
-//		user2.setTel("01012345689");
-//		userService.save(user2);
-//		userService.save(user);
+		User user = new User();
+		user.setId("ko");
+		user.setPwd("ko");
+		user.setNickname("프로 알뜰러");
+		user.setTel("01012345678");
+		User user2 = new User();
+		user2.setId("admin");
+		user2.setPwd("admin");
+		user2.setNickname("관리자");
+		user2.setTel("01012345689");
+		userService.save(user2);
+		userService.save(user);
 		
 //		User u = userService.findById("ko").get();
 //		userService.delete(u);

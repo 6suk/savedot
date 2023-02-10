@@ -794,6 +794,11 @@ p span:not(:last-child) {
   content: '￦ ';
 }
 
+.mate-detail-price-tag-box {
+  display: flex;
+  gap: 0.2rem;
+}
+
 .mate-detail-price-tag {
   font-size: 12px;
   padding-inline: 0.75rem;
