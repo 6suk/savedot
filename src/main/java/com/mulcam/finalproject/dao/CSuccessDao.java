@@ -11,14 +11,14 @@ import com.mulcam.finalproject.entity.CSuccess;
 @Mapper
 public interface CSuccessDao {
 	
-	@Select("select * from cSuccess")
+	@Select("select * from csuccess")
 	public List<CSuccess> getList();
 	
-	@Insert("insert into cSuccess values(default, default, #{cid}, #{uid})")
+	@Insert("insert into csuccess values(default, default, #{cid}, #{uid})")
 	void insert(CSuccess cs);
 	
 	@Select("SELECT SUM(camount) AS sumToday "
-			+ "FROM cSuccess AS s "
+			+ "FROM csuccess AS s "
 			+ "JOIN challenge AS c "
 			+ "ON c.cid = s.cid "
 			+ "WHERE CAST(s.sucDate AS DATE) = CURDATE() "
@@ -27,7 +27,7 @@ public interface CSuccessDao {
 	public int getTodaySum(String uid);
 	
 	@Select("SELECT SUM(camount) AS sumWeek "
-			+ "FROM cSuccess AS s "
+			+ "FROM csuccess AS s "
 			+ "JOIN challenge AS c "
 			+ "ON c.cid = s.cid "
 			+ "WHERE CAST(s.sucDate AS DATE) BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK) AND NOW() "
@@ -36,7 +36,7 @@ public interface CSuccessDao {
 	
 	
 	@Select("SELECT SUM(camount) AS sumMonth "
-			+ "FROM cSuccess AS s "
+			+ "FROM csuccess AS s "
 			+ "JOIN challenge AS c "
 			+ "ON c.cid = s.cid "
 			+ "WHERE CAST(s.sucDate AS DATE) BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH) AND NOW() "
