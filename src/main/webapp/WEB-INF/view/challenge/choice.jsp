@@ -16,6 +16,7 @@
 	<!-- TOP -->
 	<%@ include file="../common/top.jsp"%>
 	<!-- TOP -->
+	
 	<div class="container-nonaside-sm">
 		<div class="question-box">
 			<div class="question">
@@ -25,19 +26,14 @@
 			<c:forEach items="${challenge}" var="c">
 				<button class="btn btn-gray choice" type="button" name="op"
 					value="cha1" onclick="location.href='/challenge/choice/${c.cid}'">
-					<c:if test="${c.cid eq 1}">&#128652;</c:if>
-					<c:if test="${c.cid eq 2}">&#127869;</c:if>
-					<c:if test="${c.cid eq 3}">☕</c:if>
-					<!-- 커피이모지는 따로 코드 없어서 이미지로 첨부 -->
-					${c.cname}<br> <strong
-						style="color: CornflowerBlue; font-size: smaller; font-weight: 400;">${c.camount}원
-						절약</strong>
+					<c:if test="${c.cid eq 1}"><img src="/emoji/bus.png"></c:if>
+					<c:if test="${c.cid eq 2}"><img src="/emoji/fork.png"></c:if>
+					<c:if test="${c.cid eq 3}"><img src="/emoji/hot-beverage_2615.png"></c:if>
+					${c.cname}<br>
+					<strong style="color: CornflowerBlue; font-size: smaller; font-weight: 400;">${c.camount}원 절약</strong>
 				</button>
 			</c:forEach>
 		</div>
 	</div>
-	<!-- BOTTOM -->
-	<%@ include file="../common/bottom.jsp"%>
-	<!-- BOTTOM -->
 </body>
 </html>
