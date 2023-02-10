@@ -2,18 +2,17 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-
     <!-- // Heading -->
-<%@ include file="../common/heading.jsp"%>
-<!-- // Heading -->
+    <%@ include file="../common/heading.jsp"%>
+    <!-- // Heading -->
 
     <title>수입/지출 등록</title>
   </head>
   <body>
     <!-- //TOP -->
-  <%@ include file="../common/top.jsp"%>
-  <!-- TOP -->
- 
+    <%@ include file="../common/top.jsp"%>
+    <!-- TOP -->
+
     <div class="container-nonaside">
       <!-- content -->
       <section>
@@ -47,7 +46,14 @@
           <div class="inputbox">
             <form id="mateform" class="inputbox">
               <input class="form-control text input-text empty-text" type="text" name="cashDate" id="date" disabled />
-              <input class="form-control text input-text" type="text" name="amount"  id="amount" placeholder="금액*" disabled />
+              <input
+                class="form-control text input-text"
+                type="text"
+                name="amount"
+                id="amount"
+                placeholder="금액*"
+                disabled
+              />
               <input class="form-control text input-text" type="text" name="cashContent" placeholder="내역*" disabled />
               <textarea id="memo" class="form-control" name="memo" cols="30" rows="10" placeholder="메모"></textarea>
             </form>

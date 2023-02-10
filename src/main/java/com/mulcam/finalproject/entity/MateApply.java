@@ -29,7 +29,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Builder
-public class Apply {
+public class MateApply {
 	
 	@Id
 	@Column(name = "aid")
@@ -45,20 +45,15 @@ public class Apply {
 	@JoinColumn(name = "mid")
 	@NotNull
 	private Mate mate;	// 게시물 작성자 정보는 여기에 있음
-	
-	@Column(length = 30)
-	@NotNull
-	private String area;
-	
-	@Column(length = 128)
-	@NotNull
-	private String title;
-	
+
 	@Column(columnDefinition = "TEXT")
 	private String content;
 	
 	@CreationTimestamp
 	private LocalDateTime modDate;
+	
+	@ColumnDefault("0")
+	private int tradeType;
 	
 	@NotNull
 	@ColumnDefault("0")

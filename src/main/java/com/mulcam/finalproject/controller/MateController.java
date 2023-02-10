@@ -26,7 +26,7 @@ import com.mulcam.finalproject.service.ReverseGeocodeUtil;
 import com.mulcam.finalproject.service.UserService;
 
 @Controller
-//@RequestMapping("/mate")
+@RequestMapping("/mate")
 public class MateController {
 
 	@Autowired
@@ -38,7 +38,7 @@ public class MateController {
 	@Autowired
 	ReverseGeocodeUtil reverseGeocodeUtil;
 
-	@GetMapping("/mate")
+	@GetMapping("/write")
 	public String writeGet(Model model) {
 		User user = userService.findById("ko").get(); // 추후 세션에서 가져오기
 		// mapper
@@ -48,7 +48,7 @@ public class MateController {
 		return "mate/write";
 	}
 
-	@PostMapping("/mate")
+	@PostMapping("/write")
 	public String writePost(MateDTO mateDTO, String uid) {
 		Optional<User> user_ = userService.findById(uid);
 			User user = user_.get();
@@ -58,10 +58,9 @@ public class MateController {
 			// mapper
 			ModelMapper modelMapper = new ModelMapper();
 			Mate mate = modelMapper.map(mateDTO, Mate.class);
-			Long mid = mateService.save(mate, files);
+//			Long mid = mateService.save(mate, files);
 			
-			return "redirect:/detail/" + mid;
-
+			return "redirect:/detail/" + 1;
 	}
 
 	@PostMapping("/location")

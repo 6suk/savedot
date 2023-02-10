@@ -1,5 +1,139 @@
 const columns = document.querySelectorAll('.preview');
 let sendfile;
+let filelist = [];
+
+// require 검사 + SUBMIT
+$('#sendbtn').click(function () {
+  let check = requiredCheck(filelist);
+  console.log(check);
+  if (check) {
+    cashsubmit();
+  }
+});
+
+// 카테고리 클릭 시
+$(document).ready(function () {
+  $("input[name = 'category']").change(function () {
+    let category = $('input[name=category]:checked').val();
+    let label = $('#label');
+    let preview = $('#preview');
+    let inputText = $('.input-text');
+    let inputimg = $('#input');
+
+    switch (category) {
+      case '0': //영수증
+        //requird
+        inputText.removeClass('empty');
+        inputText.removeClass('required');
+        inputimg.addClass('required');
+        label.removeClass('none');
+        $('input.input-text').val('');
+        inputText.attr('disabled', true);
+        console.log(0);
+        break;
+
+      case '1': //지출 직접 기입
+        //requird
+        $('.imgbox-only').removeClass('empty');
+        inputText.removeClass('empty');
+        inputText.addClass('required');
+        inputimg.removeClass('required');
+        $('.embed-img').remove();
+        preview.attr('hidden', true);
+        label.attr('hidden', false);
+        label.addClass('none');
+        inputText.attr('disabled', false);
+        console.log(1);
+        break;
+
+      case '2': //수입 직접 기입
+        //requird
+        $('.imgbox-only').removeClass('empty');
+        inputText.removeClass('empty');
+        inputText.addClass('required');
+        inputimg.removeClass('required');
+        preview.attr('hidden', true);
+        label.attr('hidden', false);
+        label.addClass('none');
+        inputText.attr('disabled', false);
+        console.log(2);
+        break;
+    }
+  });
+});
+
+// SUBMIT!
+function cashsubmit() {
+  let category = $('input[name=category]:checked').val();
+  console.log(category);
+  let cashsaveform = $('#cashsaveform');
+  switch (category) {
+    case '0': // 영수증
+      cashsaveform_saveimg();
+      break;
+    case '1': // 지출 직접 기입
+      cashsaveform.submit();
+      break;
+    case '2': // 수입 직접 기입
+      cashsaveform.submit();
+      break;
+  }
+}
+
+// 영수증 이미지가 있을 때, SUBMIT!
+function cashsaveform_saveimg() {
+  let formData = new FormData($('#cashsaveform')[0]);
+  formData.append('saveimg', filelist[0]);
+
+  fetch('/cashsave/test', {
+    method: 'POST',
+    cache: 'no-cache',
+    body: formData,
+    redirect: 'follow',
+  })
+    .then((response) => {
+      if (response.redirected) {
+        window.location.href = response.url;
+      }
+    })
+    .catch(function (err) {
+      console.info(err + ' url: ' + url);
+    });
+}
+
+// 영수증 이미지 Ajax
+function sendimg(file) {
+  let formdata = new FormData();
+  formdata.append('data', file);
+
+  $.ajax({
+    type: 'post',
+    url: '/ocr',
+    data: formdata,
+    contentType: false,
+    processData: false,
+    success: function (res) {
+      let data = JSON.parse(res);
+
+      let resultMemo = '';
+
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].time != null) {
+          $('#date').val(data[i].time);
+        }
+        if (data[i].price != null) {
+          $('#amount').val(data[i].price);
+        }
+        if (data[i].inferText != null) {
+          resultMemo += data[i].inferText + ' ';
+        }
+      }
+
+      $('#memo').val(resultMemo);
+      console.log(data);
+    },
+  });
+}
 
 var input = document.getElementById('input');
 var initLabel = document.getElementById('label');
@@ -102,11 +236,10 @@ function handleUpdate(fileList) {
   });
   reader.readAsDataURL(fileList[0]);
 
+  filelist.push(fileList[0]);
+  console.log(fileList);
   sendimg(fileList[0]);
 }
-
-
-
 
 function el(nodeName, attributes, ...children) {
   const node = nodeName === 'fragment' ? document.createDocumentFragment() : document.createElement(nodeName);
@@ -135,153 +268,4 @@ function el(nodeName, attributes, ...children) {
     }
   });
   return node;
-}
-
-// require 검사 + SUBMIT
-$('#sendbtn').click(function () {
-  let inner = $('#inner');
-
-  //input value
-  let category = $('input[name=category]:checked');
-  let category_control = $('label#category');
-  let title = $('input[name=title]');
-  let area = $('#area2 option:selected');
-  let area_control = $('.input-btn');
-  let price1 = $('input[name=price1]');
-  let price2 = $('input[name=price2]');
-
-  //control
-  let check = [category, title, area, price1, price2];
-  let control = [category_control, title, area_control, price1, price2];
-  let check_ = 0;
-
-  for (let i = 0; i < check.length; i++) {
-    if (check[i].val() === '' || check[i].val() === null || check[i].val() === undefined) {
-      control[i].addClass('empty');
-    } else {
-      check_++;
-    }
-  }
-
-  if (sendfile === null) {
-    inner.addClass('empty');
-  } else {
-    check_++;
-  }
-
-  if (check_ === check.length + 1) {
-    cashsubmit();
-  }
-});
-
-// require 값 채워질 때
-$(function () {
-  let category_control = $('label#category');
-  let img_control = $('#inner');
-
-  $('input[name=title], input[name=area], input[name=price1], input[name=price2]').on('input', function () {
-    $(this).removeClass('empty');
-  });
-
-  $('input[name=category]').change(function () {
-    if ($(this).length > 0) {
-      category_control.removeClass('empty');
-    }
-  });
-});
-
-var ele = document.getElementById('date');
-ele.onchange = function () {
-  if (el.value === '') {
-    el.classList.add('empty-text');
-  } else {
-    el.classList.remove('empty-text');
-  }
-};
-
-$(document).ready(function () {
-  $("input[name = 'category']").change(function () {
-    let category = $('input[name=category]:checked').val();
-    let label = $('#label');
-    let preview = $('#preview');
-    let inputText = $('.input-text');
-
-    switch (category) {
-      case '0': //영수증
-        label.removeClass('none');
-        $('input.input-text').val('');
-        inputText.attr('disabled', true);
-        console.log(0);
-        break;
-
-      case '1': //지출 직접 기입
-        $('.embed-img').remove();
-        preview.attr('hidden', true);
-        label.attr('hidden', false);
-        label.addClass('none');
-        inputText.attr('disabled', false);
-        console.log(1);
-        break;
-
-      case '2': //수입 직접 기입
-        preview.attr('hidden', true);
-        label.attr('hidden', false);
-        label.addClass('none');
-        inputText.attr('disabled', false);
-        console.log(2);
-        break;
-    }
-  });
-});
-
-function cashsubmit() {
-  let category = $('input[name=category]:checked').val();
-  switch (category) {
-    case 0: // 영수증
-      break;
-    case 1: // 지출 직접 기입
-      break;
-    case 2: // 수입 직접 기입
-      break;
-  }
-}
-
-function test() {
-  // console.log('sendfile');
-  // console.log(sendfile);
-}
-
-
-function sendimg(file) {
-  let formdata = new FormData()
-  formdata.append('data', file)
-  
-  $.ajax({
-    type: 'post',
-    url: '/ocr',
-    data: formdata,
-    contentType: false,
-    processData: false,
-    success: function (res) {
-
-      let data = JSON.parse(res);
-
-      let resultMemo = "";
-
-      for(let i=0; i<data.length; i++){
-        if(data[i].time != null){
-          $("#date").val(data[i].time);
-        }
-        if(data[i].price != null){
-          $("#amount").val(data[i].price);
-        }
-        if(data[i].inferText != null){
-          resultMemo += data[i].inferText + " ";
-        }
-      }
-
-      $("#memo").val(resultMemo);
-      console.log(data);
-    },
-  });
 }
