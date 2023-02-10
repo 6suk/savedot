@@ -1,22 +1,16 @@
 package com.mulcam.finalproject.controller;
 
-import java.io.File;
-import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.mulcam.finalproject.dto.ReceiptImgDTO;
 import com.mulcam.finalproject.entity.Receipt;
-import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.OcrUtil;
 import com.mulcam.finalproject.service.ReceiptService;
 
@@ -35,13 +29,13 @@ public class ReceiptController {
 /** 수입지출등록 **/
 	
 	/* 수입지출 등록 front page띄우기 */
-	@GetMapping("/cashSave")
+	@GetMapping("/cashsave")
 	public String cashRegisterForm() {
 		return "/test/cashSave";
 
 	}
 	
-	@PostMapping("/cashSave") // 수입 지출 등록 
+	@PostMapping("/cashsave") // 수입 지출 등록 
 	public String receiptRegister(Receipt receiptVO) {
 		receiptVO.setUid(1);
 		
