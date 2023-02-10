@@ -50,7 +50,7 @@
               name="img"
             />
           </div>
-          <form id="cashsaveform" class="inputbox" action="/cashsave/test" method="post">
+          <form id="cashsaveform" class="inputbox" action="cash/write" method="post">
             <div class="inputbox">
               <input class="form-control text input-text" type="date" name="regDate" id="date" disabled />
               <input
@@ -69,6 +69,6 @@
       </section>
     </div>
   </body>
-  <script src="/js/cashsave.js"></script>
+  <script src="/js/cash.js"></script>
   <script src="/js/required.js"></script>
 </html>

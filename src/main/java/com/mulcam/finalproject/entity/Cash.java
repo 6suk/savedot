@@ -1,6 +1,5 @@
 package com.mulcam.finalproject.entity;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,7 +15,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Receipt {
+public class Cash { /* cash db */
 
 	private int cid;
 	private int category;// 0 = OCR, 지출,1 = 수입 
@@ -26,8 +25,8 @@ public class Receipt {
 	private String content; 
 	private String memo;
 	private String cashCategoryName;
-	private int uid;
 	List<MultipartFile> saveimg;
+	private String uid;
 	
 	
 
@@ -43,7 +42,7 @@ public class Receipt {
 		cashCategoryName = CashCategoryNames[category];
 	}
 
-	public Receipt(String regDate, int amount, String content) {
+	public Cash(String regDate, int amount, String content) {
 		this.regDate = regDate;
 		this.amount = amount;
 		this.content = content;

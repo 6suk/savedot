@@ -11,8 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.mulcam.finalproject.dto.ImageDTO;
 import com.mulcam.finalproject.dto.LocationDTO;
-import com.mulcam.finalproject.entity.Receipt;
 import com.mulcam.finalproject.entity.ReceiptImg;
+import com.mulcam.finalproject.entity.Cash;
 import com.mulcam.finalproject.entity.User;
 import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.ReverseGeocodeUtil;
@@ -41,6 +41,7 @@ public class TestControllerYelim {
 	}
 	
 	@PostMapping("/cashsave/test")
+<<<<<<< HEAD
 	public String datatest(Receipt receipt) {
 		List<MultipartFile> saveimg = receipt.getSaveimg();
 		
@@ -50,6 +51,9 @@ public class TestControllerYelim {
 			System.out.println(receiptImgInfo);
 		}
 		
+=======
+	public String datatest(Cash receipt, MultipartFile saveimg) {
+>>>>>>> e5438bc28478bc7b83f133c67da58e279a40821b
 		System.out.println(receipt);
 		return "redirect:/cashsave/test";
 	}
