@@ -19,18 +19,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.mulcam.finalproject.dto.OcrImageDTO;
 import com.mulcam.finalproject.dto.OcrDTO;
+import com.mulcam.finalproject.dto.OcrImageDTO;
 
 @Service
 public class CashOcrUtil {
-	
+
 
 	@Value("${apiURL}") private String apiURL;
 	@Value("${secretKey}") private String secretKey;
 	@Value("${spring.servlet.multipart.location}")
 	private String location;
-	
+
 	public String getOcrResult(MultipartFile multipartFile) throws Exception {
 		/* BASE64 인코딩 */
 		Base64.Encoder encoder = Base64.getEncoder();
@@ -79,11 +79,14 @@ public class CashOcrUtil {
 				jo3.getJSONArray("images").getJSONObject(0).getJSONArray("fields").getJSONObject(0).put("price", inferText);
 				continue;
 			}
+			if(images.getJSONObject(i).get("inferText").equals("[매장명]") || images.getJSONObject(i).get("inferText").equals("상호:")) {
+				jo3.getJSONArray("images").getJSONObject(0).getJSONArray("fields").getJSONObject(0).put("shopName", images.getJSONObject(i+1).get("inferText"));
+			}
 		}
 		return jo3.getJSONArray("images").getJSONObject(0).getJSONArray("fields").toString();
 	}
-	
-	
+
+
 	public static boolean checkDate(String checkDate) {
 		checkDate = checkDate.replaceAll("년","-");
 		checkDate = checkDate.replaceAll("월","-");
@@ -110,38 +113,38 @@ public class CashOcrUtil {
 		}
 		return false;
 	}
-	
-	
+
+
 	public static boolean isContent(String content) {
-		
+
 		if(content.contains("매장")|| content.contains("상호")) {
-			
+
 		}
 		return false;
 	}
-	
-	
-	
+
+
+
 	public static byte[] ocrImgArray(String filePath) throws Exception {
 		byte[] returnValue = null;
-		
+
 		ByteArrayOutputStream baos = null;
 		FileInputStream fis = null;
-		
+
 
 		try {
 			baos = new ByteArrayOutputStream();
 			fis = new FileInputStream(filePath);
-			
+
 			byte[] buf = new byte[1024];
 			int read = 0;
-			
+
 			while((read=fis.read(buf,0,buf.length))!= -1) {
 				baos.write(buf, 0, read);
 			}
-			
+
 			returnValue = baos.toByteArray();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -152,10 +155,10 @@ public class CashOcrUtil {
 				fis.close();
 			}
 		}
-		
-		
+
+
 		return returnValue;
 	}
-		
-	
+
+
 }

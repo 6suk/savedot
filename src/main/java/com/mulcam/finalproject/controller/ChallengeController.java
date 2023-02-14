@@ -18,10 +18,10 @@ import com.mulcam.finalproject.service.ChallengeService;
 @Controller
 @RequestMapping("/challenge")
 public class ChallengeController {
-	
+
 	@Autowired private ChallengeService cs;
 	@Autowired private CSuccessService css;
-	
+
 	@GetMapping("/choice")
 	public String listForm(Model model) {
 		List<Challenge> list = cs.getChallengeList();
@@ -29,7 +29,7 @@ public class ChallengeController {
 		model.addAttribute("challenge", list);
 		return "challenge/choice";
 	}
-	
+
 	@GetMapping("/choice/{cid}")
 	public String updateForm(@PathVariable int cid, Model model) {
 		Challenge c = cs.getChallenge(cid);
@@ -37,14 +37,14 @@ public class ChallengeController {
 		System.out.println(c);
 		return "challenge/confirm";
 	}
-	
+
 	@GetMapping("/confirm")
 	public String nameList(Model model) {
 		List<Challenge> nameList = cs.getChallengeList();
 		model.addAttribute("challenge", nameList);
 		return "challenge/confirm";
 	}
-	
+
 	@GetMapping("/save/{cid}")
 	public String mptest(@PathVariable int cid) {
 		CSuccess cs = new CSuccess();
@@ -54,5 +54,5 @@ public class ChallengeController {
 		css.insert(cs);
 		return "redirect:/mypage";
 	}
-	
+
 }

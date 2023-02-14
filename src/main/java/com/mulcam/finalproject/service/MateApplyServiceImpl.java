@@ -27,7 +27,7 @@ public class MateApplyServiceImpl implements MateApplyService {
 		mateApplyDAO.save(mateApply);
 		return mateApplyDAO.findSaveId();
 	}
-	
+
 	@Override
 	public void delete(Long aid) {
 		mateApplyDAO.delete(aid);

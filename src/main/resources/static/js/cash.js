@@ -83,6 +83,7 @@ function cashsubmit() {
 // 영수증 이미지가 있을 때, SUBMIT!
 function cashsaveform_submit(ver) {
   let formData = new FormData($('#cashsaveform')[0]);
+  console.log(formData.get('date'));
 
   if (ver === 0) {
     formData.append('saveimg', filelist[0]);
@@ -119,20 +120,20 @@ function sendimg(file) {
       let data = JSON.parse(res);
 
       let resultMemo = '';
-
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].time != null) {
-          $('#date').val(data[i].time);
+  for(let i=0; i<data.length; i++){
+        if(data[i].time != null){
+          $("#date").val(data[i].time);
         }
-        if (data[i].price != null) {
-          $('#amount').val(data[i].price);
+        if(data[i].shopName != null){
+          $("#shopName").val(data[i].shopName);
         }
-        if (data[i].inferText != null) {
-          resultMemo += data[i].inferText + ' ';
+        if(data[i].price != null){
+          $("#amount").val(data[i].price);
+        }
+        if(data[i].inferText != null){
+          resultMemo += data[i].inferText + " ";
         }
       }
-
-      $('#memo').val(resultMemo);
       console.log(data);
     },
   });

@@ -14,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString @Builder
 public class CashOcrImg {
-	
+
 	private int oid;
 	private String imgFileName;
 	private String ext;
@@ -22,6 +22,6 @@ public class CashOcrImg {
 	private String imgFilePath;
 	private int cid;
 	private String uid;
-	
+
 
 }

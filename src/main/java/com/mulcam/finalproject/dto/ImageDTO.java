@@ -25,7 +25,7 @@ public class ImageDTO {
 	private UUID uuid;
 	private String ext;
 	private File path;
-	
+
 	public MateImg setMateImgInfo() {
 		// Img Entity 생성
 		MateImg mateImg = MateImg.builder()
@@ -35,7 +35,7 @@ public class ImageDTO {
 				.saveDate(LocalDate.now())
 				.build();
 		return mateImg;
-		
+
     }
 
 	public CashImg setCashImgInfo() {

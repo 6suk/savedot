@@ -21,13 +21,13 @@ public class MateServiceImpl implements MateService {
 
 	@Autowired
 	MateRepository mateRepository;
-	
+
 	@Autowired
 	MateImgRepository mateImgRepository;
-	
+
 	@Autowired
 	ImageUpload imageUpload;
-	
+
 	@Value("${spring.servlet.multipart.location}")
 	private String location;
 
@@ -36,7 +36,7 @@ public class MateServiceImpl implements MateService {
 		Long longId = Long.parseLong(id);
 		return mateRepository.findById(longId);
 	}
-	
+
 	@Override
 	public Optional<Mate> findById(Long id) {
 		return mateRepository.findById(id);
@@ -49,12 +49,12 @@ public class MateServiceImpl implements MateService {
 		for(ImageDTO img : imgInfoList) {
 			mateImgInfoList.add(img.setMateImgInfo());
 		}
-		
+
 		mate.addImgList(mateImgInfoList);
 		mate = mateRepository.save(mate);
 		return mate.getId();
 	}
-	
+
 	@Override
 	public Long save(Mate mate) {
 		mate = mateRepository.save(mate);

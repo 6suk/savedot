@@ -22,14 +22,14 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "uid")
 	private Long idAuto;
-	
+
 	@Column(unique = true, nullable = false)
 	private String id;
-	
+
 	@Column(nullable = false)
 	private String pwd;
-	
+
 	private String tel;
-	
+
 	private String nickname;
 }
