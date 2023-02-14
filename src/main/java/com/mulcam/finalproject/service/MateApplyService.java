@@ -17,14 +17,10 @@ public interface MateApplyService {
 
 	/** Apply : Uid 검색 */
 	public List<MateApplyDTO> findByUid(User user);
-<<<<<<< HEAD
 	
 	/** Apply : Uid 검색 */
 	public List<MateApplyDTO> findByUid(Long uid);
-	
-=======
 
->>>>>>> c07efb8d279ce2a501523e217e642c6fbcfb1d65
 	/** Apply : Mid 검색 */
 	public List<MateApplyDTO> findByMid(Mate mate);
 
