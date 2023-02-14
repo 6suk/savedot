@@ -22,6 +22,10 @@ section {
   margin-bottom: 10rem;
 }
 
+nav + div {
+  margin-top: 4rem;
+}
+
 /* TOP */
 @media (min-width: 1200px) {
   .navbar > .container-fluid {
@@ -38,7 +42,7 @@ section {
   justify-content: space-between;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  margin-bottom: 4rem;
+  /* margin-bottom: 4rem; */
 
   /* add */
   background-color: transparent;
@@ -593,8 +597,8 @@ aside {
 }
 
 .form-select.input-btn-ele-reverse {
-  background-position: right 1.6rem center;
-  padding-left: 1.6rem;
+  background-position: right 1.5rem center;
+  padding-left: 1.5rem;
 }
 
 option:not(:first-of-type) {
@@ -644,9 +648,8 @@ option:not(:first-of-type) {
 #wrap {
   display: none;
   width: 100%;
-  height: 480px;
+  height: 540px !important;
   position: relative;
-  box-shadow: 2px 4px 16px rgb(0 0 0 / 6%);
 }
 
 /* ////////////////////////////////////  MATE WRTIE >> //////////////////////////////////// */
@@ -741,15 +744,26 @@ input[type='date'].empty-text {
   padding-inline: 0.5rem;
 }
 
+.mate-detail-content {
+  padding-block: 0.2rem;
+}
+
 .mate-detail-sub-info,
-.mate-detail-middle {
+.mate-detail-middle,
+.mate-detail-map-info {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .mate-detail-middle {
-  padding-block: 1rem;
+  padding-block: 1.5rem;
   border-block: 1px solid var(--border-color);
+}
+
+.mate-detail-middle .line p,
+.mmate-detail-middle .line span {
+  font-size: 14px;
 }
 
 .mate-detail-sub-info p,
@@ -807,6 +821,28 @@ p span:not(:last-child) {
   color: var(--main-color);
   border-radius: 5px;
   font-weight: 500;
+  user-select: none;
+}
+
+.mate-url-tag {
+  font-size: 12px;
+  padding-inline: 0.65rem;
+  padding-block: 0.36rem;
+  background-color: #eee;
+  color: var(--gray-color);
+  border-radius: 5px;
+  font-weight: 500;
+  user-select: none;
+  transition: all ease 0.3s 0s;
+}
+
+.mate-url-tag.hover {
+  cursor: pointer;
+}
+
+.mate-url-tag.hover:hover {
+  background-color: #dddddd;
+  transition: all ease 0.3s 0s;
 }
 
 button > i {
@@ -815,6 +851,26 @@ button > i {
   color: #fff;
   opacity: 1;
 }
+
+.map {
+  width: 100%;
+  height: 400px;
+}
+
+.mate-detail-map {
+  padding-block: 1.5rem;
+  border-block: 1px solid var(--border-color);
+  padding-inline: 0.5rem;
+}
+
+.mate-detail-map-info {
+  /* padding-bottom: 1.5rem; */
+  padding-top: 1.5rem;
+}
+
+/* ////////////////////////////////////  Detail >> //////////////////////////////////// */
+
+/* ////////////////////////////////////  SIDE & MODAL >> //////////////////////////////////// */
 
 .seletion-side {
   display: none;
@@ -831,4 +887,349 @@ button > i {
   top: 7.2rem;
   right: calc(20% - 340px);
   width: calc(20%);
+}
+
+.mate-detail-position {
+  color: var(--main-color);
+}
+
+.modalBg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 1060;
+}
+
+.savedot-modal {
+  opacity: 0;
+  transition: all ease 0.3s 0s;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 8px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 48px;
+  display: inline-block;
+  max-width: 620px;
+  width: 100%;
+}
+
+.modal-close {
+  position: relative;
+  z-index: 99;
+  width: 100%;
+  background-color: white;
+  height: 50px;
+  cursor: pointer;
+}
+
+.modal-close i {
+  font-size: 24px;
+  position: absolute;
+  right: 3%;
+  top: 20%;
+}
+
+.savedot-modal-addr {
+  opacity: 0;
+  transition: all ease 0.3s 0s;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 8px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: inline-block;
+  max-width: 460px;
+  width: 100%;
+  box-shadow: 2px 4px 16px rgb(0 0 0 / 6%);
+}
+
+/* ////////////////////////////////////  SIDE & MODAL >> //////////////////////////////////// */
+
+/* ////////////////////////////////////  MATE CARD - MYPAGE //////////////////////////////////// */
+.mate_card {
+  margin-bottom: 4rem;
+}
+
+.mypage-mate-card-box {
+  white-space: nowrap;
+  scroll-snap-type: mandatory;
+  scroll-snap-type: x mandatory;
+  overflow-x: scroll;
+  overflow: hidden;
+  gap: 1rem;
+  display: flex;
+  -webkit-overflow-scrolling: touch;
+  transition: all 0.3s cubic-bezier(0, 0, 0.5, 1);
+  scroll-behavior: smooth;
+}
+
+.mate_card_btn {
+  width: 50px;
+  height: 50px;
+  font-size: 19px;
+  top: 50%;
+  transform: translate(0, -50%);
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgb(213 213 213 / 40%);
+  box-shadow: 2px 4px 16px rgb(0 0 0 / 3%);
+  transition: all 0.3s cubic-bezier(0, 0, 0.5, 1);
+  color: #cfcfcf;
+}
+
+.mate_card_btn.prev {
+  right: 1rem;
+}
+
+.mate_card_btn.next {
+  left: 1rem;
+}
+
+.mate_card_btn:hover {
+  color: #bdbdbd;
+  background-color: rgb(213 213 213 / 40%);
+  box-shadow: 2px 4px 16px rgb(0 0 0 / 6%);
+}
+
+.mate-card-list {
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.mate-card-item {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  width: 20.5rem;
+  height: 13.5rem;
+  justify-content: space-between;
+  padding-inline: 1.8rem;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding-block: 1.8rem;
+  transition: all ease 0.3s 0s;
+}
+
+#mate-card-2 .mate-card-item {
+  height: 16.5rem;
+}
+
+.mate-card-item:hover {
+  border: 1px solid rgba(var(--main-color-rgb), 50%);
+  transition: all ease 0.3s 0s;
+}
+
+.mate-card-top {
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+a {
+  transition: all ease 0.3s 0s;
+}
+
+a:hover {
+  transition: all ease 0.3s 0s;
+}
+
+.mate-card-top h4 {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.mate-card-top-count {
+  font-size: 15px;
+  font-weight: 600;
+  padding-inline: 0.5rem;
+  padding-block: 0.2rem;
+  background-color: #eee;
+  color: #999;
+  border-radius: 5px;
+}
+
+.mate-card-tag {
+  background-color: var(--sub-color);
+  color: var(--main-color);
+  user-select: none;
+  padding-inline: 0.65rem;
+  padding-block: 0.36rem;
+  border-radius: 5px;
+}
+
+#mate-card-3 .mate-card-tag {
+  background-color: #eee;
+  color: var(--lgray-color);
+}
+
+#mate-card-1 .mate-card-tag {
+  color: var(--gray-color);
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+}
+
+.mate-card-middle {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  padding-inline: 0.2rem;
+}
+
+.mate-card-middle ul {
+  font-size: 14px;
+  flex-direction: column;
+  list-style: none;
+  display: flex;
+}
+
+.mate-card-middle h5 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mate-card-middle-notice {
+  font-size: 14px;
+}
+
+.mate-card-middle-tb {
+  display: flex;
+  gap: 1rem;
+}
+
+.mate-card-middle-tb ul,
+.mate-card-middle-tb li {
+  color: #666;
+  margin: 0;
+  padding: 0;
+}
+
+.mate-card-middle-tb li:not(:last-child) {
+  padding-bottom: 0.25rem;
+}
+
+.tb-title {
+  font-weight: 600;
+}
+
+.mate-card-arrow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mate-card-arrow .btn {
+  color: var(--lgray-color);
+  font-size: 18px;
+}
+
+.mate-card-arrow .btn:hover {
+  color: var(--gray-color);
+}
+
+/* 마이페이지 카테고리 */
+
+.mypage-navbar {
+  border-bottom: 1px solid rgba(var(--border-color-rgb), 0.8);
+}
+
+.sub a {
+  font-size: 15px;
+}
+
+.mypage-navbar .nav-link {
+  color: #333;
+}
+
+.mypage-navbar .nav-link:hover {
+  font-weight: 600;
+  color: var(--main-color);
+}
+
+.mypage-navbar .nav-link.active {
+  font-weight: 600;
+  color: var(--main-color);
+}
+
+.mypage-navbar.sub .nav-link.active {
+  font-weight: 600;
+  color: var(--gray-color);
+}
+
+.mypage-navbar a {
+  display: block;
+  position: relative;
+  transition: color 0.15s ease;
+  padding-block: 1.2rem;
+}
+
+.mypage-navbar .active::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 4px;
+  background: var(--main-color);
+  left: 0;
+  bottom: 0;
+}
+
+.mypage-navbar.sub .active::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 4px;
+  background: rgba(var(--main-color-rgb), 30%);
+  left: 0;
+  bottom: 0;
+}
+
+/* Sub 카테고리 */
+.mypage-sub-category {
+  margin-bottom: 3.5rem;
+}
+
+.mypage-sub-category ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+}
+
+.mypage-sub-category-item {
+  width: 100%;
+  text-align: center;
+  position: relative;
+  padding-block: 1rem;
+  cursor: pointer;
+}
+
+.mypage-sub-category a.active::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--lgray-color);
+  left: 0;
+  bottom: 0;
 }

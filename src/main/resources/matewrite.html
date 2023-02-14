@@ -105,21 +105,46 @@
                   ></i>
                 </div>
                 <div style="position: relative; width: 100%">
+                  <div class="input-btn">
+                    <select name="bank" id="bank" class="form-select required font-14" style="flex: 0.2 0 0">
+                      <option value="0" selected disabled>은행</option>
+                      <option value="1">카카오뱅크</option>
+                      <option value="2">농협</option>
+                      <option value="3">국민</option>
+                    </select>
+                    <input
+                      type="text"
+                      class="form-control text"
+                      name="accountNumber"
+                      id="accountNumber"
+                      style="flex: 1 0 0"
+                      placeholder="*계좌번호"
+                    />
+                    <i
+                      class="fa-solid fa-circle-exclamation inner-btn font-14"
+                      style="color: var(--lgray-color); opacity: 0.5"
+                      data-bs-toggle="tooltip"
+                      data-bs-html="true"
+                      data-bs-placement="top"
+                      title="계좌번호는 거래 진행 중일 시 메이트에게만 공개됩니다."
+                    ></i>
+                  </div>
+                </div>
+                <div class="input-btn">
+                  <select name="telType" id="tel_type" class="form-select required font-14" style="flex: 0.2 0 0">
+                    <option value="0" selected disabled>연락 방법</option>
+                    <option value="1">오픈채팅</option>
+                    <option value="2">댓글</option>
+                  </select>
                   <input
-                    class="form-control text required"
                     type="text"
-                    name="accountNumber"
-                    placeholder="계좌번호*"
-                    numberOnly
+                    class="form-control text"
+                    name="telUrl"
+                    id="tel_url"
+                    style="flex: 1 0 0"
+                    placeholder="*연락 방법 선택"
+                    disabled
                   />
-                  <i
-                    class="fa-solid fa-circle-exclamation inner-btn font-14"
-                    style="color: var(--lgray-color); opacity: 0.5"
-                    data-bs-toggle="tooltip"
-                    data-bs-html="true"
-                    data-bs-placement="top"
-                    title="계좌번호는 거래 진행 중일 시 메이트에게만 공개됩니다."
-                  ></i>
                 </div>
                 <input class="form-control text required" type="text" name="title" placeholder="타이틀*" />
                 <div class="d-flex gap-2">
@@ -149,7 +174,7 @@
                     data-bs-toggle="tooltip"
                     data-bs-html="true"
                     data-bs-placement="top"
-                    title="구매가와 모집인원을 기입하면,<br> 판매가가 자동으로 계산됩니다.<br>판매가는 수정이 가능합니다."
+                    title="구매가와 모집인원 기입 시,<br>판매가는 자동으로 계산됩니다.<br>모집인원 미기입 시 기본 1명으로 계산됩니다.<br>자동 계산된 판매가는 수정이 가능합니다."
                     id="calc_price"
                   />
                 </div>
@@ -168,7 +193,6 @@
                   rows="10"
                   placeholder="제품의 정보를 자세하게 기재해주세요!"
                 ></textarea>
-                <input class="form-control text" type="text" name="openChat" placeholder="오픈채팅 URL" />
                 <div class="form-tag tag-border" id="tradetype">
                   <input type="radio" name="tradeType" id="direct" value="1" class="required" />
                   <label for="direct" id="tradetype">직접거래</label>
@@ -212,6 +236,7 @@
                       class="form-select input-btn-ele-reverse"
                       style="flex: 0.2 0 0"
                     >
+                      <option value="0" disabled selected>선불/착불</option>
                       <option value="1">선불</option>
                       <option value="2">착불</option>
                     </select>
@@ -230,13 +255,17 @@
             </div>
           </div>
         </section>
-        <section class="seletion-side-addr" id="section-wrap">
-          <div id="wrap"></div>
-        </section>
+      </div>
+    </div>
+
+    <div class="modalBg" id="modal-bg">
+      <div class="requestModal savedot-modal-addr" id="section-wrap">
+        <div id="closebtn" class="modal-close"><i class="fa-solid fa-x"></i></div>
+        <div id="wrap"></div>
       </div>
     </div>
   </body>
-
+  <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=dbe219346db7d2ef92284f7144059849&libraries=services"></script>
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
   <script src="../resources/static/js/kakao_address.js"></script>

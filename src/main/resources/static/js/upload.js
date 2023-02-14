@@ -5,7 +5,9 @@ let filelist = [];
 
 // required 검사 + SUBMIT
 $('#sendbtn').click(function () {
+  console.log('실행');
   let check = requiredCheck(filelist);
+  console.log(check);
   if (check) {
     matesubmit();
   }
@@ -13,6 +15,7 @@ $('#sendbtn').click(function () {
 
 // SUBMIT!
 function matesubmit() {
+  console.log('실행');
   let price = $('input:text[price]');
   Array.from(price).forEach((x) => {
     $(x).val(removeCommas($(x).val()));
@@ -32,7 +35,7 @@ function matesubmit() {
     });
   }
 
-  fetch('/mate/write', {
+  fetch('write', {
     method: 'POST',
     cache: 'no-cache',
     body: formData,
