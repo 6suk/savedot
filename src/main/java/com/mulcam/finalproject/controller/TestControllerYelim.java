@@ -2,6 +2,7 @@ package com.mulcam.finalproject.controller;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +12,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.mulcam.finalproject.dto.ImageDTO;
 import com.mulcam.finalproject.dto.LocationDTO;
+import com.mulcam.finalproject.dto.MateApplyDTO;
 import com.mulcam.finalproject.entity.CashImg;
+import com.mulcam.finalproject.entity.MateApply;
 import com.mulcam.finalproject.entity.Cash;
 import com.mulcam.finalproject.entity.User;
+import com.mulcam.finalproject.service.MateApplyService;
 import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.UserService;
 import com.mulcam.finalproject.util.ImageUpload;
@@ -21,6 +25,9 @@ import com.mulcam.finalproject.util.ReverseGeocodeUtil;
 
 @Controller
 public class TestControllerYelim {
+	
+	@Autowired
+	ModelMapper modelMapper;
 
 	@Autowired
 	ReverseGeocodeUtil reverseGeocode;
@@ -33,6 +40,18 @@ public class TestControllerYelim {
 
 	@Autowired
 	ImageUpload imageUpload;
+	
+	@Autowired
+	MateApplyService applyService;
+	
+	@GetMapping("/dao")
+	public String mateapplyGet() {
+		User user = userService.findById("admin").get();
+		List<MateApplyDTO> list = applyService.findByUid(user);
+		list.forEach(x -> System.out.println(x));
+		
+		return "cashsave/write";
+	}
 
 	@GetMapping("/cashsave/test")
 	public String datatestGet() {
