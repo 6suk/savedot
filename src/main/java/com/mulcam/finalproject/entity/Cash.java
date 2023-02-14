@@ -13,14 +13,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class Cash { /* cash db */
 
 	private int cid;
-	private int category;// 0 = OCR, 지출,1 = 수입
+	private int reqCategory; // 0 = 지출 영수증, 1 = 지출, 2 = 수입 (View용)
+	private int category; // 0 = 지출, 1 = 수입
 	private String regDate;
 	private LocalDate cashDateLocal;
 	private int amount;
@@ -30,18 +32,17 @@ public class Cash { /* cash db */
 	private String uid;
 	List<MultipartFile> saveimg;
 
-
-
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 		this.cashDateLocal = LocalDate.parse(regDate);
 
 	}
 
-	public void setCategory(int category) {
-		String[] CashCategoryNames = {"지출", "수입"};
-		this.category = category;
-		cashCategoryName = CashCategoryNames[category];
+	public void setReqCategory(int reqCategory) {
+		String[] cashCategoryNames = { "지출", "수입" };
+		this.reqCategory = reqCategory;
+		this.category = this.reqCategory == 2 ? 1 : 0;
+		this.cashCategoryName = cashCategoryNames[this.category];
 	}
 
 	public Cash(String regDate, int amount, String content) {
@@ -50,7 +51,4 @@ public class Cash { /* cash db */
 		this.content = content;
 	}
 
-
-
 }
-

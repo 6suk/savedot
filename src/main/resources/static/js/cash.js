@@ -11,6 +11,15 @@ $('#sendbtn').click(function () {
   }
 });
 
+// 콤마 삭제
+function removeCommas(data) {
+  if (!data || data.length == 0) {
+    return '';
+  } else {
+    return data.split(',').join('');
+  }
+}
+
 // 카테고리 클릭 시
 $(document).ready(function () {
   $("input[name = 'category']").change(function () {
@@ -83,13 +92,14 @@ function cashsubmit() {
 // 영수증 이미지가 있을 때, SUBMIT!
 function cashsaveform_submit(ver) {
   let formData = new FormData($('#cashsaveform')[0]);
-  console.log(formData.get('date'));
+  formData.append('reqCategory', $('input[name=category]:checked').val());
+  formData.set('amount', removeCommas(formData.get('amount')));
 
   if (ver === 0) {
     formData.append('saveimg', filelist[0]);
   }
 
-  fetch('/cash/write', {
+  fetch('write', {
     method: 'POST',
     cache: 'no-cache',
     body: formData,
@@ -120,19 +130,23 @@ function sendimg(file) {
       let data = JSON.parse(res);
 
       let resultMemo = '';
-  for(let i=0; i<data.length; i++){
-        if(data[i].time != null){
-          $("#date").val(data[i].time);
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].time != null) {
+          $('#date').val(data[i].time);
         }
-        if(data[i].shopName != null){
-          $("#shopName").val(data[i].shopName);
+        if (data[i].shopName != null) {
+          $('#shopName').val(data[i].shopName);
         }
-        if(data[i].price != null){
-          $("#amount").val(data[i].price);
+        if (data[i].price != null) {
+          $('#amount').val(data[i].price);
         }
-        if(data[i].inferText != null){
-          resultMemo += data[i].inferText + " ";
+        if (data[i].inferText != null) {
+          resultMemo += data[i].inferText + ' ';
         }
+
+        $('#date').attr('disabled', false);
+        $('#shopName').attr('disabled', false);
+        $('#amount').attr('disabled', false);
       }
       console.log(data);
     },

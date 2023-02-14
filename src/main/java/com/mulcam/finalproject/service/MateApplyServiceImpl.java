@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.mulcam.finalproject.dao.MateApplyDAO;
 import com.mulcam.finalproject.dto.MateApplyDTO;
+import com.mulcam.finalproject.dto.MateDTO;
 import com.mulcam.finalproject.entity.Mate;
 import com.mulcam.finalproject.entity.MateApply;
 import com.mulcam.finalproject.entity.User;
@@ -21,6 +22,9 @@ public class MateApplyServiceImpl implements MateApplyService {
 
 	@Autowired
 	MateService mateService;
+	
+	@Autowired
+	UserService userService;
 
 	@Override
 	public Long save(MateApply mateApply) {
@@ -32,7 +36,13 @@ public class MateApplyServiceImpl implements MateApplyService {
 	public void delete(Long aid) {
 		mateApplyDAO.delete(aid);
 	}
-
+	
+	@Override
+	public List<MateApplyDTO> findByUid(Long uid) {
+		userService.findById(uid);
+		return findByUid(userService.findById(uid).get());	
+	}
+	
 	@Override
 	public List<MateApplyDTO> findByUid(User user) {
 		List<MateApplyDTO> dtoList = new ArrayList<>();
@@ -43,8 +53,9 @@ public class MateApplyServiceImpl implements MateApplyService {
 		list.forEach(entity -> {
 			MateApplyDTO applyDTO = modelMapper.map(entity, MateApplyDTO.class);
 			Long mid = entity.getMid();
+			MateDTO mateDTO = modelMapper.map(mateService.findById(mid).get(),MateDTO.class);
 			applyDTO.setUser(user);
-			applyDTO.setMate(mateService.findById(mid).get());
+			applyDTO.setMate(mateDTO);
 			dtoList.add(applyDTO);
 		});
 

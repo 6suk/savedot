@@ -56,7 +56,8 @@ public class CashController {
 			List<ImageDTO> imgDTO = imageUpload.LocalSaveFiles(saveimg);
 			CashImg cashImgInfo = imgDTO.get(0).setCashImgInfo();
 			System.out.println(cashImgInfo);
-			cashService.ocrImgSave(cashImgInfo);
+//			cashService.ocrImgSave(cashImgInfo);
+			// 해당 DB 저는 없어서 잠시 주석처리 해두었습니다!
 		}
 		System.out.println(cash);
 		cash.setUid("ko");

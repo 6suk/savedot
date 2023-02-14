@@ -45,7 +45,6 @@ public class MateController {
 	@Autowired
 	ReverseGeocodeUtil reverseGeocodeUtil;
 
-
 	/** Mate Write */
 	@GetMapping("/write")
 	public String writeGet(Model model) {
@@ -59,21 +58,21 @@ public class MateController {
 	@PostMapping("/write")
 	public String writePost(MateDTO mateDTO, String uid) {
 		Optional<User> user_ = userService.findById(uid);
-			User user = user_.get();
-			mateDTO.setUser(user);
+		User user = user_.get();
+		mateDTO.setUser(user);
 
-			Mate mate = modelMapper.map(mateDTO, Mate.class);
-			Long mid = null;
+		Mate mate = modelMapper.map(mateDTO, Mate.class);
+		Long mid = null;
 
-			if(mateDTO.getReqimgs() != null) {
-				List<MultipartFile> files = mateDTO.getReqimgs();
-				mid = mateService.save(mate, files);
-			}else {
-				mid = mateService.save(mate);
-			}
+		if (mateDTO.getReqimgs() != null) {
+			List<MultipartFile> files = mateDTO.getReqimgs();
+			mid = mateService.save(mate, files);
+		} else {
+			mid = mateService.save(mate);
+		}
 
-			System.out.println(mateDTO);
-			return "redirect:/mate/detail/" + mid;
+		System.out.println(mateDTO);
+		return "redirect:/mate/detail/" + mid;
 	}
 
 	@PostMapping("/location")
@@ -109,14 +108,17 @@ public class MateController {
 		apply.setUid(user.getIdAuto());
 		apply.setMid(mate.getId());
 
-		Long aid = applyService.save(apply);
-		return "mypage/mate";
+		applyService.save(apply);
+		return "redirect:/mypage/mate/apply/" + user.getIdAuto() + "/all";
 	}
 
 	@GetMapping("/apply/cancel/{aid}")
 	public String applyCancel(@PathVariable Long aid) {
+		// 로그인 임시
+		User user = userService.findById("admin").get();
+		
 		applyService.delete(aid);
-		return "mypage/mate";
+		return "redirect:/mypage/mate/apply/" + user.getIdAuto() + "/all";
 	}
 
 }

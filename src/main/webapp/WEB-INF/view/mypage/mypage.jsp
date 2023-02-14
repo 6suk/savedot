@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib prefix="c"
 uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!-- //// MYPAGE TEST PAGE //// -->
+<!-- //// MYPAGE PAGE - MAIN //// -->
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -15,6 +15,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <!-- //TOP -->
     <%@ include file="../common/top.jsp"%>
     <!-- TOP// -->
+    <!-- MYPAGE - TOP -->
+    <%@ include file="../common/mypage_top.jsp"%>
+    <!-- MYPAGE - TOP -->
 
     <div class="container-lg">
       <div class="row">
@@ -51,5 +54,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       </div>
     </div>
     <script src="/js/mypage_card.js"></script>
+    <script src="/js/mypage_nav.js"></script>
   </body>
 </html>

@@ -61,9 +61,9 @@
 									<select name="bank" id="bank"
 										class="form-select required font-14" style="flex: 0.2 0 0">
 										<option value="0" selected disabled>은행</option>
-										<option value="1">카카오뱅크</option>
-										<option value="2">농협</option>
-										<option value="3">국민</option>
+										<option value="카카오뱅크">카카오뱅크</option>
+										<option value="농협">농협</option>
+										<option value="국민">국민</option>
 									</select> <input type="text" class="form-control text"
 										name="accountNumber" id="accountNumber" style="flex: 1 0 0"
 										placeholder="*계좌번호" /> <i

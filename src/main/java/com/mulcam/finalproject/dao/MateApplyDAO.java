@@ -22,14 +22,19 @@ public interface MateApplyDAO {
 			+ "	SET isDel = 1"
 			+ "	WHERE aid = #{aid};")
 	public void delete(Long aid);
-
-	@Select("SELECT * FROM mate_apply WHERE isDel = 0;")
+	
+	@Update("UPDATE mate_apply"
+			+ "	SET isApply = #{isApply}"
+			+ "	WHERE aid = #{aid};")
+	public void updateIsApply(int isApply, Long aid);
+	
+	@Select("SELECT * FROM mate_apply WHERE isDel = 0 ORDER BY modDate DESC;")
 	public List<MateApply> findAll();
-
-	@Select("SELECT * FROM mate_apply WHERE uid = #{uid} AND isDel = 0;")
+	
+	@Select("SELECT * FROM mate_apply WHERE uid = #{uid} AND isDel = 0 ORDER BY modDate DESC;")
 	public List<MateApply> findByUid(Long uid);
-
-	@Select("SELECT * FROM mate_apply WHERE mid = #{mid} AND isDel = 0;")
+	
+	@Select("SELECT * FROM mate_apply WHERE mid = #{mid} AND isDel = 0 ORDER BY modDate DESC;")
 	public List<MateApply> findByMid(Long mid);
 
 }

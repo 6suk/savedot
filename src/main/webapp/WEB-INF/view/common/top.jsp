@@ -13,10 +13,10 @@
         <a class="nav-link active" href="#">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">조각메이트</a>
+        <a class="nav-link" href="/mate/write">조각메이트</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">챌린지</a>
+        <a class="nav-link" href="/challenge/choice">챌린지</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">알뜰정보</a>
