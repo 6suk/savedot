@@ -16,7 +16,7 @@ import com.mulcam.finalproject.service.CSuccessService;
 @Controller
 @RequestMapping("/challenge")
 public class CSuccessController {
-	
+
 	@Autowired private CSuccessService css;
 
 	@GetMapping("/list")
@@ -25,17 +25,17 @@ public class CSuccessController {
 		model.addAttribute("successList", list);
 		return "challenge/list";
 	}
-	
+
 	@GetMapping("/test")
 	public String testForm() {
 		return "challenge/test";
 	}
-	
+
 	@PostMapping("/test")
 	public String push(CSuccess cs) {
 		System.out.println(cs);
 		css.insert(cs);
 		return "redirect:/challenge/list";
 	}
-	
+
 }

@@ -1,11 +1,6 @@
 package com.mulcam.finalproject.entity;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.UUID;
-
-import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +16,7 @@ import lombok.ToString;
 @ToString
 @Builder
 public class CashImg {
-	
+
 	private int iid;
 	private String fileName;
 	private String ext;
@@ -29,5 +24,5 @@ public class CashImg {
 	private String filePath;
 	private LocalDate saveDate;
 	private int cid;
-	
+
 }

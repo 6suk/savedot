@@ -28,10 +28,10 @@ public class MypageController {
 		MypageSumDTO mypageSumDTO = css.getSum("admin");
 		return mypageSumDTO;
 	}
-	
+
 	@GetMapping("/apply")
 	public String applyGet() {
-		
+
 		return null;
 	}
 

@@ -3,11 +3,9 @@ package com.mulcam.finalproject.util;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -17,8 +15,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.mulcam.finalproject.dto.LocationDTO;
-
-import net.bytebuddy.asm.Advice.Return;
 
 @Service
 public class ReverseGeocodeUtil {
@@ -62,7 +58,7 @@ public class ReverseGeocodeUtil {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		JSONParser parser = new JSONParser();
 		JSONObject obj = null;
 
@@ -80,7 +76,7 @@ public class ReverseGeocodeUtil {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
+
 		return param;
 	}
 }

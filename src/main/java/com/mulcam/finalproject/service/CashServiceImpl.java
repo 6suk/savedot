@@ -13,11 +13,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.uuid.Generators;
 import com.mulcam.finalproject.dao.CashDao;
 import com.mulcam.finalproject.entity.Cash;
-import com.mulcam.finalproject.entity.CashOcrImg;
+import com.mulcam.finalproject.entity.CashImg;
 
 @Service
 public class CashServiceImpl implements CashService {
-	
+
 	@Value("${spring.servlet.multipart.location}")
 	private String location;
 
@@ -36,7 +36,7 @@ public class CashServiceImpl implements CashService {
 	}
 
 
-	@Override // 영수증 이미지 로컬 저장 
+	@Override // 영수증 이미지 로컬 저장
 	public void LocalSaveFiles(MultipartFile ocrImgs) {
 		File path = getPath();
 
@@ -53,7 +53,7 @@ public class CashServiceImpl implements CashService {
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
-			
+
 	}
 
 	// 날짜별 폴더 생성
@@ -63,12 +63,10 @@ public class CashServiceImpl implements CashService {
 		return path;
 	}
 
-	@Override
-	public void OcrImgSave(CashOcrImg ocrImg) {
-		
-
-		
-	
+	@Override // 영수증 이미지 db저장
+	public void ocrImgSave(CashImg cashImg) {
+		cashImg.setCid(1);
+		cashDao.ocrImgSave(cashImg);
 	}
 
 

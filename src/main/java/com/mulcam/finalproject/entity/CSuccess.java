@@ -19,5 +19,5 @@ public class CSuccess {
 	private LocalDateTime sucDate;
 	private int cid;
 	private String uid;
-	
+
 }

@@ -56,8 +56,11 @@ public class CashController {
 			List<ImageDTO> imgDTO = imageUpload.LocalSaveFiles(saveimg);
 			CashImg cashImgInfo = imgDTO.get(0).setCashImgInfo();
 			System.out.println(cashImgInfo);
+			cashService.ocrImgSave(cashImgInfo);
 		}
 		System.out.println(cash);
+		cash.setUid("ko");
+		cashService.cashSave(cash);
 		return "redirect:/cash/write";
 	}
 

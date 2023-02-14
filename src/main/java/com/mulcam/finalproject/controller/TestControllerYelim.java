@@ -13,9 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.mulcam.finalproject.dto.ImageDTO;
 import com.mulcam.finalproject.dto.LocationDTO;
 import com.mulcam.finalproject.dto.MateApplyDTO;
-import com.mulcam.finalproject.entity.CashImg;
-import com.mulcam.finalproject.entity.MateApply;
 import com.mulcam.finalproject.entity.Cash;
+import com.mulcam.finalproject.entity.CashImg;
 import com.mulcam.finalproject.entity.User;
 import com.mulcam.finalproject.service.MateApplyService;
 import com.mulcam.finalproject.service.MateService;
@@ -25,7 +24,7 @@ import com.mulcam.finalproject.util.ReverseGeocodeUtil;
 
 @Controller
 public class TestControllerYelim {
-	
+
 	@Autowired
 	ModelMapper modelMapper;
 
@@ -40,16 +39,16 @@ public class TestControllerYelim {
 
 	@Autowired
 	ImageUpload imageUpload;
-	
+
 	@Autowired
 	MateApplyService applyService;
-	
+
 	@GetMapping("/dao")
 	public String mateapplyGet() {
 		User user = userService.findById("admin").get();
 		List<MateApplyDTO> list = applyService.findByUid(user);
 		list.forEach(x -> System.out.println(x));
-		
+
 		return "cashsave/write";
 	}
 
@@ -66,7 +65,7 @@ public class TestControllerYelim {
 			CashImg receiptImgInfo = imgDTO.get(0).setCashImgInfo();
 			System.out.println(receiptImgInfo);
 		}
-		
+
 		System.out.println(cash);
 		return "redirect:/cashsave/test";
 	}

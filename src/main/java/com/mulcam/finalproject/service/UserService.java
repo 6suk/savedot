@@ -12,14 +12,14 @@ import com.mulcam.finalproject.repository.UserRepository;
 public class UserService {
 	@Autowired
 	UserRepository userRepository;
-	
+
 	public void save(User user) {
 		userRepository.save(user);
 	}
 	public Optional<User> findById(String id) {
 		return userRepository.findById(id);
 	}
-	
+
 	public void delete(User user) {
 		userRepository.delete(user);
 	}

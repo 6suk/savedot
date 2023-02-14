@@ -15,7 +15,7 @@ public class UserDTO {
 	private String tel;
 	private String telFormat;
 	private String nickname;
-	
+
 	public void setTel(String tel) {
 		this.tel = tel;
 		if(tel != null) {

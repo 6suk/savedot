@@ -61,7 +61,7 @@
                 placeholder="금액*"
                 disabled
               />
-              <input class="form-control text input-text" type="text" name="content" placeholder="내역*" disabled />
+              <input class="form-control text input-text" type="text" name="content" id="shopName" placeholder="내역*" disabled />
               <textarea id="memo" class="form-control" name="memo" cols="30" rows="10" placeholder="메모"></textarea>
             </div>
           </form>
