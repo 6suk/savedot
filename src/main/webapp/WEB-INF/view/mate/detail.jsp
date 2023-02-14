@@ -122,7 +122,7 @@
 						class="btn btn-sub mdi" value="닫기" />
 				</div>
 			</div>
-			<form id="applyform" class="inputbox" method="post"
+			<form id="applyform" class="inputbox"
 				action="/mate/apply/${mate.id}">
 				<input type="hidden" name="userid" value="${user.id}" />
 				<input type="hidden" value="${mate.placeAddr}" id="apply_place_addr" />
@@ -131,18 +131,7 @@
 					value="${mate.parcelType}" id="apply_parcel_type" />
 				<div class="d-flex gap-2">
 					<input class="form-control text required" type="text"
-						name="nickname" value="닉네임" readonly />
-					<div style="position: relative; width: 100%">
-						<input type="hidden" name="id" /> <input
-							class="form-control text required" type="text" name="tel"
-							value="010-0000-0000" readonly /> <i
-							class="fa-solid fa-circle-exclamation inner-btn font-14"
-							style="color: var(- -lgray-color); opacity: 0.5"
-							data-bs-toggle="tooltip" data-bs-html="true"
-							data-bs-placement="top"
-							title="연락처는 매칭 성공 시 작성자에게만 공개됩니다.<br>
-                연락처 수정은 마이페이지에서 가능합니다."></i>
-					</div>
+						name="nickname" value="${user.nickname }" readonly />
 				</div>
 				<textarea class="form-control" name="content" cols="30" rows="10"
 					placeholder="남기고 싶은 말을 적어주세요 :)"></textarea>

@@ -16,7 +16,14 @@ public class UserService {
 	public void save(User user) {
 		userRepository.save(user);
 	}
+	
+	/** id로 찾기 */
 	public Optional<User> findById(String id) {
+		return userRepository.findById(id);
+	}
+	
+	/** PK로 찾기 */
+	public Optional<User> findById(Long id) {
 		return userRepository.findById(id);
 	}
 	

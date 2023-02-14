@@ -17,30 +17,26 @@ public interface CSuccessDao {
 	@Insert("insert into csuccess values(default, default, #{cid}, #{uid})")
 	void insert(CSuccess cs);
 	
-	@Select("SELECT SUM(camount) AS sumToday "
-			+ "FROM csuccess AS s "
-			+ "JOIN challenge AS c "
-			+ "ON c.cid = s.cid "
-			+ "WHERE CAST(s.sucDate AS DATE) = CURDATE() "
-			+ "GROUP BY s.uid "
-			+ "HAVING uid = #{uid}")
+	@Select("SELECT IFNULL(SUM(camount),0) sumToday "
+			+ " FROM csuccess AS s"
+			+ " JOIN challenge AS c"
+			+ " ON c.cid = s.cid"
+			+ " WHERE CAST(s.sucDate AS DATE) = CURDATE() AND uid = #{uid};")
 	public int getTodaySum(String uid);
 	
-	@Select("SELECT SUM(camount) AS sumWeek "
-			+ "FROM csuccess AS s "
-			+ "JOIN challenge AS c "
-			+ "ON c.cid = s.cid "
-			+ "WHERE CAST(s.sucDate AS DATE) BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK) AND NOW() "
-			+ "and uid = #{uid}")
+	@Select("SELECT IFNULL(SUM(camount),0) sumWeek"
+			+ "	FROM csuccess AS s"
+			+ "	JOIN challenge AS c"
+			+ "	ON c.cid = s.cid"
+			+ "	WHERE CAST(s.sucDate AS DATE) BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK) AND NOW() AND uid = #{uid};")
 	public int getWeekSum(String uid);
 	
 	
-	@Select("SELECT SUM(camount) AS sumMonth "
-			+ "FROM csuccess AS s "
-			+ "JOIN challenge AS c "
-			+ "ON c.cid = s.cid "
-			+ "WHERE CAST(s.sucDate AS DATE) BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH) AND NOW() "
-			+ "and uid = #{uid}")
+	@Select("SELECT IFNULL(SUM(camount),0) sumMonth"
+			+ "	FROM csuccess AS s"
+			+ "	JOIN challenge AS c"
+			+ "	ON c.cid = s.cid"
+			+ "	WHERE CAST(s.sucDate AS DATE) BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH) AND NOW() AND uid = #{uid};")
 	public int getMonthSum(String uid);
 	
 }

@@ -52,7 +52,7 @@ public class ChallengeController {
 		System.out.println(cid);
 		cs.setCid(cid);
 		css.insert(cs);
-		return "redirect:/mypage";
+		return "redirect:/mypage/main";
 	}
 	
 }

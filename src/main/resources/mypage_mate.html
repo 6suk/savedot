@@ -67,41 +67,43 @@
       </div>
     </nav>
     <!-- TOP -->
+    <!-- MYPAGE - TOP -->
     <nav id="mypage_category">
       <ul class="nav justify-content-center mypage-navbar">
         <li class="nav-item">
-          <a class="nav-link" href="#">나의 절약캘린더</a>
+          <a class="nav-link mypage" id="nav_main" href="/mypage/main">나의 절약캘린더</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#">나의 조각메이트</a>
+          <a class="nav-link mypage" id="nav_mate" href="/mypage/mate/apply/${user.idAuto}/all">나의 조각메이트</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">나의 수입/지출</a>
+          <a class="nav-link mypage" href="#">나의 수입/지출</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">알림</a>
+          <a class="nav-link mypage" href="#">알림</a>
         </li>
       </ul>
     </nav>
-    <nav id="mate_sub_category">
+    <nav id="mate_sub_category" class="hide">
       <ul class="nav justify-content-center mypage-navbar sub">
         <li class="nav-item">
-          <a class="nav-link" href="#">내가 작성한 글</a>
+          <a class="nav-link mypage-sub" href="#">내가 작성한 글</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#">신청 리스트 전체보기</a>
+          <a class="nav-link mypage-sub" href="/mypage/mate/apply/${user.idAuto}/all">신청 리스트 전체보기</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">신청 완료</a>
+          <a class="nav-link mypage-sub" href="#">신청 완료</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">거래 중</a>
+          <a class="nav-link mypage-sub" href="#">거래 중</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">거래 완료</a>
+          <a class="nav-link mypage-sub" href="#">거래 완료</a>
         </li>
       </ul>
     </nav>
+    <!-- MYPAGE - TOP -->
 
     <div class="container-lg">
       <div class="row">
@@ -426,7 +428,7 @@
                         </ul>
                         <ul>
                           <li>
-                            <u><a href="">오픈채팅</a></u>
+                            <u><a href="" target="_blank">오픈채팅</a></u>
                           </li>
                           <li>2023-02-13</li>
                         </ul>
@@ -491,6 +493,7 @@
       </div>
     </div>
     <script src="../resources/static/js/mypage_mate.js"></script>
+    <script src="../resources/static/js/mypage_nav.js"></script>
     <script>
       var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
       var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
