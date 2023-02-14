@@ -26,6 +26,9 @@ public class MateDTO {
 	private String categoryName;
 	private String bank;
 	private String accountNumber;
+	private int telType;
+	private String telName;
+	private String telUrl;
 	private String title;
 	private String content;
 	private int price1;
@@ -39,7 +42,7 @@ public class MateDTO {
 	private String placeAddr;
 	private int parcelType;
 	private String parcelName;
-	private int parcelPrice;;
+	private int parcelPrice;
 	private LocalDateTime modDate;
 	private int isDel;
 	private int viewCnt;
@@ -57,13 +60,20 @@ public class MateDTO {
 	public void setTradeType(int tradeType) {
 		String[] tradeNames = { null, "직접거래", "택배거래", "직접거래 / 택배거래 모두 가능" };
 		this.tradeType = tradeType;
-		tradeName = tradeNames[tradeType];
+		this.tradeName = tradeNames[tradeType];
 	}
 
 	public void setParcelType(int parcelType) {
 		String[] parcelNames = { null, "선불", "착불" };
 		this.parcelType = parcelType;
-		parcelName = parcelNames[parcelType];
+		this.parcelName = parcelNames[parcelType];
+	}
+	
+	public void setTelType(int telType) {
+		String[] telNames = { null, "오픈채팅", "댓글" };
+		this.telType = telType;
+		this.telName = telNames[telType];
+		
 	}
 
 }

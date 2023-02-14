@@ -54,6 +54,9 @@ public class Mate {
 	@Column(length = 50)
 	private String accountNumber;
 	
+	private int telType;
+	private String telUrl;
+	
 	@Column(length = 128)
 	@NotNull
 	private String title;

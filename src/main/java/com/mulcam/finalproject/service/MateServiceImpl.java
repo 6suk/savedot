@@ -54,5 +54,12 @@ public class MateServiceImpl implements MateService {
 		mate = mateRepository.save(mate);
 		return mate.getId();
 	}
+	
+	@Override
+	public Long save(Mate mate) {
+		mate = mateRepository.save(mate);
+		return mate.getId();
+	}
+
 
 }

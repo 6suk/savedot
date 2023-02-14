@@ -13,6 +13,9 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.mulcam.finalproject.service.MateService;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -22,7 +25,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -31,36 +33,19 @@ import lombok.ToString;
 @Builder
 public class MateApply {
 	
-	@Id
-	@Column(name = "aid")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long aid;
 	
-	@ManyToOne // N:1
-	@JoinColumn(name = "uid") // FK
-	@NotNull
-	private User user;	// 작성자
+	private Long uid;
 	
-	@ManyToOne
-	@JoinColumn(name = "mid")
-	@NotNull
-	private Mate mate;	// 게시물 작성자 정보는 여기에 있음
+	private Long mid;	
 
-	@Column(columnDefinition = "TEXT")
 	private String content;
 	
-	@CreationTimestamp
 	private LocalDateTime modDate;
 	
-	@ColumnDefault("0")
-	private int tradeType;
+	private int applyTradelType;
 	
-	@NotNull
-	@ColumnDefault("0")
 	private int isDel;
 	
-	@NotNull
-	@ColumnDefault("0")
 	private int isApply;
-
 }

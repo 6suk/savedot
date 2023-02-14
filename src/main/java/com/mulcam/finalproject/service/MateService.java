@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.mulcam.finalproject.dto.MateDTO;
 import com.mulcam.finalproject.entity.Mate;
+import com.mulcam.finalproject.entity.MateApply;
 import com.mulcam.finalproject.entity.MateImg;
 
 public interface MateService {
@@ -18,4 +19,11 @@ public interface MateService {
 
 	/** write : 게시글 DB 저장 */
 	public Long save(Mate mate, List<MultipartFile> imgs);
+	
+	/** write : 게시글 DB 저장 */
+	public Long save(Mate mate);
+	
+
+	
+	
 }
