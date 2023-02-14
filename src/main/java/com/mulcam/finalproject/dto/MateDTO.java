@@ -68,12 +68,12 @@ public class MateDTO {
 		this.parcelType = parcelType;
 		this.parcelName = parcelNames[parcelType];
 	}
-	
+
 	public void setTelType(int telType) {
 		String[] telNames = { null, "오픈채팅", "댓글" };
 		this.telType = telType;
 		this.telName = telNames[telType];
-		
+
 	}
 
 }

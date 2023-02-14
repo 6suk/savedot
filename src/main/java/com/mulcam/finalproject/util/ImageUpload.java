@@ -13,14 +13,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.uuid.Generators;
 import com.mulcam.finalproject.dto.ImageDTO;
-import com.mulcam.finalproject.dto.OcrImageDTO;
 
 @Service
 public class ImageUpload {
-	
+
 	@Value("${spring.servlet.multipart.location}")
 	private String location;
-	
+
 	public List<ImageDTO> LocalSaveFiles(List<MultipartFile> imgs) {
 		File path = getPath();
 		List<ImageDTO> list = new ArrayList<>();
@@ -39,7 +38,7 @@ public class ImageUpload {
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
-			
+
 			ImageDTO imgDTO = ImageDTO.builder()
 					.ext(ext)
 					.uuid(uuid)
@@ -50,12 +49,12 @@ public class ImageUpload {
 		});
 		return list;
 	}
-	
+
 	// 날짜별 폴더 생성
 	public File getPath() {
 		LocalDate localdate = LocalDate.now();
 		File path = new File(location + File.separator + localdate.toString());
 		return path;
 	}
-	
+
 }

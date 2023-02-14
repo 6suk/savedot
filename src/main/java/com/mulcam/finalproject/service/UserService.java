@@ -12,7 +12,7 @@ import com.mulcam.finalproject.repository.UserRepository;
 public class UserService {
 	@Autowired
 	UserRepository userRepository;
-	
+
 	public void save(User user) {
 		userRepository.save(user);
 	}
@@ -21,12 +21,16 @@ public class UserService {
 	public Optional<User> findById(String id) {
 		return userRepository.findById(id);
 	}
+<<<<<<< HEAD
 	
 	/** PK로 찾기 */
 	public Optional<User> findById(Long id) {
 		return userRepository.findById(id);
 	}
 	
+=======
+
+>>>>>>> c07efb8d279ce2a501523e217e642c6fbcfb1d65
 	public void delete(User user) {
 		userRepository.delete(user);
 	}

@@ -11,13 +11,13 @@ import com.mulcam.finalproject.entity.MateApply;
 
 @Mapper
 public interface MateApplyDAO {
-	
+
 	@Insert("INSERT INTO mate_apply VALUES(DEFAULT, #{content}, DEFAULT, DEFAULT, DEFAULT, #{mid}, #{uid}, #{applyTradelType})")
 	public void save(MateApply mateApply);
-	
+
 	@Select("SELECT LAST_INSERT_ID();")
 	public Long findSaveId();
-	
+
 	@Update("UPDATE mate_apply"
 			+ "	SET isDel = 1"
 			+ "	WHERE aid = #{aid};")
@@ -36,5 +36,5 @@ public interface MateApplyDAO {
 	
 	@Select("SELECT * FROM mate_apply WHERE mid = #{mid} AND isDel = 0 ORDER BY modDate DESC;")
 	public List<MateApply> findByMid(Long mid);
-	
+
 }

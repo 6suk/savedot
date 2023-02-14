@@ -8,19 +8,23 @@ import com.mulcam.finalproject.entity.MateApply;
 import com.mulcam.finalproject.entity.User;
 
 public interface MateApplyService {
-	
+
 	/** Apply : 메이트 신청 DB 저장 */
 	public Long save(MateApply mateApply);
-	
+
 	/** Apply : 메이트 신청 취소 */
 	public void delete(Long aid);
-	
+
 	/** Apply : Uid 검색 */
 	public List<MateApplyDTO> findByUid(User user);
+<<<<<<< HEAD
 	
 	/** Apply : Uid 검색 */
 	public List<MateApplyDTO> findByUid(Long uid);
 	
+=======
+
+>>>>>>> c07efb8d279ce2a501523e217e642c6fbcfb1d65
 	/** Apply : Mid 검색 */
 	public List<MateApplyDTO> findByMid(Mate mate);
 

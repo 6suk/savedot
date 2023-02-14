@@ -15,7 +15,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class MateApplyDTO {
-	
+
 	private Long aid;
 	private String userid; // view 전송용
 	private User user;

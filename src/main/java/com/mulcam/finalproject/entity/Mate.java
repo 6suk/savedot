@@ -50,13 +50,13 @@ public class Mate {
 
 	@Column(length = 20)
 	private String bank;
-	
+
 	@Column(length = 50)
 	private String accountNumber;
-	
+
 	private int telType;
 	private String telUrl;
-	
+
 	@Column(length = 128)
 	@NotNull
 	private String title;
@@ -72,7 +72,7 @@ public class Mate {
 
 	@NotNull
 	private int positionNum;
-	
+
 	@Column(length = 128)
 	private String openChat;
 

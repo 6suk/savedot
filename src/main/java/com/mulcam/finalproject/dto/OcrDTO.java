@@ -15,7 +15,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class OcrDTO {
-	
+
     private String lang = "ko";
     private String requestId = "string";
     private String resultType = "string";

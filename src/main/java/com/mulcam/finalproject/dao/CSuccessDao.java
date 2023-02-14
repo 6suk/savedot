@@ -10,10 +10,10 @@ import com.mulcam.finalproject.entity.CSuccess;
 
 @Mapper
 public interface CSuccessDao {
-	
+
 	@Select("select * from csuccess")
 	public List<CSuccess> getList();
-	
+
 	@Insert("insert into csuccess values(default, default, #{cid}, #{uid})")
 	void insert(CSuccess cs);
 	
@@ -38,6 +38,5 @@ public interface CSuccessDao {
 			+ "	ON c.cid = s.cid"
 			+ "	WHERE CAST(s.sucDate AS DATE) BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH) AND NOW() AND uid = #{uid};")
 	public int getMonthSum(String uid);
-	
+
 }
- 
