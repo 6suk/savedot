@@ -122,13 +122,13 @@
 						class="btn btn-sub mdi" value="닫기" />
 				</div>
 			</div>
-			<form id="applyform" class="inputbox"
-				action="/mate/apply/${mate.id}">
-				<input type="hidden" name="userid" value="${user.id}" />
-				<input type="hidden" value="${mate.placeAddr}" id="apply_place_addr" />
-				<input type="hidden" value="${mate.parcelPrice}"
-					id="apply_parcel_price" /> <input type="hidden"
-					value="${mate.parcelType}" id="apply_parcel_type" />
+			<form id="applyform" class="inputbox" action="/mate/apply/${mate.id}"
+				method="post">
+				<input type="hidden" name="uid" value="${user.idAuto}" /> <input
+					type="hidden" value="${mate.placeAddr}" id="apply_place_addr" /> <input
+					type="hidden" value="${mate.parcelPrice}" id="apply_parcel_price" />
+				<input type="hidden" value="${mate.parcelType}"
+					id="apply_parcel_type" />
 				<div class="d-flex gap-2">
 					<input class="form-control text required" type="text"
 						name="nickname" value="${user.nickname }" readonly />

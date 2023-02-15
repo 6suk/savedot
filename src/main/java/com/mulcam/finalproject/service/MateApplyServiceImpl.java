@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.mulcam.finalproject.dao.MateApplyDAO;
 import com.mulcam.finalproject.dto.MateApplyDTO;
 import com.mulcam.finalproject.dto.MateDTO;
+import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.Mate;
 import com.mulcam.finalproject.entity.MateApply;
 import com.mulcam.finalproject.entity.User;
@@ -22,7 +23,7 @@ public class MateApplyServiceImpl implements MateApplyService {
 
 	@Autowired
 	MateService mateService;
-	
+
 	@Autowired
 	UserService userService;
 
@@ -36,38 +37,53 @@ public class MateApplyServiceImpl implements MateApplyService {
 	public void delete(Long aid) {
 		mateApplyDAO.delete(aid);
 	}
-	
-	@Override
-	public List<MateApplyDTO> findByUid(Long uid) {
-		userService.findById(uid);
-		return findByUid(userService.findById(uid).get());	
-	}
-	
-	@Override
-	public List<MateApplyDTO> findByUid(User user) {
-		List<MateApplyDTO> dtoList = new ArrayList<>();
-		List<MateApply> list = mateApplyDAO.findByUid(user.getIdAuto());
 
-		// mapper
-		ModelMapper modelMapper = new ModelMapper();
-		list.forEach(entity -> {
-			MateApplyDTO applyDTO = modelMapper.map(entity, MateApplyDTO.class);
-			Long mid = entity.getMid();
-			MateDTO mateDTO = modelMapper.map(mateService.findById(mid).get(),MateDTO.class);
-			applyDTO.setUser(user);
-			applyDTO.setMate(mateDTO);
-			dtoList.add(applyDTO);
-		});
-
-		return dtoList;
+	@Override
+	public List<MateApplyDTO> findBySendUid(Long uid) {
+		return findBySendUid(userService.findById(uid).get());
 	}
 
+	@Override
+	public List<MateApplyDTO> findBySendUid(User user) {
+		List<MateApply> list = mateApplyDAO.findBySendUid(user.getIdAuto());
+		return mapperDTO(list);
+	}
+
+
+	@Override
+	public List<MateApplyDTO> findByGetUid(Long uid) {
+		return findByGetUid(userService.findById(uid).get());
+	}
+
+	@Override
+	public List<MateApplyDTO> findByGetUid(User user) {
+		List<MateApply> list = mateApplyDAO.findByGetUid(user.getIdAuto());
+		return mapperDTO(list);
+	}
+	
 	@Override
 	public List<MateApplyDTO> findByMid(Mate mate) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	public List<MateApplyDTO> mapperDTO(List<MateApply> list) {
+		List<MateApplyDTO> dtoList = new ArrayList<>();
 
+		// mapper
+		ModelMapper modelMapper = new ModelMapper();
+		list.forEach(entity -> {
+			MateApplyDTO applyDTO = modelMapper.map(entity, MateApplyDTO.class);
+			Long mid = entity.getMid();
+			Long uid = entity.getUid();
+			MateDTO mateDTO = modelMapper.map(mateService.findById(mid).get(), MateDTO.class);
+			UserDTO userDTO = modelMapper.map(userService.findById(uid).get(), UserDTO.class);
+			applyDTO.setUser(userDTO);
+			applyDTO.setMate(mateDTO);
+			dtoList.add(applyDTO);
+		});
+
+		return dtoList;
+	}
 
 }
