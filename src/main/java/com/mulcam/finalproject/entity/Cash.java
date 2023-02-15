@@ -51,4 +51,6 @@ public class Cash { /* cash db */
 		this.content = content;
 	}
 
+
+
 }
