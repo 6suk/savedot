@@ -2,6 +2,9 @@ package com.mulcam.finalproject.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.CSuccess;
 import com.mulcam.finalproject.entity.Challenge;
 import com.mulcam.finalproject.service.CSuccessService;
@@ -22,10 +26,13 @@ public class ChallengeController {
 	@Autowired private ChallengeService cs;
 	@Autowired private CSuccessService css;
 
+	/* 로그인 안했을 때 챌린지 페이지 접근 불가? */
 	@GetMapping("/choice")
-	public String listForm(Model model) {
+	public String listForm(Model model, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		UserDTO user = (UserDTO) session.getAttribute("user");
+		
 		List<Challenge> list = cs.getChallengeList();
-		list.forEach(x -> System.out.println(x));
 		model.addAttribute("challenge", list);
 		return "challenge/choice";
 	}
@@ -34,7 +41,6 @@ public class ChallengeController {
 	public String updateForm(@PathVariable int cid, Model model) {
 		Challenge c = cs.getChallenge(cid);
 		model.addAttribute("c", c);
-		System.out.println(c);
 		return "challenge/confirm";
 	}
 
@@ -46,13 +52,15 @@ public class ChallengeController {
 	}
 
 	@GetMapping("/save/{cid}")
-	public String mptest(@PathVariable int cid) {
+	public String mptest(@PathVariable int cid, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		UserDTO user = (UserDTO) session.getAttribute("user");
+		
 		CSuccess cs = new CSuccess();
-		cs.setUid("admin");
-		System.out.println(cid);
+		cs.setUid(user.getId());
 		cs.setCid(cid);
 		css.insert(cs);
 		return "redirect:/mypage/main";
 	}
-
+	
 }
