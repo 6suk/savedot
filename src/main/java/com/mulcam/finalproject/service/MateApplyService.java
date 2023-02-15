@@ -15,13 +15,22 @@ public interface MateApplyService {
 	/** Apply : 메이트 신청 취소 */
 	public void delete(Long aid);
 
-	/** Apply : Uid 검색 */
-	public List<MateApplyDTO> findByUid(User user);
+	/** Send Apply : Uid 검색 (내가 신청한) */
+	public List<MateApplyDTO> findBySendUid(User user);
 	
-	/** Apply : Uid 검색 */
-	public List<MateApplyDTO> findByUid(Long uid);
+	/** Send Apply : Uid 검색 (내가 신청한) */
+	public List<MateApplyDTO> findBySendUid(Long uid);
 
+	/** Get Apply : Uid 검색 (내가 작성한 게시물의 신청 리스트) */
+	public List<MateApplyDTO> findByGetUid(User user);
+	
+	/** Get Apply : Uid 검색 (내가 작성한 게시물의 신청 리스트) */
+	public List<MateApplyDTO> findByGetUid(Long uid);
+	
 	/** Apply : Mid 검색 */
 	public List<MateApplyDTO> findByMid(Mate mate);
+	
+	
+	
 
 }

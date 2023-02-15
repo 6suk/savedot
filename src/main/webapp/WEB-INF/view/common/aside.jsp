@@ -10,7 +10,7 @@
         /> -->
   </div>
   <div class="aside-info border-bottom">
-    <h4>짠돌쓰</h4>
+    <h4>${user.nickname }</h4>
     <dl>
       <dt>챌린지</dt>
       <dd>

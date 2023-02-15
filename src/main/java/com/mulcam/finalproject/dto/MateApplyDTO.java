@@ -1,5 +1,6 @@
 package com.mulcam.finalproject.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.mulcam.finalproject.entity.User;
@@ -17,14 +18,13 @@ import lombok.ToString;
 public class MateApplyDTO {
 
 	private Long aid;
-	private String userid; // view 전송용
-	private User user;
-	private Long mid;	// view 전송용
+	private UserDTO user;
 	private MateDTO mate;
 	private String content;
 	private int applyTradelType;
 	private int isApply;
 	private int isDel;
 	private LocalDateTime modDate;
+	private LocalDate regDate;	// 등록일
 	
 }

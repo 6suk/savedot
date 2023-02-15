@@ -1,7 +1,9 @@
 package com.mulcam.finalproject.controller;
 
 import java.util.List;
-import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,6 @@ import com.mulcam.finalproject.dto.MateDTO;
 import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.Mate;
 import com.mulcam.finalproject.entity.MateApply;
-import com.mulcam.finalproject.entity.User;
 import com.mulcam.finalproject.service.MateApplyService;
 import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.UserService;
@@ -47,31 +48,21 @@ public class MateController {
 
 	/** Mate Write */
 	@GetMapping("/write")
-	public String writeGet(Model model) {
-		User user = userService.findById("ko").get(); // 추후 세션에서 가져오기
-
-		UserDTO userDTO = modelMapper.map(user, UserDTO.class);
-		model.addAttribute("user", userDTO);
+	public String writeGet() {
 		return "mate/write";
 	}
 
 	@PostMapping("/write")
 	public String writePost(MateDTO mateDTO, String uid) {
-		Optional<User> user_ = userService.findById(uid);
-		User user = user_.get();
-		mateDTO.setUser(user);
-
+		mateDTO.setUser(userService.findById(uid).get());
 		Mate mate = modelMapper.map(mateDTO, Mate.class);
 		Long mid = null;
-
 		if (mateDTO.getReqimgs() != null) {
 			List<MultipartFile> files = mateDTO.getReqimgs();
 			mid = mateService.save(mate, files);
 		} else {
 			mid = mateService.save(mate);
 		}
-
-		System.out.println(mateDTO);
 		return "redirect:/mate/detail/" + mid;
 	}
 
@@ -85,40 +76,26 @@ public class MateController {
 	/** Mate Detail */
 	@GetMapping("/detail/{mid}")
 	public String detail(@PathVariable Long mid, Model model) {
-		// 로그인 임시
-		User user = userService.findById("admin").get();
 		Mate mate = mateService.findById(mid).get();
-
 		MateDTO mateDTO = modelMapper.map(mate, MateDTO.class);
-		UserDTO userDTO = modelMapper.map(user, UserDTO.class);
-
 		model.addAttribute("mate", mateDTO);
-		model.addAttribute("user", userDTO); // 로그인 유저
-
 		return "mate/detail";
 	}
 
 	/** Mate Apply */
-	@GetMapping("/apply/{mid}")
-	public String applySave(@PathVariable Long mid, MateApplyDTO applyDTO) {
-		User user = userService.findById(applyDTO.getUserid()).get();
-		Mate mate = mateService.findById(applyDTO.getMid()).get();
-
+	@PostMapping("/apply/{mid}")
+	public String applySave(@PathVariable Long mid, Long uid, MateApplyDTO applyDTO) {
 		MateApply apply = modelMapper.map(applyDTO, MateApply.class);
-		apply.setUid(user.getIdAuto());
-		apply.setMid(mate.getId());
-
+		apply.setUid(uid);
+		apply.setMid(mid);
 		applyService.save(apply);
-		return "redirect:/mypage/mate/apply/" + user.getIdAuto() + "/all";
+		return "redirect:/mypage/mate/apply/" + uid + "/all";
 	}
 
-	@GetMapping("/apply/cancel/{aid}")
-	public String applyCancel(@PathVariable Long aid) {
-		// 로그인 임시
-		User user = userService.findById("admin").get();
-		
+	@GetMapping("/apply/cancel/{uid}/{aid}")
+	public String applyCancel(@PathVariable Long aid, @PathVariable Long uid) {
 		applyService.delete(aid);
-		return "redirect:/mypage/mate/apply/" + user.getIdAuto() + "/all";
+		return "redirect:/mypage/mate/apply/" + uid + "/all";
 	}
 
 }

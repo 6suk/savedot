@@ -1,3 +1,4 @@
+@charset "utf-8";
 @import url(maincolor.css);
 
 /* //////////////////////////////////// << MAIN STYLE //////////////////////////////////// */
@@ -23,7 +24,7 @@ section {
 }
 
 nav + div {
-  margin-top: 4rem;
+  margin-top: 3.5rem;
 }
 
 /* TOP */
@@ -980,6 +981,12 @@ button > i {
   scroll-behavior: smooth;
 }
 
+@media (pointer: coarse) {
+  .mypage-mate-card-box {
+    overflow: scroll;
+  }
+}
+
 .mate_card_btn {
   width: 50px;
   height: 50px;
@@ -1018,7 +1025,8 @@ button > i {
   display: flex;
   flex-direction: column;
   width: 20.5rem;
-  height: 13.5rem;
+  /* height: 13.5rem; */
+  height: 16.5rem;
   justify-content: space-between;
   padding-inline: 1.8rem;
   border: 1px solid var(--border-color);
@@ -1027,9 +1035,9 @@ button > i {
   transition: all ease 0.3s 0s;
 }
 
-#mate-card-2 .mate-card-item {
+/* #mate-card-2 .mate-card-item {
   height: 16.5rem;
-}
+} */
 
 .mate-card-item:hover {
   border: 1px solid rgba(var(--main-color-rgb), 50%);
@@ -1067,15 +1075,41 @@ a:hover {
 }
 
 .mate-card-tag {
-  background-color: var(--sub-color);
-  color: var(--main-color);
   user-select: none;
   padding-inline: 0.65rem;
   padding-block: 0.36rem;
   border-radius: 5px;
 }
 
-#mate-card-3 .mate-card-tag {
+.mate-card-tag.ver0 {
+  color: var(--gray-color);
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+}
+
+.mate-card-tag.ver0::after {
+  content: '신청 완료';
+}
+
+.mate-card-tag.ver1 {
+  background-color: var(--sub-color);
+  color: var(--main-color);
+}
+
+.mate-card-tag.ver1::after {
+  content: '거래 중';
+}
+
+.mate-card-tag.ver2 {
+  background-color: #eee;
+  color: var(--lgray-color);
+}
+
+.mate-card-tag.ver2::after {
+  content: '거래완료';
+}
+
+/* #mate-card-3 .mate-card-tag {
   background-color: #eee;
   color: var(--lgray-color);
 }
@@ -1084,7 +1118,7 @@ a:hover {
   color: var(--gray-color);
   background-color: transparent;
   border: 1px solid var(--border-color);
-}
+} */
 
 .mate-card-middle {
   gap: 1rem;
@@ -1148,10 +1182,11 @@ a:hover {
 
 .mypage-navbar {
   border-bottom: 1px solid rgba(var(--border-color-rgb), 0.8);
+  font-size: 15px;
 }
 
 .sub a {
-  font-size: 15px;
+  /* font-size: 15px; */
 }
 
 .mypage-navbar .nav-link {
@@ -1169,8 +1204,8 @@ a:hover {
 }
 
 .mypage-navbar.sub .nav-link.active {
-  font-weight: 600;
-  color: var(--gray-color);
+  /* font-weight: 600;
+  color: var(--gray-color); */
 }
 
 .mypage-navbar a {

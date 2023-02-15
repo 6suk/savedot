@@ -3,7 +3,7 @@ $('.btn.fa-chevron-right').click(function () {
   let control_box = mate_card.find('.mypage-mate-card-box');
 
   let scrollX = $(control_box).scrollLeft();
-  $(control_box).scrollLeft(scrollX + 800);
+  $(control_box).scrollLeft(scrollX + 600);
 });
 
 $('.btn.fa-chevron-left').click(function () {
@@ -11,5 +11,5 @@ $('.btn.fa-chevron-left').click(function () {
   let control_box = mate_card.find('.mypage-mate-card-box');
 
   let scrollX = $(control_box).scrollLeft();
-  $(control_box).scrollLeft(scrollX - 800);
+  $(control_box).scrollLeft(scrollX - 600);
 });
