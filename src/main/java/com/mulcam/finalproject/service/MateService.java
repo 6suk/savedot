@@ -19,8 +19,5 @@ public interface MateService {
 
 	/** write : 게시글 DB 저장 */
 	public Long save(Mate mate);
-
-
-
-
+	
 }

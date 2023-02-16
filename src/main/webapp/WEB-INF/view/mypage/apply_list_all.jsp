@@ -29,12 +29,14 @@
 
 			<!-- content -->
 			<section class="col-md-8">
-				<!-- << 카드 구좌 1 -->
+				<!-- /////////////////// 보낸 조각메이트 /////////////////// -->
 				<div id="mate-card-1" class="mate_card">
 					<div class="mate-card-top">
 						<div class="d-flex align-items-center gap-2">
-							<h4>조각 메이트 신청 현황</h4>
-							<p class="mate-card-top-count">4</p>
+							<c:if test="${sendNew eq true }">
+								<p class="mate-card-top-notify"></p>
+							</c:if>
+							<h4>보낸 조각메이트 신청</h4>
 						</div>
 
 						<div class="mate-card-arrow">
@@ -44,36 +46,64 @@
 					</div>
 					<div style="position: relative">
 						<div class="mypage-mate-card-box">
-							<c:forEach var="apply" items="${sendApply}">
-								<!-- 카드 시작 -->
+							<c:forEach var="apply" items="${sendApply }">
+								<!-- 카드 1 : 대기중 -->
 								<div class="mate-card-list"
 									onclick="location.href='/mate/detail/${apply.mate.id}'">
 									<div class="mate-card-item">
 										<div class="mate-card-top">
-											<p class="mate-card-tag ver${apply.isApply}"></p>
-											<c:if test="${apply.isApply ne '2'}">
-												<u><a href="/mate/apply/cancel/${user.idAuto }/${apply.aid}">신청취소</a></u>
-											</c:if>
+											<p class="mate-card-tag ver${apply.isApply }"></p>
+											<u><a
+												href="/mate/apply/cancel/${user.idAuto }/${apply.aid}">신청취소</a></u>
 										</div>
 										<div class="mate-card-middle">
 											<h5>${apply.mate.title }</h5>
+											<c:if test="${apply.isApply eq '0'}">
+											<!-- // 대기중 ul -->
 											<div class="mate-card-middle-tb">
 												<ul class="tb-title">
 													<li>판매자</li>
-													<c:if test="${apply.isApply ne '2' }">
-														<li>연락방법</li>
-													</c:if>
+													<li>연락수단</li>
+													<li>거래방법</li>
 													<li>신청일</li>
-													<c:if test="${apply.isApply eq '2' }">
-														<li>거래완료일</li>
-													</c:if>
-													<c:if test="${apply.isApply eq '1' }">
-														<li style="position: relative">입금 계좌</li>
-													</c:if>
 												</ul>
 												<ul>
 													<li>${apply.mate.user.nickname }</li>
-													<c:if test="${apply.isApply ne '2' }">
+													<c:choose>
+														<c:when test="${apply.mate.telType eq '1' }">
+															<li><u><a href="${apply.mate.telUrl }"
+																	target="_blank">${apply.mate.telName }</a></u></li>
+														</c:when>
+														<c:otherwise>
+															<li>${apply.mate.telName }</li>
+														</c:otherwise>
+													</c:choose>
+
+													<c:choose>
+														<c:when test="${apply.applyTradelType ne 0 }">
+															<li>${apply.applyTradelType }</li>
+														</c:when>
+														<c:otherwise>
+															<li>${apply.mate.tradeName }</li>
+														</c:otherwise>
+													</c:choose>
+													<li>${apply.regDate }</li>
+												</ul>
+											</div>
+											<!-- 대기중 ul// -->
+											</c:if>
+											<c:if test="${apply.isApply eq '1'}">
+											<!-- //진행중 ul -->
+											<div class="mate-card-middle-tb">
+													<ul class="tb-title">
+														<li>판매자</li>
+														<li>연락수단</li>
+														<li>거래방법</li>
+														<li>입금계좌</li>
+														<li>신청일</li>
+													</ul>
+													<ul>
+														<li>${apply.mate.user.nickname }</li>
 														<c:choose>
 															<c:when test="${apply.mate.telType eq '1' }">
 																<li><u><a href="${apply.mate.telUrl }"
@@ -83,145 +113,135 @@
 																<li>${apply.mate.telName }</li>
 															</c:otherwise>
 														</c:choose>
-													</c:if>
-													<li>${apply.regDate}</li>
-													<c:if test="${apply.isApply eq '2' }">
-														<li>${apply.modDate}</li>
-													</c:if>
-													<c:if test="${apply.isApply eq '1' }">
-														<li>${apply.mate.bank }<br />${apply.mate.accountNumber }
-															<i class="fa-solid fa-circle-exclamation"
+														<c:choose>
+															<c:when test="${apply.applyTradelType ne 0 }">
+																<li>${apply.applyTradelType }</li>
+															</c:when>
+															<c:otherwise>
+																<li>${apply.mate.tradeName }</li>
+															</c:otherwise>
+														</c:choose>
+														<li>${apply.mate.bank }${apply.mate.accountNumber }<i
+															class="fa-solid fa-circle-exclamation"
 															style="color: var(- -lgray-color); opacity: 0.5"
 															data-bs-toggle="tooltip" data-bs-html="true"
 															data-bs-placement="top"
 															title="입금 전 더치트에 검색해 본다면<br>더욱 안전한 거래를 할 수 있어요!"></i>
 														</li>
+														<li>${apply.regDate }</li>
+													</ul>
+												</div>
+												<!-- 진행중 ul// -->
+												</c:if>
+												<c:if test="${apply.isApply eq '2'}">
+												<!-- //거래완료 ul -->
+												<div class="mate-card-middle-tb">
+													<ul class="tb-title">
+														<li>판매자</li>
+														<li>신청일</li>
+														<li>거래완료</li>
+													</ul>
+													<ul>
+														<li>${apply.mate.user.nickname }</li>
+														<li>${apply.regDate }</li>
+														<li>${fn:replace(apply.modDate,'T',' ')}</li>
+													</ul>
+												</div>
+												<!-- 거래완료 ul// -->
+												</c:if>
+										</div>
+									</div>
+								</div>
+								<!-- 카드 1 : 대기중 끝 -->
+							</c:forEach>
+						</div>
+					</div>
+				</div>
+				<!-- /////////////////// 보낸 조각메이트 끝 /////////////////// -->
+
+				<!-- /////////////////// 받은 조각메이트 /////////////////// -->
+				<div id="mate-card-2" class="mate_card">
+					<div class="mate-card-top">
+						<div class="d-flex align-items-center gap-2">
+							<c:if test="${getNew eq true }">
+								<p class="mate-card-top-notify"></p>
+							</c:if>
+							<h4>받은 조각메이트 신청</h4>
+						</div>
+						<div class="mate-card-arrow">
+							<button class="btn fa-solid fa-chevron-left"></button>
+							<button class="btn fa-solid fa-chevron-right"></button>
+						</div>
+					</div>
+					<div style="position: relative">
+						<div class="mypage-mate-card-box">
+							<c:forEach var="apply" items="${getApply }">
+								<!-- 카드 2 -->
+								<div class="mate-card-list"
+									onclick="location.href='/mate/detail/${apply.mate.id}'">
+									<div class="mate-card-item">
+										<form id="apply_edit_form">
+											<div class="mate-card-top">
+												<p class="is_apply_tag mate-card-tag ver${apply.isApply }"></p>
+												<input type="hidden" name="aid" value="${apply.aid }" /> <select
+													name="isApply"
+													class="is_apply_select_tag mate-card-tag ver${apply.isApply } hide">
+													<option value="0" class="tag_0"
+														${apply.isApply eq '0' ? 'selected' : ''}>대기 중</option>
+													<option value="1" class="tag_1"
+														${apply.isApply eq '1' ? 'selected' : ''}>거래 중</option>
+													<option value="2" class="tag_2"
+														${apply.isApply eq '2' ? 'selected' : ''}>거래완료</option>
+												</select> <a class="is_apply_mod"><u>상태변경</u></a>
+												<div class="is_apply_edit hide">
+													<div class="d-flex gap-1">
+														<button class="mate-card-tag ver0 is-apply-save-btn">변경</button>
+														<button class="mate-card-tag ver2 is-apply-edit-btn">취소</button>
+													</div>
+												</div>
+											</div>
+										</form>
+										<div class="mate-card-middle">
+											<h5>${apply.mate.title }</h5>
+											<div class="mate-card-middle-tb">
+												<ul class="tb-title" id="ul_title_aid_${apply.aid }">
+													<li>신청자</li>
+													<li>거래방법</li>
+													<li>신청일</li>
+													<c:if test="${apply.isApply eq '2' }">
+														<li>거래완료</li>
+													</c:if>
+
+												</ul>
+												<ul id="ul_desc_aid_${apply.aid }">
+													<li>${apply.user.nickname }</li>
+													<c:choose>
+														<c:when test="${apply.applyTradelType ne 0 }">
+															<li>${apply.tradeName }</li>
+														</c:when>
+														<c:otherwise>
+															<li>${apply.mate.tradeName }</li>
+														</c:otherwise>
+													</c:choose>
+													<li>${apply.regDate }</li>
+													<c:if test="${apply.isApply eq '2' }">
+														<li>${fn:replace(apply.modDate,'T',' ')}</li>
 													</c:if>
 												</ul>
 											</div>
 										</div>
 									</div>
 								</div>
-								<!-- 카드 끝 -->
+								<!-- 카드 2 -->
 							</c:forEach>
 						</div>
 					</div>
 				</div>
-				<!-- 카드 구좌 1 >> -->
-
-				<!-- << 카드 구좌 2 -->
-				<div id="mate-card-2" class="mate_card">
-					<div class="mate-card-top">
-						<div class="d-flex align-items-center gap-2">
-							<h4>조각 메이트 진행 현황</h4>
-							<p class="mate-card-top-count">2</p>
-						</div>
-						<div class="mate-card-arrow">
-							<button class="btn fa-solid fa-chevron-left"></button>
-							<button class="btn fa-solid fa-chevron-right"></button>
-						</div>
-					</div>
-					<div style="position: relative">
-						<div class="mypage-mate-card-box">
-							<c:forEach var="apply" items="${apply}">
-								<c:if test="${apply.isApply eq '1' }">
-									<!-- 카드 시작 -->
-									<div class="mate-card-list">
-										<div class="mate-card-item">
-											<div class="mate-card-top">
-												<p class="mate-card-tag">거래중</p>
-												<u><a href="/mate/apply/cancel/${apply.aid}">신청취소</a></u>
-											</div>
-											<div class="mate-card-middle">
-												<h5>${apply.mate.title }</h5>
-												<div class="mate-card-middle-tb">
-													<ul class="tb-title">
-														<li>연락방법</li>
-														<li>신청일</li>
-														<li>연락처</li>
-														<li style="position: relative">입금 계좌</li>
-													</ul>
-													<ul>
-														<c:set var="tel_url"
-															value="/mate/detail/${apply.mate.id }" />
-														<c:if test="${apply.mate.telType eq '1' }">
-															<c:set var="tel_url" value="${apply.mate.telUrl }" />
-														</c:if>
-														<li><u><a href="${tel_url }" target="_blank">${apply.mate.telName }</a></u></li>
-														<li>${fn:replace(apply.modDate,'T',' ')}</li>
-														<li>${apply.mate.user.tel }</li>
-														<li>${apply.mate.bank }<br />${apply.mate.accountNumber }
-															<i class="fa-solid fa-circle-exclamation"
-															style="color: var(- -lgray-color); opacity: 0.5"
-															data-bs-toggle="tooltip" data-bs-html="true"
-															data-bs-placement="top"
-															title="입금 전 더치트에 검색해 본다면<br>더욱 안전한 거래를 할 수 있어요!"></i>
-														</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- 카드 끝 -->
-								</c:if>
-							</c:forEach>
-						</div>
-					</div>
-				</div>
-				<!-- 카드 구좌 2 >> -->
-
-				<!-- << 카드 구좌 3 -->
-				<div id="mate-card-3" class="mate_card">
-					<div class="mate-card-top">
-						<div class="d-flex align-items-center gap-2">
-							<h4>조각 메이트 완료 현황</h4>
-							<p class="mate-card-top-count">4</p>
-						</div>
-						<div class="mate-card-arrow">
-							<button class="btn fa-solid fa-chevron-left"></button>
-							<button class="btn fa-solid fa-chevron-right"></button>
-						</div>
-					</div>
-					<div style="position: relative">
-						<div class="mypage-mate-card-box">
-							<c:forEach var="apply" items="${apply}">
-								<c:if test="${apply.isApply eq '2' }">
-									<!-- 카드 시작 -->
-									<div class="mate-card-list">
-										<div class="mate-card-item">
-											<div class="mate-card-top">
-												<p class="mate-card-tag">거래완료</p>
-											</div>
-											<div class="mate-card-middle">
-												<h5>${apply.mate.title }</h5>
-												<div class="mate-card-middle-tb">
-													<ul class="tb-title">
-														<li>연락방법</li>
-														<li>신청일</li>
-													</ul>
-													<ul>
-														<c:set var="tel_url"
-															value="/mate/detail/${apply.mate.id }" />
-														<c:if test="${apply.mate.telType eq '1' }">
-															<c:set var="tel_url" value="${apply.mate.telUrl }" />
-														</c:if>
-														<li><u><a href="${tel_url }" target="_blank">${apply.mate.telName }</a></u></li>
-														<li>${fn:replace(apply.modDate,'T',' ')}</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- 카드 끝 -->
-								</c:if>
-							</c:forEach>
-						</div>
-					</div>
-				</div>
-				<!-- 카드 구좌 3 >> -->
+				<!-- /////////////////// 받은 조각메이트 끝 /////////////////// -->
 			</section>
 		</div>
 	</div>
+
 	<script src="/js/mypage_mate.js"></script>
 	<script src="/js/mypage_nav.js"></script>
 	<script>
