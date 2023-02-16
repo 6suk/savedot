@@ -109,48 +109,63 @@
 	</div>
 
 	<!-- // Apply Form -->
-	<div class="modalBg">
-		<div class="requestModal savedot-modal">
-			<div class="content-title">
-				<div>
-					<h5>메이트 신청</h5>
-					<p class="font-14 l-graytxt pt-1">최종 매칭은 글 작성자의 승낙 시 진행됩니다!</p>
-				</div>
-				<div>
-					<input type="button" id="sendbtn" class="btn btn-main mdi"
-						value="메이트 신청" /> <input type="button" id="closebtn"
-						class="btn btn-sub mdi" value="닫기" />
-				</div>
-			</div>
-			<form id="applyform" class="inputbox" action="/mate/apply/${mate.id}"
-				method="post">
-				<input type="hidden" name="uid" value="${user.idAuto}" /> <input
-					type="hidden" value="${mate.placeAddr}" id="apply_place_addr" /> <input
-					type="hidden" value="${mate.parcelPrice}" id="apply_parcel_price" />
-				<input type="hidden" value="${mate.parcelType}"
-					id="apply_parcel_type" />
-				<div class="d-flex gap-2">
-					<input class="form-control text required" type="text"
-						name="nickname" value="${user.nickname }" readonly />
-				</div>
-				<textarea class="form-control" name="content" cols="30" rows="10"
-					placeholder="남기고 싶은 말을 적어주세요 :)"></textarea>
-				<div class="" id="trade_show">
-					<div class="input-btn">
-						<select name="applyTradelType" id="apply_trade_type"
-							class="form-select input-btn-ele-reverse" style="flex: 0.2 0 0">
-							<option selected disabled>거래방법</option>
-							<option value="1" id="apply_trade_type_1">직접거래</option>
-							<option value="2" id="apply_trade_type_2">택배거래</option>
-						</select> <input type="text" class="form-control text"
-							id="apply_parcel_notice" style="flex: 1 0 0" value="" readonly
-							placeholder="" />
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-	<!-- // Apply Form -->
+    <div class="modalBg">
+      <div class="requestModal savedot-modal" style="opacity: 1">
+        <div class="content-title">
+          <h5>매칭 신청</h5>
+          <div>
+            <input type="button" id="sendbtn" class="btn btn-main mdi" value="메이트 신청" />
+            <input type="button" id="closebtn" class="btn btn-sub mdi" value="닫기" />
+          </div>
+        </div>
+        <input type="hidden" value="${mate.placeAddr}" id="apply_place_addr" />
+        <input type="hidden" value="${mate.parcelPrice}" id="apply_parcel_price" />
+        <input type="hidden" value="${mate.parcelType}" id="apply_parcel_type" />
+        <form id="applyform" class="inputbox" action="/mate/apply/${mate.id}" method="post">
+          <input type="hidden" name="uid" value="${user.idAuto}" />
+          <input type="hidden" value="${mate.placeAddr}" id="apply_place_addr" />
+          <input type="hidden" value="${mate.parcelPrice}" id="apply_parcel_price" />
+          <input type="hidden" value="${mate.parcelType}" id="apply_parcel_type" />
+          <input class="form-control text required" type="text" name="nickname" value="${user.nickname }" readonly />
+          <!-- <textarea
+            class="form-control"
+            name="content"
+            cols="30"
+            rows="10"
+            placeholder="남기고 싶은 말을 적어주세요 :)"
+          ></textarea> -->
+          <div class="" id="trade_show">
+            <div class="input-btn">
+              <select
+                name="applyTradelType"
+                id="apply_trade_type"
+                class="form-select input-btn-ele-reverse"
+                style="flex: 0.2 0 0"
+              >
+                <option selected disabled>거래방법</option>
+                <option value="1" id="apply_trade_type_1">직접거래</option>
+                <option value="2" id="apply_trade_type_2">택배거래</option>
+              </select>
+              <input
+                type="text"
+                class="form-control text"
+                id="apply_parcel_notice"
+                style="flex: 1 0 0"
+                value=""
+                readonly
+                placeholder=""
+              />
+            </div>
+            <ul class="apply_notice">
+              <li>제품에 대한 질문은 게시물의 댓글 또는 기재된 연락 수단을 이용해주세요.</li>
+              <li>거래 진행 중으로 변경 시 판매자의 입금 계좌번호를 확인할 수 있습니다.</li>
+              <li>모집인원이 모두 차면 자동으로 취소됩니다.</li>
+            </ul>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- // Apply Form -->
 </body>
 <script type="text/javascript"
 	src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=dbe219346db7d2ef92284f7144059849"></script>
