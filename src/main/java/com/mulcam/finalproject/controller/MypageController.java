@@ -61,17 +61,11 @@ public class MypageController {
 
 		List<MateApplyDTO> sendApply = applyService.findBySendUid(uid);
 		model.addAttribute("sendApply", sendApply);
-		model.addAttribute("sendNew", applyService.findNewBySendUid(uid));	// New Notify
 
 		List<MateApplyDTO> getApply = applyService.findByGetUid(uid);
 		model.addAttribute("getApply", getApply);
-		model.addAttribute("getNew", applyService.findNewByGetUid(uid));	// New Notify
-		
-		
 
 		return "mypage/apply_list_all";
 	}
-	
-	
 
 }

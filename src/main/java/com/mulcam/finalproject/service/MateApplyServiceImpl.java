@@ -1,6 +1,5 @@
 package com.mulcam.finalproject.service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +19,7 @@ import com.mulcam.finalproject.entity.User;
 public class MateApplyServiceImpl implements MateApplyService {
 
 	@Autowired
-	MateApplyDAO applyDAO;
+	MateApplyDAO mateApplyDAO;
 
 	@Autowired
 	MateService mateService;
@@ -30,64 +29,47 @@ public class MateApplyServiceImpl implements MateApplyService {
 
 	@Override
 	public Long save(MateApply mateApply) {
-		applyDAO.save(mateApply);
-		return applyDAO.findSaveId();
+		mateApplyDAO.save(mateApply);
+		return mateApplyDAO.findSaveId();
 	}
 
 	@Override
 	public void delete(Long aid) {
-		applyDAO.delete(aid);
+		mateApplyDAO.delete(aid);
 	}
 
 	@Override
 	public List<MateApplyDTO> findBySendUid(Long uid) {
-		List<MateApply> list = applyDAO.findBySendUid(uid);
-		return mapperDTO(list);
+		return findBySendUid(userService.findById(uid).get());
 	}
 
 	@Override
 	public List<MateApplyDTO> findBySendUid(User user) {
-		return findBySendUid(user.getIdAuto());
+		List<MateApply> list = mateApplyDAO.findBySendUid(user.getIdAuto());
+		return mapperDTO(list);
 	}
-	
-	@Override
-	public boolean findNewBySendUid(Long uid) {
-		int count = applyDAO.findNewBySendUid(uid);
-		return count > 0 ? true : false;
-	}
+
 
 	@Override
 	public List<MateApplyDTO> findByGetUid(Long uid) {
-		List<MateApply> list = applyDAO.findByGetUid(uid);
-		return mapperDTO(list);
+		return findByGetUid(userService.findById(uid).get());
 	}
 
 	@Override
 	public List<MateApplyDTO> findByGetUid(User user) {
-		return findByGetUid(user.getIdAuto());
+		List<MateApply> list = mateApplyDAO.findByGetUid(user.getIdAuto());
+		return mapperDTO(list);
 	}
 	
-	@Override
-	public boolean findNewByGetUid(Long uid) {
-		int count = applyDAO.findNewByGetUid(uid);
-		return count > 0 ? true : false;
-	}
-
 	@Override
 	public List<MateApplyDTO> findByMid(Mate mate) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public LocalDateTime editIsApply(Long aid, int isApply) {
-		applyDAO.editIsApply(aid, isApply);
-		return applyDAO.findEditTime(aid);
-	}
-
 	public List<MateApplyDTO> mapperDTO(List<MateApply> list) {
 		List<MateApplyDTO> dtoList = new ArrayList<>();
-		
+
 		// mapper
 		ModelMapper modelMapper = new ModelMapper();
 		list.forEach(entity -> {
@@ -103,9 +85,5 @@ public class MateApplyServiceImpl implements MateApplyService {
 
 		return dtoList;
 	}
-
-
-
-
 
 }
