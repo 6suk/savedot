@@ -127,7 +127,6 @@
                 <div class="line d-flex">
                   <p><span>조회</span><span>33</span></p>
                   <p>
-                    <!-- <span><i class="fa-solid fa-heart"></i></span><span>13</span> -->
                     <span><i class="fa-regular fa-heart"></i></span><span>13</span>
                   </p>
                 </div>
@@ -137,95 +136,132 @@
               <!-- Top 03 -->
               <div class="mate-detail-price">
                 <h5>7,000</h5>
-                <p class="mate-detail-price-tag">SAVE 7,000</p>
+                <div class="mate-detail-price-tag-box">
+                  <input type="hidden" name="tradeType" value="3" id="trade_type" />
+                  <p class="mate-detail-price-tag hide" id="trade_type_1">직접거래</p>
+                  <p class="mate-detail-price-tag hide" id="trade_type_2">택배거래</p>
+                </div>
               </div>
             </div>
 
             <div class="mate-detail-middle">
-              <div>
+              <div class="d-flex flex-column gap-2">
                 <p class="font-15 font-600">유저 닉네임</p>
-                <p class="font-14 l-graytxt">광주 광역시 남구</p>
+                <div class="font-14 d-flex detail line">
+                  <p><span>모집인원</span><span class="mate-url-tag">1명</span></p>
+                  <p>
+                    <input type="hidden" name="telType" value="1" id="tel_type" />
+                    <span>연락방식</span
+                    ><a
+                      class="mate-url-tag hover hide"
+                      href="https://open.kakao.com/o/saWWrd4e"
+                      target="_blank"
+                      id="tel_type_1"
+                      >오픈채팅 <i class="fa-solid fa-arrow-up-right-from-square"></i></a
+                    ><span class="mate-url-tag hide" id="tel_type_2">댓글</span>
+                  </p>
+                </div>
               </div>
               <button class="btn btn-main sm font-14" id="applybtn">
-                매칭신청
-                <!-- <i class="fa-solid fa-circle-plus" id="applybtn-icon"></i> -->
+                메이트 신청
                 <i class="fa-solid fa-plus" id="applybtn-icon"></i>
-              </button>
-              <button class="btn btn-gray sm font-14" id="applybtn-o" style="display: none">
-                작성취소
-                <!-- <i class="fa-solid fa-circle-plus" id="applybtn-icon" style="color: #666"></i> -->
-                <i class="fa-solid fa-minus" id="applybtn-icon" style="color: #666"></i>
               </button>
             </div>
             <div class="mate-detail-content">
               <p>솔직히 엽떡 혼자 먹기 너무 많잖아요!</p>
               <p>이제 시키려고 하는데 소분해서 나눠드실 분 계신가요?</p>
             </div>
-            <div class="mate-detail-middle">
-              <p class="font-15 font-600">여기에서 만나요!</p>
-              <a class="font-15" href=""><i class="fa-solid fa-location-dot"></i> <span>문화전당역</span></a>
-            </div>
-          </div>
-        </section>
-        <section class="seletion-side" id="section-apply">
-          <div class="content-title">
-            <div>
-              <h5>매칭 신청</h5>
-              <p class="font-14 l-graytxt pt-1">최종 매칭은 글 작성자의 승낙 시 진행됩니다!</p>
-            </div>
-            <input type="button" id="sendbtn" class="btn btn-main mdi" value="매칭신청" />
-          </div>
-          <form id="mateform" class="inputbox" method="post" action="/apply/{mid}">
-            <div class="input-btn">
-              <select name="" id="area1" class="form-select empty-select required" disabled>
-                <option value="" selected disabled id="area1_title">시</option>
-              </select>
-              <select name="area" id="area2" class="form-select empty-select required" disabled>
-                <option value="" disabled selected id="area2_title">군/구</option>
-                <option value="error" disabled>시를 먼저 선택해주세요!</option>
-              </select>
-              <a class="input-btn-ele" id="getLocation"
-                ><span>위치찾기</span> <i class="fa-solid fa-location-crosshairs"></i
-              ></a>
-              <a class="input-btn-ele" id="self_write" style="display: none"
-                ><span>직접선택</span> <i class="fa-solid fa-chevron-down"></i
-              ></a>
-            </div>
-            <div class="d-flex gap-2">
-              <input class="form-control text required" type="text" name="nickname" value="닉네임" readonly />
-              <div style="position: relative; width: 100%">
-                <input type="hidden" name="id" />
-                <input class="form-control text required" type="text" name="tel" value="010-0000-0000" readonly />
-                <i
-                  class="fa-solid fa-circle-exclamation inner-btn font-14"
-                  style="color: var(--lgray-color); opacity: 0.5"
-                  data-bs-toggle="tooltip"
-                  data-bs-html="true"
-                  data-bs-placement="top"
-                  title="연락처는 매칭 성공 시 작성자에게만 공개됩니다.<br>
-                  연락처 수정은 마이페이지에서 가능합니다."
-                ></i>
+            <div class="mate-detail-map">
+              <div>
+                <input type="hidden" id="coords" name="placeCoords" value="33.450701 126.570667" />
+                <div id="map" class="map"></div>
+              </div>
+              <div class="mate-detail-map-info">
+                <p class="font-14">직접거래 시 <u>만남 장소</u>를 미리 확인하세요!</p>
+                <p class="mate-url-tag"><i class="fa-solid fa-location-arrow graytxt"></i> 문화전당역</p>
               </div>
             </div>
-            <input class="form-control text required" type="text" name="title" placeholder="타이틀*" />
-            <textarea
-              class="form-control"
-              name="content"
-              cols="30"
-              rows="10"
-              placeholder="남기고 싶은 말을 적어주세요 :)"
-            ></textarea>
-          </form>
+          </div>
         </section>
       </div>
     </div>
+
+    <!-- // Apply Form -->
+    <div class="modalBg" style="display: block">
+      <div class="requestModal savedot-modal" style="opacity: 1">
+        <div class="content-title">
+          <h5>매칭 신청</h5>
+          <div>
+            <input type="button" id="sendbtn" class="btn btn-main mdi" value="메이트 신청" />
+            <input type="button" id="closebtn" class="btn btn-sub mdi" value="닫기" />
+          </div>
+        </div>
+        <input type="hidden" value="${mate.placeAddr}" id="apply_place_addr" />
+        <input type="hidden" value="${mate.parcelPrice}" id="apply_parcel_price" />
+        <input type="hidden" value="${mate.parcelType}" id="apply_parcel_type" />
+        <form id="applyform" class="inputbox" action="/mate/apply/${mate.id}" method="post">
+          <input type="hidden" name="uid" value="${user.idAuto}" />
+          <input type="hidden" value="${mate.placeAddr}" id="apply_place_addr" />
+          <input type="hidden" value="${mate.parcelPrice}" id="apply_parcel_price" />
+          <input type="hidden" value="${mate.parcelType}" id="apply_parcel_type" />
+          <input class="form-control text required" type="text" name="nickname" value="${user.nickname }" readonly />
+          <!-- <textarea
+            class="form-control"
+            name="content"
+            cols="30"
+            rows="10"
+            placeholder="남기고 싶은 말을 적어주세요 :)"
+          ></textarea> -->
+          <div class="" id="trade_show">
+            <div class="input-btn">
+              <select
+                name="applyTradelType"
+                id="apply_trade_type"
+                class="form-select input-btn-ele-reverse"
+                style="flex: 0.2 0 0"
+              >
+                <option selected disabled>거래방법</option>
+                <option value="1" id="apply_trade_type_1">직접거래</option>
+                <option value="2" id="apply_trade_type_2">택배거래</option>
+              </select>
+              <input
+                type="text"
+                class="form-control text"
+                id="apply_parcel_notice"
+                style="flex: 1 0 0"
+                value=""
+                readonly
+                placeholder=""
+              />
+            </div>
+            <ul class="apply_notice">
+              <li>제품에 대한 질문은 게시물의 댓글 또는 기재된 연락 수단을 이용해주세요.</li>
+              <li>거래 진행 중으로 변경 시 판매자의 입금 계좌번호를 확인할 수 있습니다.</li>
+              <li>모집인원이 모두 차면 자동으로 취소됩니다.</li>
+            </ul>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- // Apply Form -->
   </body>
+  <script
+    type="text/javascript"
+    src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=dbe219346db7d2ef92284f7144059849"
+  ></script>
+  <script
+    type="text/javascript"
+    src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=dbe219346db7d2ef92284f7144059849&libraries=clusterer"
+  ></script>
+
+  <script src="../resources/static/js/map.js"></script>
   <script src="../resources/static/js/apply.js"></script>
+  <script src="../resources/static/js/mate_detail.js"></script>
+  <script src="../resources/static/js/required.js"></script>
   <script>
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
       return new bootstrap.Tooltip(tooltipTriggerEl);
     });
   </script>
-  <script src="../resources/static/js/geolocation.js"></script>
 </html>

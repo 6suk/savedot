@@ -15,5 +15,5 @@ public class Challenge {
 	private int cid;
 	private String cname;
 	private int camount;
-	
+
 }

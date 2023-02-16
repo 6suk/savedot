@@ -75,8 +75,7 @@
             <input type="radio" name="category" id="cate_2" value="2" />
             <label for="cate_2" id="category">수입 직접 등록</label>
           </div>
-          <!-- <input type="button" id="sendbtn" class="btn btn-main main" value="등록하기" /> -->
-          <input type="button" id="" class="btn btn-main main" onclick="test()" value="등록하기" />
+          <input type="button" id="sendbtn" class="btn btn-main main" value="등록하기" />
         </div>
 
         <div class="writebox flex-lg-row">
@@ -91,19 +90,35 @@
                 <span class="l-graytxt font-14 font-300">결제 일시, 품명, 금액가 잘 나오도록 촬영해 주세요.</span>
               </div>
             </label>
-            <input id="input" class="input" accept="image/*" type="file" multiple="false" hidden="true" name="img" />
+            <input
+              id="input"
+              class="input required"
+              accept="image/*"
+              type="file"
+              multiple="false"
+              hidden="true"
+              name="img"
+            />
           </div>
-          <div class="inputbox">
-            <form id="mateform" class="inputbox">
-              <input class="form-control text input-text empty-text" type="date" name="title" id="date" disabled />
-              <input class="form-control text input-text" type="number" name="price2" placeholder="금액*" disabled />
-              <input class="form-control text input-text" type="text" name="price1" placeholder="내역*" disabled />
-              <textarea class="form-control" name="content" cols="30" rows="10" placeholder="메모"></textarea>
-            </form>
-          </div>
+          <form id="cashsaveform" class="inputbox" action="/cashsave/test" method="post">
+            <div class="inputbox">
+              <input class="form-control text input-text" type="date" name="regDate" id="date" disabled />
+              <input
+                class="form-control text input-text"
+                type="text"
+                name="amount"
+                id="amount"
+                placeholder="금액*"
+                disabled
+              />
+              <input class="form-control text input-text" type="text" name="content" placeholder="내역*" disabled />
+              <textarea id="memo" class="form-control" name="memo" cols="30" rows="10" placeholder="메모"></textarea>
+            </div>
+          </form>
         </div>
       </section>
     </div>
   </body>
   <script src="../resources/static/js/cashsave.js"></script>
+  <script src="../resources/static/js/required.js"></script>
 </html>

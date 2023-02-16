@@ -42,8 +42,33 @@ $('#getLocation').click(function () {
 });
 
 // [직접기입] : 전체 시 가져오기
-$('#self_write').click(function () {
-  btntoggle();
+// $('#self_write').click(function () {
+//   btntoggle();
+//   area1.attr('disabled', false);
+//   area2.attr('disabled', false);
+//   $('.input-btn').removeClass('empty');
+//   $('#area1_location_value').remove();
+//   $('#area2_location_value').remove();
+//   area1.children('option').remove();
+//   area1.append('<option value="" selected disabled id="area1_title">시</option>');
+//   area2.append('<option value="" disabled selected id="area2_title">군/구</option>');
+
+//   var request = new XMLHttpRequest();
+//   request.open('GET', 'https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes?regcode_pattern=*00000000');
+//   request.send();
+//   request.onload = function () {
+//     let json = JSON.parse(request.response);
+//     let arr = json.regcodes;
+
+//     for (let i = 0; i < arr.length; i++) {
+//       let areas = arr[i];
+//       area1.append(`<option value=${areas.code.slice(0, 2)}>${areas.name}</option>`);
+//     }
+//   };
+// });
+
+// 서버 위치찾기 오류로 추가
+$(function () {
   area1.attr('disabled', false);
   area2.attr('disabled', false);
   $('.input-btn').removeClass('empty');

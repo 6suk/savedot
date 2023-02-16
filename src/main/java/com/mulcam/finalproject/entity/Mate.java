@@ -1,7 +1,6 @@
 package com.mulcam.finalproject.entity;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -49,9 +48,14 @@ public class Mate {
 	@ColumnDefault("0")
 	private int category;
 
-	@Column(length = 30)
-	@NotNull
-	private String area;
+	@Column(length = 20)
+	private String bank;
+
+	@Column(length = 50)
+	private String accountNumber;
+
+	private int telType;
+	private String telUrl;
 
 	@Column(length = 128)
 	@NotNull
@@ -67,16 +71,29 @@ public class Mate {
 	private int price2;
 
 	@NotNull
-	private int savePrice;
+	private int positionNum;
+
+	@Column(length = 128)
+	private String openChat;
+
+	@ColumnDefault("0")
+	private int tradeType;
+
+	@Column(length = 50)
+	private String placeName;
+
+	@Column(length = 40)
+	private String placeCoords;
+
+	private String placeAddr;
+
+	@ColumnDefault("0")
+	private int parcelType;
+
+	private int parcelPrice;
 
 	@CreationTimestamp
 	private LocalDateTime modDate;
-	
-	@Column(length = 50)
-	private String placeName;
-	@Column(length = 40)
-	private String placeCoords;
-	private String placeAddr;
 
 	@NotNull
 	@ColumnDefault("0")
@@ -95,7 +112,6 @@ public class Mate {
 	private int likeCnt;
 
 	@OneToMany(mappedBy = "mate", cascade = CascadeType.ALL, orphanRemoval = true)
-	@NotNull
 	private List<MateImg> imgInfo;
 
 	public void addImgList(List<MateImg> mateImgs) {

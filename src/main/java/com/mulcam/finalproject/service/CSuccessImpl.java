@@ -11,9 +11,9 @@ import com.mulcam.finalproject.entity.CSuccess;
 
 @Service
 public class CSuccessImpl implements CSuccessService {
-	
+
 	@Autowired private CSuccessDao csd;
-	
+
 	@Override
 	public void insert(CSuccess cs) {
 		csd.insert(cs);
@@ -32,6 +32,6 @@ public class CSuccessImpl implements CSuccessService {
 		mypageSumDTO.setChallengeWeek(csd.getWeekSum(uid));
 		mypageSumDTO.setChallengeMonth(csd.getMonthSum(uid));
 		return mypageSumDTO;
-			
+
 	}
 }

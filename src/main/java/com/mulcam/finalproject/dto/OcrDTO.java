@@ -15,12 +15,12 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class OcrDTO {
-	
+
     private String lang = "ko";
     private String requestId = "string";
     private String resultType = "string";
     private String timestamp = "";
     private String version = "V1";
-    private List<ImageDTO> images;
+    private List<OcrImageDTO> images;
 
 }

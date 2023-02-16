@@ -11,10 +11,10 @@ import com.mulcam.finalproject.entity.Challenge;
 
 @Service
 public class ChallengeServiceImpl implements ChallengeService {
-	
+
 	@Autowired private ChallengeDao challengeDao;
-	
-	
+
+
 	@Override
 	public List<Challenge> getChallengeList() {
 		List<Challenge> list = challengeDao.getChallengeList();

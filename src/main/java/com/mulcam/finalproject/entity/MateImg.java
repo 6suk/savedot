@@ -27,17 +27,17 @@ public class MateImg {
 	@Id @NotNull
 	@Column(name = "iid", columnDefinition = "BINARY(16)")
 	private UUID id;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "mid")
 	private Mate mate;
-	
+
 	@Column(length = 8)
 	private String ext;
-	
+
 	private String origFileName;
-	
+
 	private String filePath;
-	
+
 	private LocalDate saveDate;
 }

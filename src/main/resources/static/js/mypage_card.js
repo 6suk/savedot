@@ -7,7 +7,7 @@ let mate_ver = 0;
 $(function () {
   $.ajax({
     type: 'post',
-    url: 'mypage',
+    url: '/mypage/main',
     success: function (data) {
       challenge.push(data.challengeToday);
       challenge.push(data.challengeWeek);

@@ -1,24 +1,114 @@
 package com.mulcam.finalproject.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.mulcam.finalproject.dto.ImageDTO;
 import com.mulcam.finalproject.dto.LocationDTO;
-import com.mulcam.finalproject.dto.MypageSumDTO;
+import com.mulcam.finalproject.dto.MateApplyDTO;
+import com.mulcam.finalproject.dto.UserDTO;
+import com.mulcam.finalproject.entity.Cash;
+import com.mulcam.finalproject.entity.CashImg;
+import com.mulcam.finalproject.entity.User;
+import com.mulcam.finalproject.service.MateApplyService;
 import com.mulcam.finalproject.service.MateService;
-import com.mulcam.finalproject.service.ReverseGeocodeUtil;
+import com.mulcam.finalproject.service.UserService;
+import com.mulcam.finalproject.util.ImageUpload;
+import com.mulcam.finalproject.util.ReverseGeocodeUtil;
 
 @Controller
 public class TestControllerYelim {
+
+	@Autowired
+	ModelMapper modelMapper;
 
 	@Autowired
 	ReverseGeocodeUtil reverseGeocode;
 
 	@Autowired
 	MateService mateService;
+
+	@Autowired
+	UserService userService;
+
+	@Autowired
+	ImageUpload imageUpload;
+
+	@Autowired
+	MateApplyService applyService;
+
+	@GetMapping("/login/{uid}")
+	public String loginTemp(@PathVariable String uid, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		User user = userService.findById(uid).get();
+		UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+		session.setAttribute("user", userDTO);
+		return "redirect:/mypage/main";
+	}
+	
+	@GetMapping("/logout")
+	public String logoutTemp(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		session.invalidate();
+		return "redirect:/mypage/main";
+	}
+
+	@GetMapping("/dao")
+	public String mateapplyGet() {
+		User user = userService.findById("admin").get();
+		List<MateApplyDTO> list = applyService.findBySendUid(user);
+		list.forEach(x -> System.out.println(x));
+		return "cashsave/write";
+	}
+
+	@GetMapping("/cashsave/test")
+	public String datatestGet() {
+		return "cashsave/write";
+	}
+
+	@PostMapping("/cashsave/test")
+	public String datatest(Cash cash) {
+		List<MultipartFile> saveimg = cash.getSaveimg();
+		if (saveimg != null) {
+			List<ImageDTO> imgDTO = imageUpload.LocalSaveFiles(saveimg);
+			CashImg receiptImgInfo = imgDTO.get(0).setCashImgInfo();
+			System.out.println(receiptImgInfo);
+		}
+
+		System.out.println(cash);
+		return "redirect:/cashsave/test";
+	}
+
+	@GetMapping("/mate/test")
+	public String writetest() {
+		User user = new User();
+		user.setId("ko");
+		user.setPwd("ko");
+		user.setNickname("프로 알뜰러");
+		user.setTel("01012345678");
+		User user2 = new User();
+		user2.setId("admin");
+		user2.setPwd("admin");
+		user2.setNickname("관리자");
+		user2.setTel("01012345689");
+		userService.save(user2);
+		userService.save(user);
+
+//		User u = userService.findById("ko").get();
+//		userService.delete(u);
+		return "test/write";
+	}
 
 	/** Reverse Geocode 테스트 */
 	@GetMapping("/rege")
@@ -27,7 +117,7 @@ public class TestControllerYelim {
 		LocationDTO dto1 = new LocationDTO();
 		dto1.setLat("37.28699209406186"); // 위도
 		dto1.setLon("127.01184649535573"); // 경도
-		
+
 		System.out.println("경기도 수원시 장안구 : " + reverseGeocode.getArea(dto1));
 
 		LocationDTO dto2 = new LocationDTO();
@@ -36,8 +126,8 @@ public class TestControllerYelim {
 		System.out.println("제주특별자치도 서귀포시 : " + reverseGeocode.getArea(dto2));
 
 		LocationDTO dto3 = new LocationDTO();
-		dto3.setLat("33.49975371296835"); //위도
-		dto3.setLon("126.51487649468552"); //경도
+		dto3.setLat("33.49975371296835"); // 위도
+		dto3.setLon("126.51487649468552"); // 경도
 		System.out.println("제주특별자치도 제주시 : " + reverseGeocode.getArea(dto3));
 
 		LocationDTO dto4 = new LocationDTO();
