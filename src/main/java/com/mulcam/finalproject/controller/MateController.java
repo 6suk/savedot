@@ -1,9 +1,7 @@
 package com.mulcam.finalproject.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.mulcam.finalproject.dto.LocationDTO;
 import com.mulcam.finalproject.dto.MateApplyDTO;
 import com.mulcam.finalproject.dto.MateDTO;
-import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.Mate;
 import com.mulcam.finalproject.entity.MateApply;
 import com.mulcam.finalproject.service.MateApplyService;
@@ -96,6 +94,15 @@ public class MateController {
 	public String applyCancel(@PathVariable Long aid, @PathVariable Long uid) {
 		applyService.delete(aid);
 		return "redirect:/mypage/mate/apply/" + uid + "/all";
+	}
+	
+	@PostMapping("/apply/state-edit")
+	@ResponseBody
+	public MateApplyDTO applyStateEdit(@RequestBody MateApplyDTO applyDTO) {
+		System.out.println(applyDTO);
+		LocalDateTime modDateTime = applyService.editIsApply(applyDTO.getAid(), applyDTO.getIsApply());
+		applyDTO.setModDate(modDateTime);
+		return applyDTO;
 	}
 
 }

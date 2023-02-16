@@ -1,5 +1,6 @@
 package com.mulcam.finalproject.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.mulcam.finalproject.dto.MateApplyDTO;
@@ -20,6 +21,9 @@ public interface MateApplyService {
 	
 	/** Send Apply : Uid 검색 (내가 신청한) */
 	public List<MateApplyDTO> findBySendUid(Long uid);
+	
+	/** Send Apply : New Notify */
+	public boolean findNewBySendUid(Long uid);
 
 	/** Get Apply : Uid 검색 (내가 작성한 게시물의 신청 리스트) */
 	public List<MateApplyDTO> findByGetUid(User user);
@@ -27,8 +31,15 @@ public interface MateApplyService {
 	/** Get Apply : Uid 검색 (내가 작성한 게시물의 신청 리스트) */
 	public List<MateApplyDTO> findByGetUid(Long uid);
 	
+	/** Get Apply : New Notify */
+	public boolean findNewByGetUid(Long uid);
+	
 	/** Apply : Mid 검색 */
 	public List<MateApplyDTO> findByMid(Mate mate);
+	
+	/** Apply : 거래중,거래완료 등 상태 변경 */
+	public LocalDateTime editIsApply(Long aid, int isApply);
+
 	
 	
 	

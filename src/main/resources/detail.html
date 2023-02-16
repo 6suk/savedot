@@ -187,13 +187,10 @@
     </div>
 
     <!-- // Apply Form -->
-    <div class="modalBg">
-      <div class="requestModal savedot-modal">
+    <div class="modalBg" style="display: block">
+      <div class="requestModal savedot-modal" style="opacity: 1">
         <div class="content-title">
-          <div>
-            <h5>매칭 신청</h5>
-            <p class="font-14 l-graytxt pt-1">최종 매칭은 글 작성자의 승낙 시 진행됩니다!</p>
-          </div>
+          <h5>매칭 신청</h5>
           <div>
             <input type="button" id="sendbtn" class="btn btn-main mdi" value="메이트 신청" />
             <input type="button" id="closebtn" class="btn btn-sub mdi" value="닫기" />
@@ -204,29 +201,14 @@
         <input type="hidden" value="${mate.parcelType}" id="apply_parcel_type" />
         <form id="applyform" class="inputbox" method="post" action="/mate/apply/${mate.id}">
           <input type="hidden" name="uid" value="${user.id}" />
-          <div class="d-flex gap-2">
-            <input class="form-control text required" type="text" name="nickname" value="닉네임" readonly />
-            <div style="position: relative; width: 100%">
-              <input type="hidden" name="id" />
-              <input class="form-control text required" type="text" name="tel" value="010-0000-0000" readonly />
-              <i
-                class="fa-solid fa-circle-exclamation inner-btn font-14"
-                style="color: var(--lgray-color); opacity: 0.5"
-                data-bs-toggle="tooltip"
-                data-bs-html="true"
-                data-bs-placement="top"
-                title="연락처는 매칭 성공 시 작성자에게만 공개됩니다.<br>
-                연락처 수정은 마이페이지에서 가능합니다."
-              ></i>
-            </div>
-          </div>
-          <textarea
+          <input class="form-control text required" type="text" name="nickname" value="닉네임" readonly />
+          <!-- <textarea
             class="form-control"
             name="content"
             cols="30"
             rows="10"
             placeholder="남기고 싶은 말을 적어주세요 :)"
-          ></textarea>
+          ></textarea> -->
           <div class="" id="trade_show">
             <div class="input-btn">
               <select
@@ -249,6 +231,11 @@
                 placeholder=""
               />
             </div>
+            <ul class="apply_notice">
+              <li>제품에 대한 질문은 게시물의 댓글 또는 기재된 연락 수단을 이용해주세요.</li>
+              <li>거래 진행 중으로 변경 시 판매자의 입금 계좌번호를 확인할 수 있습니다.</li>
+              <li>모집인원이 모두 차면 자동으로 취소됩니다.</li>
+            </ul>
           </div>
         </form>
       </div>

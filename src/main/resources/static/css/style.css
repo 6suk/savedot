@@ -869,6 +869,32 @@ button > i {
   padding-top: 1.5rem;
 }
 
+.apply_notice {
+  font-size: 15px;
+  margin: 1rem 0 0 0;
+  padding: 0;
+  list-style: none;
+}
+.apply_notice li {
+  color: #666;
+  margin-inline: 0.5rem;
+  position: relative;
+  display: block;
+  font-style: normal;
+  padding-left: 0.8rem;
+}
+
+.apply_notice li:not(:first-child) {
+  padding-top: 0.2rem;
+}
+
+.apply_notice li::before {
+  content: '- ';
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
 /* ////////////////////////////////////  Detail >> //////////////////////////////////// */
 
 /* ////////////////////////////////////  SIDE & MODAL >> //////////////////////////////////// */
@@ -1024,9 +1050,9 @@ button > i {
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  width: 20.5rem;
+  width: 22.5rem;
   /* height: 13.5rem; */
-  height: 16.5rem;
+  height: 17.5rem;
   justify-content: space-between;
   padding-inline: 1.8rem;
   border: 1px solid var(--border-color);
@@ -1034,10 +1060,6 @@ button > i {
   padding-block: 1.8rem;
   transition: all ease 0.3s 0s;
 }
-
-/* #mate-card-2 .mate-card-item {
-  height: 16.5rem;
-} */
 
 .mate-card-item:hover {
   border: 1px solid rgba(var(--main-color-rgb), 50%);
@@ -1059,19 +1081,33 @@ a:hover {
   transition: all ease 0.3s 0s;
 }
 
+button {
+  transition: all ease 0.3s 0s;
+}
+
+button:hover {
+  transition: all ease 0.3s 0s;
+}
+
 .mate-card-top h4 {
   font-size: 22px;
   font-weight: 800;
 }
 
-.mate-card-top-count {
-  font-size: 15px;
+.mate-card-top-notify {
+  font-size: 14px;
   font-weight: 600;
   padding-inline: 0.5rem;
+  padding-inline-start: 0.5rem;
+  padding-inline-end: 0.5rem;
   padding-block: 0.2rem;
-  background-color: #eee;
-  color: #999;
+  background-color: #ffc10721;
+  color: #ffc107;
   border-radius: 5px;
+}
+
+.mate-card-top-notify::after {
+  content: 'new';
 }
 
 .mate-card-tag {
@@ -1079,21 +1115,53 @@ a:hover {
   padding-inline: 0.65rem;
   padding-block: 0.36rem;
   border-radius: 5px;
+  border: 0;
+}
+
+select.mate-card-tag {
+  background-color: transparent !important;
+  color: #333 !important;
+  border: 1px solid rgba(var(--border-color-rgb), 0.8);
+  padding-right: 2rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23666666' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.mate-card-tag:focus {
+  outline: 0;
+}
+
+.mate-card-tag option:disabled {
+  color: var(--lgray-color);
+  background-color: rgb(247, 248, 250);
 }
 
 .mate-card-tag.ver0 {
-  color: var(--gray-color);
-  background-color: transparent;
-  border: 1px solid var(--border-color);
+  background-color: var(--sub-color);
+  color: var(--main-color);
 }
 
 .mate-card-tag.ver0::after {
-  content: '신청 완료';
+  content: '대기 중';
+}
+
+button.mate-card-tag::after {
+  content: none !important;
+}
+
+button.mate-card-tag:hover {
+  opacity: 0.8;
 }
 
 .mate-card-tag.ver1 {
-  background-color: var(--sub-color);
-  color: var(--main-color);
+  background-color: var(--main-color);
+  color: #fff;
 }
 
 .mate-card-tag.ver1::after {
@@ -1109,19 +1177,8 @@ a:hover {
   content: '거래완료';
 }
 
-/* #mate-card-3 .mate-card-tag {
-  background-color: #eee;
-  color: var(--lgray-color);
-}
-
-#mate-card-1 .mate-card-tag {
-  color: var(--gray-color);
-  background-color: transparent;
-  border: 1px solid var(--border-color);
-} */
-
 .mate-card-middle {
-  gap: 1rem;
+  gap: 0.5rem;
   display: flex;
   flex-direction: column;
   padding-inline: 0.2rem;
@@ -1135,6 +1192,7 @@ a:hover {
 }
 
 .mate-card-middle h5 {
+  font-size: 18px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1185,10 +1243,6 @@ a:hover {
   font-size: 15px;
 }
 
-.sub a {
-  /* font-size: 15px; */
-}
-
 .mypage-navbar .nav-link {
   color: #333;
 }
@@ -1201,11 +1255,6 @@ a:hover {
 .mypage-navbar .nav-link.active {
   font-weight: 600;
   color: var(--main-color);
-}
-
-.mypage-navbar.sub .nav-link.active {
-  /* font-weight: 600;
-  color: var(--gray-color); */
 }
 
 .mypage-navbar a {
