@@ -1756,3 +1756,195 @@ div.challenge-choice {
 }
 
 /* ////////////////////////////////////  MYPAGE_CASH //////////////////////////////////// */
+
+/* ////////////////////////////////////  MATE_LIST //////////////////////////////////// */
+/* view */
+.mate-flex-view {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* item */
+.mate-flex-item {
+  max-width: 274px;
+  width: 100%;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  /* padding: 0 0 12px; */
+  border-radius: 8px;
+  border: 1px solid #ebebeb;
+  background-color: #fff;
+  overflow: hidden;
+  display: -moz-box;
+  display: flex;
+  -moz-box-orient: vertical;
+  -moz-box-direction: normal;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
+  cursor: pointer;
+  aspect-ratio: 3/4;
+}
+
+.mate-flex-item:hover {
+  box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.05);
+  transform: scale3d(1.01, 1.01, 1.01);
+}
+
+.mate-top-info > *,
+.mate-middle-info > *,
+.mate-bottom-info > * {
+  padding-inline: 1rem;
+}
+
+/* item-top */
+.mate-top-info {
+  position: relative;
+  height: 50%;
+}
+
+.mate-top-info .top {
+  padding-top: 0.5rem;
+  width: 100%;
+  position: absolute;
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+}
+
+.mate-top-info .top .mate-card-tag {
+  background-color: var(--sub-color);
+  color: var(--main-color);
+}
+
+.mate-top-info .top .mate-card-tag.position-count {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: var(--main-color);
+}
+
+.mate-top-info .top .fa-heart {
+  font-size: 16px;
+  color: #eee;
+}
+
+.position-count::before {
+  content: '모집인원 ';
+}
+
+.category0::after {
+  content: '조각메이트';
+}
+
+.category1::after {
+  content: 'OTT메이트';
+}
+
+.mate-top-info .thum {
+  position: relative;
+  padding: 0;
+  height: 100%;
+}
+
+.thum img {
+  position: absolute;
+  object-fit: cover;
+  top: 50%;
+  left: 50%;
+  max-height: 100%;
+  min-width: 100%;
+  transform: translate(-50%, -50%);
+}
+
+/* mate-info-group : middle + bottom */
+
+.mate-info-group {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+/* item-middle */
+
+.mate-middle-info {
+  gap: 0.4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.mate-middle-info .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--lgray-color);
+  font-size: 12px;
+}
+
+.mate-middle-info .top p span {
+  color: #dcdcdc;
+}
+
+.mate-middle-info .title {
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* white-space: break-spaces; */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  min-height: 50px;
+}
+.mate-middle-info .price {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.mate-middle-info .price::before {
+  content: '￦';
+  margin-right: 0.2rem;
+}
+
+/* item-middle */
+.mate-bottom-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mate-bottom-info .left {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.mate-bottom-info .left [Trade] {
+  font-size: 13px;
+  line-height: 16px;
+  user-select: none;
+  padding-inline: 0.65rem;
+  padding-block: 0.36rem;
+  border-radius: 5px;
+  border: 1px solid rgba(var(--main-color-rgb), 0.5);
+  color: rgba(var(--main-color-rgb), 0.8);
+  border-radius: 50px;
+}
+
+.mate-bottom-info .right {
+}
+
+@media screen and (max-width: 950px) {
+}
+
+@media screen and (max-width: 780px) {
+  .mate-flex-item {
+    max-width: 100%;
+  }
+}
+
+/* ////////////////////////////////////  MATE_LIST //////////////////////////////////// */

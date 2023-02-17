@@ -72,6 +72,9 @@ public class Mate {
 
 	@NotNull
 	private int positionNum;
+	
+	@NotNull
+	private int positonApplyNum;
 
 	@Column(length = 128)
 	private String openChat;
