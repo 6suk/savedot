@@ -1,6 +1,7 @@
-package com.mulcam.finalproject.entity;
+package com.mulcam.finalproject.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +12,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class News {
+public class NewsDTO {
 	
 	private String title;
 	private String link;
