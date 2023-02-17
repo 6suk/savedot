@@ -25,6 +25,7 @@ public class ImageDTO {
 	private UUID uuid;
 	private String ext;
 	private File path;
+	private String downloadName;
 
 	public MateImg setMateImgInfo() {
 		// Img Entity 생성

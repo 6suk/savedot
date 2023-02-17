@@ -64,8 +64,6 @@ public class MypageController {
 		List<MateApplyDTO> getApply = applyService.findByGetUid(uid);
 		model.addAttribute("getApply", getApply);
 		model.addAttribute("getNew", applyService.findNewByGetUid(uid));	// New Notify
-		
-		
 
 		return "mypage/apply_list_all";
 	}
