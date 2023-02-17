@@ -17,12 +17,14 @@ window.onload = function getTime() {
 }
 
 // 현재 날짜
-function locale (){
-    
+function locale() {
+
     let dayStr = new Date().toString();
     let week = dayStr.slice(0, 3);  // 오늘 요일 영어로
     let date = dayStr.slice(4, 15); // 일, 월, 년
 
     return week + ", " + date;
-} 
-document.getElementById( 'usingFunction' ).innerHTML = locale (); 
+}
+document.getElementById( 'today1' ).innerHTML = locale (); 
+document.getElementById( 'today2' ).innerHTML = locale (); 
+document.getElementById( 'today3' ).innerHTML = locale (); 
