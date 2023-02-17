@@ -2,7 +2,6 @@ package com.mulcam.finalproject.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.modelmapper.ModelMapper;
@@ -49,8 +48,7 @@ public class TestControllerYelim {
 	MateApplyService applyService;
 
 	@GetMapping("/login/{uid}")
-	public String loginTemp(@PathVariable String uid, HttpServletRequest req) {
-		HttpSession session = req.getSession();
+	public String loginTemp(@PathVariable String uid, HttpSession session) {
 		User user = userService.findById(uid).get();
 		UserDTO userDTO = modelMapper.map(user, UserDTO.class);
 		session.setAttribute("user", userDTO);
@@ -58,8 +56,7 @@ public class TestControllerYelim {
 	}
 	
 	@GetMapping("/logout")
-	public String logoutTemp(HttpServletRequest req) {
-		HttpSession session = req.getSession();
+	public String logoutTemp(HttpSession session) {
 		session.invalidate();
 		return "redirect:/mypage/main";
 	}

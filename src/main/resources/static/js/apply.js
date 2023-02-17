@@ -11,16 +11,14 @@ $('#sendbtn').click(function () {
 let modal_bg = $('.modalBg');
 let modal = $('.savedot-modal');
 let apply_btn = $('#applybtn');
-let closw_btn = $('#closebtn');
+let close_btn = $('#closebtn');
 
 apply_btn.click(function () {
-  modal_bg.show();
-  modal.css('opacity', '1');
+  modal_bg.fadeToggle(220);
 });
 
-closw_btn.click(function () {
-  modal_bg.hide();
-  modal.css('opacity', '0');
+close_btn.click(function () {
+  modal_bg.fadeToggle(220);
 });
 
 let apply_trade_type = $('#apply_trade_type');

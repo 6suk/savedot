@@ -331,7 +331,7 @@ aside {
 
 @media (max-width: 992px) {
   .viewcard-group {
-    margin-inline: 2rem;
+    margin-inline: 0rem;
   }
 }
 
@@ -404,6 +404,7 @@ aside {
 .emojitxt span {
   font-size: 1.75rem;
   font-weight: 800;
+  white-space: nowrap;
 }
 
 /* ////////////////////////////////////  CARD >>  //////////////////////////////////// */
@@ -932,7 +933,6 @@ button > i {
 }
 
 .savedot-modal {
-  opacity: 0;
   transition: all ease 0.3s 0s;
   position: relative;
   left: 50%;
@@ -1479,3 +1479,280 @@ div.challenge-choice {
 }
 
 /* ////////////////////////////////////  CHALLENGE_CHOICE //////////////////////////////////// */
+
+/* ////////////////////////////////////  MYPAGE_CASH //////////////////////////////////// */
+.mypage-cash {
+  display: flex;
+  gap: 2.5rem;
+  flex-direction: column;
+}
+
+.mypage-card.cash {
+  display: flex;
+  padding-inline: 0;
+  justify-content: space-evenly;
+  padding-block: 1.8rem;
+}
+
+.mypage-card.cash > .mypage-card-left {
+  width: 50%;
+}
+
+@media (max-width: 992px) {
+  .mypage-card.cash > .mypage-card-left {
+    width: auto;
+  }
+}
+
+/* 월 + 검색 */
+.mypage-cash-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.mypage-cash-top h4 {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.mypage-cash-top-start {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.mypage-cash-top-start button {
+  opacity: 50%;
+}
+
+.mypage-cash-top-end {
+  display: flex;
+}
+
+.mypage-cash-top-end *:not(:first-child, :last-child) {
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0;
+}
+
+.mypage-cash-top-end :first-child {
+  border: 1px solid var(--border-color);
+  border-radius: 5px 0px 0px 5px;
+}
+
+.mypage-cash-top-end :last-child {
+  border-radius: 0px 5px 5px 0px !important;
+}
+
+.mypage-cash-top-end button {
+  border: 1px solid var(--border-color);
+  background-color: transparent;
+  padding-inline: 1rem;
+}
+
+.mypage-cash-top-end button > i {
+  border: 0 !important;
+  color: var(--lgray-color);
+}
+
+.mypage-cash-top-end input[type='date'] {
+  width: 150px;
+  height: 40px;
+}
+
+.mypage-cash-top-end input[type='date']::before {
+  content: attr(data-placeholder);
+  width: 100%;
+}
+
+.mypage-cash-top-end input[type='date']:focus::before,
+.mypage-cash-top-end input[type='date']:valid::before {
+  display: none;
+}
+
+/* 지출 수입 리스트 */
+.mypage-cash-item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.mypage-cash-item-top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  border: 0;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mypage-cash-item-button-group {
+  position: relative;
+}
+
+.mypage-cash-item-button-group span {
+  font-size: 12px;
+  position: absolute;
+  left: 0;
+  pointer-events: none;
+  opacity: 50%;
+}
+
+[down] {
+  bottom: 0.5rem;
+}
+[up] {
+  top: 0.5rem;
+}
+
+.mypage-cash-item-count {
+  font-size: 14px;
+  color: var(--lgray-color);
+}
+
+.mypage-cash-item-date {
+  padding-left: 1rem;
+}
+
+/* 항목 */
+[category] {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1/1;
+}
+
+[category]::after {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.cash-item {
+  margin: 0;
+  list-style: none;
+  display: flex;
+  gap: 1.875rem;
+  font-size: 15px;
+  align-items: center;
+  padding: 1.25rem 1.875rem;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(var(--border-color-rgb), 0.5);
+  font-weight: 300;
+}
+
+[cash-name] {
+  width: 20%;
+}
+
+[cash-amount] {
+  font-weight: 600;
+  width: 10%;
+  text-align: right;
+}
+
+[cash-memo] {
+  width: 40%;
+}
+
+[cash-img] {
+  opacity: 0;
+  font-size: 14px;
+  white-space: nowrap;
+  user-select: none;
+  cursor: default;
+}
+
+[cash-img][ON] {
+  opacity: 1;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: all ease 0.3s 0s;
+}
+
+[cash-img][ON]:hover {
+  opacity: 0.8;
+}
+
+/* 지출 */
+.cash-item.ver0 {
+}
+
+.cash-item.ver0 [category] {
+  background: rgba(255, 107, 0, 0.1);
+  border: 1px solid rgba(255, 107, 0, 0.3);
+}
+
+.cash-item.ver0 [category]::after {
+  content: '-';
+  color: #ff6b00;
+}
+
+.cash-item.ver0 [cash-amount] {
+  color: #ff6b00;
+}
+
+/*수입*/
+.cash-item.ver1 {
+}
+
+.cash-item.ver1 [category] {
+  background: var(--sub-color);
+  border: 1px solid rgba(var(--main-color-rgb), 0.2);
+}
+
+.cash-item.ver1 [category]::after {
+  content: '+';
+  color: var(--main-color);
+}
+
+.cash-item.ver1 [cash-amount] {
+  color: var(--main-color);
+}
+
+@media (pointer: coarse) {
+  .mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .cash-item {
+    flex-wrap: wrap;
+  }
+
+  .cash-item li {
+    width: auto;
+  }
+
+  .cash-item li[cash-memo] {
+    width: 70%;
+  }
+}
+
+.savedot-modal.cash {
+  width: auto;
+  padding: 28px;
+}
+
+.savedot-modal .close-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.savedot-modal .receipt-img {
+  padding-top: 1rem;
+}
+
+.savedot-modal .receipt-img img {
+  height: 50vh;
+}
+
+/* ////////////////////////////////////  MYPAGE_CASH //////////////////////////////////// */
