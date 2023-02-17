@@ -12,7 +12,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class News {
-	
+
 	private String title;
 	private String link;
 	private String description;

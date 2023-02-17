@@ -20,14 +20,14 @@ import com.mulcam.finalproject.entity.ExchangeRate;
 
 @Service
 public class ExchangeRateUtil {
-	
+
 	@Value("${authKey}") private String authKey;
-	
+
 	public List<ExchangeRate> getRate() throws Exception {
 
 		// 오늘, 어제 날짜 계산
 		String searchDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
-		
+
 		Date yDate = new Date();
 		yDate = new Date(yDate.getTime()+(1000*60*60*24*-1));
 		SimpleDateFormat ySdf = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
@@ -51,23 +51,23 @@ public class ExchangeRateUtil {
 		String line;
 		line = br.readLine();
 
-		
+
 		// 받아온 JSON 데이터 파싱하기
 		// 파서 객체 만들기
 		JSONParser parser = new JSONParser();
 
 		// JSON 데이터를 파싱하여 배열로 추출
 		JSONArray items = (JSONArray) parser.parse(line);
-		
+
 		List<ExchangeRate> elist = new ArrayList<>();
 
-		for (int i = 0; i < items.size(); i++) {
-			JSONObject item = (JSONObject) items.get(i);
+		for (Object item2 : items) {
+			JSONObject item = (JSONObject) item2;
 
 			String cur_unit = (String) item.get("cur_unit");		// 통화코드
 			String cur_nm = (String) item.get("cur_nm");			// 국가명
 			String deal_bas_r = (String) item.get("deal_bas_r");	// 매매기준율
-			
+
 			if (cur_unit.equals("USD") || cur_unit.equals("JPY(100)") || cur_unit.equals("EUR")) {
 				ExchangeRate exchangeRate = new ExchangeRate(cur_unit.substring(0, 3), cur_nm, deal_bas_r);
 				elist.add(exchangeRate);

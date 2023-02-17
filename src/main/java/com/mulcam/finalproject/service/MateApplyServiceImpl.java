@@ -49,7 +49,7 @@ public class MateApplyServiceImpl implements MateApplyService {
 	public List<MateApplyDTO> findBySendUid(User user) {
 		return findBySendUid(user.getIdAuto());
 	}
-	
+
 	@Override
 	public boolean findNewBySendUid(Long uid) {
 		int count = applyDAO.findNewBySendUid(uid);
@@ -66,7 +66,7 @@ public class MateApplyServiceImpl implements MateApplyService {
 	public List<MateApplyDTO> findByGetUid(User user) {
 		return findByGetUid(user.getIdAuto());
 	}
-	
+
 	@Override
 	public boolean findNewByGetUid(Long uid) {
 		int count = applyDAO.findNewByGetUid(uid);
@@ -87,7 +87,7 @@ public class MateApplyServiceImpl implements MateApplyService {
 
 	public List<MateApplyDTO> mapperDTO(List<MateApply> list) {
 		List<MateApplyDTO> dtoList = new ArrayList<>();
-		
+
 		// mapper
 		ModelMapper modelMapper = new ModelMapper();
 		list.forEach(entity -> {

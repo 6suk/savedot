@@ -12,7 +12,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class ExchangeRate {
-	
+
 	private String cur_unit;
 	private String cur_nm;
 	private String deal_bas_r;

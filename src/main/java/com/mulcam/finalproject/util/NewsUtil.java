@@ -18,7 +18,7 @@ public class NewsUtil {
 
 	@Value("${clientId}") private String clientId;
 	@Value("${clientSecret}") private String clientSecret;
-	
+
 	public News getNews(String query) throws Exception {
 
 		StringBuilder urlBuilder = new StringBuilder("https://openapi.naver.com/v1/search/news.json");
@@ -52,14 +52,14 @@ public class NewsUtil {
 		JSONArray items = json.getJSONArray("items");
 
 		JSONObject item = (JSONObject) items.get(0);
-		
+
 		String title = (String) item.get("title");
 		String link = (String) item.get("link");
 		String description = (String) item.get("description");
 		String pubDate = (String) item.get("pubDate");
-		
+
 		News news = new News(title, link, description.replace("<b>", "").replace("</b>", "").replace("http*", ""), pubDate.substring(0,16), query);
-	
+
 		return news;
 
 	}

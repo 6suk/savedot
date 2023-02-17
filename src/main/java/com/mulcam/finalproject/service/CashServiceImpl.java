@@ -65,13 +65,14 @@ public class CashServiceImpl implements CashService {
 
 	@Override // 영수증 이미지 db저장
 	public void ocrImgSave(CashImg cashImg) {
-		cashImg.setCid(2);
 		cashDao.ocrImgSave(cashImg);
 	}
 
-
-
-
+	@Override
+	public int getRecentCid(String uid) {
+		int cid = cashDao.getRecentCid(uid);
+		return cid;
+	}
 
 
 

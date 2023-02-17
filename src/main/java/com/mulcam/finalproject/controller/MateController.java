@@ -95,7 +95,7 @@ public class MateController {
 		applyService.delete(aid);
 		return "redirect:/mypage/mate/apply/" + uid + "/all";
 	}
-	
+
 	@PostMapping("/apply/state-edit")
 	@ResponseBody
 	public MateApplyDTO applyStateEdit(@RequestBody MateApplyDTO applyDTO) {
