@@ -12,7 +12,7 @@
 					<div class="carousel-inner">
 						<c:forEach items="${mate.imgInfo }" var="img" varStatus="i">
 							<div class="carousel-item ${i.index eq 0 ? 'active' : '' }">
-								<img src="/upload/${img.saveDate }/${img.id }${img.ext }"
+								<img src="/savedot/upload/${img.saveDate }/${img.id }${img.ext }"
 									class="d-block slide-img" />
 							</div>
 						</c:forEach>
