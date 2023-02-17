@@ -16,13 +16,13 @@ window.onload = function getTime() {
     setTimeout(getTime, 300000);	// 5분마다 갱신
 }
 
-// 현재 시간 -> 환율 (사용 X)
-// function locale (){
-//     return new Date().toLocaleString();
-// } 
-// document.getElementById( 'usingFunction' ).innerHTML = locale(); 
+// 현재 날짜
+function locale (){
+    
+    let dayStr = new Date().toString();
+    let week = dayStr.slice(0, 3);  // 오늘 요일 영어로
+    let date = dayStr.slice(4, 15); // 일, 월, 년
 
-// // 추가로, 실시간 타이머 표시 방법 ㅡ 1000 밀리초(=1초)에 한번씩 함수 실행하기 
-// setInterval ( function() {
-//     document.getElementById("usingFunction").innerHTML = locale(); 
-// } , 1000 );
+    return week + ", " + date;
+} 
+document.getElementById( 'usingFunction' ).innerHTML = locale (); 

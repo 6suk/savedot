@@ -21,7 +21,7 @@ a:link {
     float: left;
   }
 
-  .card-date {
+  .card-date #usingFunction {
     margin-bottom: 20px;
     color: #666666;
   }
@@ -47,7 +47,7 @@ a:link {
     color:#333;
     border-radius: 3px;
     box-shadow: 0 5px 30px -5px rgba(0,0,0,0.16);
-    height: 270px;
+    /* height: 270px; */
   }
 
 /* 갱신 시간 */
