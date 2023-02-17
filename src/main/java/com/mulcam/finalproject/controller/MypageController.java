@@ -42,16 +42,14 @@ public class MypageController {
 
 	@PostMapping("/main")
 	@ResponseBody
-	public MypageSumDTO mypagePost(HttpServletRequest req) {
-		HttpSession session = req.getSession();
+	public MypageSumDTO mypagePost(HttpSession session) {
 		UserDTO user = (UserDTO) session.getAttribute("user");
 		MypageSumDTO mypageSumDTO = css.getSum(user.getId());
 		return mypageSumDTO;
 	}
 
 	@GetMapping("/mate/apply/{uid}/all")
-	public String applyGet(@PathVariable Long uid, Model model, HttpServletRequest req) {
-		HttpSession session = req.getSession();
+	public String applyGet(@PathVariable Long uid, Model model, HttpSession session) {
 		UserDTO user = (UserDTO) session.getAttribute("user");
 
 		/** (임시) 로그인 유저와 동일하지 않다면 접근 불가 - 추후 필터로 옮길 것 */

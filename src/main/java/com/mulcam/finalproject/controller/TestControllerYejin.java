@@ -40,7 +40,7 @@ public class TestControllerYejin {
 //		return "redirect:/mypage/main";
 //	}
 //	
-//	@GetMapping("/logout")
+//	@GetMapping("/mypage/cash/list")
 //	public String logoutTemp(HttpServletRequest req) {
 //		HttpSession session = req.getSession();
 //		session.invalidate();
