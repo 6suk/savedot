@@ -1805,11 +1805,11 @@ div.challenge-choice {
 /* item-top */
 .mate-top-info {
   position: relative;
-  height: 50%;
+  height: 40%;
 }
 
 .mate-top-info .top {
-  padding-top: 0.5rem;
+  padding-top: 1rem;
   width: 100%;
   position: absolute;
   font-size: 13px;
@@ -1865,7 +1865,7 @@ div.challenge-choice {
 /* mate-info-group : middle + bottom */
 
 .mate-info-group {
-  height: 50%;
+  height: 60%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -1936,6 +1936,11 @@ div.challenge-choice {
 }
 
 .mate-bottom-info .right {
+}
+
+.mate-bottom-info .right [LIKE] {
+  font-size: 20px;
+  color: #dcdcdc;
 }
 
 @media screen and (max-width: 950px) {
