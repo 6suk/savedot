@@ -11,7 +11,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.mulcam.finalproject.entity.News;
+import com.mulcam.finalproject.dto.NewsDTO;
 
 @Service
 public class NewsUtil {
@@ -19,7 +19,7 @@ public class NewsUtil {
 	@Value("${clientId}") private String clientId;
 	@Value("${clientSecret}") private String clientSecret;
 
-	public News getNews(String query) throws Exception {
+	public NewsDTO getNews(String query) throws Exception {
 
 		StringBuilder urlBuilder = new StringBuilder("https://openapi.naver.com/v1/search/news.json");
 		urlBuilder.append("?" + URLEncoder.encode("query", "UTF-8") + "=" + URLEncoder.encode(query, "UTF-8"));
@@ -58,7 +58,7 @@ public class NewsUtil {
 		String description = (String) item.get("description");
 		String pubDate = (String) item.get("pubDate");
 
-		News news = new News(title, link, description.replace("<b>", "").replace("</b>", "").replace("http*", ""), pubDate.substring(0,16), query);
+		NewsDTO news = new NewsDTO(title, link, description.replace("<b>", "").replace("</b>", "").replace("http*", ""), pubDate.substring(0,16), query);
 
 		return news;
 

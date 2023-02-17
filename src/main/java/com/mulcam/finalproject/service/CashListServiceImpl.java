@@ -10,7 +10,7 @@ import com.mulcam.finalproject.entity.Cash;
 
 @Service
 public class CashListServiceImpl implements CashListService {
-	
+
 	@Autowired
 	private CashDao cashDao;
 

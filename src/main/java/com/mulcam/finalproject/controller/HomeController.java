@@ -17,12 +17,12 @@ import com.mulcam.finalproject.util.ImageUpload;
 public class HomeController {
 	@Autowired
 	ImageUpload imageUpload;
-	
+
 	@GetMapping("")
 	public String main() {
 		return "redirect:/mypage/main";
 	}
-	
+
 	@GetMapping("/savedot/upload/{path}/{downloadName}")
 	public ResponseEntity<Resource> download(@ModelAttribute ImageDTO imgDTO)  {
 		return imageUpload.download(imgDTO);

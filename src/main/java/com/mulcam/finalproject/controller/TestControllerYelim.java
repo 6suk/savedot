@@ -54,7 +54,7 @@ public class TestControllerYelim {
 		session.setAttribute("user", userDTO);
 		return "redirect:/mypage/main";
 	}
-	
+
 	@GetMapping("/logout")
 	public String logoutTemp(HttpSession session) {
 		session.invalidate();

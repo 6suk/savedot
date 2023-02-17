@@ -23,7 +23,7 @@ import com.mulcam.finalproject.service.UserService;
 @Controller
 @RequestMapping("/mypage")
 public class TestContollerYejin {
-	
+
 	@Autowired
 	UserService userService;
 
@@ -37,19 +37,19 @@ public class TestContollerYejin {
 	private String secretKey;
 
 	/* 수입지출 등록 리스트 */
-	
+
 	//리스트폼띄워주기
 		@GetMapping("cash/list")
-		public String listForm(Model model,Cash cash) {	
-			
+		public String listForm(Model model,Cash cash) {
+
 			LocalDate today = LocalDate.now();
 			LocalDate firstDay = today.with(TemporalAdjusters.firstDayOfMonth()); // 해당월의 첫째날을 구해줌
-			
+
 			model.addAttribute("startDate",firstDay);
 			model.addAttribute("endDate",today);
 
 			return "cash/list";
-			
+
 		}
 
 
@@ -60,14 +60,14 @@ public class TestContollerYejin {
 			HttpSession session = req.getSession();
 			UserDTO user = (UserDTO) session.getAttribute("user");
 
-			
+
 			/* 사용자 지정 기간별 수입 지출 합계구하기 */
 			String startDate = req.getParameter("startDate");
 			String endDate = req.getParameter("endDate");
 
 			List<Cash> list = cashListService.getList(user.getId(), startDate, endDate);
 
-			int incomeSum = 0, expenseSum=0; 
+			int incomeSum = 0, expenseSum=0;
 
 			for(Cash cash : list) {
 				System.out.println(cash);
@@ -78,23 +78,23 @@ public class TestContollerYejin {
 			}
 			System.out.println("수입합계 : " + incomeSum);
 			System.out.println("지출합계 : " + expenseSum);
-			
+
 			/* 오늘의 합계 구하기 */
-			
+
 			int expenseTodaySum = cashListService.sumNowExpense(user.getId());
 			System.out.println("오늘 지출합계 : " + expenseTodaySum);
-			
+
 			int incomeTodaySum=cashListService.sumNowIncome(user.getId());
 			System.out.println("오늘 수입합계 : " + incomeTodaySum);
-			
+
 			model.addAttribute("startDate", startDate);
 			model.addAttribute("endDate", endDate);
 			model.addAttribute("incomeSum", incomeSum);
 			model.addAttribute("expenseSum", expenseSum);
 			model.addAttribute("expenseTodaySum", expenseTodaySum);
 			model.addAttribute("incomeTodaySum", incomeTodaySum);
-			
-			
+
+
 			return "cash/list";
 
 }

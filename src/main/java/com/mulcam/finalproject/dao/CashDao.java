@@ -37,12 +37,12 @@ public interface CashDao{
 		@Select("SELECT SUM(amount) FROM cash"
 				+ " WHERE uid=#{uid} AND category=0 AND regDate=DATE(NOW())")
 		public int sumNowExpense(String uid);
-		
+
 		/* 오늘 '수입'합계 구하기 */
 		@Select("SELECT SUM(amount) FROM cash"
 				+ " WHERE uid=#{uid} AND category=1 AND regDate=DATE(NOW())")
 		public int sumNowIncome(String uid);
-		
+
 		/* 수입/지출 전체 리스트 가져오기 */
 		@Select("SELECT category,content,amount,memo FROM cash WHERE uid=#{uid} AND regDate=#{regDate}")
 		List<Cash> getAllCashList(String uid,String regDate);
