@@ -74,6 +74,7 @@ public class Mate {
 	private int positionNum;
 	
 	@NotNull
+	@ColumnDefault("0")
 	private int positonApplyNum;
 
 	@Column(length = 128)

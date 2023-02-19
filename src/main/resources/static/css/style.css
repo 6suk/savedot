@@ -1758,6 +1758,55 @@ div.challenge-choice {
 /* ////////////////////////////////////  MYPAGE_CASH //////////////////////////////////// */
 
 /* ////////////////////////////////////  MATE_LIST //////////////////////////////////// */
+/* 검색 */
+.search-bar {
+  margin-right: 2rem;
+  flex: 0 0 auto;
+  width: 18%;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+
+.mate-top-title {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-bar .form-control.text {
+  border-radius: 0;
+}
+
+.search-bar .mypage-cash-top-end :last-child {
+  border-radius: 0 !important;
+}
+
+.search-top-button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  border: 0;
+  padding: 0.8rem;
+  border-bottom: 1px solid var(--border-color);
+}
+.search-top-title-group {
+  width: 100%;
+  position: relative;
+  text-align: left;
+}
+
+.search-top-title-group span {
+  font-size: 12px;
+  position: absolute;
+  right: 0;
+  pointer-events: none;
+  opacity: 50%;
+}
+
 /* view */
 .mate-flex-view {
   display: flex;
@@ -1767,7 +1816,7 @@ div.challenge-choice {
 
 /* item */
 .mate-flex-item {
-  max-width: 274px;
+  max-width: 244px;
   width: 100%;
   height: 100%;
   -webkit-box-sizing: border-box;
@@ -1788,7 +1837,7 @@ div.challenge-choice {
   -moz-transition: all 0.2s;
   transition: all 0.2s;
   cursor: pointer;
-  aspect-ratio: 3/4;
+  aspect-ratio: 3/3.6;
 }
 
 .mate-flex-item:hover {
@@ -1797,8 +1846,7 @@ div.challenge-choice {
 }
 
 .mate-top-info > *,
-.mate-middle-info > *,
-.mate-bottom-info > * {
+.mate-info-group > * {
   padding-inline: 1rem;
 }
 
@@ -1830,7 +1878,7 @@ div.challenge-choice {
 }
 
 .mate-top-info .top .fa-heart {
-  font-size: 16px;
+  font-size: 20px;
   color: #eee;
 }
 
@@ -1868,7 +1916,7 @@ div.challenge-choice {
   height: 60%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 /* item-middle */
@@ -1888,18 +1936,18 @@ div.challenge-choice {
 }
 
 .mate-middle-info .top p span {
-  color: #dcdcdc;
+  color: #bdbdbd;
 }
 
 .mate-middle-info .title {
-  font-size: 16px;
+  font-size: 15px;
   overflow: hidden;
   text-overflow: ellipsis;
   /* white-space: break-spaces; */
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  min-height: 50px;
+  min-height: 48px;
 }
 .mate-middle-info .price {
   font-size: 16px;
@@ -1938,9 +1986,14 @@ div.challenge-choice {
 .mate-bottom-info .right {
 }
 
+.mate-bottom-info .right .position-count {
+  font-size: 12px;
+}
+
 .mate-bottom-info .right [LIKE] {
   font-size: 20px;
   color: #dcdcdc;
+  box-shadow: 2px 4px 12px rgb(0 0 0 / 10%);
 }
 
 @media screen and (max-width: 950px) {
@@ -1949,6 +2002,10 @@ div.challenge-choice {
 @media screen and (max-width: 780px) {
   .mate-flex-item {
     max-width: 100%;
+  }
+  .search-bar {
+    width: 100%;
+    margin-bottom: 3rem;
   }
 }
 

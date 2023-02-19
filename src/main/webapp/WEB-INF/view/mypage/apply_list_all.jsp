@@ -171,101 +171,101 @@
 				<!-- /////////////////// 보낸 조각메이트 끝 /////////////////// -->
 
 				<!-- /////////////////// 받은 조각메이트 /////////////////// -->
-				<div id="mate-card-2" class="mate_card">
-					<div class="mate-card-top">
-						<div class="d-flex align-items-center gap-2">
-							<c:if test="${getNew eq true }">
-								<p class="mate-card-top-notify"></p>
-							</c:if>
-							<h4>받은 조각메이트 신청</h4>
-						</div>
-						<div class="mate-card-arrow">
-							<button class="btn fa-solid fa-chevron-left"></button>
-							<button class="btn fa-solid fa-chevron-right"></button>
-						</div>
-					</div>
-					<div style="position: relative">
-						<c:choose>
-							<c:when test="${fn:length(getApply) == 0}">
-								<!-- 카드 0 : 찾을 수 없음 -->
-								<div class="mypage-mate-none-card">
-									<p>신청 리스트를 찾을 수 없어요!</p>
-								</div>
-								<!-- 카드 0 : 찾을 수 없음 -->
-							</c:when>
-							<c:otherwise>
-								<div class="mypage-mate-card-box">
-									<c:forEach var="apply" items="${getApply }">
-										<!-- 카드 2 -->
-										<div class="mate-card-list"
-											onclick="location.href='/mate/detail/${apply.mate.id}'">
-											<div class="mate-card-item">
-												<form id="apply_edit_form">
-													<div class="mate-card-top">
-														<p class="is_apply_tag mate-card-tag ver${apply.isApply }"></p>
-														<input type="hidden" name="aid" value="${apply.aid }" />
-														<select name="isApply"
-															class="is_apply_select_tag mate-card-tag ver${apply.isApply } hide">
-															<option value="0" class="tag_0"
-																${apply.isApply eq '0' ? 'selected' : ''}>대기 중</option>
-															<option value="1" class="tag_1"
-																${apply.isApply eq '1' ? 'selected' : ''}>거래 중</option>
-															<option value="2" class="tag_2"
-																${apply.isApply eq '2' ? 'selected' : ''}>거래완료</option>
-														</select> <a class="is_apply_mod"><u>상태변경</u></a>
-														<div class="is_apply_edit hide">
-															<div class="d-flex gap-1">
-																<button class="mate-card-tag ver0 is-apply-save-btn">변경</button>
-																<button class="mate-card-tag ver2 is-apply-edit-btn">취소</button>
-															</div>
-														</div>
-													</div>
-												</form>
-												<div class="mate-card-middle">
-													<h5>${apply.mate.title }</h5>
-													<div class="mate-card-middle-tb">
-														<ul class="tb-title" id="ul_title_aid_${apply.aid }">
-															<li>신청자</li>
-															<li>거래방법</li>
-															<li>신청일</li>
-															<c:if test="${apply.isApply eq '2' }">
-																<li>거래완료</li>
-															</c:if>
+          <div id="mate-card-2" class="mate_card">
+            <div class="mate-card-top">
+              <div class="d-flex align-items-center gap-2">
+                <c:if test="${getNew eq true }">
+                  <p class="mate-card-top-notify"></p>
+                </c:if>
+                <h4>받은 조각메이트 신청</h4>
+              </div>
+              <div class="mate-card-arrow">
+                <button class="btn fa-solid fa-chevron-left"></button>
+                <button class="btn fa-solid fa-chevron-right"></button>
+              </div>
+            </div>
+            <div style="position: relative">
+              <c:choose>
+                <c:when test="${fn:length(getApply) == 0}">
+                  <!-- 카드 0 : 찾을 수 없음 -->
+                  <div class="mypage-mate-none-card">
+                    <p>신청 리스트를 찾을 수 없어요!</p>
+                  </div>
+                  <!-- 카드 0 : 찾을 수 없음 -->
+                </c:when>
+                <c:otherwise>
+                  <div class="mypage-mate-card-box">
+                    <c:forEach var="apply" items="${getApply }">
+                      <!-- 카드 2 -->
+                      <div class="mate-card-list"
+                        onclick="location.href='/mate/detail/${apply.mate.id}'">
+                        <div class="mate-card-item">
+                          <form id="apply_edit_form">
+                            <div class="mate-card-top">
+                              <p class="is_apply_tag mate-card-tag ver${apply.isApply }"></p>
+                              <input type="hidden" name="aid" value="${apply.aid }" />
+                              <select name="isApply"
+                                class="is_apply_select_tag mate-card-tag ver${apply.isApply } hide">
+                                <option value="0" class="tag_0"
+                                  ${apply.isApply eq '0' ? 'selected' : ''}>대기 중</option>
+                                <option value="1" class="tag_1"
+                                  ${apply.isApply eq '1' ? 'selected' : ''}>거래 중</option>
+                                <option value="2" class="tag_2"
+                                  ${apply.isApply eq '2' ? 'selected' : ''}>거래완료</option>
+                              </select> <a class="is_apply_mod"><u>상태변경</u></a>
+                              <div class="is_apply_edit hide">
+                                <div class="d-flex gap-1">
+                                  <button class="mate-card-tag ver0 is-apply-save-btn">변경</button>
+                                  <button class="mate-card-tag ver2 is-apply-edit-btn">취소</button>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                          <div class="mate-card-middle">
+                            <h5>${apply.mate.title }</h5>
+                            <div class="mate-card-middle-tb">
+                              <ul class="tb-title" id="ul_title_aid_${apply.aid }">
+                                <li>신청자</li>
+                                <li>거래방법</li>
+                                <li>신청일</li>
+                                <c:if test="${apply.isApply eq '2' }">
+                                  <li>거래완료</li>
+                                </c:if>
 
-														</ul>
-														<ul id="ul_desc_aid_${apply.aid }">
-															<li>${apply.user.nickname }</li>
-															<c:choose>
-																<c:when test="${apply.applyTradelType ne 0 }">
-																	<li>${apply.tradeName }</li>
-																</c:when>
-																<c:otherwise>
-																	<li>${apply.mate.tradeName }</li>
-																</c:otherwise>
-															</c:choose>
-															<li>${apply.regDate }</li>
-															<c:if test="${apply.isApply eq '2' }">
-																<li>${fn:replace(apply.modDate,'T',' ')}</li>
-															</c:if>
-														</ul>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- 카드 2 -->
-									</c:forEach>
-								</div>
-							</c:otherwise>
-						</c:choose>
-					</div>
-				</div>
+                              </ul>
+                              <ul id="ul_desc_aid_${apply.aid }">
+                                <li>${apply.user.nickname }</li>
+                                <c:choose>
+                                  <c:when test="${apply.applyTradelType ne 0 }">
+                                    <li>${apply.tradeName }</li>
+                                  </c:when>
+                                  <c:otherwise>
+                                    <li>${apply.mate.tradeName }</li>
+                                  </c:otherwise>
+                                </c:choose>
+                                <li>${apply.regDate }</li>
+                                <c:if test="${apply.isApply eq '2' }">
+                                  <li>${fn:replace(apply.modDate,'T',' ')}</li>
+                                </c:if>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- 카드 2 -->
+                    </c:forEach>
+                  </div>
+                </c:otherwise>
+              </c:choose>
+            </div>
+          </div>
 				<!-- /////////////////// 받은 조각메이트 끝 /////////////////// -->
 			</section>
 		</div>
 	</div>
 
-	<script src="/js/mypage_mate.js"></script>
 	<script src="/js/mypage_nav.js"></script>
+	<script src="/js/mypage_mate.js"></script>
 	<script>
 		var tooltipTriggerList = [].slice.call(document
 				.querySelectorAll('[data-bs-toggle="tooltip"]'));

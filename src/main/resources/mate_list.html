@@ -62,86 +62,76 @@
     <div class="container-lg">
       <div class="row">
         <!-- // ASIDE -->
-        <aside class="col-md-2">
-          <div class="aside-img">
-            <!-- <img
-              width="80%"
-              src="https://emojipedia-us.s3.amazonaws.com/source/microsoft-teams/337/blue-heart_1f499.png"
-            /> -->
+        <aside class="search-bar">
+          <div class="mypage-cash-top-end">
+            <input class="form-control text" type="text" placeholder="검색하기" />
+            <button class="date-search" id="date-search" style="border-left: 0">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
           </div>
-          <div class="aside-info border-bottom">
-            <h4>짠돌쓰</h4>
-            <dl>
-              <dt>챌린지</dt>
-              <dd>
-                <a href="#">12</a>
-              </dd>
-              <dt>조각메이트</dt>
-              <dd><a href="#">2</a></dd>
-            </dl>
-            <div class="btn btn-border font-12">정보수정</div>
-          </div>
-          <div class="multiple-btn pt-3 pb-5">
-            <a class="icon-btn" href="#">
-              <i class="fa-solid fa-certificate mb-2"></i>
-              <p>챌린지</p>
-            </a>
-            <a class="icon-btn" href="#">
-              <i class="fa-solid fa-circle-plus mb-2"></i>
-              <p>지출등록</p>
-            </a>
-            <a class="icon-btn" href="#">
-              <i class="fa-solid fa-share-nodes mb-2"></i>
-              <p>공유하기</p>
-            </a>
+          <div class="mate-search-select">
+            <!-- // 카테고리 1 -->
+            <button class="search-top-button" data-bs-toggle="collapse" data-bs-target="#category-search" cash-item>
+              <div class="search-top-title-group">
+                <span class="fa-solid fa-sort-down" down></span>
+                <span class="fa-solid fa-sort-up hide" up></span>
+                전체보기
+              </div>
+            </button>
+            <div id="category-search" class="collapse">
+              <ul>
+                <li>전체보기</li>
+                <li>조각 메이트</li>
+                <li>OTT 메이트</li>
+              </ul>
+            </div>
+            <!-- 카테고리 1 // -->
+            <!-- // 카테고리 2 -->
+            <button class="search-top-button" data-bs-toggle="collapse" data-bs-target="#ing-search" cash-item>
+              <div class="search-top-title-group">
+                <span class="fa-solid fa-sort-down" down></span>
+                <span class="fa-solid fa-sort-up hide" up></span>
+                상태
+              </div>
+            </button>
+            <div id="ing-search" class="collapse">
+              <ul>
+                <li>전체보기</li>
+                <li>조각 메이트</li>
+                <li>OTT 메이트</li>
+              </ul>
+            </div>
+            <!-- // 카테고리 2 -->
+            <!-- // 카테고리 3 -->
+            <button class="search-top-button" data-bs-toggle="collapse" data-bs-target="#area--search" cash-item>
+              <div class="search-top-title-group">
+                <span class="fa-solid fa-sort-down" down></span>
+                <span class="fa-solid fa-sort-up hide" up></span>
+                지역 검색
+              </div>
+            </button>
+            <div id="area--search" class="collapse">
+              <ul id="area-search"></ul>
+            </div>
+            <!-- // 카테고리 3 -->
           </div>
         </aside>
         <!-- ASIDE// -->
 
         <!-- content -->
-        <section class="col-md-8">
+        <section class="col-md">
+          <div class="mate-top-title">
+            <h4>전체보기</h4>
+            <button class="btn btn-main mdi">글작성하기</button>
+          </div>
           <div class="mate-flex-view">
             <!-- item -->
-            <div class="mate-flex-item">
+            <div class="mate-flex-item" mid="0">
               <div class="mate-top-info">
                 <div class="top">
                   <p class="mate-card-tag category0"></p>
-                  <p class="mate-card-tag position-count">0 / 1</p>
-                </div>
-                <div class="thum">
-                  <img src="c:/savedot/img/2023-02-15/4362cf0d-ac85-11ed-8d36-b78ee2dba33a.jpg" />
-                </div>
-              </div>
-              <div class="mate-info-group">
-                <div class="mate-middle-info">
-                  <div class="top">
-                    <p>작성자 닉네임</p>
-                    <div class="line d-flex">
-                      <p><span class="fa-solid fa-heart"></span><span>33</span></p>
-                      <p><span class="fa-regular fa-comment"></span><span>12</span></p>
-                    </div>
-                  </div>
-                  <div class="title">다이소 수세미 2개씩 나누실 분</div>
-                  <div class="price">500</div>
-                </div>
-                <div class="mate-bottom-info">
-                  <div class="left" TradeType="1">
-                    <p Trade ver1>만남 거래</p>
-                    <p Trade ver2>택배 거래</p>
-                  </div>
-                  <div class="right">
-                    <span class="fa-regular fa-heart" LIKE></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- item -->
-            <!-- item -->
-            <div class="mate-flex-item">
-              <div class="mate-top-info">
-                <div class="top">
-                  <p class="mate-card-tag category0"></p>
-                  <p class="mate-card-tag position-count">0 / 1</p>
+                  <span class="fa-regular fa-heart" LIKE none-like></span>
+                  <span class="fa-solid fa-heart hide" LIKE select-like></span>
                 </div>
                 <div class="thum">
                   <img src="" />
@@ -156,27 +146,30 @@
                       <p><span class="fa-regular fa-comment"></span><span>12</span></p>
                     </div>
                   </div>
-                  <div class="title">다이소 수세미 2개씩 나누실 분</div>
+                  <div class="title">
+                    다이소 수세미 2개씩 나누실 분다이소 수세미 2개씩 나누실 분다이소 수세미 2개씩 나누실 분
+                  </div>
                   <div class="price">500</div>
                 </div>
                 <div class="mate-bottom-info">
                   <div class="left" TradeType="1">
-                    <p Trade ver1>만남 거래</p>
-                    <p Trade ver2>택배 거래</p>
+                    <p Trade ver1 class="hide">만남 거래</p>
+                    <p Trade ver2 class="hide">택배 거래</p>
                   </div>
                   <div class="right">
-                    <span class="fa-solid fa-heart"></span>
+                    <p class="position-count">0 / 5</p>
                   </div>
                 </div>
               </div>
             </div>
             <!-- item -->
             <!-- item -->
-            <div class="mate-flex-item">
+            <div class="mate-flex-item" mid="0">
               <div class="mate-top-info">
                 <div class="top">
                   <p class="mate-card-tag category0"></p>
-                  <p class="mate-card-tag position-count">0 / 1</p>
+                  <span class="fa-regular fa-heart" LIKE none-like></span>
+                  <span class="fa-solid fa-heart hide" LIKE select-like></span>
                 </div>
                 <div class="thum">
                   <img src="c:/savedot/img/2023-02-15/4362cf0d-ac85-11ed-8d36-b78ee2dba33a.jpg" />
@@ -191,30 +184,33 @@
                       <p><span class="fa-regular fa-comment"></span><span>12</span></p>
                     </div>
                   </div>
-                  <div class="title">다이소 수세미 2개씩 나누실 분</div>
+                  <div class="title">
+                    다이소 수세미 2개씩 나누실 분다이소 수세미 2개씩 나누실 분다이소 수세미 2개씩 나누실 분
+                  </div>
                   <div class="price">500</div>
                 </div>
                 <div class="mate-bottom-info">
                   <div class="left" TradeType="1">
-                    <p Trade ver1>만남 거래</p>
-                    <p Trade ver2>택배 거래</p>
+                    <p Trade ver1 class="hide">만남 거래</p>
+                    <p Trade ver2 class="hide">택배 거래</p>
                   </div>
                   <div class="right">
-                    <span class="fa-solid fa-heart"></span>
+                    <p class="position-count">0 / 5</p>
                   </div>
                 </div>
               </div>
             </div>
             <!-- item -->
             <!-- item -->
-            <div class="mate-flex-item">
+            <div class="mate-flex-item" mid="0">
               <div class="mate-top-info">
                 <div class="top">
                   <p class="mate-card-tag category0"></p>
-                  <p class="mate-card-tag position-count">0 / 1</p>
+                  <span class="fa-regular fa-heart" LIKE none-like></span>
+                  <span class="fa-solid fa-heart hide" LIKE select-like></span>
                 </div>
                 <div class="thum">
-                  <img src="" />
+                  <img src="c:/savedot/img/2023-02-15/4362cf0d-ac85-11ed-8d36-b78ee2dba33a.jpg" />
                 </div>
               </div>
               <div class="mate-info-group">
@@ -226,16 +222,94 @@
                       <p><span class="fa-regular fa-comment"></span><span>12</span></p>
                     </div>
                   </div>
-                  <div class="title">다이소 수세미 2개씩 나누실 분</div>
+                  <div class="title">
+                    다이소 수세미 2개씩 나누실 분다이소 수세미 2개씩 나누실 분다이소 수세미 2개씩 나누실 분
+                  </div>
                   <div class="price">500</div>
                 </div>
                 <div class="mate-bottom-info">
                   <div class="left" TradeType="1">
-                    <p Trade ver1>만남 거래</p>
-                    <p Trade ver2>택배 거래</p>
+                    <p Trade ver1 class="hide">만남 거래</p>
+                    <p Trade ver2 class="hide">택배 거래</p>
                   </div>
                   <div class="right">
-                    <span class="fa-solid fa-heart"></span>
+                    <p class="position-count">0 / 5</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- item -->
+            <!-- item -->
+            <div class="mate-flex-item" mid="0">
+              <div class="mate-top-info">
+                <div class="top">
+                  <p class="mate-card-tag category0"></p>
+                  <span class="fa-regular fa-heart" LIKE none-like></span>
+                  <span class="fa-solid fa-heart hide" LIKE select-like></span>
+                </div>
+                <div class="thum">
+                  <img src="c:/savedot/img/2023-02-15/4362cf0d-ac85-11ed-8d36-b78ee2dba33a.jpg" />
+                </div>
+              </div>
+              <div class="mate-info-group">
+                <div class="mate-middle-info">
+                  <div class="top">
+                    <p>작성자 닉네임</p>
+                    <div class="line d-flex">
+                      <p><span class="fa-solid fa-heart"></span><span>33</span></p>
+                      <p><span class="fa-regular fa-comment"></span><span>12</span></p>
+                    </div>
+                  </div>
+                  <div class="title">
+                    다이소 수세미 2개씩 나누실 분다이소 수세미 2개씩 나누실 분다이소 수세미 2개씩 나누실 분
+                  </div>
+                  <div class="price">500</div>
+                </div>
+                <div class="mate-bottom-info">
+                  <div class="left" TradeType="1">
+                    <p Trade ver1 class="hide">만남 거래</p>
+                    <p Trade ver2 class="hide">택배 거래</p>
+                  </div>
+                  <div class="right">
+                    <p class="position-count">0 / 5</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- item -->
+            <!-- item -->
+            <div class="mate-flex-item" mid="0">
+              <div class="mate-top-info">
+                <div class="top">
+                  <p class="mate-card-tag category0"></p>
+                  <span class="fa-regular fa-heart" LIKE none-like></span>
+                  <span class="fa-solid fa-heart hide" LIKE select-like></span>
+                </div>
+                <div class="thum">
+                  <img src="c:/savedot/img/2023-02-15/4362cf0d-ac85-11ed-8d36-b78ee2dba33a.jpg" />
+                </div>
+              </div>
+              <div class="mate-info-group">
+                <div class="mate-middle-info">
+                  <div class="top">
+                    <p>작성자 닉네임</p>
+                    <div class="line d-flex">
+                      <p><span class="fa-solid fa-heart"></span><span>33</span></p>
+                      <p><span class="fa-regular fa-comment"></span><span>12</span></p>
+                    </div>
+                  </div>
+                  <div class="title">
+                    다이소 수세미 2개씩 나누실 분다이소 수세미 2개씩 나누실 분다이소 수세미 2개씩 나누실 분
+                  </div>
+                  <div class="price">500</div>
+                </div>
+                <div class="mate-bottom-info">
+                  <div class="left" TradeType="1">
+                    <p Trade ver1 class="hide">만남 거래</p>
+                    <p Trade ver2 class="hide">택배 거래</p>
+                  </div>
+                  <div class="right">
+                    <p class="position-count">0 / 5</p>
                   </div>
                 </div>
               </div>
