@@ -1,7 +1,9 @@
 package com.mulcam.finalproject.util;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -49,7 +52,12 @@ public class ImageUpload {
 				e.printStackTrace();
 			}
 
-			ImageDTO imgDTO = ImageDTO.builder().ext(ext).uuid(uuid).path(path).inputFile(inputFile).build();
+			ImageDTO imgDTO = ImageDTO.builder()
+					.ext(ext)
+					.uuid(uuid)
+					.path(path)
+					.inputFile(inputFile)
+					.build();
 			list.add(imgDTO);
 		});
 		return list;
@@ -80,5 +88,6 @@ public class ImageUpload {
 
 		return null;
 	}
+	
 
 }

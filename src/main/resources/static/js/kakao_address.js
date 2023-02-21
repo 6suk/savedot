@@ -9,6 +9,7 @@ let modalbg = document.getElementById('modal-bg');
 // inputValue
 let place_name = document.getElementById('place_name');
 let place_coords = document.getElementById('place_coords');
+let place_code = document.getElementById('place_code');
 let place_addr = document.getElementById('place_addr');
 
 function foldDaumPostcode() {
@@ -40,7 +41,15 @@ function sample3_execDaumPostcode() {
         addr = data.jibunAddress;
       }
       // 우편번호와 주소 정보를 해당 필드에 넣는다.
+      place_addr.disabled = false;
       place_addr.value = addr;
+      let addr_code = data.sigunguCode.substring(0, 2);
+
+      // 시군구 코드
+      place_code.disabled = false;
+      place_code.value = addr_code;
+      place_name.disabled = false;
+      place_name.readOnly = true;
 
       if (data.buildingName != null && data.buildingName != '') {
         place_name.value = data.buildingName;
@@ -61,7 +70,6 @@ function sample3_execDaumPostcode() {
       document.body.scrollTop = currentScroll;
 
       geocoder.addressSearch(data.address, function (results, status) {
-        console.log(status);
         // 정상적으로 검색이 완료됐으면
         if (status === daum.maps.services.Status.OK) {
           var result = results[0]; //첫번째 결과의 값을 활용
@@ -70,8 +78,8 @@ function sample3_execDaumPostcode() {
           let lat = result.y;
           let lng = result.x;
           var coords = lat + ' ' + lng;
+          place_coords.disabled = false;
           place_coords.value = coords;
-          console.log(coords);
         }
       });
     },
@@ -97,6 +105,12 @@ function addr_cancle() {
   place_addr.value = null;
   place_name.value = null;
   place_coords.value = null;
+  place_code.value = null;
+
+  place_addr.disabled = true;
+  place_name.disabled = true;
+  place_coords.disabled = true;
+  place_code.disabled = true;
 }
 
 let modal_bg = $('.modalBg');

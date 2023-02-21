@@ -1,33 +1,36 @@
 package com.mulcam.finalproject.service;
 
-import java.util.Optional;
-
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mulcam.finalproject.dao.UserDAO;
+import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.User;
-import com.mulcam.finalproject.repository.UserRepository;
 
+/** 임시 */
 @Service
 public class UserService {
 	@Autowired
-	UserRepository userRepository;
 
-	public void save(User user) {
-		userRepository.save(user);
-	}
+	ModelMapper modelMapper;
+	
+	@Autowired
+	UserDAO userDAO;
+
 
 	/** id로 찾기 */
-	public Optional<User> findById(String id) {
-		return userRepository.findById(id);
+	public UserDTO findById(String id) {
+		User user = userDAO.findById(id);
+		UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+		return userDTO;
 	}
 
 	/** PK로 찾기 */
-	public Optional<User> findById(Long id) {
-		return userRepository.findById(id);
+	public UserDTO findByUid(Long id) {
+		User user = userDAO.findByUid(id);
+		UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+		return userDTO;
 	}
 
-	public void delete(User user) {
-		userRepository.delete(user);
-	}
 }

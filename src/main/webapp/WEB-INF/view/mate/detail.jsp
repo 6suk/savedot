@@ -121,8 +121,8 @@
         <input type="hidden" value="${mate.placeAddr}" id="apply_place_addr" />
         <input type="hidden" value="${mate.parcelPrice}" id="apply_parcel_price" />
         <input type="hidden" value="${mate.parcelType}" id="apply_parcel_type" />
-        <form id="applyform" class="inputbox" action="/mate/apply/${mate.id}" method="post">
-          <input type="hidden" name="uid" value="${user.idAuto}" />
+        <form id="applyform" class="inputbox" action="/mate/apply/${mate.mid}" method="post">
+          <input type="hidden" name="uid" value="${user.uid}" />
           <input type="hidden" value="${mate.placeAddr}" id="apply_place_addr" />
           <input type="hidden" value="${mate.parcelPrice}" id="apply_parcel_price" />
           <input type="hidden" value="${mate.parcelType}" id="apply_parcel_type" />

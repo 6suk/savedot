@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.beust.jcommander.internal.Console;
 import com.mulcam.finalproject.dao.MateApplyDAO;
 import com.mulcam.finalproject.dto.MateApplyDTO;
 import com.mulcam.finalproject.dto.MateDTO;
@@ -47,7 +48,7 @@ public class MateApplyServiceImpl implements MateApplyService {
 
 	@Override
 	public List<MateApplyDTO> findBySendUid(User user) {
-		return findBySendUid(user.getIdAuto());
+		return findBySendUid(user.getUid());
 	}
 
 	@Override
@@ -64,7 +65,7 @@ public class MateApplyServiceImpl implements MateApplyService {
 
 	@Override
 	public List<MateApplyDTO> findByGetUid(User user) {
-		return findByGetUid(user.getIdAuto());
+		return findByGetUid(user.getUid());
 	}
 
 	@Override
@@ -80,9 +81,20 @@ public class MateApplyServiceImpl implements MateApplyService {
 	}
 
 	@Override
-	public LocalDateTime editIsApply(Long aid, int isApply) {
-		applyDAO.editIsApply(aid, isApply);
-		return applyDAO.findEditTime(aid);
+	public LocalDateTime editIsApply(MateApplyDTO mateApplyDTO) {
+		applyDAO.editIsApply(mateApplyDTO.getAid(), mateApplyDTO.getIsApply());
+
+		// 대기중, 진행중 -> 거래 완료로 변경 시 Mate 모집인원 +1
+		if (mateApplyDTO.getIsApply() == 2) {
+			mateService.updateAddApply(mateApplyDTO.getMid());
+		}
+
+		// 거래 완료 -> 대기중, 진행중 변경 시 Mate 모집인원 -1
+		if (mateApplyDTO.getBeforeIsApply() == 2 && mateApplyDTO.getIsApply() != 2) {
+			mateService.updateCancelApply(mateApplyDTO.getMid());
+		}
+
+		return applyDAO.findEditTime(mateApplyDTO.getAid());
 	}
 
 	public List<MateApplyDTO> mapperDTO(List<MateApply> list) {
@@ -94,8 +106,8 @@ public class MateApplyServiceImpl implements MateApplyService {
 			MateApplyDTO applyDTO = modelMapper.map(entity, MateApplyDTO.class);
 			Long mid = entity.getMid();
 			Long uid = entity.getUid();
-			MateDTO mateDTO = modelMapper.map(mateService.findById(mid).get(), MateDTO.class);
-			UserDTO userDTO = modelMapper.map(userService.findById(uid).get(), UserDTO.class);
+			MateDTO mateDTO = mateService.findOneByMid(mid);
+			UserDTO userDTO = userService.findByUid(uid);
 			applyDTO.setUser(userDTO);
 			applyDTO.setMate(mateDTO);
 			dtoList.add(applyDTO);
@@ -103,9 +115,5 @@ public class MateApplyServiceImpl implements MateApplyService {
 
 		return dtoList;
 	}
-
-
-
-
 
 }

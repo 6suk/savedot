@@ -3,6 +3,10 @@ package com.mulcam.finalproject.entity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.mulcam.finalproject.service.MateService;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +22,6 @@ import lombok.ToString;
 @ToString
 @Builder
 public class MateApply {
-
 	private Long aid;
 
 	private Long uid;
@@ -36,4 +39,6 @@ public class MateApply {
 	private int isDel;
 
 	private int isApply;
+	
+	
 }

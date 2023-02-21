@@ -12,17 +12,24 @@ import com.mulcam.finalproject.entity.MateApply;
 
 @Mapper
 public interface MateApplyDAO {
-
-	@Insert("INSERT INTO mate_apply VALUES(DEFAULT, #{content}, DEFAULT, DEFAULT, DEFAULT, #{mid}, #{uid}, #{applyTradelType}, DEFAULT)")
+	
+	/** Apply Save */
+	@Insert("INSERT INTO mate_apply"
+			+ "	(aid, `mid`, uid, content, isApply, isDel, modDate, applyTradelType, regDate)"
+			+ "	VALUES (DEFAULT, #{mid}, #{uid}, #{content}, DEFAULT, DEFAULT, DEFAULT, #{applyTradelType}, DEFAULT);")
 	public void save(MateApply mateApply);
 
 	@Select("SELECT LAST_INSERT_ID();")
 	public Long findSaveId();
-
+	
+	/** Apply delete */
 	@Update("UPDATE mate_apply"
 			+ "	SET isDel = 1"
 			+ "	WHERE aid = #{aid};")
 	public void delete(Long aid);
+
+	
+	/** Apply 상태변경 */
 
 	@Update("UPDATE mate_apply"
 			+ "	SET isApply = #{isApply},"
@@ -33,7 +40,12 @@ public interface MateApplyDAO {
 	@Select("SELECT modDate FROM mate_apply"
 			+ "	WHERE aid = #{aid};")
 	public LocalDateTime findEditTime(Long aid);
+<<<<<<< HEAD
 
+=======
+	
+	/** Apply 전체리스트 조회 (사용안함) */
+>>>>>>> f71de73676ea701eccd6d3620af3550f40119415
 	@Select("SELECT * FROM mate_apply WHERE isDel = 0 ORDER BY modDate DESC, regdate DESC;")
 	public List<MateApply> findAll();
 
@@ -52,23 +64,27 @@ public interface MateApplyDAO {
 	@Select("SELECT a.* FROM mate_apply AS a"
 			+ " JOIN mate AS m"
 			+ " ON a.`mid` = m.`mid`"
-			+ " WHERE isDel = 0 AND m.uid = #{uid}"
-			+ " ORDER BY modDate DESC, regDate DESC;")
+			+ " WHERE a.isDel = 0 AND m.isDel = 0 AND m.uid = #{uid}"
+			+ " ORDER BY a.modDate DESC, a.regDate DESC;")
 	public List<MateApply> findByGetUid(Long uid);
 
 	/** GET APPLY New Notify : 오늘 상태 변경된 리스트 카운트 */
 	@Select("SELECT COUNT(*) FROM mate_apply AS a"
 			+ " JOIN mate AS m"
 			+ " ON a.`mid` = m.`mid`"
-			+ " WHERE CAST(modDate AS DATE) = CURDATE()"
+			+ " WHERE CAST(a.modDate AS DATE) = CURDATE()"
 			+ "	AND a.isDel = 0"
 			+ " AND m.uid = #{uid};")
 	public int findNewByGetUid(Long uid);
 
+<<<<<<< HEAD
 
 	@Select("SELECT * FROM mate_apply WHERE mid = #{mid} AND isDel = 0 ORDER BY modDate DESC, regDate DESC;")
 	public List<MateApply> findByMid(Long mid);
 
+=======
+	
+>>>>>>> f71de73676ea701eccd6d3620af3550f40119415
 
 
 }

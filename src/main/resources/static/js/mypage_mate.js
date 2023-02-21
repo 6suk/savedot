@@ -67,31 +67,32 @@ $('.is-apply-save-btn').click(function (event) {
     contentType: 'application/json',
     data: JSON.stringify($value),
     success: function (data) {
-      $group.children('.is_apply_tag').attr('class', `is_apply_tag mate-card-tag ver${data.isApply}`);
-      $group.children('.is_apply_select_tag').attr('class', `is_apply_select_tag mate-card-tag ver${data.isApply}`);
+      location.reload();
+      // $group.children('.is_apply_tag').attr('class', `is_apply_tag mate-card-tag ver${data.isApply}`);
+      // $group.children('.is_apply_select_tag').attr('class', `is_apply_select_tag mate-card-tag ver${data.isApply}`);
 
-      let $title = $(`#ul_title_aid_${data.aid}`);
-      let $desc = $(`#ul_desc_aid_${data.aid}`);
-      // 거래 완료 일 때 //
-      if (data.isApply == 2) {
-        // 거래 완료일 변경
-        if ($title.children().length == 4) {
-          $(`#ul_desc_aid_${data.aid} :last-child`).html(data.modDate.replace('T', ' '));
-        }
-        // 거래 완료일 추가
-        else {
-          $title.append('<li>거래완료일</li>');
-          $desc.append(`<li>${data.modDate.replace('T', ' ')}</li>`);
-        }
-      }
-      // 거래 완료가 아닌데, 거래 완료일이 있을 때 거래 완료일 삭제 //
-      else {
-        if ($title.children().length == 4) {
-          $(`#ul_title_aid_${data.aid} :last-child`).remove();
-          $(`#ul_desc_aid_${data.aid} :last-child`).remove();
-        }
-      }
-      edit(event);
+      // let $title = $(`#ul_title_aid_${data.aid}`);
+      // let $desc = $(`#ul_desc_aid_${data.aid}`);
+      // // 거래 완료 일 때 //
+      // if (data.isApply == 2) {
+      //   // 거래 완료일 변경
+      //   if ($title.children().length == 4) {
+      //     $(`#ul_desc_aid_${data.aid} :last-child`).html(data.modDate.replace('T', ' '));
+      //   }
+      //   // 거래 완료일 추가
+      //   else {
+      //     $title.append('<li>거래완료일</li>');
+      //     $desc.append(`<li>${data.modDate.replace('T', ' ')}</li>`);
+      //   }
+      // }
+      // // 거래 완료가 아닌데, 거래 완료일이 있을 때 거래 완료일 삭제 //
+      // else {
+      //   if ($title.children().length == 4) {
+      //     $(`#ul_title_aid_${data.aid} :last-child`).remove();
+      //     $(`#ul_desc_aid_${data.aid} :last-child`).remove();
+      //   }
+      // }
+      // edit(event);
     },
   });
 });

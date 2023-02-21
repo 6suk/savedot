@@ -11,7 +11,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class UserDTO {
-	private Long idAuto;
+	private Long uid;
 	private String id;
 	private String tel;
 	private String telFormat;
@@ -24,4 +24,5 @@ public class UserDTO {
 			this.telFormat = tel.replaceAll(regEx, "$1-$2-$3");
 		}
 	}
+
 }

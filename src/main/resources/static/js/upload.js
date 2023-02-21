@@ -5,7 +5,6 @@ let filelist = [];
 
 // required 검사 + SUBMIT
 $('#sendbtn').click(function () {
-  console.log('실행');
   let check = requiredCheck(filelist);
   console.log(check);
   if (check) {
@@ -15,7 +14,6 @@ $('#sendbtn').click(function () {
 
 // SUBMIT!
 function matesubmit() {
-  console.log('실행');
   let price = $('input:text[price]');
   Array.from(price).forEach((x) => {
     $(x).val(removeCommas($(x).val()));
