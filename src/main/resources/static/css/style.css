@@ -838,6 +838,16 @@ p span:not(:last-child) {
   transition: all ease 0.3s 0s;
 }
 
+.mate-url-tag.ver0 {
+  font-weight: 600;
+  background-color: var(--sub-color);
+  color: var(--main-color);
+}
+
+.mate-url-tag.ver0:hover {
+  background-color: var(--sub-color-hover);
+}
+
 .mate-url-tag.hover {
   cursor: pointer;
 }
@@ -949,6 +959,25 @@ button > i {
   display: inline-block;
   max-width: 620px;
   width: 100%;
+}
+
+.savedot-modal.question {
+  max-width: 320px;
+  padding-block: 6rem;
+}
+
+.question-title {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.question-btn {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
 }
 
 .modal-close {

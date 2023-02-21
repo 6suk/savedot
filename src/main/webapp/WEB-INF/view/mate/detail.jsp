@@ -34,14 +34,14 @@
 						<div class="mate-detail-sub-info">
 							<div class="dot d-flex">
 								<p>${mate.categoryName }</p>
-								<p>매칭 전</p>
+								<p>${mate.state eq 0 ? '판매중' : '판매완료' }</p>
 							</div>
 							<div class="line d-flex">
 								<p>
-									<span>조회</span><span>33</span>
+									<span>조회</span><span>${mate.viewCnt }</span>
 								</p>
 								<p>
-									<span><i class="fa-regular fa-heart"></i></span><span>13</span>
+									<span><i class="fa-regular fa-heart"></i></span><span>${mate.likeCnt }</span>
 								</p>
 							</div>
 						</div>
@@ -66,7 +66,8 @@
 							<p class="font-15 font-600">${mate.user.nickname }</p>
 							<div class="font-14 d-flex detail line">
 								<p>
-									<span>모집인원</span><span class="mate-url-tag">${mate.positionNum }명</span>
+									<span>${mate.state eq 0 ? '모집중' : '모집완료' }</span>
+									<span class="mate-url-tag ver${mate.state}">${mate.positonApplyNum } / ${mate.positionNum }</span>
 								</p>
 								<p>
 									<input type="hidden" name="telType" value="${mate.telType }"
@@ -79,9 +80,22 @@
 								</p>
 							</div>
 						</div>
-						<button class="btn btn-main sm font-14" id="applybtn">
-							메이트 신청 <i class="fa-solid fa-plus" id="applybtn-icon"></i>
-						</button>
+						<c:choose>
+							<c:when test="${mate.user.uid eq user.uid }">
+								<div>
+									<button class="btn btn-sub sm font-14"
+										onclick="location.href='/mate/update/${mate.mid}'">게시물
+										수정</button>
+									<button class="btn btn-gray sm font-14" id="question-openbtn">게시물
+										삭제</button>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<button class="btn btn-main sm font-14" id="applybtn">
+									메이트 신청 <i class="fa-solid fa-plus" id="applybtn-icon"></i>
+								</button>
+							</c:otherwise>
+						</c:choose>
 					</div>
 					<div class="mate-detail-content">${mate.content }</div>
 					<c:if test="${not empty mate.placeCoords }">
@@ -107,65 +121,74 @@
 			</section>
 		</div>
 	</div>
+	<!-- // question Modal -->
+	<div class="modalBg question">
+		<div class="requestModal savedot-modal question" style="opacity: 1">
+			<div class="question-title">
+				<h5>게시물을 삭제하시겠습니까?</h5>
+				<div class="question-btn">
+					<input type="button" class="btn btn-main full font-14"
+						onclick="location.href='/mate/delete/${mate.mid}'" value="삭제" />
+					<input type="button" id="question-closebtn"
+						class="btn btn-sub full font-14" value="취소" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- question Modal // -->
 
 	<!-- // Apply Form -->
-    <div class="modalBg">
-      <div class="requestModal savedot-modal" style="opacity: 1">
-        <div class="content-title">
-          <h5>매칭 신청</h5>
-          <div>
-            <input type="button" id="sendbtn" class="btn btn-main mdi" value="메이트 신청" />
-            <input type="button" id="closebtn" class="btn btn-sub mdi" value="닫기" />
-          </div>
-        </div>
-        <input type="hidden" value="${mate.placeAddr}" id="apply_place_addr" />
-        <input type="hidden" value="${mate.parcelPrice}" id="apply_parcel_price" />
-        <input type="hidden" value="${mate.parcelType}" id="apply_parcel_type" />
-        <form id="applyform" class="inputbox" action="/mate/apply/${mate.mid}" method="post">
-          <input type="hidden" name="uid" value="${user.uid}" />
-          <input type="hidden" value="${mate.placeAddr}" id="apply_place_addr" />
-          <input type="hidden" value="${mate.parcelPrice}" id="apply_parcel_price" />
-          <input type="hidden" value="${mate.parcelType}" id="apply_parcel_type" />
-          <input class="form-control text required" type="text" name="nickname" value="${user.nickname }" readonly />
-          <!-- <textarea
+	<div class="modalBg">
+		<div class="requestModal savedot-modal" style="opacity: 1">
+			<div class="content-title">
+				<h5>매칭 신청</h5>
+				<div>
+					<input type="button" id="sendbtn" class="btn btn-main mdi"
+						value="메이트 신청" /> <input type="button" id="closebtn"
+						class="btn btn-sub mdi" value="닫기" />
+				</div>
+			</div>
+			<input type="hidden" value="${mate.placeAddr}" id="apply_place_addr" />
+			<input type="hidden" value="${mate.parcelPrice}"
+				id="apply_parcel_price" /> <input type="hidden"
+				value="${mate.parcelType}" id="apply_parcel_type" />
+			<form id="applyform" class="inputbox"
+				action="/mate/apply/${mate.mid}" method="post">
+				<input type="hidden" name="uid" value="${user.uid}" /> <input
+					type="hidden" value="${mate.placeAddr}" id="apply_place_addr" /> <input
+					type="hidden" value="${mate.parcelPrice}" id="apply_parcel_price" />
+				<input type="hidden" value="${mate.parcelType}"
+					id="apply_parcel_type" /> <input
+					class="form-control text required" type="text" name="nickname"
+					value="${user.nickname }" readonly />
+				<!-- <textarea
             class="form-control"
             name="content"
             cols="30"
             rows="10"
             placeholder="남기고 싶은 말을 적어주세요 :)"
           ></textarea> -->
-          <div class="" id="trade_show">
-            <div class="input-btn">
-              <select
-                name="applyTradelType"
-                id="apply_trade_type"
-                class="form-select input-btn-ele-reverse"
-                style="flex: 0.2 0 0"
-              >
-                <option selected disabled>거래방법</option>
-                <option value="1" id="apply_trade_type_1">직접거래</option>
-                <option value="2" id="apply_trade_type_2">택배거래</option>
-              </select>
-              <input
-                type="text"
-                class="form-control text"
-                id="apply_parcel_notice"
-                style="flex: 1 0 0"
-                value=""
-                readonly
-                placeholder=""
-              />
-            </div>
-            <ul class="apply_notice">
-              <li>제품에 대한 질문은 게시물의 댓글 또는 기재된 연락 수단을 이용해주세요.</li>
-              <li>거래 진행 중으로 변경 시 판매자의 입금 계좌번호를 확인할 수 있습니다.</li>
-              <li>모집인원이 모두 차면 자동으로 취소됩니다.</li>
-            </ul>
-          </div>
-        </form>
-      </div>
-    </div>
-    <!-- // Apply Form -->
+				<div class="" id="trade_show">
+					<div class="input-btn">
+						<select name="applyTradelType" id="apply_trade_type"
+							class="form-select input-btn-ele-reverse" style="flex: 0.2 0 0">
+							<option selected disabled>거래방법</option>
+							<option value="1" id="apply_trade_type_1">직접거래</option>
+							<option value="2" id="apply_trade_type_2">택배거래</option>
+						</select> <input type="text" class="form-control text"
+							id="apply_parcel_notice" style="flex: 1 0 0" value="" readonly
+							placeholder="" />
+					</div>
+					<ul class="apply_notice">
+						<li>제품에 대한 질문은 게시물의 댓글 또는 기재된 연락 수단을 이용해주세요.</li>
+						<li>거래 진행 중으로 변경 시 판매자의 입금 계좌번호를 확인할 수 있습니다.</li>
+						<li>모집인원이 모두 차면 자동으로 취소됩니다.</li>
+					</ul>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- // Apply Form -->
 </body>
 <script type="text/javascript"
 	src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=dbe219346db7d2ef92284f7144059849"></script>

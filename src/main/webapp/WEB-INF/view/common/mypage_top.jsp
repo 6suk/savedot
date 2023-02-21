@@ -6,13 +6,8 @@
 		<li class="nav-item"><a class="nav-link mypage" id="nav_main"
 			href="/mypage/main">나의 절약캘린더</a></li>
 		<li class="nav-item"><a class="nav-link mypage" id="nav_mate"
-<<<<<<< HEAD
-			href="/mypage/mate/apply/${user.idAuto }/all">나의 조각메이트</a></li>
-		<li class="nav-item"><a class="nav-link mypage" href="/mypage/cash/list">나의
-=======
 			href="/mypage/mate/apply/${user.uid }/all">나의 조각메이트</a></li>
-		<li class="nav-item"><a class="nav-link mypage" href="#">나의
->>>>>>> f71de73676ea701eccd6d3620af3550f40119415
+		<li class="nav-item"><a class="nav-link mypage" href="/mypage/cash/list">나의
 				수입/지출</a></li>
 		<li class="nav-item"><a class="nav-link mypage" href="#">알림</a></li>
 	</ul>

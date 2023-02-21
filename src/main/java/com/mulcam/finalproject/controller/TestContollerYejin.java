@@ -40,7 +40,7 @@ public class TestContollerYejin {
 
 	//리스트폼띄워주기
 		@GetMapping("cash/list")
-		public String listForm(Model model,HttpServletRequest req,Cash cash) {
+		public String listForm(Model model,HttpServletRequest req) {
 			HttpSession session = req.getSession();
 			UserDTO user = (UserDTO) session.getAttribute("user");
 
@@ -52,6 +52,28 @@ public class TestContollerYejin {
 			model.addAttribute("endDate",today);
 			model.addAttribute("month",month);
 			
+			/* 한달 지출 합계, 수입합계 */
+			List<Cash> list = cashListService.getList(user.getId(), firstDay.toString(), today.toString());
+			int incomeSum = 0, expenseSum=0;
+			for(Cash cash : list) {
+				System.out.println(cash);
+				if(cash.getCategory()==0)
+					expenseSum += cash.getAmount();
+				else
+					incomeSum += cash.getAmount();
+			}
+			model.addAttribute("incomeSum", incomeSum);
+			model.addAttribute("expenseSum", expenseSum);
+			
+			
+			/* 오늘의 지출수입 합계 구하기 */
+			int expenseTodaySum = cashListService.sumNowExpense(user.getId());
+			int incomeTodaySum=cashListService.sumNowIncome(user.getId());
+			model.addAttribute("expenseTodaySum", expenseTodaySum);
+			model.addAttribute("incomeTodaySum", incomeTodaySum);
+			
+			
+			/* 한달치 리스트 출력 */ 
 			List<Cash> allCashList = cashListService.getAllCashList(user.getId());
 			model.addAttribute("allCashList",allCashList);
 			System.out.println("========리스트======= " + allCashList );
@@ -67,39 +89,13 @@ public class TestContollerYejin {
 			HttpSession session = req.getSession();
 			UserDTO user = (UserDTO) session.getAttribute("user");
 
-
 			/* 사용자 지정 기간별 수입 지출 합계구하기 */
 			String startDate = req.getParameter("startDate");
 			String endDate = req.getParameter("endDate");
-
-			List<Cash> list = cashListService.getList(user.getId(), startDate, endDate);
-
-			int incomeSum = 0, expenseSum=0;
-
-			for(Cash cash : list) {
-				System.out.println(cash);
-				if(cash.getCategory()==0)
-					expenseSum += cash.getAmount();
-				else
-					incomeSum += cash.getAmount();
-			}
-			System.out.println("수입합계 : " + incomeSum);
-			System.out.println("지출합계 : " + expenseSum);
-
-			/* 오늘의 합계 구하기 */
-
-			int expenseTodaySum = cashListService.sumNowExpense(user.getId());
-			System.out.println("오늘 지출합계 : " + expenseTodaySum);
-
-			int incomeTodaySum=cashListService.sumNowIncome(user.getId());
-			System.out.println("오늘 수입합계 : " + incomeTodaySum);
-
 			model.addAttribute("startDate", startDate);
 			model.addAttribute("endDate", endDate);
-			model.addAttribute("incomeSum", incomeSum);
-			model.addAttribute("expenseSum", expenseSum);
-			model.addAttribute("expenseTodaySum", expenseTodaySum);
-			model.addAttribute("incomeTodaySum", incomeTodaySum);
+		
+	
 
 
 

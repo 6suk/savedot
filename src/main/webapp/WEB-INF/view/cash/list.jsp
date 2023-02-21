@@ -82,12 +82,12 @@
 				<!-- 2. CARD : 월 총 수입·지출 + 검색 총 수입·지출 출력 끝 // -->
 
 				<!-- // 3. CASH LIST : 수입·지출 내역 모두 출력 -->
-				
-					<div class="mypage-cash-item-list">
-						<!-- // 3-A. CASH ITEM : 수입·지출 일별 출력 -->
-						<div class="mypage-cash-item">
-							<!-- A-1. data-bs-target 해당 날짜로 변경 -->
-							<c:forEach var="cash" items="${allCashList}">
+
+				<div class="mypage-cash-item-list">
+					<!-- // 3-A. CASH ITEM : 수입·지출 일별 출력 -->
+					<div class="mypage-cash-item">
+						<!-- A-1. data-bs-target 해당 날짜로 변경 -->
+						<c:forEach var="cash" items="${allCashList}">
 							<button class="mypage-cash-item-top" data-bs-toggle="collapse"
 								data-bs-target="#date-${cash.regDate}" cash-item>
 								<div class="mypage-cash-item-button-group">
@@ -112,73 +112,73 @@
 										receipt-src="${cash.filePath }/${cash.fileName}${cash.ext}">
 										영수증보기</li>
 								</ul>
-				</c:forEach>
-				<!-- A-4. ver0 : 지출 · ver1 : 수입 끝 // -->
+						</c:forEach>
+						<!-- A-4. ver0 : 지출 · ver1 : 수입 끝 // -->
 
-				<!-- // A-5. A-4와 동일(프론트 테스트용) -->
-				<ul class="cash-item ver1">
-					<li category></li>
-					<li cash-name>(주)이마트</li>
-					<li cash-amount>5,114,640</li>
-					<li cash-memo>메모메모메모메모메모메모메모메모메모메모메모메모메모메모</li>
-					<li cash-img receipt-src>영수증보기</li>
-				</ul>
-				<!-- A-5. A-4와 동일(프론트 테스트용) 끝 // -->
-		</div>
-	</div>
-	<!-- 3-A. CASH ITEM : 수입·지출 일별 출력 끝// -->
-
-	<!-- // 3-B. CASH ITEM : 수입·지출 일별 출력 (프론트 테스트용) -->
-	<div class="mypage-cash-item">
-		<button class="mypage-cash-item-top" data-bs-toggle="collapse"
-			data-bs-target="#date-2023-02-15" cash-item>
-			<div class="mypage-cash-item-button-group">
-				<div class="mypage-cash-item-date">
-					<span class="fa-solid fa-sort-down" down></span> <span
-						class="fa-solid fa-sort-up hide" up></span> 2023-02-15 (수)
+						<!-- // A-5. A-4와 동일(프론트 테스트용) -->
+						<ul class="cash-item ver1">
+							<li category></li>
+							<li cash-name>(주)이마트</li>
+							<li cash-amount>5,114,640</li>
+							<li cash-memo>메모메모메모메모메모메모메모메모메모메모메모메모메모메모</li>
+							<li cash-img receipt-src>영수증보기</li>
+						</ul>
+						<!-- A-5. A-4와 동일(프론트 테스트용) 끝 // -->
+					</div>
 				</div>
-			</div>
-			<p class="mypage-cash-item-count">8</p>
-		</button>
-		<!-- // cash list - content -->
-		<div id="date-2023-02-15" class="collapse show">
-			<ul class="cash-item ver0">
-				<li category></li>
-				<li cash-name>(주)이마트</li>
-				<li cash-amount>4,640</li>
-				<li cash-memo>지출 테스트1</li>
-				<li cash-img receipt-src>영수증보기</li>
-			</ul>
-			<ul class="cash-item ver0">
-				<li category></li>
-				<li cash-name>(주)이마트</li>
-				<li cash-amount>82,000</li>
-				<li cash-memo>지출 테스트2</li>
-				<li cash-img
-					receipt-src="c:/savedot/img/2023-02-10/7f0ec92c-a926-11ed-a94e-376e4f7bc4fa.jpg">
-					영수증보기</li>
-			</ul>
-			<ul class="cash-item ver0">
-				<li category></li>
-				<li cash-name>(주)이마트</li>
-				<li cash-amount>114,640</li>
-				<li cash-memo>지출 테스트3 메모메모메모메모메모메모메모메모메모메모메모메모메모메모</li>
-				<li cash-img receipt-src>영수증보기</li>
-			</ul>
-			<ul class="cash-item ver1">
-				<li category></li>
-				<li cash-name>(주)이마트</li>
-				<li cash-amount>114,640</li>
-				<li cash-memo>수입 테스트</li>
-				<li cash-img receipt-src>영수증보기</li>
-			</ul>
+				<!-- 3-A. CASH ITEM : 수입·지출 일별 출력 끝// -->
+
+				<!-- // 3-B. CASH ITEM : 수입·지출 일별 출력 (프론트 테스트용) -->
+				<div class="mypage-cash-item">
+					<button class="mypage-cash-item-top" data-bs-toggle="collapse"
+						data-bs-target="#date-2023-02-15" cash-item>
+						<div class="mypage-cash-item-button-group">
+							<div class="mypage-cash-item-date">
+								<span class="fa-solid fa-sort-down" down></span> <span
+									class="fa-solid fa-sort-up hide" up></span> 2023-02-15 (수)
+							</div>
+						</div>
+						<p class="mypage-cash-item-count">8</p>
+					</button>
+					<!-- // cash list - content -->
+					<div id="date-2023-02-15" class="collapse show">
+						<ul class="cash-item ver0">
+							<li category></li>
+							<li cash-name>(주)이마트</li>
+							<li cash-amount>4,640</li>
+							<li cash-memo>지출 테스트1</li>
+							<li cash-img receipt-src>영수증보기</li>
+						</ul>
+						<ul class="cash-item ver0">
+							<li category></li>
+							<li cash-name>(주)이마트</li>
+							<li cash-amount>82,000</li>
+							<li cash-memo>지출 테스트2</li>
+							<li cash-img
+								receipt-src="c:/savedot/img/2023-02-10/7f0ec92c-a926-11ed-a94e-376e4f7bc4fa.jpg">
+								영수증보기</li>
+						</ul>
+						<ul class="cash-item ver0">
+							<li category></li>
+							<li cash-name>(주)이마트</li>
+							<li cash-amount>114,640</li>
+							<li cash-memo>지출 테스트3 메모메모메모메모메모메모메모메모메모메모메모메모메모메모</li>
+							<li cash-img receipt-src>영수증보기</li>
+						</ul>
+						<ul class="cash-item ver1">
+							<li category></li>
+							<li cash-name>(주)이마트</li>
+							<li cash-amount>114,640</li>
+							<li cash-memo>수입 테스트</li>
+							<li cash-img receipt-src>영수증보기</li>
+						</ul>
+					</div>
+				</div>
+				<!-- 3-B. CASH ITEM : 수입·지출 일별 출력 (프론트 테스트용) 끝 // -->
 		</div>
-	</div>
-	<!-- 3-B. CASH ITEM : 수입·지출 일별 출력 (프론트 테스트용) 끝 // -->
-	</div>
-	<!-- 3. CASH LIST : 수입·지출 내역 모두 출력 끝 // -->
-	</section>
-	<!-- content -->
+		<!-- 3. CASH LIST : 수입·지출 내역 모두 출력 끝 // -->
+		</section>
+		<!-- content -->
 	</div>
 	</div>
 

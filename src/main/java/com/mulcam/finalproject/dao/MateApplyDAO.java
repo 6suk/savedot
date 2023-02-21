@@ -40,12 +40,10 @@ public interface MateApplyDAO {
 	@Select("SELECT modDate FROM mate_apply"
 			+ "	WHERE aid = #{aid};")
 	public LocalDateTime findEditTime(Long aid);
-<<<<<<< HEAD
 
-=======
 	
 	/** Apply 전체리스트 조회 (사용안함) */
->>>>>>> f71de73676ea701eccd6d3620af3550f40119415
+
 	@Select("SELECT * FROM mate_apply WHERE isDel = 0 ORDER BY modDate DESC, regdate DESC;")
 	public List<MateApply> findAll();
 
@@ -77,14 +75,6 @@ public interface MateApplyDAO {
 			+ " AND m.uid = #{uid};")
 	public int findNewByGetUid(Long uid);
 
-<<<<<<< HEAD
-
-	@Select("SELECT * FROM mate_apply WHERE mid = #{mid} AND isDel = 0 ORDER BY modDate DESC, regDate DESC;")
-	public List<MateApply> findByMid(Long mid);
-
-=======
-	
->>>>>>> f71de73676ea701eccd6d3620af3550f40119415
 
 
 }

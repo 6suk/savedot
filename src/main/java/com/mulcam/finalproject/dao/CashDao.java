@@ -43,14 +43,15 @@ public interface CashDao{
 				+ " WHERE uid=#{uid} AND category=1 AND regDate=DATE(NOW())")
 		public int sumNowIncome(String uid);
 
-		/* 수입/지출 전체 리스트 가져오기 (ocr_img DB JOIN) */
-	//	@Select("SELECT category,content,amount,memo FROM cash WHERE uid=#{uid} ORDER BY regDate DESC")
-		@Select("SELECT a.category, a.content,a.amount,a.memo, a.regDate, b.filePath, b.fileName, b.ext, b.saveDate"
-				+ " FROM cash AS a"
-				+ " LEFT JOIN ocr_img AS b"
-				+ " ON a.cid = b.cid"
-				+ " WHERE uid=#{uid}"
-				+ " ORDER BY a.regDate DESC")
-		List<Cash> getAllCashList(String uid);  // 한달동안 list 뽑기 -> 날짜기준 -> 목록출력
+
+		/* 수입지출 전체리스트 가져오기 (오늘날짜부터 한달치) */
+		// 한달동안 list 뽑기 -> 날짜기준 -> 목록출력
+		@Select("SELECT DISTINCT(a.regDate), a.category, a.content,a.amount,a.memo, b.filePath, b.fileName, b.ext, b.saveDate\r\n"
+				+ "FROM cash AS a\r\n"
+				+ "LEFT JOIN ocr_img AS b\r\n"
+				+ "ON a.cid = b.cid\r\n"
+				+ "WHERE uid=#{uid} AND regDate BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH ) AND NOW()\r\n"
+				+ "ORDER BY a.regDate DESC")
+		List<Cash> getAllCashList(String uid);
 
 }
