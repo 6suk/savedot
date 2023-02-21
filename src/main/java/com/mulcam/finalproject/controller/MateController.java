@@ -65,8 +65,14 @@ public class MateController {
 	@GetMapping("/detail/{mid}")
 	public String detail(@PathVariable Long mid, Model model) {
 		MateDTO mateDTO = mateService.findOneByMid(mid);
-		model.addAttribute("mate", mateDTO);
-		return "mate/detail";
+		// 삭제된 게시물일 때 (추후 필터 또는 에러 페이지로 이동하는 로직 구현할 것)
+		if (mateDTO == null) {
+			return "error/error_404";
+		} else {
+			model.addAttribute("mate", mateDTO);
+			return "mate/detail";
+		}
+
 	}
 
 	/** Mate Apply : 신청 */
@@ -75,17 +81,18 @@ public class MateController {
 		MateApply apply = modelMapper.map(applyDTO, MateApply.class);
 		apply.setUid(uid);
 		apply.setMid(mid);
+		System.out.println(apply);
 		applyService.save(apply);
 		return "redirect:/mypage/mate/apply/" + uid + "/all";
 	}
-	
+
 	/** Mate Apply : 신청취소 */
 	@GetMapping("/apply/cancel/{uid}/{aid}")
 	public String applyCancel(@PathVariable Long aid, @PathVariable Long uid) {
 		applyService.delete(aid);
 		return "redirect:/mypage/mate/apply/" + uid + "/all";
 	}
-	
+
 	/** Mate Apply : 상태변경 */
 	@PostMapping("/apply/state-edit")
 	@ResponseBody
@@ -94,7 +101,7 @@ public class MateController {
 		applyDTO.setModDate(modDateTime);
 		return applyDTO;
 	}
-	
+
 	/** Mate List */
 	@GetMapping("/list")
 	public String listSearchGet(@ModelAttribute MateSearchDTO mateSearchDTO, Model model) {
@@ -102,7 +109,7 @@ public class MateController {
 		model.addAttribute("mate", mateDTO);
 		return "mate/list";
 	}
-	
+
 	/** Mate Write : 현재위치 (사용안함) */
 	@PostMapping("/location")
 	@ResponseBody
@@ -110,22 +117,28 @@ public class MateController {
 		param = reverseGeocodeUtil.getArea(param);
 		return param;
 	}
-	
+
 	/** Mate Update : 게시물 수정 */
+	/** 추후 본인만 접근 가능하도록 Filter 적용 필요 */
 	@GetMapping("/update/{mid}")
 	public String updateMateGet(@PathVariable Long mid, Model model) {
 		MateDTO mateDTO = mateService.findOneByMid(mid);
 		model.addAttribute("mate", mateDTO);
 		return "mate/update";
 	}
-	
+
 	@PostMapping("/update/{mid}")
-	public String updateMatePost(Model model, @ModelAttribute MateDTO mateDTO) {
-		System.out.println(mateDTO);
-		return "mate/update";
+	public String updateMatePost(@ModelAttribute MateDTO mateDTO, Model model, HttpSession session) {
+		mateDTO.setUser((UserDTO) session.getAttribute("user"));
+		mateService.update(mateDTO);
+		return "redirect:/mate/detail/" + mateDTO.getMid();
 	}
-	
-	
-	
+
+	/** Mate Update : 게시물 삭제 */
+	@GetMapping("/delete/{mid}")
+	public String deleteMateGet(@PathVariable Long mid) {
+		mateService.delete(mid);
+		return "redirect:/mate/list";
+	}
 
 }

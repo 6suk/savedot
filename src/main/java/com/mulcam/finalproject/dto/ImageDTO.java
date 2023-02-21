@@ -26,6 +26,7 @@ public class ImageDTO {
 	private String ext;
 	private File path;
 	private String downloadName;
+	private LocalDate saveDate; // 폴더명
 
 	public MateImg setMateImgInfo(Long mid) {
 		// Img Entity 생성

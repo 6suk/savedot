@@ -15,6 +15,12 @@ public interface MateService {
 	/** write : 게시글 DB 저장 */
 	public Long save(MateDTO mateDTO);
 	
+	/** update : 게시글 수정 */
+	public void update(MateDTO mateDTO);
+	
+	/** delete : 게시글 삭제 */
+	public void delete(Long mid);
+	
 	/** Apply : mate position apply num Update */
 	public void updateAddApply(Long mid);
 	

@@ -162,10 +162,16 @@
                   </p>
                 </div>
               </div>
-              <button class="btn btn-main sm font-14" id="applybtn">
+              <!-- <button class="btn btn-main sm font-14" id="applybtn">
                 메이트 신청
                 <i class="fa-solid fa-plus" id="applybtn-icon"></i>
-              </button>
+              </button> -->
+              <div>
+                <button class="btn btn-sub sm font-14" onclick="location.href='/mate/update/${mate.mid}'">
+                  게시물 수정
+                </button>
+                <button class="btn btn-gray sm font-14" id="question-openbtn">게시물 삭제</button>
+              </div>
             </div>
             <div class="mate-detail-content">
               <p>솔직히 엽떡 혼자 먹기 너무 많잖아요!</p>
@@ -185,6 +191,25 @@
         </section>
       </div>
     </div>
+
+    <!-- // question Modal -->
+    <div class="modalBg question">
+      <div class="requestModal savedot-modal question" style="opacity: 1">
+        <div class="question-title">
+          <h5>게시물을 삭제하시겠습니까?</h5>
+          <div class="question-btn">
+            <input
+              type="button"
+              class="btn btn-main full font-14"
+              onclick="location.href='/mate/delete/${mid}'"
+              value="삭제"
+            />
+            <input type="button" id="question-closebtn" class="btn btn-sub full font-14" value="취소" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- question Modal // -->
 
     <!-- // Apply Form -->
     <div class="modalBg">

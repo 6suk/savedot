@@ -1,8 +1,8 @@
 package com.mulcam.finalproject.dao;
 
 import java.util.List;
-import java.util.Optional;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -29,7 +29,42 @@ public interface MateDAO {
 			+ "	VALUES (UUID_TO_BIN(#{id}), #{mid}, #{ext}, #{filePath}, #{origFileName}, #{saveDate})")
 	public void ImgSave(MateImg mateImg);
 	
+	/** UPDATE */
+	@Insert("UPDATE mate"
+			+ "	SET"
+			+ "		category=#{category},"
+			+ "		title=#{title},"
+			+ "		content=#{content},"
+			+ "		positionNum=#{positionNum},"
+			+ "		accountNumber=#{accountNumber},"
+			+ "		bank=#{bank},"
+			+ "		modDate=CURRENT_TIMESTAMP(),"
+			+ "		price1=#{price1},"
+			+ "		price2=#{price2},"
+			+ "		tradeType=#{telType},"
+			+ "		placeAddr=#{placeAddr},"
+			+ "		placeCoords=#{placeCoords},"
+			+ "		placeName=#{placeName},"
+			+ "		placeCode=#{placeCode},"
+			+ "		parcelType=#{parcelType},"
+			+ "		parcelPrice=#{parcelPrice},"
+			+ "		telType=#{telType},"
+			+ "		telUrl=#{telUrl},"
+			+ "		state = if(positionNum = positonApplyNum, 1, 0)"
+			+ "	WHERE `mid`=#{mid};")
+	public void update(Mate mate);
 	
+	/** 이미지 정보 DB 삭제 */
+	@Delete("DELETE FROM mate_img WHERE `mid`=#{mid};")
+	public void deleteImgsByMid(Long mid);
+	
+	/** 게시물 삭제 */
+	@Delete("UPDATE mate"
+			+ "	SET"
+			+ "	isDel = 1"
+			+ "	WHERE `mid` = ${mid};")
+	public void deleteMateByMid(Long mid);
+
 	/** FINDONE */
 	@Select("SELECT * FROM mate"
 			+ "	WHERE isDel = 0"

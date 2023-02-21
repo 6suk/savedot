@@ -186,8 +186,8 @@
 										<option value="2" ${mate.parcelType eq 2 ? 'selected' : ''}>착불</option>
 									</select> <input type="number" class="form-control text"
 										name="parcelPrice" id="parcel_price" style="flex: 1 0 0"
-										placeholder="*택배비를 기입해주세요."
-										value="${mate.parcelType eq 1 ? mate.parcelPrice : '0'}" />
+										value="${mate.parcelType eq 1 ? mate.parcelPrice : ''}"
+										${mate.parcelType eq 1 ? '' : 'placeholder="착불 선택" disabled'}/>
 								</div>
 							</div>
 							<!-- 선불/착불 선택 >> -->
