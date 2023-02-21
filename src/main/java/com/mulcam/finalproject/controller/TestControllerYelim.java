@@ -30,9 +30,6 @@ import com.mulcam.finalproject.util.ReverseGeocodeUtil;
 public class TestControllerYelim {
 
 	@Autowired
-	ModelMapper modelMapper;
-
-	@Autowired
 	ReverseGeocodeUtil reverseGeocode;
 
 	@Autowired
@@ -46,11 +43,11 @@ public class TestControllerYelim {
 
 	@Autowired
 	MateApplyService applyService;
+	
 
 	@GetMapping("/login/{uid}")
 	public String loginTemp(@PathVariable String uid, HttpSession session) {
-		User user = userService.findById(uid).get();
-		UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+		UserDTO userDTO = userService.findById(uid);
 		session.setAttribute("user", userDTO);
 		return "redirect:/mypage/main";
 	}
@@ -59,14 +56,6 @@ public class TestControllerYelim {
 	public String logoutTemp(HttpSession session) {
 		session.invalidate();
 		return "redirect:/mypage/main";
-	}
-
-	@GetMapping("/dao")
-	public String mateapplyGet() {
-		User user = userService.findById("admin").get();
-		List<MateApplyDTO> list = applyService.findBySendUid(user);
-		list.forEach(x -> System.out.println(x));
-		return "cashsave/write";
 	}
 
 	@GetMapping("/cashsave/test")
@@ -99,8 +88,8 @@ public class TestControllerYelim {
 		user2.setPwd("admin");
 		user2.setNickname("관리자");
 		user2.setTel("01012345689");
-		userService.save(user2);
-		userService.save(user);
+//		userService.save(user2);
+//		userService.save(user);
 
 //		User u = userService.findById("ko").get();
 //		userService.delete(u);

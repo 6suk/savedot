@@ -1756,3 +1756,321 @@ div.challenge-choice {
 }
 
 /* ////////////////////////////////////  MYPAGE_CASH //////////////////////////////////// */
+
+/* ////////////////////////////////////  MATE_LIST //////////////////////////////////// */
+/* 검색 */
+.search-bar {
+  margin-right: 2rem;
+  flex: 0 0 auto;
+  width: 18%;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+
+.mate-top-title {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-bar .form-control.text {
+  border-radius: 0;
+}
+
+.search-bar .mypage-cash-top-end :last-child {
+  border-radius: 0 !important;
+}
+
+.search-top-button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  border: 0;
+  padding: 0.8rem;
+  border-bottom: 1px solid var(--border-color);
+}
+.search-top-title-group {
+  width: 100%;
+  position: relative;
+  text-align: left;
+}
+
+.search-top-title-group span {
+  font-size: 12px;
+  position: absolute;
+  right: 0;
+  pointer-events: none;
+  opacity: 50%;
+}
+
+.mate-search ul {
+  list-style: none;
+  margin: 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mate-search .form-check-input:checked[type='checkbox'] {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%234880ee' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e");
+}
+.mate-search .form-check-input:checked[type='radio'] {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%234880ee'/%3e%3c/svg%3e");
+}
+
+.mate-search .form-check-input:checked {
+  background-color: var(--sub-color);
+  border-color: var(--sub-color);
+}
+.mate-search .form-check-input {
+  margin-right: 0.2rem;
+  background-color: #eee;
+  border-color: #eee;
+}
+
+.mate-search .form-check-input:focus {
+  border-color: transparent;
+  outline: 0;
+  box-shadow: none;
+}
+
+/* view */
+.mate-flex-view {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* item */
+.mate-flex-item {
+  max-width: 244px;
+  width: 100%;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  /* padding: 0 0 12px; */
+  border-radius: 8px;
+  border: 1px solid #ebebeb;
+  background-color: #fff;
+  overflow: hidden;
+  display: -moz-box;
+  display: flex;
+  -moz-box-orient: vertical;
+  -moz-box-direction: normal;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
+  cursor: pointer;
+  aspect-ratio: 3/3.6;
+}
+
+.mate-flex-item:hover {
+  box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.05);
+  transform: scale3d(1.01, 1.01, 1.01);
+}
+
+.mate-top-info > *,
+.mate-info-group > * {
+  padding-inline: 1rem;
+}
+
+/* item-top */
+.mate-top-info {
+  position: relative;
+  height: 40%;
+}
+
+.mate-top-info .top {
+  padding-top: 1rem;
+  width: 100%;
+  position: absolute;
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+}
+
+.mate-top-info .top .mate-card-tag {
+  font-size: 12px;
+  background-color: #eee;
+  color: var(--lgray-color);
+  filter: drop-shadow(1px 1px 10px rgb(255 255 255 / 50%));
+}
+
+.mate-top-info .top .mate-card-tag.position[N] {
+  background-color: rgba(var(--main-color-rgb), 0.95);
+  color: #fff;
+}
+
+.position[N]::before {
+  content: '모집중 ';
+}
+
+.position[Y]::before {
+  content: '모집완료 ';
+}
+.mate-top-info .top .fa-heart {
+  font-size: 20px;
+  color: #eee;
+}
+
+.category0::after {
+  content: '조각메이트';
+}
+
+.category1::after {
+  content: 'OTT메이트';
+}
+
+.mate-top-info .thum {
+  position: relative;
+  padding: 0;
+  height: 100%;
+}
+
+.mate-top-info .top [LIKE] {
+  font-size: 20px;
+  color: #dcdcdc;
+  /* box-shadow: 2px 4px 12px rgb(0 0 0 / 10%); */
+  filter: drop-shadow(1px 1px 10px rgb(255 255 255 / 50%));
+}
+
+.thum img {
+  position: absolute;
+  object-fit: cover;
+  top: 50%;
+  left: 50%;
+  max-height: 100%;
+  min-width: 100%;
+  transform: translate(-50%, -50%);
+}
+
+/* mate-info-group : middle + bottom */
+
+.mate-info-group {
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+/* item-middle */
+
+.mate-middle-info {
+  gap: 0.4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.mate-middle-info .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--lgray-color);
+  font-size: 14px;
+}
+
+.mate-middle-info .top p span {
+  color: #bdbdbd;
+}
+
+.mate-middle-info .title {
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* white-space: break-spaces; */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  min-height: 48px;
+}
+.mate-middle-info .price {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.mate-middle-info .price::before {
+  content: '￦';
+  margin-right: 0.2rem;
+}
+
+/* item-middle */
+.mate-bottom-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+.mate-bottom-info .left {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.mate-bottom-info .left [Trade] {
+  font-size: 13px;
+  line-height: 16px;
+  user-select: none;
+  padding-inline: 0.65rem;
+  padding-block: 0.36rem;
+  border-radius: 5px;
+  border: 1px solid rgba(var(--main-color-rgb), 0.5);
+  color: rgba(var(--main-color-rgb), 0.8);
+  border-radius: 50px;
+}
+
+.mate-bottom-info .right {
+}
+
+.mate-bottom-info .right .position-count {
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.mate-bottom-info .right .category {
+  color: var(--main-color);
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.position-count[N] {
+  color: var(--main-color);
+}
+
+.position-count[N]::before {
+  color: var(--lgray-color);
+  content: '모집인원 ';
+}
+
+.position-count[Y]::before {
+  color: var(--lgray-color);
+  content: '판매완료 ';
+}
+
+@media screen and (max-width: 950px) {
+}
+
+@media screen and (max-width: 780px) {
+  .mate-flex-item {
+    max-width: 100%;
+  }
+  .search-bar {
+    width: 100%;
+    margin-bottom: 3rem;
+  }
+}
+
+/* ////////////////////////////////////  MATE_LIST //////////////////////////////////// */

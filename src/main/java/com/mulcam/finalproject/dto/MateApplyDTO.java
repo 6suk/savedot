@@ -19,10 +19,12 @@ public class MateApplyDTO {
 
 	private Long aid;
 	private UserDTO user;
+	private Long mid;
 	private MateDTO mate;
 	private String content;
 	private int applyTradelType;
 	private String tradeName;
+	private int beforeIsApply;
 	private int isApply;
 	private int isDel;
 	private LocalDateTime modDate;

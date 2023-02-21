@@ -27,11 +27,12 @@ public class ImageDTO {
 	private File path;
 	private String downloadName;
 
-	public MateImg setMateImgInfo() {
+	public MateImg setMateImgInfo(Long mid) {
 		// Img Entity 생성
 		MateImg mateImg = MateImg.builder()
 				.origFileName(inputFile)
-				.id(uuid).ext(ext)
+				.id(uuid.toString()).ext(ext)
+				.mid(mid)
 				.filePath(path.toString())
 				.saveDate(LocalDate.now())
 				.build();
