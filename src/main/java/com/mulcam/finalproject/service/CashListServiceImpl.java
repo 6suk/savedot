@@ -21,20 +21,26 @@ public class CashListServiceImpl implements CashListService {
 	}
 
 	@Override
-	public int sumNowExpense(String uid) {
+	public int sumNowExpense(String uid) { 
 		int getTodayExpense = cashDao.sumNowExpense(uid);
+		if(getTodayExpense==0) {
+			return 0; // 오늘 등록한게 없을 때 어떻게 해야하지,,,?
+		}
 		return getTodayExpense;
 	}
 
 	@Override
 	public int sumNowIncome(String uid) {
 		int getTodayIncome = cashDao.sumNowIncome(uid);
+		if(getTodayIncome == 0 ) {
+			return 0; // 오늘 등록한게 없을 때 어떻게 해야하지,,,?
+		}
 		return getTodayIncome;
 	}
 
 	@Override
-	public List<Cash> getAllCashList(String uid, String regDate) {
-		List<Cash> allCashList = cashDao.getAllCashList(uid, regDate);
+	public List<Cash> getAllCashList(String uid) {
+		List<Cash> allCashList = cashDao.getAllCashList(uid);
 		return allCashList;
 	}
 

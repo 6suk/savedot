@@ -40,14 +40,21 @@ public class TestContollerYejin {
 
 	//리스트폼띄워주기
 		@GetMapping("cash/list")
-		public String listForm(Model model,Cash cash) {
+		public String listForm(Model model,HttpServletRequest req,Cash cash) {
+			HttpSession session = req.getSession();
+			UserDTO user = (UserDTO) session.getAttribute("user");
 
 			LocalDate today = LocalDate.now();
 			LocalDate firstDay = today.with(TemporalAdjusters.firstDayOfMonth()); // 해당월의 첫째날을 구해줌
+			int month = LocalDate.now().getMonthValue();
 
 			model.addAttribute("startDate",firstDay);
 			model.addAttribute("endDate",today);
-
+			model.addAttribute("month",month);
+			
+			List<Cash> allCashList = cashListService.getAllCashList(user.getId());
+			model.addAttribute("allCashList",allCashList);
+			System.out.println("========리스트======= " + allCashList );
 			return "cash/list";
 
 		}
@@ -93,6 +100,7 @@ public class TestContollerYejin {
 			model.addAttribute("expenseSum", expenseSum);
 			model.addAttribute("expenseTodaySum", expenseTodaySum);
 			model.addAttribute("incomeTodaySum", incomeTodaySum);
+
 
 
 			return "cash/list";

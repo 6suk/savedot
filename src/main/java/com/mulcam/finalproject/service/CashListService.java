@@ -17,7 +17,7 @@ public interface CashListService {
 	int sumNowIncome(String uid);
 
 	/* 리스트내역 출력 (카테고리,내역,금액,메모) */
-	List<Cash> getAllCashList(String uid,String regDate);
+	List<Cash> getAllCashList(String uid);
 
 
 }

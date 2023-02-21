@@ -102,8 +102,8 @@ public class TestControllerYelim {
 		userService.save(user2);
 		userService.save(user);
 
-//		User u = userService.findById("ko").get();
-//		userService.delete(u);
+	//	User u = userService.findById("ko").get();
+	//	userService.delete(u);
 		return "test/write";
 	}
 
