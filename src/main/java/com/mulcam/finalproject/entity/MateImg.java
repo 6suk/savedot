@@ -1,6 +1,12 @@
 package com.mulcam.finalproject.entity;
 
+import java.io.File;
 import java.time.LocalDate;
+import java.util.UUID;
+
+import org.apache.taglibs.standard.extra.spath.Path;
+
+import com.mulcam.finalproject.dto.ImageDTO;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -26,4 +32,16 @@ public class MateImg {
 	private String filePath;
 
 	private LocalDate saveDate;
+	
+	public ImageDTO setImageDTO() {
+		ImageDTO imgDTO = ImageDTO.builder()
+				.inputFile(this.origFileName)
+				.uuid(UUID.fromString(id))
+				.ext(this.ext)
+				.path(new File(this.filePath))
+				.saveDate(this.saveDate)
+				.build();
+		return imgDTO;
+	}
+	
 }

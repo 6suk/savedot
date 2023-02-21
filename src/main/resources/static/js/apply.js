@@ -9,6 +9,7 @@ $('#sendbtn').click(function () {
 
 // Modal 컨트롤
 let modal_bg = $('.modalBg');
+let modal_bg_question = $('.modalBg.question');
 let modal = $('.savedot-modal');
 let apply_btn = $('#applybtn');
 let close_btn = $('#closebtn');
@@ -19,6 +20,14 @@ apply_btn.click(function () {
 
 close_btn.click(function () {
   modal_bg.fadeToggle(220);
+});
+
+$('#question-closebtn').click(function () {
+  modal_bg_question.fadeToggle(220);
+});
+
+$('#question-openbtn').click(function () {
+  modal_bg_question.fadeToggle(220);
 });
 
 let apply_trade_type = $('#apply_trade_type');

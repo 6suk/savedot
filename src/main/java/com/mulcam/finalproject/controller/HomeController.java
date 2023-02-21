@@ -2,6 +2,7 @@ package com.mulcam.finalproject.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,7 +10,9 @@ import java.nio.file.Paths;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +41,20 @@ public class HomeController {
 	
 	@GetMapping("/savedot/upload/{path}/{downloadName}")
 	public ResponseEntity<Resource> download(@ModelAttribute ImageDTO imgDTO)  {
-		return imageUpload.download(imgDTO);
+		Path path = Paths.get(location + File.separator + imgDTO.getPath() + File.separator + imgDTO.getDownloadName());
+
+		try {
+			String contentType = Files.probeContentType(path);
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentDisposition(ContentDisposition.builder("attachment")
+					.filename(imgDTO.getDownloadName(), StandardCharsets.UTF_8).build());
+			headers.add(HttpHeaders.CONTENT_TYPE, contentType);
+			Resource resource = new InputStreamResource(Files.newInputStream(path));
+			return new ResponseEntity<>(resource, headers, HttpStatus.OK);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	@GetMapping("/savedot/display/{path}/{downloadName}")
