@@ -3,8 +3,6 @@ package com.mulcam.finalproject.entity;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.Entity;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;

@@ -1807,6 +1807,38 @@ div.challenge-choice {
   opacity: 50%;
 }
 
+.mate-search ul {
+  list-style: none;
+  margin: 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mate-search .form-check-input:checked[type='checkbox'] {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%234880ee' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e");
+}
+.mate-search .form-check-input:checked[type='radio'] {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%234880ee'/%3e%3c/svg%3e");
+}
+
+.mate-search .form-check-input:checked {
+  background-color: var(--sub-color);
+  border-color: var(--sub-color);
+}
+.mate-search .form-check-input {
+  margin-right: 0.2rem;
+  background-color: #eee;
+  border-color: #eee;
+}
+
+.mate-search .form-check-input:focus {
+  border-color: transparent;
+  outline: 0;
+  box-shadow: none;
+}
+
 /* view */
 .mate-flex-view {
   display: flex;
@@ -1868,22 +1900,27 @@ div.challenge-choice {
 }
 
 .mate-top-info .top .mate-card-tag {
-  background-color: var(--sub-color);
-  color: var(--main-color);
+  font-size: 12px;
+  background-color: #eee;
+  color: var(--lgray-color);
+  filter: drop-shadow(1px 1px 10px rgb(255 255 255 / 50%));
 }
 
-.mate-top-info .top .mate-card-tag.position-count {
-  background-color: rgba(255, 255, 255, 0.8);
-  color: var(--main-color);
+.mate-top-info .top .mate-card-tag.position[N] {
+  background-color: rgba(var(--main-color-rgb), 0.95);
+  color: #fff;
 }
 
+.position[N]::before {
+  content: '모집중 ';
+}
+
+.position[Y]::before {
+  content: '모집완료 ';
+}
 .mate-top-info .top .fa-heart {
   font-size: 20px;
   color: #eee;
-}
-
-.position-count::before {
-  content: '모집인원 ';
 }
 
 .category0::after {
@@ -1898,6 +1935,13 @@ div.challenge-choice {
   position: relative;
   padding: 0;
   height: 100%;
+}
+
+.mate-top-info .top [LIKE] {
+  font-size: 20px;
+  color: #dcdcdc;
+  /* box-shadow: 2px 4px 12px rgb(0 0 0 / 10%); */
+  filter: drop-shadow(1px 1px 10px rgb(255 255 255 / 50%));
 }
 
 .thum img {
@@ -1932,7 +1976,7 @@ div.challenge-choice {
   justify-content: space-between;
   align-items: center;
   color: var(--lgray-color);
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .mate-middle-info .top p span {
@@ -1940,7 +1984,7 @@ div.challenge-choice {
 }
 
 .mate-middle-info .title {
-  font-size: 15px;
+  font-size: 16px;
   overflow: hidden;
   text-overflow: ellipsis;
   /* white-space: break-spaces; */
@@ -1964,6 +2008,7 @@ div.challenge-choice {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: row-reverse;
 }
 
 .mate-bottom-info .left {
@@ -1988,12 +2033,31 @@ div.challenge-choice {
 
 .mate-bottom-info .right .position-count {
   font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
-.mate-bottom-info .right [LIKE] {
-  font-size: 20px;
-  color: #dcdcdc;
-  box-shadow: 2px 4px 12px rgb(0 0 0 / 10%);
+.mate-bottom-info .right .category {
+  color: var(--main-color);
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.position-count[N] {
+  color: var(--main-color);
+}
+
+.position-count[N]::before {
+  color: var(--lgray-color);
+  content: '모집인원 ';
+}
+
+.position-count[Y]::before {
+  color: var(--lgray-color);
+  content: '판매완료 ';
 }
 
 @media screen and (max-width: 950px) {

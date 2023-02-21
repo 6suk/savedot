@@ -2,7 +2,6 @@ package com.mulcam.finalproject.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import com.mulcam.finalproject.dto.MypageSumDTO;
 import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.service.CSuccessService;
 import com.mulcam.finalproject.service.MateApplyService;
-import com.mulcam.finalproject.service.UserService;
 
 @Controller
 @RequestMapping("/mypage")
@@ -27,9 +25,6 @@ public class MypageController {
 
 	@Autowired
 	private CSuccessService css;
-
-	@Autowired
-	private UserService userService;
 
 	@Autowired
 	private MateApplyService applyService;
@@ -51,9 +46,8 @@ public class MypageController {
 	@GetMapping("/mate/apply/{uid}/all")
 	public String applyGet(@PathVariable Long uid, Model model, HttpSession session) {
 		UserDTO user = (UserDTO) session.getAttribute("user");
-
-		/** (임시) 로그인 유저와 동일하지 않다면 접근 불가 - 추후 필터로 옮길 것 */
-		if (user == null || user.getIdAuto() != uid) {
+		
+		if(user == null || !user.getUid().equals(uid)) {
 			return "redirect:/mate/write";
 		}
 

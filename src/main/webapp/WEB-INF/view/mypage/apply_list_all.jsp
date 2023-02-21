@@ -58,12 +58,13 @@
 									<c:forEach var="apply" items="${sendApply }">
 										<!-- 카드 1  -->
 										<div class="mate-card-list"
-											onclick="location.href='/mate/detail/${apply.mate.id}'">
+											onclick="location.href='/mate/detail/${apply.mate.mid}'">
 											<div class="mate-card-item">
 												<div class="mate-card-top">
 													<p class="mate-card-tag ver${apply.isApply }"></p>
+													<c:if test="${apply.isApply ne '2'}">
 													<u><a
-														href="/mate/apply/cancel/${user.idAuto }/${apply.aid}">신청취소</a></u>
+														href="/mate/apply/cancel/${user.uid }/${apply.aid}">신청취소</a></u></c:if>
 												</div>
 												<div class="mate-card-middle">
 													<h5>${apply.mate.title }</h5>
@@ -198,12 +199,14 @@
                     <c:forEach var="apply" items="${getApply }">
                       <!-- 카드 2 -->
                       <div class="mate-card-list"
-                        onclick="location.href='/mate/detail/${apply.mate.id}'">
+                        onclick="location.href='/mate/detail/${apply.mate.mid}'">
                         <div class="mate-card-item">
                           <form id="apply_edit_form">
                             <div class="mate-card-top">
                               <p class="is_apply_tag mate-card-tag ver${apply.isApply }"></p>
                               <input type="hidden" name="aid" value="${apply.aid }" />
+                              <input type="hidden" name="mid" value="${apply.mate.mid }" />
+                              <input type="hidden" name="beforeIsApply" value="${apply.isApply }" />
                               <select name="isApply"
                                 class="is_apply_select_tag mate-card-tag ver${apply.isApply } hide">
                                 <option value="0" class="tag_0"

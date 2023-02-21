@@ -38,7 +38,7 @@ public interface MateApplyService {
 	public List<MateApplyDTO> findByMid(Mate mate);
 	
 	/** Apply : 거래중,거래완료 등 상태 변경 */
-	public LocalDateTime editIsApply(Long aid, int isApply);
+	public LocalDateTime editIsApply(MateApplyDTO mateApplyDTO);
 
 	
 	

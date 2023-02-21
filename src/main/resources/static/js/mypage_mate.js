@@ -67,7 +67,7 @@ $('.is-apply-save-btn').click(function (event) {
     contentType: 'application/json',
     data: JSON.stringify($value),
     success: function (data) {
-      $('#mate-card-2').load(' #mate-card-2');
+      location.reload();
       // $group.children('.is_apply_tag').attr('class', `is_apply_tag mate-card-tag ver${data.isApply}`);
       // $group.children('.is_apply_select_tag').attr('class', `is_apply_select_tag mate-card-tag ver${data.isApply}`);
 

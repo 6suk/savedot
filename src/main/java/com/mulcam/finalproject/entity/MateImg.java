@@ -1,15 +1,6 @@
 package com.mulcam.finalproject.entity;
 
 import java.time.LocalDate;
-import java.util.UUID;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -19,20 +10,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity @Getter @Setter
+@Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor @Builder
-@ToString(exclude = {"mate"})
+@ToString
 public class MateImg {
-	@Id @NotNull
-	@Column(name = "iid", columnDefinition = "BINARY(16)")
-	private UUID id;
+	private String id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "mid")
-	private Mate mate;
-
-	@Column(length = 8)
+	private Long mid;
+	
 	private String ext;
 
 	private String origFileName;
