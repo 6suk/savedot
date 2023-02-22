@@ -11,11 +11,22 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class UserDTO {
-	private Long uid;
-	private String id;
+	private Long uid;			// pri
+	private String uname;			
+	private String id;			// uni
+	private String pwd;
+	private String nickname;		// uni
+	private String email;
+	
+	// NULL
 	private String tel;
 	private String telFormat;
-	private String nickname;
+	private String birthDate;
+	private String addr;
+	private int pay;
+	private String departures;
+	private String arrivals;
+	private String vehicles;
 
 	public void setTel(String tel) {
 		this.tel = tel;
