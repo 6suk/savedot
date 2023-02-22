@@ -55,5 +55,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     </div>
     <script src="/js/mypage_card.js"></script>
     <script src="/js/mypage_nav.js"></script>
+    <script src="/js/mypage_card.js"></script>
   </body>
 </html>

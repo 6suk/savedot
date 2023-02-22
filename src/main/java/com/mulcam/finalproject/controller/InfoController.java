@@ -17,13 +17,13 @@ import com.mulcam.finalproject.util.NewsUtil;
 @Controller
 @RequestMapping("/info")
 public class InfoController {
-    	
+
 	@Autowired private NewsUtil newsUtil;
 	@Autowired private ExchangeRateUtil exchangeRateUtil;
-	
+
 	@GetMapping("/news")
     public String Information(Model model) throws Exception {
-		
+
 		// 경제 뉴스
 		List<NewsDTO> list = new ArrayList<>();
 		String[] categories = {"금리", "주택", "주식"};
@@ -32,12 +32,12 @@ public class InfoController {
 			list.add(n);
 		}
 		model.addAttribute("newsList", list);
-		
+
 		// 환율
 		List<ExchangeRateDTO> elist = exchangeRateUtil.getRate();
 		model.addAttribute("elist", elist);
-		System.out.println(elist);
-		
-        return null;
+
+        return "info/news";
 	}
 }
+

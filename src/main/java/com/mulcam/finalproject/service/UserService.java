@@ -12,10 +12,12 @@ import com.mulcam.finalproject.entity.User;
 @Service
 public class UserService {
 	@Autowired
+
 	ModelMapper modelMapper;
 	
 	@Autowired
 	UserDAO userDAO;
+
 
 	/** id로 찾기 */
 	public UserDTO findById(String id) {
@@ -23,7 +25,7 @@ public class UserService {
 		UserDTO userDTO = modelMapper.map(user, UserDTO.class);
 		return userDTO;
 	}
-	
+
 	/** PK로 찾기 */
 	public UserDTO findByUid(Long id) {
 		User user = userDAO.findByUid(id);

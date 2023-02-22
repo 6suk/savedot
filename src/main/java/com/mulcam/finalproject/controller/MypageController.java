@@ -61,7 +61,7 @@ public class MypageController {
 
 		return "mypage/apply_list_all";
 	}
-	
-	
+
+
 
 }
