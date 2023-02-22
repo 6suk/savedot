@@ -36,7 +36,8 @@ public class InfoController {
 		// 환율
 		List<ExchangeRateDTO> elist = exchangeRateUtil.getRate();
 		model.addAttribute("elist", elist);
+		System.out.println(elist);
 		
-        return "info/news";
+        return null;
 	}
 }

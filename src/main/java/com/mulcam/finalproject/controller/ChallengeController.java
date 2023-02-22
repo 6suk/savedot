@@ -26,12 +26,11 @@ public class ChallengeController {
 	@Autowired private ChallengeService cs;
 	@Autowired private CSuccessService css;
 
-	/* 로그인 안했을 때 챌린지 페이지 접근 불가? */
+	/* 로그인 안했을 때 챌린지 클릭 시 -> /user/login 페이지로 이동 */
 	@GetMapping("/choice")
 	public String listForm(Model model, HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		UserDTO user = (UserDTO) session.getAttribute("user");
-		
 		List<Challenge> list = cs.getChallengeList();
 		model.addAttribute("challenge", list);
 		return "challenge/choice";

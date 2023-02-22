@@ -30,5 +30,6 @@ public class UserService {
 		UserDTO userDTO = modelMapper.map(user, UserDTO.class);
 		return userDTO;
 	}
-	
+
 }
+
