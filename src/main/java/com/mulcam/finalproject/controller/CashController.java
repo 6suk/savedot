@@ -78,7 +78,7 @@ public class CashController {
 			cashService.ocrImgSave(cashImgInfo); // ocr_img DB에 저장
 		}
 
-		return "redirect:/cash/write"; // 나중에 scheduler로 보내주는걸로 수정하기
+		return "redirect:/mypage/main"; // 나중에 scheduler로 보내주는걸로 수정하기
 	}
 
 	@PostMapping("/ocr")

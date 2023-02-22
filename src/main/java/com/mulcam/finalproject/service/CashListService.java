@@ -1,6 +1,7 @@
 package com.mulcam.finalproject.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.mulcam.finalproject.entity.Cash;
 
@@ -17,7 +18,7 @@ public interface CashListService {
 	int sumNowIncome(String uid);
 
 	/* 리스트내역 출력 (카테고리,내역,금액,메모) */
-	List<Cash> getAllCashList(String uid);
+	Map<String, List<Cash>> getAllCashList(String uid);
 
 
 }

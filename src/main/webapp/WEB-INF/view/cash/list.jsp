@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -28,13 +29,13 @@
 				<div class="mypage-cash-top mobile">
 					<div class="mypage-cash-top-start">
 						<button class="btn fa-solid fa-chevron-left"
-							onclick="location.href='#'"></button>
+							onclick="'#'"></button>
 						<h4>${month}월</h4>
 						<button class="btn fa-solid fa-chevron-right"
 							onclick="location.href='#'"></button>
 					</div>
 					<form class="mypage-cash-top-end" action="/mypage/cash/list"
-						method="post">
+						method="get">
 						<input required class="form-control text input-text required"
 							type="date" name="startDate" id="startDate" value="${startDate}"
 							data-placeholder="시작일" /> <input required
@@ -56,8 +57,11 @@
 						<div class="mypage-card-left">
 							<p class="mypage-card-toptxt" id="card1-top">2월 지출 합계</p>
 							<div class="emojitxt">
-								<img src="/static/emoji/money-with-wings_1f4b8.png"
-									id="card1-emoji" /> <span id="card1-emoji-txt"><h4>${expenseSum}원</h4></span>
+								<img src="/emoji/money-with-wings_1f4b8.png" id="card1-emoji" />
+								<span id="card1-emoji-txt"><h4>
+										<fmt:formatNumber value="${expenseSum}" pattern="#,###">
+										</fmt:formatNumber>원</h4>
+								</span>
 							</div>
 							<p class="mypage-card-bottomtxt" id="card1-bottom">${startDate}
 								~ ${endDate}</p>
@@ -69,8 +73,11 @@
 						<div class="mypage-card-left">
 							<p class="mypage-card-toptxt" id="card2-top">2월 수입 합계</p>
 							<div class="emojitxt">
-								<img src="/static/emoji/bellhop-bell_1f6ce-fe0f.png"
-									id="card2-emoji" /> <span id="card2-emoji-txt"><h4>${incomeSum}원</h4></span>
+								<img src="/emoji/bellhop-bell_1f6ce-fe0f.png" id="card2-emoji" />
+								<span id="card2-emoji-txt"><h4>
+										<fmt:formatNumber value="${incomeSum}" pattern="#,###"></fmt:formatNumber>
+										원</h4>
+								</span>
 							</div>
 							<p class="mypage-card-bottomtxt" id="card2-bottom">${startDate}
 								~ ${endDate}</p>
@@ -87,99 +94,47 @@
 					<!-- // 3-A. CASH ITEM : 수입·지출 일별 출력 -->
 					<div class="mypage-cash-item">
 						<!-- A-1. data-bs-target 해당 날짜로 변경 -->
-						<c:forEach var="cash" items="${allCashList}">
+						<c:forEach var="entry" items="${map}">
 							<button class="mypage-cash-item-top" data-bs-toggle="collapse"
-								data-bs-target="#date-${cash.regDate}" cash-item>
+								data-bs-target="#date-${entry.key}" cash-item>
 								<div class="mypage-cash-item-button-group">
 									<div class="mypage-cash-item-date">
 										<span class="fa-solid fa-sort-down" down></span> <span
-											class="fa-solid fa-sort-up hide" up></span> ${cash.regDate}
+											class="fa-solid fa-sort-up hide" up></span>${entry.key}
 									</div>
 								</div>
 								<p class="mypage-cash-item-count">8</p>
 							</button>
 							<!-- A-2. ID 해당 날짜로 변경 -->
-							<div id="date-${cash.regDate}" class="collapse show">
+							<div id="date-${entry.key}" class="collapse show">
 								<!-- A-3. 일자별 리스트 출력 -->
 								<!-- // A-4. ver0 : 지출 · ver1 : 수입 -->
-
-								<ul class="cash-item ver${cash.category}">
-									<li category></li>
-									<li cash-name>${cash.content}</li>
-									<li cash-amount>${cash.amount}</li>
-									<li cash-memo>${cash.memo}</li>
-									<li cash-img
-										receipt-src="${cash.filePath }/${cash.fileName}${cash.ext}">
-										영수증보기</li>
-								</ul>
+								<c:forEach var="cashList" items="${entry.value}">
+									<ul class="cash-item ver${cashList.category}">
+										<li category></li>
+										<li cash-name>${cashList.content}</li>
+										<li cash-amount><fmt:formatNumber
+												value="${cashList.amount}" pattern="#,###"></fmt:formatNumber></li>
+										<li cash-memo>${cashList.memo}</li>
+										<c:if test="${not empty cashList.fileName}">
+											<li cash-img
+												receipt-src="/savedot/upload/${cashList.saveDate}/${cashList.fileName}${cashList.ext}">
+												영수증보기</li>
+										</c:if>
+										<c:if test="${empty cashList.fileName}">
+										영수증보기
+									</c:if>
+									</ul>
+								</c:forEach>
 						</c:forEach>
 						<!-- A-4. ver0 : 지출 · ver1 : 수입 끝 // -->
-
-						<!-- // A-5. A-4와 동일(프론트 테스트용) -->
-						<ul class="cash-item ver1">
-							<li category></li>
-							<li cash-name>(주)이마트</li>
-							<li cash-amount>5,114,640</li>
-							<li cash-memo>메모메모메모메모메모메모메모메모메모메모메모메모메모메모</li>
-							<li cash-img receipt-src>영수증보기</li>
-						</ul>
-						<!-- A-5. A-4와 동일(프론트 테스트용) 끝 // -->
 					</div>
 				</div>
 				<!-- 3-A. CASH ITEM : 수입·지출 일별 출력 끝// -->
-
-				<!-- // 3-B. CASH ITEM : 수입·지출 일별 출력 (프론트 테스트용) -->
-				<div class="mypage-cash-item">
-					<button class="mypage-cash-item-top" data-bs-toggle="collapse"
-						data-bs-target="#date-2023-02-15" cash-item>
-						<div class="mypage-cash-item-button-group">
-							<div class="mypage-cash-item-date">
-								<span class="fa-solid fa-sort-down" down></span> <span
-									class="fa-solid fa-sort-up hide" up></span> 2023-02-15 (수)
-							</div>
-						</div>
-						<p class="mypage-cash-item-count">8</p>
-					</button>
-					<!-- // cash list - content -->
-					<div id="date-2023-02-15" class="collapse show">
-						<ul class="cash-item ver0">
-							<li category></li>
-							<li cash-name>(주)이마트</li>
-							<li cash-amount>4,640</li>
-							<li cash-memo>지출 테스트1</li>
-							<li cash-img receipt-src>영수증보기</li>
-						</ul>
-						<ul class="cash-item ver0">
-							<li category></li>
-							<li cash-name>(주)이마트</li>
-							<li cash-amount>82,000</li>
-							<li cash-memo>지출 테스트2</li>
-							<li cash-img
-								receipt-src="c:/savedot/img/2023-02-10/7f0ec92c-a926-11ed-a94e-376e4f7bc4fa.jpg">
-								영수증보기</li>
-						</ul>
-						<ul class="cash-item ver0">
-							<li category></li>
-							<li cash-name>(주)이마트</li>
-							<li cash-amount>114,640</li>
-							<li cash-memo>지출 테스트3 메모메모메모메모메모메모메모메모메모메모메모메모메모메모</li>
-							<li cash-img receipt-src>영수증보기</li>
-						</ul>
-						<ul class="cash-item ver1">
-							<li category></li>
-							<li cash-name>(주)이마트</li>
-							<li cash-amount>114,640</li>
-							<li cash-memo>수입 테스트</li>
-							<li cash-img receipt-src>영수증보기</li>
-						</ul>
-					</div>
-				</div>
-				<!-- 3-B. CASH ITEM : 수입·지출 일별 출력 (프론트 테스트용) 끝 // -->
+				<!-- 3. CASH LIST : 수입·지출 내역 모두 출력 끝 // -->
+			</section>
+			<!-- content -->
 		</div>
-		<!-- 3. CASH LIST : 수입·지출 내역 모두 출력 끝 // -->
-		</section>
-		<!-- content -->
-	</div>
 	</div>
 
 	<!-- // MODAL : 영수증 이미지 -->

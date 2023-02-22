@@ -1,7 +1,10 @@
 package com.mulcam.finalproject.service;
 
-import java.util.HashMap;
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,27 +26,41 @@ public class CashListServiceImpl implements CashListService {
 
 	@Override
 	public int sumNowExpense(String uid) { 
-		int getTodayExpense = cashDao.sumNowExpense(uid);
-		if(getTodayExpense==0) {
-			return 0; // 오늘 등록한게 없을 때 어떻게 해야하지,,,?
-		}
+		int getTodayExpense = 0;
+		try { 
+			getTodayExpense = cashDao.sumNowExpense(uid);
+		} catch (Exception e) {	}
 		return getTodayExpense;
 	}
 
 	@Override
 	public int sumNowIncome(String uid) {
-		int getTodayIncome = cashDao.sumNowIncome(uid);
-		if(getTodayIncome == 0 ) {
-			return 0; // 오늘 등록한게 없을 때 어떻게 해야하지,,,?
-		}
+		
+		int getTodayIncome = 0;
+		try { 
+			getTodayIncome = cashDao.sumNowIncome(uid);
+		} catch (Exception e) {	}
+		
 		return getTodayIncome;
 	}
 
 	@Override
-	public List<Cash> getAllCashList(String uid) {
-		List<Cash> allCashList = cashDao.getAllCashList(uid);
-	
-		return allCashList;
+	public Map<String, List<Cash>> getAllCashList(String uid) {
+		LocalDate today = LocalDate.now();
+		int year = today.getYear();
+		int month = today.getMonthValue();
+		int day = today.getDayOfMonth();
+
+		Comparator<String> comparator = Comparator.reverseOrder();
+		Map<String, List<Cash>> map =  new TreeMap<>(comparator);
+		for(int i=1;i<=day;i++) {
+			String date = String.format("%d-%02d-%02d", year,month,i);
+			List<Cash> list = cashDao.getCashListByDate(uid, date);
+			if(list.size()==0)
+				continue;
+			map.put(date, list);
+		}
+		return map; 
 	}
 
 

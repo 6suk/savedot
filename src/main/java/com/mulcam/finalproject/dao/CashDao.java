@@ -46,12 +46,21 @@ public interface CashDao{
 
 		/* 수입지출 전체리스트 가져오기 (오늘날짜부터 한달치) */
 		// 한달동안 list 뽑기 -> 날짜기준 -> 목록출력
-		@Select("SELECT DISTINCT(a.regDate), a.category, a.content,a.amount,a.memo, b.filePath, b.fileName, b.ext, b.saveDate\r\n"
-				+ "FROM cash AS a\r\n"
-				+ "LEFT JOIN ocr_img AS b\r\n"
-				+ "ON a.cid = b.cid\r\n"
-				+ "WHERE uid=#{uid} AND regDate BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH ) AND NOW()\r\n"
-				+ "ORDER BY a.regDate DESC")
+		@Select("SELECT a.category, a.content,a.amount,a.memo,a.regDate, b.fileName, b.ext, b.saveDate"
+				+ " FROM cash AS a"
+				+ " LEFT JOIN ocr_img AS b"
+				+ " ON a.cid = b.cid"
+				+ " WHERE uid=#{uid} AND regDate BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH ) AND NOW()"
+				+ " ORDER BY a.regDate DESC")
 		List<Cash> getAllCashList(String uid);
 
+		/* 수입지출 전체리스트 날짜기준 -> 목록출력 */
+		@Select("SELECT a.category, a.content,a.amount,a.memo,a.regDate, b.fileName, b.ext, b.saveDate"
+				+ " FROM cash AS a"
+				+ " LEFT JOIN ocr_img AS b"
+				+ " ON a.cid = b.cid"
+				+ " WHERE uid=#{uid} AND regDate=#{regDate}"
+				+ " ORDER BY a.regDate DESC")
+		List<Cash> getCashListByDate(String uid,String regDate);
+		
 }
