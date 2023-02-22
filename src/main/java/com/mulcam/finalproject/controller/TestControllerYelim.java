@@ -51,7 +51,7 @@ public class TestControllerYelim {
 		session.setAttribute("user", userDTO);
 		return "redirect:/mypage/main";
 	}
-	
+
 	@GetMapping("/logout")
 	public String logoutTemp(HttpSession session) {
 		session.invalidate();
@@ -91,8 +91,8 @@ public class TestControllerYelim {
 //		userService.save(user2);
 //		userService.save(user);
 
-//		User u = userService.findById("ko").get();
-//		userService.delete(u);
+	//	User u = userService.findById("ko").get();
+	//	userService.delete(u);
 		return "test/write";
 	}
 

@@ -29,7 +29,11 @@ public class Cash { /* cash db */
 	private String cashCategoryName;
 	private String uid;
 	List<MultipartFile> saveimg;
-
+	private String fileName;
+	private String ext;
+	private String filePath;
+	private LocalDate saveDate;
+	
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 		this.cashDateLocal = LocalDate.parse(regDate);

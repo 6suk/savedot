@@ -33,12 +33,12 @@ public class HomeController {
 	
 	@Value("${spring.servlet.multipart.location}")
 	private String location;
-	
+
 	@GetMapping("")
 	public String main() {
 		return "redirect:/mypage/main";
 	}
-	
+
 	@GetMapping("/savedot/upload/{path}/{downloadName}")
 	public ResponseEntity<Resource> download(@ModelAttribute ImageDTO imgDTO)  {
 		Path path = Paths.get(location + File.separator + imgDTO.getPath() + File.separator + imgDTO.getDownloadName());
