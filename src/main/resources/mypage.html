@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="../resources/static/css/mainStyle.css" />
     <link rel="stylesheet" href="../resources/static/css/card.css" /> -->
     <link rel="stylesheet" href="../resources/static/css/style.css" />
+    <link rel="stylesheet" href="../resources/static/css/calendar.css" />
 
     <title>FinalProject</title>
   </head>
@@ -115,33 +116,318 @@
             <!-- /////////// -->
             <div class="col-lg viewcard mypage-card" id="card1">
               <div class="mypage-card-left">
-                <p class="mypage-card-toptxt" id="card1-top"></p>
+                <p class="mypage-card-toptxt" id="card1-top">챌린지로 오늘 아낀 비용</p>
                 <div class="emojitxt">
-                  <img src="" id="card1-emoji" />
-                  <span id="card1-emoji-txt"></span>
+                  <img src="../resources/static/emoji/beer-mug.png" id="card1-emoji" />
+                  <span id="card1-emoji-txt">맥주 0캔</span>
                 </div>
-                <p class="mypage-card-bottomtxt" id="card1-bottom"></p>
+                <p class="mypage-card-bottomtxt" id="card1-bottom">약 0원을 아꼈어요!</p>
               </div>
-              <div class="mypage-card-right" id="card1-right"></div>
+              <div class="mypage-card-right" id="card1-right">주간</div>
             </div>
             <!-- /////////// -->
             <div class="col-lg viewcard mypage-card" id="card2">
               <div class="mypage-card-left">
-                <p class="mypage-card-toptxt" id="card2-top"></p>
+                <p class="mypage-card-toptxt" id="card2-top">챌린지로 오늘 아낀 비용</p>
                 <div class="emojitxt">
-                  <img src="" id="card2-emoji" />
-                  <span id="card2-emoji-txt"></span>
+                  <img src="../resources/static/emoji/pizza_1f355.png" id="card2-emoji" />
+                  <span id="card2-emoji-txt">피자 0판</span>
                 </div>
-                <p class="mypage-card-bottomtxt" id="card2-bottom"></p>
+                <p class="mypage-card-bottomtxt" id="card2-bottom">약 0원을 아꼈어요!</p>
               </div>
-              <div class="mypage-card-right" id="card2-right"></div>
+              <div class="mypage-card-right" id="card2-right">주간</div>
             </div>
             <!-- /////////// -->
           </div>
           <!-- mypage - card // -->
+          <!-- // mypage - calendar -->
+          <div class="mypage-calendar-flex">
+            <input type="hidden" value="2023" name="Y" id="Y" />
+            <input type="hidden" value="2" name="M" id="N" />
+            <div class="mate-top-title">
+              <div class="mypage-calendar-top-start">
+                <button class="btn fa-solid fa-solid fa-angles-left" id="year-left-btn"></button>
+                <button class="btn fa-solid fa-angle-left" id="left-btn"></button>
+                <h4>2023년 2월</h4>
+                <button class="btn fa-solid fa-angle-right" id="right-btn"></button>
+                <button class="btn fa-solid fa-solid fa-angles-right" id="year-right-btn"></button>
+              </div>
+              <i class="fa-solid fa-list-ul calendar-list-icon" onclick="location.href='/mypage/cash'"></i>
+            </div>
+            <div>
+              <ul class="weekdays">
+                <li SUNDAY>일</li>
+                <li>월</li>
+                <li>화</li>
+                <li>수</li>
+                <li>목</li>
+                <li>금</li>
+                <li SATURDAY>토</li>
+              </ul>
+              <ol class="day-grid">
+                <!-- // 시작 -->
+                <li NOTE>30</li>
+                <li NOTE>29</li>
+                <li TODAY>
+                  <div class="date">1</div>
+                  <div class="stamp" SaveSuccess="3"></div>
+                  <div class="amount">
+                    <!-- <p class="plus">32,000</p>
+                    <p class="minus">32,000</p> -->
+                  </div>
+                </li>
+                <li>
+                  <div class="date">2</div>
+                  <div class="stamp" SaveSuccess="0"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">4</div>
+                  <div class="stamp" SaveSuccess="1"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">5</div>
+                  <div class="stamp" SaveSuccess="0"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">6</div>
+                  <div class="stamp" SaveSuccess="0"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <!-- // 끝 -->
+                <!-- // 시작 -->
+                <li SUNDAY>
+                  <div class="date">7</div>
+                  <div class="stamp" SaveSuccess="3"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">8</div>
+                  <div class="stamp" SaveSuccess="2"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">9</div>
+                  <div class="stamp" SaveSuccess="2"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">10</div>
+                  <div class="stamp" SaveSuccess="2"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">11</div>
+                  <div class="stamp" SaveSuccess="1"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">12</div>
+                  <div class="stamp" SaveSuccess="0"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">13</div>
+                  <div class="stamp" SaveSuccess="0"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <!-- // 끝 -->
+                <!-- // 시작 -->
+                <li SUNDAY>
+                  <div class="date">14</div>
+                  <div class="stamp" SaveSuccess="3"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">15</div>
+                  <div class="stamp" SaveSuccess="2"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">16</div>
+                  <div class="stamp" SaveSuccess="2"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">17</div>
+                  <div class="stamp" SaveSuccess="2"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">18</div>
+                  <div class="stamp" SaveSuccess="1"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">19</div>
+                  <div class="stamp" SaveSuccess="0"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li SATURDAY>
+                  <div class="date">20</div>
+                  <div class="stamp" SaveSuccess="0"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <!-- // 끝 -->
+                <!-- // 시작 -->
+                <li SUNDAY>
+                  <div class="date">21</div>
+                  <div class="stamp" SaveSuccess="3"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">22</div>
+                  <div class="stamp" SaveSuccess="2"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">23</div>
+                  <div class="stamp" SaveSuccess="2"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">24</div>
+                  <div class="stamp" SaveSuccess="2"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">25</div>
+                  <div class="stamp" SaveSuccess="1"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">26</div>
+                  <div class="stamp" SaveSuccess="0"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">27</div>
+                  <div class="stamp" SaveSuccess="0"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <!-- // 끝 -->
+                <!-- // 시작 -->
+                <li SUNDAY>
+                  <div class="date">28</div>
+                  <div class="stamp" SaveSuccess="3"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">29</div>
+                  <div class="stamp" SaveSuccess="2"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">30</div>
+                  <div class="stamp" SaveSuccess="2"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="date">31</div>
+                  <div class="stamp" SaveSuccess="2"></div>
+                  <div class="amount">
+                    <p class="plus">32,000</p>
+                    <p class="minus">32,000</p>
+                  </div>
+                </li>
+                <li NOTE>1</li>
+                <li NOTE>2</li>
+                <li NOTE>3</li>
+                <!-- // 끝 -->
+              </ol>
+            </div>
+          </div>
+          <!-- // mypage - calendar -->
         </section>
       </div>
     </div>
+    <script src="../resources/static/js/mypage_calendar.js"></script>
     <script src="../resources/static/js/mypage_card.js"></script>
   </body>
 </html>

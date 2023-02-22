@@ -47,7 +47,7 @@
         <a class="nav-link ${logout }" href="/mypage/main">마이페이지</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link ${logout }" href="#">로그아웃</a>
+        <a class="nav-link ${logout }" href="/logout">로그아웃</a>
       </li>
     </ul>
   </div>

@@ -1,0 +1,211 @@
+@charset "utf-8";
+
+.mypage-calendar-flex {
+  user-select: none;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.mypage-calendar-flex .mate-top-title {
+  padding-inline: 1rem;
+}
+
+.mypage-calendar-top-start {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.mypage-calendar-top-start button {
+  opacity: 30%;
+  padding: 0;
+  margin: 0;
+}
+/* .mypage-calendar-top-start button:first-child,
+.mypage-calendar-top-start button:last-child {
+  opacity: 20%;
+} */
+
+.mypage-calendar-top-start h4 {
+  padding-inline: 0.6rem;
+}
+
+.calendar-list-icon {
+  cursor: pointer;
+  padding-inline: 1rem;
+  transition: all ease 0.3s 0s;
+}
+.calendar-list-icon:hover {
+  opacity: 0.8;
+}
+
+.mypage-calendar-flex ul,
+.mypage-calendar-flex ol {
+  display: grid;
+  background-color: #eee;
+  grid-gap: 1px;
+  justify-self: center;
+  height: auto;
+  grid-template-columns: repeat(7, 1fr);
+  margin: 0;
+  padding: 0;
+}
+
+.mypage-calendar-flex .weekdays li {
+  font-size: 15px;
+  color: #999;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  margin-left: 0;
+}
+
+.mypage-calendar-flex .weekdays {
+  border-bottom: 1px solid #eee;
+  height: 3vw;
+}
+
+.mypage-calendar-flex .day-grid li {
+  cursor: pointer;
+  height: 12vw;
+  max-height: 125px;
+  background-color: #fff;
+  list-style: none;
+  margin-left: 0;
+  padding: 0.5rem;
+  font-size: 14px;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all ease 0.3s 0s;
+}
+
+.day-grid li:hover {
+  opacity: 0.8;
+}
+
+.day-grid .date {
+  flex: 0.1 0 0;
+}
+
+.day-grid .stamp {
+  flex: 0.5 0 0;
+  display: flex;
+  justify-content: center;
+}
+
+.day-grid .stamp img,
+.day-grid .stamp object {
+  width: 40%;
+}
+.day-grid .amount {
+  flex: 0.4 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.day-grid .amount p {
+  cursor: pointer;
+  display: flex;
+  font-size: 12px;
+  align-items: center;
+  transition: all ease 0.3s 0s;
+  letter-spacing: 0.5px;
+}
+
+.day-grid .amount .plus {
+  color: rgba(31, 107, 255, 0.9);
+}
+
+.day-grid .amount .plus:hover {
+  color: rgba(31, 107, 255, 1);
+}
+
+.day-grid .amount .plus::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background-color: rgba(31, 107, 255, 0.6);
+  border-radius: 50%;
+  margin-right: 0.25rem;
+}
+
+.day-grid .amount p::after {
+  content: '원';
+}
+
+.day-grid .amount .minus {
+  color: rgba(255, 31, 31, 0.9);
+}
+
+.day-grid .amount .minus:hover {
+  color: rgba(255, 31, 31, 1);
+}
+
+.day-grid .amount .minus::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background-color: rgba(255, 31, 31, 0.6);
+  border-radius: 50%;
+  margin-right: 0.25rem;
+}
+
+.mypage-calendar-flex .day-grid li[NOTE] {
+  color: #c5c5c5;
+  font-weight: 200;
+}
+
+.mypage-calendar-flex .day-grid li[TODAY] {
+  background-color: #fffdeb;
+}
+
+[SUNDAY],
+[SUNDAY] .date {
+  color: rgba(255, 31, 31, 1) !important;
+}
+
+[SATURDAY],
+[SATURDAY] .date {
+  color: rgba(31, 107, 255, 1) !important;
+}
+
+@media all and (max-width: 800px) {
+  .mypage-calendar-flex ul,
+  .mypage-calendar-flex ol {
+    background-color: transparent;
+    height: 100% !important;
+    border: 0 !important;
+  }
+
+  .mypage-calendar-flex .mate-top-title {
+    padding-bottom: 1rem;
+  }
+
+  .amount {
+    display: none !important;
+  }
+
+  .day-grid .stamp img,
+  .day-grid .stamp object {
+    width: 100%;
+  }
+
+  .day-grid li {
+    min-height: 90px;
+  }
+
+  .weekdays {
+    height: 40px;
+    border: 0;
+    font-size: 13px;
+  }
+}
