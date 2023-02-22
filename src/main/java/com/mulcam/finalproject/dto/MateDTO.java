@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mulcam.finalproject.entity.MateImg;
-import com.mulcam.finalproject.entity.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

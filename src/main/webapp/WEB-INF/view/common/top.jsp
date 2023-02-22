@@ -35,10 +35,10 @@
     
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link ${login }" href="/login/ko">로그인</a>
+        <a class="nav-link ${login }" href="/user/login">로그인</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link ${login }" href="#">회원가입</a>
+        <a class="nav-link ${login }" href="/user/join">회원가입</a>
       </li>
       <li class="nav-item">
         <a class="nav-link ${logout }" href="/cash/write">지출등록</a>
@@ -47,7 +47,7 @@
         <a class="nav-link ${logout }" href="/mypage/main">마이페이지</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link ${logout }" href="#">로그아웃</a>
+        <a class="nav-link ${logout }" href="/user/logout">로그아웃</a>
       </li>
     </ul>
   </div>
