@@ -31,7 +31,7 @@ public class MateApply {
 	private String content;
 
 	private LocalDate regDate;	// 등록일
-	
+
 	private LocalDateTime modDate;	// isApply 갱신일
 
 	private int applyTradelType;

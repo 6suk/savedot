@@ -55,8 +55,8 @@ public class ExchangeRateUtil {
 			// JSON 데이터를 파싱하여 배열로 추출
 			JSONArray items = (JSONArray) parser.parse(line);
 
-			for (int i = 0; i < items.size(); i++) {
-				JSONObject item = (JSONObject) items.get(i);
+			for (Object item2 : items) {
+				JSONObject item = (JSONObject) item2;
 				String curUnit = (String) item.get("cur_unit"); // 통화코드
 
 				if (curUnit.equals("USD") || curUnit.equals("JPY(100)") || curUnit.equals("EUR")) {

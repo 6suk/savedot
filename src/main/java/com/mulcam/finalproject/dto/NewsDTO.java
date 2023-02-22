@@ -12,8 +12,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+
 public class NewsDTO {
-	
+
 	private String title;
 	private String link;
 	private String description;

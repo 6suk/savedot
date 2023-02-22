@@ -31,7 +31,7 @@ public class ChallengeController {
 	public String listForm(Model model, HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		UserDTO user = (UserDTO) session.getAttribute("user");
-		
+
 		List<Challenge> list = cs.getChallengeList();
 		model.addAttribute("challenge", list);
 		return "challenge/choice";
@@ -55,12 +55,12 @@ public class ChallengeController {
 	public String mptest(@PathVariable int cid, HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		UserDTO user = (UserDTO) session.getAttribute("user");
-		
+
 		CSuccess cs = new CSuccess();
 		cs.setUid(user.getId());
 		cs.setCid(cid);
 		css.insert(cs);
 		return "redirect:/mypage/main";
 	}
-	
+
 }
