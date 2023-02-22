@@ -193,7 +193,7 @@
     </div>
 
     <!-- // question Modal -->
-    <div class="modalBg question">
+    <div class="modalBg" id="modal_question">
       <div class="requestModal savedot-modal question" style="opacity: 1">
         <div class="question-title">
           <h5>게시물을 삭제하시겠습니까?</h5>
@@ -204,15 +204,34 @@
               onclick="location.href='/mate/delete/${mid}'"
               value="삭제"
             />
-            <input type="button" id="question-closebtn" class="btn btn-sub full font-14" value="취소" />
+            <input type="button" id="closebtn" class="btn btn-sub full font-14" value="취소" />
           </div>
         </div>
       </div>
     </div>
     <!-- question Modal // -->
 
+    <!-- // Login Modal -->
+    <div class="modalBg" id="modal_login">
+      <div class="requestModal savedot-modal question" style="opacity: 1">
+        <div class="question-title">
+          <h5>로그인 후 이용 가능합니다!</h5>
+          <div class="question-btn">
+            <input
+              type="button"
+              class="btn btn-main full font-14"
+              onclick="location.href='/mate/delete/${mid}'"
+              value="로그인하러가기"
+            />
+            <input type="button" id="closebtn" class="btn btn-sub full font-14" value="취소" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Login Modal // -->
+
     <!-- // Apply Form -->
-    <div class="modalBg">
+    <div class="modalBg" id="modal_apply">
       <div class="requestModal savedot-modal" style="opacity: 1">
         <div class="content-title">
           <h5>매칭 신청</h5>
@@ -225,7 +244,7 @@
         <input type="hidden" value="${mate.parcelPrice}" id="apply_parcel_price" />
         <input type="hidden" value="${mate.parcelType}" id="apply_parcel_type" />
         <form id="applyform" class="inputbox" action="/mate/apply/${mate.id}" method="post">
-          <input type="hidden" name="uid" value="${user.idAuto}" />
+          <input type="hidden" name="uid" value="" id="uid-check" />
           <input type="hidden" value="${mate.placeAddr}" id="apply_place_addr" />
           <input type="hidden" value="${mate.parcelPrice}" id="apply_parcel_price" />
           <input type="hidden" value="${mate.parcelType}" id="apply_parcel_type" />

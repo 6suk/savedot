@@ -66,8 +66,9 @@
 							<p class="font-15 font-600">${mate.user.nickname }</p>
 							<div class="font-14 d-flex detail line">
 								<p>
-									<span>${mate.state eq 0 ? '모집중' : '모집완료' }</span>
-									<span class="mate-url-tag ver${mate.state}">${mate.positonApplyNum } / ${mate.positionNum }</span>
+									<span>${mate.state eq 0 ? '모집중' : '모집완료' }</span> <span
+										class="mate-url-tag ver${mate.state}">${mate.positonApplyNum }
+										/ ${mate.positionNum }</span>
 								</p>
 								<p>
 									<input type="hidden" name="telType" value="${mate.telType }"
@@ -121,8 +122,24 @@
 			</section>
 		</div>
 	</div>
+	<!-- // Login Modal -->
+	<div class="modalBg" id="modal_login">
+		<div class="requestModal savedot-modal question" style="opacity: 1">
+			<div class="question-title">
+				<h5>로그인 후 이용 가능합니다!</h5>
+				<div class="question-btn">
+					<input type="button" class="btn btn-main full font-14"
+						onclick="location.href='/mate/delete/${mid}'" value="로그인하러가기" />
+					<input type="button" id="closebtn" class="btn btn-sub full font-14"
+						value="취소" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Login Modal // -->
+
 	<!-- // question Modal -->
-	<div class="modalBg question">
+	<div class="modalBg" id="modal_question">
 		<div class="requestModal savedot-modal question" style="opacity: 1">
 			<div class="question-title">
 				<h5>게시물을 삭제하시겠습니까?</h5>
@@ -138,7 +155,7 @@
 	<!-- question Modal // -->
 
 	<!-- // Apply Form -->
-	<div class="modalBg">
+	<div class="modalBg" id="modal_apply">
 		<div class="requestModal savedot-modal" style="opacity: 1">
 			<div class="content-title">
 				<h5>매칭 신청</h5>

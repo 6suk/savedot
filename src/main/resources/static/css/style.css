@@ -963,7 +963,7 @@ button > i {
 
 .savedot-modal.question {
   max-width: 320px;
-  padding-block: 6rem;
+  /* padding-block: 6rem; */
 }
 
 .question-title {
