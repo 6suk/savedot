@@ -45,24 +45,25 @@ public class CashListServiceImpl implements CashListService {
 	}
 
 	@Override
-	public Map<String, List<Cash>> getAllCashList(String uid) {
-		LocalDate today = LocalDate.now();
-		int year = today.getYear();
-		int month = today.getMonthValue();
-		int day = today.getDayOfMonth();
-
+	public Map<String, List<Cash>> getCashListByPeriod(String uid, String startDate, String endDate) {
+		LocalDate startDay = LocalDate.parse(startDate);
+		LocalDate endDay = LocalDate.parse(endDate);
+		int year = startDay.getYear();
+		int month = startDay.getMonthValue();
+		
 		Comparator<String> comparator = Comparator.reverseOrder();
 		Map<String, List<Cash>> map =  new TreeMap<>(comparator);
-		for(int i=1;i<=day;i++) {
-			String date = String.format("%d-%02d-%02d", year,month,i);
+		for(int i=startDay.getDayOfMonth();i<=endDay.getDayOfMonth();i++) {
+			String date = String.format("%d-%02d-%02d", year, month, i);
 			List<Cash> list = cashDao.getCashListByDate(uid, date);
 			if(list.size()==0)
 				continue;
 			map.put(date, list);
 		}
-		return map; 
+		
+		return map;
 	}
 
 
-	}
+}
 
