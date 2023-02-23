@@ -29,10 +29,10 @@
 				<div class="mypage-cash-top mobile">
 					<div class="mypage-cash-top-start">
 						<button class="btn fa-solid fa-chevron-left"
-							onclick="'#'"></button>
-						<h4>${month}월</h4>
+							onclick="location.href='/mypage/cash/list/left'"></button>
+						<h4>${year}년 ${month}월</h4>
 						<button class="btn fa-solid fa-chevron-right"
-							onclick="location.href='#'"></button>
+							onclick="location.href='/mypage/cash/list/right'"></button>
 					</div>
 					<form class="mypage-cash-top-end" action="/mypage/cash/list"
 						method="get">
@@ -55,7 +55,7 @@
 					<!-- /////////// -->
 					<div class="col-lg viewcard mypage-card cash" id="card1">
 						<div class="mypage-card-left">
-							<p class="mypage-card-toptxt" id="card1-top">2월 지출 합계</p>
+							<p class="mypage-card-toptxt" id="card1-top">${month}월 지출 합계</p>
 							<div class="emojitxt">
 								<img src="/emoji/money-with-wings_1f4b8.png" id="card1-emoji" />
 								<span id="card1-emoji-txt"><h4>
@@ -71,7 +71,7 @@
 					<!-- /////////// -->
 					<div class="col-lg viewcard mypage-card cash" id="card2">
 						<div class="mypage-card-left">
-							<p class="mypage-card-toptxt" id="card2-top">2월 수입 합계</p>
+							<p class="mypage-card-toptxt" id="card2-top">${month}월 수입 합계</p>
 							<div class="emojitxt">
 								<img src="/emoji/bellhop-bell_1f6ce-fe0f.png" id="card2-emoji" />
 								<span id="card2-emoji-txt"><h4>
@@ -89,7 +89,6 @@
 				<!-- 2. CARD : 월 총 수입·지출 + 검색 총 수입·지출 출력 끝 // -->
 
 				<!-- // 3. CASH LIST : 수입·지출 내역 모두 출력 -->
-
 				<div class="mypage-cash-item-list">
 					<!-- // 3-A. CASH ITEM : 수입·지출 일별 출력 -->
 					<div class="mypage-cash-item">
@@ -103,7 +102,7 @@
 											class="fa-solid fa-sort-up hide" up></span>${entry.key}
 									</div>
 								</div>
-								<p class="mypage-cash-item-count">8</p>
+								<p class="mypage-cash-item-count">${entry.value.size()}</p>
 							</button>
 							<!-- A-2. ID 해당 날짜로 변경 -->
 							<div id="date-${entry.key}" class="collapse show">
@@ -122,13 +121,16 @@
 												영수증보기</li>
 										</c:if>
 										<c:if test="${empty cashList.fileName}">
-										영수증보기
+											<li cash-img
+												receipt-src="">
+												영수증보기</li>
 									</c:if>
 									</ul>
-								</c:forEach>
-						</c:forEach>
+							</c:forEach>
+				
 						<!-- A-4. ver0 : 지출 · ver1 : 수입 끝 // -->
 					</div>
+					</c:forEach>
 				</div>
 				<!-- 3-A. CASH ITEM : 수입·지출 일별 출력 끝// -->
 				<!-- 3. CASH LIST : 수입·지출 내역 모두 출력 끝 // -->
