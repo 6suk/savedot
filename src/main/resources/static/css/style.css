@@ -942,6 +942,10 @@ button > i {
   z-index: 1060;
 }
 
+.modalBg.on {
+  display: block !important;
+}
+
 .savedot-modal {
   transition: all ease 0.3s 0s;
   position: relative;
@@ -962,7 +966,7 @@ button > i {
 }
 
 .savedot-modal.question {
-  max-width: 320px;
+  max-width: 400px;
   /* padding-block: 6rem; */
 }
 
@@ -1663,6 +1667,10 @@ div.challenge-choice {
   font-weight: 400;
 }
 
+.modal-cash-list .cash-item:first-child {
+  border-top: 1px solid rgba(var(--border-color-rgb), 0.5);
+}
+
 .cash-item {
   margin: 0;
   list-style: none;
@@ -1767,13 +1775,20 @@ div.challenge-choice {
 }
 
 .savedot-modal.cash {
-  width: auto;
+  width: 100%;
   padding: 28px;
 }
 
 .savedot-modal .close-button {
   display: flex;
   justify-content: flex-end;
+}
+
+.savedot-modal.cash .close-button {
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 1rem;
+  padding-bottom: 1.5rem;
 }
 
 .savedot-modal .receipt-img {
@@ -2103,3 +2118,191 @@ div.challenge-choice {
 }
 
 /* ////////////////////////////////////  MATE_LIST //////////////////////////////////// */
+
+/* ////////////////////////////////////  MAIN //////////////////////////////////// */
+
+.header-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-width: 1400px;
+}
+
+.main-slide {
+  position: relative;
+  aspect-ratio: auto;
+}
+
+.main-slide .carousel-inner {
+  height: 700px;
+}
+
+.main-slide-item .top {
+  width: 100%;
+  height: 100%;
+}
+
+.main-slide-item.bg0 {
+  background-color: #f6edff;
+}
+
+.main-slide-item.bg1 {
+  background-color: #575664;
+}
+
+.main-slide-item.bg2 {
+  background-color: #e8f0fd;
+}
+
+.main-slide-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(20%, -45%);
+  width: 540px;
+  height: auto;
+}
+.main-slide-img.obj-ver1 {
+  width: 800px;
+  transform: translate(0%, -25%);
+}
+.main-slide-img.obj-ver2 {
+  width: 286px;
+  transform: translate(-35%, -100%);
+}
+
+/* desc */
+.main-slide-item .desc {
+  color: #111;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: default;
+  left: 300px;
+}
+
+.main-slide-item .desc .middle {
+  font-size: 44px;
+  font-weight: 400;
+  line-height: 1.3;
+  padding-bottom: 1rem;
+}
+
+.main-slide-item .desc .middle .point {
+  font-weight: 800;
+}
+
+.desc .desc-top {
+  font-weight: 600;
+  padding-bottom: 1rem;
+}
+
+.desc.ver0 .point,
+.navbar-light .navbar-nav .nav-link.active.ver0 {
+  color: #672b9e;
+}
+.main-slide-item .desc.ver1 > * {
+  color: #fff;
+}
+.desc.ver1 .point,
+.navbar-light .navbar-nav .nav-link.active.ver1 {
+  color: #ffa900;
+}
+.desc.ver2 .point {
+  color: #2d74ff;
+}
+
+.navbar-light.white .navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 200;
+}
+.navbar-light.white .navbar-nav .nav-link.active {
+  font-weight: 600;
+}
+.navbar-light.white .navbar-nav .nav-link:hover {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.main-slide-item .desc .bottom {
+  opacity: 0.9;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.main-slide-item .desc.ver1 .bottom {
+  opacity: 0.8;
+  font-weight: 200;
+}
+
+@media screen and (max-width: 950px) {
+}
+
+@media screen and (max-width: 780px) {
+  .header-wrap {
+    min-width: auto;
+  }
+
+  .main-slide-item {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .main-slide-item .top {
+    width: 100%;
+    height: 80%;
+    position: relative;
+  }
+  .main-slide-item .desc {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    bottom: 0;
+    text-align: center;
+    padding-bottom: 5rem;
+    transform: none;
+    left: auto;
+    top: auto;
+  }
+
+  .main-slide-item .desc .middle {
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.3;
+    padding-bottom: 1rem;
+  }
+  .main-slide-item .desc .bottom {
+    opacity: 0.9;
+    font-size: 15px;
+    font-weight: 400;
+  }
+
+  .obj-group {
+    position: relative;
+    left: -30%;
+    top: 35%;
+  }
+
+  .main-slide-img.obj-ver1 {
+    width: 90%;
+    transform: translate(20%, -25%);
+  }
+
+  .main-slide-img {
+    position: absolute;
+    height: auto;
+    width: 60%;
+    transform: translate(-50%, -50%);
+  }
+
+  .main-slide-img.obj-ver2 {
+    width: 50%;
+    transform: translate(-55%, -56%);
+  }
+}
+
+/* ////////////////////////////////////  MAIN //////////////////////////////////// */

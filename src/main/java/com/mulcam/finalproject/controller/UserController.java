@@ -1,6 +1,5 @@
 package com.mulcam.finalproject.controller;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -10,23 +9,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.User;
-import com.mulcam.finalproject.service.UserServiceHyerin;
-import com.mulcam.finalproject.session.UserSession;
+import com.mulcam.finalproject.service.UserService;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
-	@Resource private UserSession userSession;
-
-	@Autowired private UserServiceHyerin userService;
+	@Autowired private UserService userService;
 	
 	
 	/** 회원가입 */
@@ -102,16 +97,16 @@ public class UserController {
 		
 		int result = userService.login(id, pwd, session);
 		switch (result) {
-		case UserServiceHyerin.CORRECT_LOGIN:
+		case UserService.CORRECT_LOGIN:
 			UserDTO userDTO = userService.findById(id);
 			session.setAttribute("user", userDTO);
 			return "redirect:/mypage/main";
 			
-		case UserServiceHyerin.WRONG_PASSWORD:
+		case UserService.WRONG_PASSWORD:
 			rttr.addFlashAttribute("loginFail", pwdFailMessage);
 			return "user/login";
 		
-		case UserServiceHyerin.ID_NOT_EXIST:
+		case UserService.ID_NOT_EXIST:
 			rttr.addFlashAttribute("loginFail", idFailMessage);
 			return "redirect:/user/join";
 		

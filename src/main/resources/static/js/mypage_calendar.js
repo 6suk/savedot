@@ -1,3 +1,58 @@
+$('[CASH-DATE]').click(function () {
+  let search_date = $(this).attr('CASH-DATE');
+  let $plus = $(this).find('.plus');
+  let $minus = $(this).find('.minus');
+
+  // 값 없을 경우 모달 띄우지 않기
+  if ($plus.length === 0 && $minus.length === 0) {
+    return;
+  }
+
+  // 데이터 받아오기
+  $.ajax({
+    type: 'GET',
+    url: '/mypage/main/cash/' + search_date,
+    success: function (data) {
+      $('.cash-item').remove(); // 초기화
+      $('#modal-cash-date').text(search_date);
+      let plus_sum = $plus.text() === '' ? 0 : $plus.text();
+      let minus_sum = $minus.text() === '' ? 0 : $minus.text();
+
+      $('[modal-plus]').text(plus_sum + '원');
+      $('[modal-minus]').text(minus_sum + '원');
+
+      $(data).each(function (index, item) {
+        let inner_data =
+          '<ul class="cash-item ver' +
+          item.category +
+          '">' +
+          '<li category></li>' +
+          '<li cash-name>' +
+          item.content +
+          '</li>' +
+          '<li cash-amount>' +
+          item.amount.toLocaleString('ko-KR') +
+          '</li>' +
+          '<li cash-memo>' +
+          item.memo +
+          '</li>' +
+          '</ul>';
+        $('.modal-cash-list').append(inner_data);
+      });
+    },
+  });
+
+  $('#modal-cash').fadeToggle(220);
+});
+
+$('#closebtn').click(function () {
+  $('#modal-cash').fadeOut(220);
+});
+
+$('#modal-cash').click(function () {
+  $('#modal-cash').fadeOut(220);
+});
+
 // 현재 날짜 가져오기
 let date_ = new Date();
 let year = date_.getFullYear();

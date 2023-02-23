@@ -13,15 +13,16 @@ let modal_question = $('#modal_question');
 let modal_login = $('#modal_login');
 let modal = $('.savedot-modal');
 let apply_btn = $('#applybtn');
-let close_btn = $('#closebtn');
+let login_btn = $('#loginbtn');
+let close_btn = $('.closebtn');
 let uid = $('#uid-check').val();
 
+login_btn.click(function () {
+  modal_login.fadeToggle(220);
+});
+
 apply_btn.click(function () {
-  if (uid === '' || uid === null) {
-    modal_login.fadeToggle(220);
-  } else {
-    modal_apply.fadeToggle(220);
-  }
+  modal_apply.fadeToggle(220);
 });
 
 close_btn.click(function () {

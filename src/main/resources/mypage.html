@@ -176,7 +176,7 @@
                     <p class="minus">32,000</p> -->
                   </div>
                 </li>
-                <li>
+                <li CASH-DATE="2023-02-02">
                   <div class="date">2</div>
                   <div class="stamp" SaveSuccess="0"></div>
                   <div class="amount">
@@ -184,12 +184,12 @@
                     <p class="minus">32,000</p>
                   </div>
                 </li>
-                <li>
+                <li CASH-DATE="2023-02-04">
                   <div class="date">4</div>
                   <div class="stamp" SaveSuccess="1"></div>
                   <div class="amount">
-                    <p class="plus">32,000</p>
-                    <p class="minus">32,000</p>
+                    <!-- <p class="plus">32,000</p>
+                    <p class="minus">32,000</p> -->
                   </div>
                 </li>
                 <li>
@@ -425,6 +425,47 @@
           </div>
           <!-- // mypage - calendar -->
         </section>
+
+        <!-- // MODAL : 일자별 상세내역 -->
+        <div class="modalBg" id="modal-cash">
+          <div class="requestModal savedot-modal cash" style="opacity: 1">
+            <div class="close-button">
+              <div>
+                <h5 id="modal-cash-date">2023-02-23</h5>
+                <dl class="today-sum">
+                  <dt>지출합계</dt>
+                  <dd modal-plus></dd>
+                  <dt>수입합계</dt>
+                  <dd modal-minus></dd>
+                </dl>
+              </div>
+              <input type="button" id="closebtn" class="btn btn-sub mdi" value="닫기" />
+            </div>
+            <div class="modal-cash-list">
+              <!-- // ver0 : 지출 · ver1 : 수입 -->
+              <ul class="cash-item ver1">
+                <li category></li>
+                <li cash-name>테스트</li>
+                <li cash-amount>8000</li>
+                <li cash-memo>테스트 데이터</li>
+              </ul>
+              <ul class="cash-item ver0">
+                <li category></li>
+                <li cash-name>테스트</li>
+                <li cash-amount>4454</li>
+                <li cash-memo>테스트 데이터</li>
+              </ul>
+              <ul class="cash-item ver0">
+                <li category></li>
+                <li cash-name>테스트</li>
+                <li cash-amount>6777555</li>
+                <li cash-memo>테스트 데이터</li>
+              </ul>
+              <!-- ver0 : 지출 · ver1 : 수입 끝 // -->
+            </div>
+          </div>
+        </div>
+        <!-- // MODAL : 일자별 상세내역 -->
       </div>
     </div>
     <script src="../resources/static/js/mypage_calendar.js"></script>

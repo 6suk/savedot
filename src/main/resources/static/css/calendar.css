@@ -100,6 +100,7 @@
 
 .day-grid .stamp img,
 .day-grid .stamp object {
+  pointer-events: none;
   width: 40%;
 }
 .day-grid .amount {
@@ -208,4 +209,41 @@
     border: 0;
     font-size: 13px;
   }
+}
+
+[cash-amount] {
+  font-weight: 600;
+  width: 15%;
+  text-align: right;
+}
+
+dl.today-sum {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--lgray-color);
+  margin-top: 0.3rem;
+}
+
+dl.today-sum dt {
+  display: inline-block;
+  margin-right: 5px;
+  font-weight: 400;
+  color: var(--lgray-color);
+}
+
+dl.today-sum dd {
+  display: inline-block;
+  margin-right: 10px;
+  font-weight: bold;
+  color: var(--gray-color);
+}
+
+dl.today-sum dd:not(:last-child)::after {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: 9px;
+  margin-left: 10px;
+  background-color: rgb(218, 220, 224);
 }

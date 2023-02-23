@@ -4,9 +4,9 @@
   <ul class="nav justify-content-center mypage-navbar">
     <li class="nav-item"><a class="nav-link mypage" id="nav_main" href="/mypage/main">나의 절약캘린더</a></li>
     <li class="nav-item">
-      <a class="nav-link mypage" id="nav_mate" href="/mypage/mate/apply/${user.uid }/all">나의 조각메이트</a>
+      <a class="nav-link mypage" id="nav_mate" href="/mypage/mate/apply/all">나의 조각메이트</a>
     </li>
-    <li class="nav-item"><a class="nav-link mypage" href="/mypage/cash/list">나의 수입/지출</a></li>
+    <li class="nav-item"><a class="nav-link mypage" id="nav_cash" href="/mypage/cash/list">나의 수입/지출</a></li>
     <li class="nav-item"><a class="nav-link mypage" href="#">알림</a></li>
   </ul>
 </nav>

@@ -12,7 +12,7 @@ import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.User;
 
 @Service
-public class UserServiceImpl implements UserServiceHyerin {
+public class UserServiceImpl implements UserService {
 	
 	@Autowired ModelMapper modelMapper;
 	
@@ -33,23 +33,22 @@ public class UserServiceImpl implements UserServiceHyerin {
 	   }else if(type.equals("com")) {
 	      return userDAO.checkIdCom(id);
 	   }
-	   
 	   return null;
 	}
 	
 	/** 로그인 */
 	@Override
 	public int login(String id, String pwd, HttpSession session) {
-		User user = userDAO.findById(id);
+		UserDTO user = findById(id);
 		if (user.getId() != null) {		// id 가 존재
 			if (BCrypt.checkpw(pwd, user.getPwd())) {
 				session.setAttribute("user", user);		// 세션에 사용자 정보 저장
-				return UserServiceHyerin.CORRECT_LOGIN;
+				return UserService.CORRECT_LOGIN;
 			} else {
-				return UserServiceHyerin.WRONG_PASSWORD;
+				return UserService.WRONG_PASSWORD;
 			}
 		} 		// id 가 없음
-		return UserServiceHyerin.ID_NOT_EXIST;
+		return UserService.ID_NOT_EXIST;
 	}
 
 	@Override
