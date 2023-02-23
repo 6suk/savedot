@@ -26,6 +26,7 @@ import com.mulcam.finalproject.entity.MateApply;
 import com.mulcam.finalproject.service.MateApplyService;
 import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.UserService;
+import com.mulcam.finalproject.util.CalendarUtil;
 import com.mulcam.finalproject.util.ReverseGeocodeUtil;
 
 @Controller
@@ -46,7 +47,7 @@ public class MateController {
 
 	@Autowired
 	ReverseGeocodeUtil reverseGeocodeUtil;
-
+	
 	/** Mate Write */
 	@GetMapping("/write")
 	public String writeGet(HttpSession session) {
@@ -57,7 +58,6 @@ public class MateController {
 	public String writePost(MateDTO mateDTO, HttpSession session) {
 		mateDTO.setUser((UserDTO) session.getAttribute("user"));
 		Long mid = mateService.save(mateDTO);
-
 		return "redirect:/mate/detail/" + mid;
 	}
 
@@ -81,16 +81,15 @@ public class MateController {
 		MateApply apply = modelMapper.map(applyDTO, MateApply.class);
 		apply.setUid(uid);
 		apply.setMid(mid);
-		System.out.println(apply);
 		applyService.save(apply);
-		return "redirect:/mypage/mate/apply/" + uid + "/all";
+		return "redirect:/mypage/mate/apply/all";
 	}
 
 	/** Mate Apply : 신청취소 */
 	@GetMapping("/apply/cancel/{uid}/{aid}")
 	public String applyCancel(@PathVariable Long aid, @PathVariable Long uid) {
 		applyService.delete(aid);
-		return "redirect:/mypage/mate/apply/" + uid + "/all";
+		return "redirect:/mypage/mate/apply/all";
 	}
 
 	/** Mate Apply : 상태변경 */
@@ -104,7 +103,7 @@ public class MateController {
 
 	/** Mate List */
 	@GetMapping("/list")
-	public String listSearchGet(@ModelAttribute MateSearchDTO mateSearchDTO, Model model) {
+	public String listSearchGet(MateSearchDTO mateSearchDTO, Model model) {
 		List<MateDTO> mateDTO = mateService.findAllBySearch(mateSearchDTO);
 		model.addAttribute("mate", mateDTO);
 		return "mate/list";
@@ -128,7 +127,7 @@ public class MateController {
 	}
 
 	@PostMapping("/update/{mid}")
-	public String updateMatePost(@ModelAttribute MateDTO mateDTO, Model model, HttpSession session) {
+	public String updateMatePost(MateDTO mateDTO, Model model, HttpSession session) {
 		mateDTO.setUser((UserDTO) session.getAttribute("user"));
 		mateService.update(mateDTO);
 		return "redirect:/mate/detail/" + mateDTO.getMid();
