@@ -43,18 +43,18 @@ public class TestControllerYelim {
 	MateApplyService applyService;
 	
 
-	@GetMapping("/login/{uid}")
-	public String loginTemp(@PathVariable String uid, HttpSession session) {
-		UserDTO userDTO = userService.findById(uid);
-		session.setAttribute("user", userDTO);
-		return "redirect:/mypage/main";
-	}
-
-	@GetMapping("/logout")
-	public String logoutTemp(HttpSession session) {
-		session.invalidate();
-		return "redirect:/mypage/main";
-	}
+//	@GetMapping("/login/{uid}")
+//	public String loginTemp(@PathVariable String uid, HttpSession session) {
+//		UserDTO userDTO = userService.findById(uid);
+//		session.setAttribute("user", userDTO);
+//		return "redirect:/mypage/main";
+//	}
+//
+//	@GetMapping("/logout")
+//	public String logoutTemp(HttpSession session) {
+//		session.invalidate();
+//		return "redirect:/mypage/main";
+//	}
 
 	@GetMapping("/cashsave/test")
 	public String datatestGet() {

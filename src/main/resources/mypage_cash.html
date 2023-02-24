@@ -254,6 +254,52 @@
             </div>
             <!-- 3-A. CASH ITEM : 수입·지출 일별 출력 끝// -->
 
+            <!-- // 3-A. CASH ITEM : 수입·지출 일별 출력 -->
+            <div class="mypage-cash-item">
+              <!-- A-1. data-bs-target 해당 날짜로 변경 -->
+              <button
+                class="mypage-cash-item-top"
+                data-bs-toggle="collapse"
+                data-bs-target="#date-2023-02-17"
+                cash-item
+              >
+                <div class="mypage-cash-item-button-group">
+                  <div class="mypage-cash-item-date">
+                    <span class="fa-solid fa-sort-down" down></span>
+                    <span class="fa-solid fa-sort-up hide" up></span>
+                    2023-02-16 (목)
+                  </div>
+                </div>
+                <p class="mypage-cash-item-count">8</p>
+              </button>
+              <!-- A-2. ID 해당 날짜로 변경 -->
+              <div id="date-2023-02-17" class="collapse show">
+                <!-- A-3. 일자별 리스트 출력 -->
+                <!-- // A-4. ver0 : 지출 · ver1 : 수입 -->
+                <ul class="cash-item ver0">
+                  <li category></li>
+                  <li cash-name>테스트 데이터</li>
+                  <li cash-amount>114,640</li>
+                  <li cash-memo>메모메모메모</li>
+                  <li cash-img receipt-src="c:/savedot/img/2023-02-10/1c1962a4-a91b-11ed-8c3f-a7e7d8280cae.jpg">
+                    영수증보기
+                  </li>
+                </ul>
+                <!-- A-4. ver0 : 지출 · ver1 : 수입 끝 // -->
+
+                <!-- // A-5. A-4와 동일(프론트 테스트용) -->
+                <ul class="cash-item ver1">
+                  <li category></li>
+                  <li cash-name>(주)이마트</li>
+                  <li cash-amount>5,114,640</li>
+                  <li cash-memo>메모메모메모메모메모메모메모메모메모메모메모메모메모메모</li>
+                  <li cash-img receipt-src>영수증보기</li>
+                </ul>
+                <!-- A-5. A-4와 동일(프론트 테스트용) 끝 // -->
+              </div>
+            </div>
+            <!-- 3-A. CASH ITEM : 수입·지출 일별 출력 끝// -->
+
             <!-- // 3-B. CASH ITEM : 수입·지출 일별 출력 (프론트 테스트용) -->
             <div class="mypage-cash-item">
               <button
@@ -324,7 +370,7 @@
         </div>
       </div>
     </div>
-    <!-- // Apply Form -->
+    <!-- // MODAL : 영수증 이미지 -->
     <script src="../resources/static/js/mypage_cash.js"></script>
     <script src="../resources/static/js/mypage_nav.js"></script>
     <script src="../resources/static/js/required.js"></script>

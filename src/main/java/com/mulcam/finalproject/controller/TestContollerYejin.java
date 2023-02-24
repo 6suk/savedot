@@ -41,24 +41,70 @@ public class TestContollerYejin {
 
 	/* 수입지출 등록 리스트 */
 
-		@GetMapping("cash/list")
-		public String getCashList(HttpServletRequest req, Model model) {
+		@GetMapping(value = {"cash/list", "cash/list/{arrow}"})
+		public String getCashList(HttpServletRequest req, Model model, @PathVariable(required = false) String arrow) {
 
 			HttpSession session = req.getSession();
 			UserDTO user = (UserDTO) session.getAttribute("user");
 			int month = LocalDate.now().getMonthValue();
-			model.addAttribute("month",month);
 			LocalDate today = LocalDate.now();
+			int year = 2000;
 			
-			/* 사용자 지정 기간별 수입 지출 합계구하기 */
-			String startDate = req.getParameter("startDate");
-			if(startDate==null || startDate.equals(""))
-				startDate = today.with(TemporalAdjusters.firstDayOfMonth()).toString();
-			String endDate = req.getParameter("endDate");
-			if(endDate==null || endDate.equals(""))
-				endDate = today.toString();
+			String sessionMonthYear = (String) session.getAttribute("monthYear"); 
+			if(sessionMonthYear == null) {
+				year = today.getYear();
+				month = today.getMonthValue();
+			} else {
+				year = Integer.parseInt(sessionMonthYear.substring(0,4));
+				month = Integer.parseInt(sessionMonthYear.substring(5));
+			}
+			
+			String startDate = null;
+			String endDate = null;
+			LocalDate startDay;
+			
+			if(arrow !=null) {
+				switch (arrow) {
+				case "left":
+					month = month -1;
+					if(month == 0 ) {
+						month = 12;
+						year = year -1 ;
+					} 
+					startDate = String.format("%d-%02d-01", year, month); // 시작날짜가 해당 월의 1일 
+					startDay = LocalDate.parse(String.format("%d-%02d-01", year, month));
+					endDate = startDay.withDayOfMonth(startDay.lengthOfMonth()).toString(); 
+					break;
+
+				case "right" :
+					month = month + 1;
+					if(month == 13) {
+						month = 1;
+						year = year + 1;
+					}
+					startDate = String.format("%d-%02d-01", year, month); // 시작날짜가 해당 월의 1일 
+					startDay = LocalDate.parse(String.format("%d-%02d-01", year, month));
+					endDate = startDay.withDayOfMonth(startDay.lengthOfMonth()).toString(); 
+					break;
+				}
+			} else { 			
+				/* 사용자 지정 기간별 수입 지출 합계구하기 */
+				startDate = req.getParameter("startDate");
+				if(startDate==null || startDate.equals(""))
+					startDate = today.with(TemporalAdjusters.firstDayOfMonth()).toString();
+				endDate = req.getParameter("endDate");
+				if(endDate==null || endDate.equals(""))
+					endDate = today.toString();
+
+			}
+			
+			sessionMonthYear = String.format("%d.%02d", year, month);
+			session.setAttribute("monthYear", sessionMonthYear);
+			
 			model.addAttribute("startDate", startDate);
 			model.addAttribute("endDate", endDate);
+			model.addAttribute("year", year);
+			model.addAttribute("month", month);
 			
 			List<Cash> list = cashListService.getList(user.getId(), startDate, endDate);
 			int incomeSum = 0, expenseSum=0;
@@ -79,9 +125,8 @@ public class TestContollerYejin {
 			model.addAttribute("incomeTodaySum", incomeTodaySum);   // 오늘 수입합
 			
 			/* 한달치 리스트 출력 */  
-			Map<String, List<Cash>> map = cashListService.getAllCashList(user.getId());
+			Map<String, List<Cash>> map = cashListService.getCashListByPeriod(user.getId(),startDate, endDate);
 			model.addAttribute("map",map);
-
 			return "cash/list";
 		}
 }

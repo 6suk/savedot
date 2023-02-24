@@ -33,7 +33,6 @@ public class UserServiceImpl implements UserService {
 	   }else if(type.equals("com")) {
 	      return userDAO.checkIdCom(id);
 	   }
-	   
 	   return null;
 	}
 	
@@ -41,7 +40,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int login(String id, String pwd, HttpSession session) {
 		UserDTO user = findById(id);
-		if (user.getId() != null) {		// id 가 존재
+		if (user != null && user.getId() != null) {		// id 가 존재
 			if (BCrypt.checkpw(pwd, user.getPwd())) {
 				session.setAttribute("user", user);
 				return UserService.CORRECT_LOGIN;
@@ -71,5 +70,11 @@ public class UserServiceImpl implements UserService {
 //	public void update(User user) {
 //		userDAO.insert(user);
 //	}
+	
+	/** 회원 탈퇴 */
+	@Override
+	public void delete(String id) {
+		userDAO.delete(id);
+	}
 
 }

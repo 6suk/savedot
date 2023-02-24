@@ -52,7 +52,7 @@ public class UserController {
 		String vehicles = req.getParameter("vehicles").strip();
 		 
 		if (pwd.equals(pwd2)) {
-			User user = new User(0L, uname, id, pwd, nickname, email, tel, birthDate, addr, pay, departures, arrivals, vehicles);
+			User user = new User(0L, uname, id, pwd, nickname, email, tel, birthDate, addr, pay, departures, arrivals, vehicles, 0);
 			userService.join(user);
 			return "redirect:/user/login";
 		} else {
@@ -84,7 +84,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public String login(HttpServletRequest req, RedirectAttributes rttr, Model model) {
+	public String login(HttpServletRequest req, RedirectAttributes rttr, Model model) throws Exception {
 		HttpSession session = req.getSession();
 		
 		String idFailMessage = "존재하지 않는 아이디입니다.";
@@ -96,6 +96,8 @@ public class UserController {
 		int result = userService.login(id, pwd, session);
 		switch (result) {
 		case UserService.CORRECT_LOGIN:
+			UserDTO userDTO = userService.findById(id);
+			session.setAttribute("user", userDTO);
 			return "redirect:/mypage/main";
 			
 		case UserService.WRONG_PASSWORD:
@@ -104,6 +106,7 @@ public class UserController {
 		
 		case UserService.ID_NOT_EXIST:
 			rttr.addFlashAttribute("loginFail", idFailMessage);
+			System.out.println(UserService.ID_NOT_EXIST);
 			return "redirect:/user/join";
 		
 		default:
@@ -143,6 +146,19 @@ public class UserController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
+		return "redirect:/mate/list";
+	}
+	
+	/** 회원탈퇴 */
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable String id, Model model) {
+		model.addAttribute("id", id);
+		return "user/delete";
+	}
+	
+	@GetMapping("/deleteConfirm/{id}")
+	public String deleteConfirm(@PathVariable String id, HttpSession session) {
+		userService.delete(id);
 		return "redirect:/mate/list";
 	}
 }

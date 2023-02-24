@@ -14,7 +14,7 @@ public interface UserDAO {
 	@Select("SELECT * FROM user WHERE uid=#{uid}")
 	User findByUid(Long uid);
 	
-	@Select("SELECT * FROM user WHERE id=#{id}")
+	@Select("SELECT * FROM user WHERE id=#{id} and isDeleted=0")
 	User findById(String id);
 	
 	@Insert("INSERT INTO user VALUES(default, #{uname}, #{id}, #{pwd}, #{nickname}, #{email}, #{tel}, #{birthDate}, #{addr}, #{pay}, #{departures}, #{arrivals}, #{vehicles})")
@@ -26,15 +26,11 @@ public interface UserDAO {
 
 	String checkIdCom(String id);
 	
-//	/** uid로 정보 불러오기 */
-//	@Select("SELECT * FROM user WHERE uid=#{uid}")
-	
 //	/** 회원정보 수정 */
 //	@Update("UPDATE user SET nickname=#{nickname}, email=#{email}, tel=#{tel}, birthDate=#{birthDate}, addr=#{addr}, pay=#{pay}, departures=#{departures}, arrivals=#{arrivals}, vehicles=#{vehicles}")
 //	void update(User u);
 	
-		
-//	@Delete("delete from user where id=#{id};")
-//	void delete(String id);
-	
+	/** 회원 탈퇴 */
+	@Update("UPDATE user SET isDeleted=1 WHERE id=#{id}")
+	public void delete(String id);
 }

@@ -26,5 +26,6 @@ public class User {
 	private String departures;
 	private String arrivals;
 	private String vehicles;
+	private int isDeleted;		// not null
 	
 }

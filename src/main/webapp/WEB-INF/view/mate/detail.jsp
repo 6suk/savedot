@@ -66,8 +66,9 @@
 							<p class="font-15 font-600">${mate.user.nickname }</p>
 							<div class="font-14 d-flex detail line">
 								<p>
-									<span>${mate.state eq 0 ? '모집중' : '모집완료' }</span>
-									<span class="mate-url-tag ver${mate.state}">${mate.positonApplyNum } / ${mate.positionNum }</span>
+									<span>${mate.state eq 0 ? '모집중' : '모집완료' }</span> <span
+										class="mate-url-tag ver${mate.state}">${mate.positonApplyNum }
+										/ ${mate.positionNum }</span>
 								</p>
 								<p>
 									<input type="hidden" name="telType" value="${mate.telType }"
@@ -89,6 +90,11 @@
 									<button class="btn btn-gray sm font-14" id="question-openbtn">게시물
 										삭제</button>
 								</div>
+							</c:when>
+							<c:when test="${empty user }">
+								<button class="btn btn-main sm font-14" id="loginbtn">
+									메이트 신청 <i class="fa-solid fa-plus" id="applybtn-icon"></i>
+								</button>
 							</c:when>
 							<c:otherwise>
 								<button class="btn btn-main sm font-14" id="applybtn">
@@ -121,16 +127,32 @@
 			</section>
 		</div>
 	</div>
+	<!-- // Login Modal -->
+	<div class="modalBg" id="modal_login">
+		<div class="requestModal savedot-modal question" style="opacity: 1">
+			<div class="question-title">
+				<h5>로그인 후 메이트를 신청해주세요!</h5>
+				<div class="question-btn">
+					<input type="button" class="btn btn-main full font-14"
+						onclick="location.href='/user/login'" value="로그인하러가기" />
+					<input type="button" class="closebtn btn btn-sub full font-14"
+						value="취소" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Login Modal // -->
+
 	<!-- // question Modal -->
-	<div class="modalBg question">
+	<div class="modalBg" id="modal_question">
 		<div class="requestModal savedot-modal question" style="opacity: 1">
 			<div class="question-title">
 				<h5>게시물을 삭제하시겠습니까?</h5>
 				<div class="question-btn">
 					<input type="button" class="btn btn-main full font-14"
 						onclick="location.href='/mate/delete/${mate.mid}'" value="삭제" />
-					<input type="button" id="question-closebtn"
-						class="btn btn-sub full font-14" value="취소" />
+					<input type="button"
+						class="closebtn btn btn-sub full font-14" value="취소" />
 				</div>
 			</div>
 		</div>
@@ -138,14 +160,14 @@
 	<!-- question Modal // -->
 
 	<!-- // Apply Form -->
-	<div class="modalBg">
+	<div class="modalBg" id="modal_apply">
 		<div class="requestModal savedot-modal" style="opacity: 1">
 			<div class="content-title">
 				<h5>매칭 신청</h5>
 				<div>
 					<input type="button" id="sendbtn" class="btn btn-main mdi"
-						value="메이트 신청" /> <input type="button" id="closebtn"
-						class="btn btn-sub mdi" value="닫기" />
+						value="메이트 신청" /> <input type="button"
+						class="closebtn btn btn-sub mdi" value="닫기" />
 				</div>
 			</div>
 			<input type="hidden" value="${mate.placeAddr}" id="apply_place_addr" />

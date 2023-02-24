@@ -12,7 +12,6 @@ public interface UserService {
 	
 	/** DTO 가져오기 */
 	UserDTO findByUid(Long uid);
-	
 	UserDTO findById(String id);
 	
 	/** 로그인 */
@@ -27,5 +26,7 @@ public interface UserService {
 //	/** 회원정보 수정 */
 //	void update(User user);
 
-//	void delete(String id);
+	/** 회원탈퇴 */
+	void delete(String id);
+
 }
