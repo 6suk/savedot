@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.mulcam.finalproject.dto.ImageDTO;
 import com.mulcam.finalproject.dto.LocationDTO;
-import com.mulcam.finalproject.dto.MateApplyDTO;
 import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.Cash;
 import com.mulcam.finalproject.entity.CashImg;

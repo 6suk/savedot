@@ -1,6 +1,5 @@
 package com.mulcam.finalproject.controller;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,25 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.User;
-import com.mulcam.finalproject.service.UserServiceHyerin;
-import com.mulcam.finalproject.session.UserSession;
+import com.mulcam.finalproject.service.UserService;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
-	@Resource private UserSession userSession;
-
-	@Autowired private UserServiceHyerin userService;
+	@Autowired private UserService userService;
 	
 	
 	/** 회원가입 */
@@ -54,13 +50,10 @@ public class UserController {
 		String departures = req.getParameter("departures").strip();
 		String arrivals = req.getParameter("arrivals").strip();
 		String vehicles = req.getParameter("vehicles").strip();
-
-		
-		System.out.println(id);
 		 
 		if (pwd.equals(pwd2)) {
-			User u = new User(0L, uname, id, pwd, nickname, email, tel, birthDate, addr, pay, departures, arrivals, vehicles);
-			userService.join(u);
+			User user = new User(0L, uname, id, pwd, nickname, email, tel, birthDate, addr, pay, departures, arrivals, vehicles);
+			userService.join(user);
 			return "redirect:/user/login";
 		} else {
 			System.out.println("패스워드 입력이 잘못되었습니다.");
@@ -102,28 +95,54 @@ public class UserController {
 		
 		int result = userService.login(id, pwd, session);
 		switch (result) {
-		case UserServiceHyerin.CORRECT_LOGIN:
-			UserDTO userDTO = userService.findById(id);
-			session.setAttribute("user", userDTO);
+		case UserService.CORRECT_LOGIN:
 			return "redirect:/mypage/main";
 			
-		case UserServiceHyerin.WRONG_PASSWORD:
+		case UserService.WRONG_PASSWORD:
 			rttr.addFlashAttribute("loginFail", pwdFailMessage);
 			return "user/login";
 		
-		case UserServiceHyerin.ID_NOT_EXIST:
+		case UserService.ID_NOT_EXIST:
 			rttr.addFlashAttribute("loginFail", idFailMessage);
 			return "redirect:/user/join";
 		
 		default:
 			return "";
 		}
-
 	}
 	
+	/** 회원정보 수정 */
+	@GetMapping("/update/{uid}")
+	public String updateForm(@PathVariable Long uid, Model model) {
+		UserDTO userDTO = userService.findByUid(uid);
+		model.addAttribute("user", userDTO);
+		return "user/update";
+	}
+	
+//	@PostMapping("/update")
+//	public String update(HttpServletRequest req) {
+//		String nickname = req.getParameter("nickname").strip();
+//		String email = req.getParameter("email").strip();
+//		String tel = req.getParameter("tel").strip();
+//		String birthDate = req.getParameter("birthDate").strip();
+//		String addr = req.getParameter("addr").strip();
+//		String strpay = req.getParameter("pay").strip();
+//		int pay = 0;
+//		if (strpay != null && !strpay.equals("")) {
+//			pay = Integer.parseInt(strpay.replace(",", ""));
+//		}
+//		String departures = req.getParameter("departures").strip();
+//		String arrivals = req.getParameter("arrivals").strip();
+//		String vehicles = req.getParameter("vehicles").strip();
+//		User user = new User(nickname, email, tel, birthDate, addr, pay, departures, arrivals, vehicles);
+//		userService.update(user);
+//		return "redirect:/user/list";
+//	}
+	
+	/** 로그아웃 */
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:/user/login";
+		return "redirect:/mate/list";
 	}
 }

@@ -8,7 +8,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.beust.jcommander.internal.Console;
 import com.mulcam.finalproject.dao.MateApplyDAO;
 import com.mulcam.finalproject.dto.MateApplyDTO;
 import com.mulcam.finalproject.dto.MateDTO;
