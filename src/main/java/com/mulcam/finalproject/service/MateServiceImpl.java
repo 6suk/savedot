@@ -10,9 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.beust.jcommander.internal.Console;
 import com.mulcam.finalproject.dao.MateDAO;
-import com.mulcam.finalproject.dao.UserDAO;
 import com.mulcam.finalproject.dto.ImageDTO;
 import com.mulcam.finalproject.dto.MateDTO;
 import com.mulcam.finalproject.dto.MateSearchDTO;

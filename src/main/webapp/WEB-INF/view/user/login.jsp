@@ -1,15 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<!-- // Heading -->
+	<%@ include file="../common/heading.jsp"%>
+	<!-- // Heading -->
+    <title></title>
 	<link rel="stylesheet" href="../css/loginForm.css">
 </head>
 <body>
+ 	<!-- TOP -->
+	<%@ include file="../common/top.jsp"%>
+	<!-- TOP -->
+	 
     <div class="container">
         <!-- Heading -->
         <h1>Save dot</h1>
@@ -21,9 +26,6 @@
           </li>
           <li>
             <a href="/user/join" id="signup">회원가입</a>
-          </li>
-          <li>
-            <a href="/user/login" id="reset">RESET</a>
           </li>
         </ul>
         <!-- 일반 로그인 -->
@@ -38,8 +40,12 @@
             </div>
             <!-- repeat password input -->
             <div class="input__block">
-                <input type="password" placeholder="Repeat password" class="input repeat__password" id="repeat__password"    />
+                <input type="password" placeholder="비밀번호 확인" class="input repeat__password" id="repeat__password"    />
             </div>
+            
+  <%--           <c:if test = "${result==0}">
+                <div class = "login_warn">${pwdFailMessage}</div>
+            </c:if> --%>
 
             <!-- sign in button -->
             <button type="submit" class="signin__btn">
