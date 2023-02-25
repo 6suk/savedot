@@ -23,7 +23,7 @@ import com.mulcam.finalproject.entity.User;
 import com.mulcam.finalproject.service.MateApplyService;
 import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.UserService;
-import com.mulcam.finalproject.util.ImageUpload;
+import com.mulcam.finalproject.util.ImageUploadUtil;
 import com.mulcam.finalproject.util.ReverseGeocodeUtil;
 
 @Controller
@@ -39,7 +39,7 @@ public class TestControllerYelim {
 	UserService userService;
 
 	@Autowired
-	ImageUpload imageUpload;
+	ImageUploadUtil imageUpload;
 
 	@Autowired
 	MateApplyService applyService;

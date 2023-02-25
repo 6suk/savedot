@@ -1,48 +1,22 @@
 package com.mulcam.finalproject.controller;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.util.Scanner;
-
-import com.mulcam.finalproject.util.CalendarUtil;
+import java.util.Arrays;
+import java.util.List;
 
 public class ConsoleTest {
-	
+
 	public static void main(String[] args) {
-	    Scanner sc = new Scanner(System.in); 
+		// 은행 option 제작
+		String bank[] = { "KB국민은행", "IBK기업은행", "NH농협은행", "신한은행", "씨티은행", "SC제일은행", "우리은행", "카카오뱅크", "케이뱅크", "토스뱅크",
+				"하나은행", "경남은행", "광주은행", "대구은행", "부산은행", "KDB산업은행", "수협은행", "우체국은행", "전북은행", "제주은행", "새마을금고", "신협은행",
+				"SBI저축은행", "저축은행", "NH투자증권", "미래에셋증권", "삼성증권", "신한투자증권", "SK증권", "유안타증권", "유진투자증권", "한국투자증권" };
 
-	    System.out.print("연도 입력 : "); 
-	    int year = sc.nextInt(); 
+		List<String> list = Arrays.asList(bank);
+		list.forEach(x -> {
+			String data = "<option value='" + x + "'>"
+					+ x + "</option>";
+			System.out.println(data);
+		});
 
-	    System.out.print("월 입력 : "); 
-	    int month = sc.nextInt(); 
-//
-//		int year = 2023;
-//		int month = 2;
-	    CalendarUtil calendarUtil = new CalendarUtil();
-//	    calendarUtil.getCalendar(year,month); 
-	    
-		//기준일자
-		LocalDate date = LocalDate.of(year, month, 1);
-		DayOfWeek dayOfWeek = date.getDayOfWeek();
-		int dayOfWeekNumber = dayOfWeek.getValue();
-
-		//해당 월의 첫째 날
-		LocalDate firstDate = date.withDayOfMonth(1);
-		firstDate.getDayOfMonth();
-
-		//해당 월의 마지막 날
-		LocalDate lastDate = date.withDayOfMonth(date.lengthOfMonth());
-		
-		// 지난 달 마지막 날짜
-		LocalDate leftDate = LocalDate.of(year, 1, 1);
-		LocalDate lastlastDate = leftDate.withDayOfMonth(leftDate.lengthOfMonth());
-		int lastlastDateNumber = lastlastDate.getDayOfMonth();
-		
-//		System.out.println(lastlastDateNumber);
-//		System.out.println(firstDate);
-//		System.out.println(lastDate);
-//		System.out.println(dayOfWeekNumber);
-	    
 	}
 }
