@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.User;
@@ -49,13 +49,10 @@ public class UserController {
 		String departures = req.getParameter("departures").strip();
 		String arrivals = req.getParameter("arrivals").strip();
 		String vehicles = req.getParameter("vehicles").strip();
-
-		
-		System.out.println(id);
 		 
 		if (pwd.equals(pwd2)) {
-			User u = new User(0L, uname, id, pwd, nickname, email, tel, birthDate, addr, pay, departures, arrivals, vehicles);
-			userService.join(u);
+			User user = new User(0L, uname, id, pwd, nickname, email, tel, birthDate, addr, pay, departures, arrivals, vehicles, 0);
+			userService.join(user);
 			return "redirect:/user/login";
 		} else {
 			System.out.println("패스워드 입력이 잘못되었습니다.");
@@ -86,39 +83,71 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public String login(HttpServletRequest req, RedirectAttributes rttr, Model model) {
-		HttpSession session = req.getSession();
+	public String login(UserDTO user, HttpSession session, Model model) throws Exception {
+		int result = userService.login(user, session);
 		
-		String idFailMessage = "존재하지 않는 아이디입니다.";
-		String pwdFailMessage = "잘못된 비밀번호입니다.";
-		
-		String id = req.getParameter("id");
-		String pwd = req.getParameter("pwd");
-		
-		int result = userService.login(id, pwd, session);
 		switch (result) {
 		case UserService.CORRECT_LOGIN:
-			UserDTO userDTO = userService.findById(id);
-			session.setAttribute("user", userDTO);
-			return "redirect:/mypage/main";
-			
+			UserDTO getUser = (UserDTO) session.getAttribute("user");
+			model.addAttribute("msg", getUser.getNickname() + "님 환영합니다!");
+			model.addAttribute("url", "/mypage/main");
+			break;
 		case UserService.WRONG_PASSWORD:
-			rttr.addFlashAttribute("loginFail", pwdFailMessage);
-			return "user/login";
-		
+			model.addAttribute("msg", "잘못된 비밀번호입니다. 다시 입력해주세요.");
+			model.addAttribute("url", "/user/login"); 
+			break;
 		case UserService.ID_NOT_EXIST:
-			rttr.addFlashAttribute("loginFail", idFailMessage);
-			return "redirect:/user/join";
-		
-		default:
-			return "";
+			model.addAttribute("msg", "존재하지 않는 아이디입니다. 회원 가입 페이지로 이동할게요!");
+			model.addAttribute("url", "/user/join");
+			break;
 		}
-
+			return "user/alertMsg";
 	}
 	
+//	/** 회원정보 수정 */
+//	@GetMapping("/update/{uid}")
+//	public String updateForm(@PathVariable Long uid, Model model) {
+//		UserDTO userDTO = userService.findByUid(uid);
+//		model.addAttribute("user", userDTO);
+//		return "user/update";
+//	}
+//	@PostMapping("/update")
+//	public String update(HttpServletRequest req) {
+//		String nickname = req.getParameter("nickname").strip();
+//		String email = req.getParameter("email").strip();
+//		String tel = req.getParameter("tel").strip();
+//		String birthDate = req.getParameter("birthDate").strip();
+//		String addr = req.getParameter("addr").strip();
+//		String strpay = req.getParameter("pay").strip();
+//		int pay = 0;
+//		if (strpay != null && !strpay.equals("")) {
+//			pay = Integer.parseInt(strpay.replace(",", ""));
+//		}
+//		String departures = req.getParameter("departures").strip();
+//		String arrivals = req.getParameter("arrivals").strip();
+//		String vehicles = req.getParameter("vehicles").strip();
+//		User user = new User(nickname, email, tel, birthDate, addr, pay, departures, arrivals, vehicles);
+//		userService.update(user);
+//		return "redirect:/user/list";
+//	}
+	
+	/** 로그아웃 */
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:/user/login";
+		return "redirect:/mate/list";
+	}
+	
+	/** 회원탈퇴 */
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable String id, Model model) {
+		model.addAttribute("id", id);
+		return "user/delete";
+	}
+	
+	@GetMapping("/deleteConfirm/{id}")
+	public String deleteConfirm(@PathVariable String id, HttpSession session) {
+		userService.delete(id);
+		return "redirect:/mate/list";
 	}
 }

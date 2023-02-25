@@ -12,17 +12,21 @@ public interface UserService {
 	
 	/** DTO 가져오기 */
 	UserDTO findByUid(Long uid);
-	
 	UserDTO findById(String id);
 	
 	/** 로그인 */
-	int login(String id, String pwd, HttpSession session);
+	int login(UserDTO user, HttpSession session);
 	
 	/** 회원가입 */
-	void join(User u);
+	void join(User user);
 
 	/** 아이디 중복 검사 */
 	String checkID(String id, String type);
 
-//	void delete(String id);
+//	/** 회원정보 수정 */
+//	void update(User user);
+
+	/** 회원탈퇴 */
+	void delete(String id);
+
 }
