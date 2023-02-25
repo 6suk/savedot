@@ -1,6 +1,7 @@
 package com.mulcam.finalproject.dto;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,9 +21,11 @@ public class ExchangeRateDTO {
 	private String curUnit;
 	private String curNm;
 	private String dealBasR;
+	private LocalDate today;			// 예림 : 날짜 추가
 	private String todayCurUnit;		// 통화코드
 	private String todayCurNm;			// 국가명
 	private String todayDealBasR;		// 오늘 매매기준율
+	private LocalDate yesterday;		// 예림 : 날짜 추가
 	private String yesterdayCurUnit;	// 통화코드
 	private String yesterdayCurNm;		// 국가명
 	private String yesterdayDealBasR;	// 전일 매매기준율
