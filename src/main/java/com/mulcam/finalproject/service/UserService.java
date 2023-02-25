@@ -15,7 +15,7 @@ public interface UserService {
 	UserDTO findById(String id);
 	
 	/** 로그인 */
-	int login(String id, String pwd, HttpSession session);
+	int login(UserDTO user, HttpSession session);
 	
 	/** 회원가입 */
 	void join(User user);

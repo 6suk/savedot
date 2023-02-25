@@ -14,7 +14,7 @@ public interface UserDAO {
 	@Select("SELECT * FROM user WHERE uid=#{uid}")
 	User findByUid(Long uid);
 	
-	@Select("SELECT * FROM user WHERE id=#{id} and isDeleted=0")
+	@Select("SELECT * FROM user WHERE id=#{id} and isDeleted=0")		// 탈퇴한 적 없는 회원만 로그인 가능
 	User findById(String id);
 	
 	@Insert("INSERT INTO user VALUES(default, #{uname}, #{id}, #{pwd}, #{nickname}, #{email}, #{tel}, #{birthDate}, #{addr}, #{pay}, #{departures}, #{arrivals}, #{vehicles})")

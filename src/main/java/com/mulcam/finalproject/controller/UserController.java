@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.User;
@@ -84,44 +83,34 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public String login(HttpServletRequest req, RedirectAttributes rttr, Model model) throws Exception {
-		HttpSession session = req.getSession();
+	public String login(UserDTO user, HttpSession session, Model model) throws Exception {
+		int result = userService.login(user, session);
 		
-		String idFailMessage = "존재하지 않는 아이디입니다.";
-		String pwdFailMessage = "잘못된 비밀번호입니다.";
-		
-		String id = req.getParameter("id");
-		String pwd = req.getParameter("pwd");
-		
-		int result = userService.login(id, pwd, session);
 		switch (result) {
 		case UserService.CORRECT_LOGIN:
-			UserDTO userDTO = userService.findById(id);
-			session.setAttribute("user", userDTO);
-			return "redirect:/mypage/main";
-			
+			UserDTO getUser = (UserDTO) session.getAttribute("user");
+			model.addAttribute("msg", getUser.getNickname() + "님 환영합니다!");
+			model.addAttribute("url", "/mypage/main");
+			break;
 		case UserService.WRONG_PASSWORD:
-			rttr.addFlashAttribute("loginFail", pwdFailMessage);
-			return "user/login";
-		
+			model.addAttribute("msg", "잘못된 비밀번호입니다. 다시 입력해주세요.");
+			model.addAttribute("url", "/user/login"); 
+			break;
 		case UserService.ID_NOT_EXIST:
-			rttr.addFlashAttribute("loginFail", idFailMessage);
-			System.out.println(UserService.ID_NOT_EXIST);
-			return "redirect:/user/join";
-		
-		default:
-			return "";
+			model.addAttribute("msg", "존재하지 않는 아이디입니다. 회원 가입 페이지로 이동할게요!");
+			model.addAttribute("url", "/user/join");
+			break;
 		}
+			return "user/alertMsg";
 	}
 	
-	/** 회원정보 수정 */
-	@GetMapping("/update/{uid}")
-	public String updateForm(@PathVariable Long uid, Model model) {
-		UserDTO userDTO = userService.findByUid(uid);
-		model.addAttribute("user", userDTO);
-		return "user/update";
-	}
-	
+//	/** 회원정보 수정 */
+//	@GetMapping("/update/{uid}")
+//	public String updateForm(@PathVariable Long uid, Model model) {
+//		UserDTO userDTO = userService.findByUid(uid);
+//		model.addAttribute("user", userDTO);
+//		return "user/update";
+//	}
 //	@PostMapping("/update")
 //	public String update(HttpServletRequest req) {
 //		String nickname = req.getParameter("nickname").strip();
