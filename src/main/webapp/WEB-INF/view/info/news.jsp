@@ -50,7 +50,7 @@
             <div class="col-md-4">
 				<div class="box" data-aos="fade-up" data-aos-delay="300">
                     <span class="badge badge-secondary">${elist.get(0).todayCurUnit}</span>
-					<h6 class="card-date" id="today1"></h6>
+					<h6 class="card-date">${elist.get(0).today}</h6>
 					<h3 "card-title">&#127828; 미국</h3>
 					<p class="card-text">
 						매매 기준율 ${elist.get(0).todayDealBasR}<br>
@@ -62,7 +62,7 @@
             <div class="col-md-4">
 				<div class="box" data-aos="fade-up" data-aos-delay="300">
 					<span class="badge badge-secondary">${elist.get(1).todayCurUnit}</span>
-					<h6 class="card-date" id="today2"></h6>
+					<h6 class="card-date">${elist.get(1).today}</h6>
 					<h3 "card-title">&#127843; 일본</h3>
 					<p class="card-text">
 						매매 기준율 ${elist.get(1).todayDealBasR}<br>
@@ -74,7 +74,7 @@
             <div class="col-md-4">
 				<div class="box" data-aos="fade-up" data-aos-delay="300">
 					<span class="badge badge-secondary">${elist.get(2).todayCurUnit}</span>
-					<h6 class="card-date" id="today3"></h6>
+					<h6 class="card-date">${elist.get(2).today}</h6>
 					<h3 "card-title">🥖 유럽</h3>
 					<p class="card-text">
 						매매 기준율 ${elist.get(2).todayDealBasR}<br>

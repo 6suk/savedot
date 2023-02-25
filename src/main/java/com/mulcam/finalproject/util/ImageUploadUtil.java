@@ -17,7 +17,7 @@ import com.fasterxml.uuid.Generators;
 import com.mulcam.finalproject.dto.ImageDTO;
 
 @Service
-public class ImageUpload {
+public class ImageUploadUtil {
 
 	@Value("${spring.servlet.multipart.location}")
 	private String location;
