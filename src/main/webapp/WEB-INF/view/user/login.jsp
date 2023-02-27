@@ -2,13 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 	<!-- // Heading -->
 	<%@ include file="../common/heading.jsp"%>
 	<!-- // Heading -->
     <title></title>
-	<link rel="stylesheet" href="../css/loginForm.css">
+	<link rel="stylesheet" href="/css/loginForm.css">
 </head>
 <body>
  	<!-- TOP -->
@@ -17,12 +17,12 @@
 	 
     <div class="container">
         <!-- Heading -->
-        <h1>Save dot</h1>
+        <h1>Save.</h1>
         
         <!-- Links -->
         <ul class="links">
           <li>
-            <a href="#" id="signin">로그인</a>
+            <a href="/user/login" id="signin">로그인</a>
           </li>
           <li>
             <a href="/user/join" id="signup">회원가입</a>
@@ -42,10 +42,6 @@
             <div class="input__block">
                 <input type="password" placeholder="비밀번호 확인" class="input repeat__password" id="repeat__password"    />
             </div>
-            
-  <%--           <c:if test = "${result==0}">
-                <div class = "login_warn">${pwdFailMessage}</div>
-            </c:if> --%>
 
             <!-- sign in button -->
             <button type="submit" class="signin__btn">
@@ -70,6 +66,6 @@
           <i class="fa fa-heart"></i> 
         </p>
       </footer>
-      <script src="../js/loginForm.js?ver=1"></script>
+      <script src="/js/loginForm.js"></script>
 </body>
 </html>

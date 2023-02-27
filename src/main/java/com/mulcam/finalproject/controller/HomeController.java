@@ -22,14 +22,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mulcam.finalproject.dto.ImageDTO;
-import com.mulcam.finalproject.util.ImageUpload;
-
+import com.mulcam.finalproject.util.ImageUploadUtil;
 
 @Controller
 @RequestMapping("")
 public class HomeController {
 	@Autowired
-	ImageUpload imageUpload;
+	ImageUploadUtil imageUpload;
 	
 	@Value("${spring.servlet.multipart.location}")
 	private String location;

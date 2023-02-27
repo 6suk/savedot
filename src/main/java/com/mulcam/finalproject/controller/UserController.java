@@ -23,7 +23,6 @@ public class UserController {
 
 	@Autowired private UserService userService;
 	
-	
 	/** 회원가입 */
 	@GetMapping("/join")
 	public String joinForm() {
@@ -31,7 +30,14 @@ public class UserController {
 	}
 	
 	@PostMapping("/join")
-	public String join(HttpServletRequest req) {
+	public String join(HttpServletRequest req, Model model) {
+//		Enumeration params = req.getParameterNames();
+//		System.out.println();
+//		while (params.hasMoreElements()) {
+//			String name = (String)params.nextElement();
+//			System.out.println(name + ": " + req.getParameter(name));
+//		}
+//		System.out.println();
 		String uname = req.getParameter("uname").strip();
 		String id = req.getParameter("id").strip();
 		String pwd = req.getParameter("pwd").strip();
@@ -40,7 +46,9 @@ public class UserController {
 		String email = req.getParameter("email").strip();
 		String tel = req.getParameter("tel").strip();
 		String birthDate = req.getParameter("birthDate").strip();
+		String postcode = req.getParameter("postcode").strip();
 		String addr = req.getParameter("addr").strip();
+		String detailAddr = req.getParameter("detailAddr").strip();
 		String strpay = req.getParameter("pay").strip();
 		int pay = 0;
 		if (strpay != null && !strpay.equals("")) {
@@ -49,32 +57,36 @@ public class UserController {
 		String departures = req.getParameter("departures").strip();
 		String arrivals = req.getParameter("arrivals").strip();
 		String vehicles = req.getParameter("vehicles").strip();
+		String bank = req.getParameter("bank").strip();
+		String accountNumber = req.getParameter("accountNumber").strip();
+		String code = req.getParameter("code").strip();
 		 
 		if (pwd.equals(pwd2)) {
-			User user = new User(0L, uname, id, pwd, nickname, email, tel, birthDate, addr, pay, departures, arrivals, vehicles, 0);
+			User user = new User(0L, uname, id, pwd, nickname, email, tel, birthDate, postcode, addr, detailAddr, pay, departures, arrivals, vehicles, 0, bank, accountNumber, code);
 			userService.join(user);
 			return "redirect:/user/login";
 		} else {
-			System.out.println("패스워드 입력이 잘못되었습니다.");
-			return "redirect:/user/join";
+			model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+			model.addAttribute("url", "/user/join");
+			return "user/alertMsg";
 		}
 	}
 	
-	/** 아이디, 닉네임 중복확인 */
-	   @PostMapping("/join/checkid")
-	   @ResponseBody
-	   public int checkid(@RequestParam("id") String id, @RequestParam("type") String type) {
-
-//	    System.out.println("ajax 완료 : "+id);
-//	    String check = userService.checkID(id);
-//	    System.out.println("중복검사 : "+a);
-
-	      if (id.equals(userService.checkID(id, type))) {
-	         return 1;
-	      }
-	      return 0;
-	   }
+	/** 아이디 중복확인 */
+	@PostMapping("/join/idCheck")
+	@ResponseBody
+	public String idCheck(@RequestParam("id") String id) {
+		int cnt = userService.idCheck(id);
+		return cnt + "";
+	}
 	
+	/** 닉네임 중복확인 */
+	@PostMapping("/join/nicknameCheck")
+	@ResponseBody
+	public String nicknameCheck(@RequestParam("nickname") String nickname) {
+		int c = userService.nicknameCheck(nickname);
+		return c + "";
+	}
 	   
 	/** 로그인 */
 	@GetMapping("/login")
@@ -88,10 +100,7 @@ public class UserController {
 		
 		switch (result) {
 		case UserService.CORRECT_LOGIN:
-			UserDTO getUser = (UserDTO) session.getAttribute("user");
-			model.addAttribute("msg", getUser.getNickname() + "님 환영합니다!");
-			model.addAttribute("url", "/mypage/main");
-			break;
+			return "redirect:/mypage/main";
 		case UserService.WRONG_PASSWORD:
 			model.addAttribute("msg", "잘못된 비밀번호입니다. 다시 입력해주세요.");
 			model.addAttribute("url", "/user/login"); 
@@ -104,32 +113,90 @@ public class UserController {
 			return "user/alertMsg";
 	}
 	
-//	/** 회원정보 수정 */
-//	@GetMapping("/update/{uid}")
-//	public String updateForm(@PathVariable Long uid, Model model) {
-//		UserDTO userDTO = userService.findByUid(uid);
-//		model.addAttribute("user", userDTO);
-//		return "user/update";
-//	}
-//	@PostMapping("/update")
-//	public String update(HttpServletRequest req) {
-//		String nickname = req.getParameter("nickname").strip();
-//		String email = req.getParameter("email").strip();
-//		String tel = req.getParameter("tel").strip();
-//		String birthDate = req.getParameter("birthDate").strip();
-//		String addr = req.getParameter("addr").strip();
-//		String strpay = req.getParameter("pay").strip();
-//		int pay = 0;
-//		if (strpay != null && !strpay.equals("")) {
-//			pay = Integer.parseInt(strpay.replace(",", ""));
-//		}
-//		String departures = req.getParameter("departures").strip();
-//		String arrivals = req.getParameter("arrivals").strip();
-//		String vehicles = req.getParameter("vehicles").strip();
-//		User user = new User(nickname, email, tel, birthDate, addr, pay, departures, arrivals, vehicles);
-//		userService.update(user);
-//		return "redirect:/user/list";
-//	}
+	/** 회원정보 수정 */
+	
+	//수정하고자 하는 정보를 불러오는 메소드
+	@GetMapping("/update/{uid}")
+	public String updateForm(@PathVariable Long uid, Model model) {
+		UserDTO userDTO = userService.findByUid(uid);
+		model.addAttribute("user", userDTO);
+		return "user/profile";
+	}
+	
+	@PostMapping("/update")
+	public String update(HttpServletRequest req, Model model) {
+		long uid = Long.parseLong(req.getParameter("uid"));
+		String pwd = req.getParameter("pwd").strip();
+		String pwd2 = req.getParameter("pwd2").strip();
+		String nickname = req.getParameter("nickname").strip();
+		String email = req.getParameter("email").strip();
+		String tel = req.getParameter("tel").strip();
+		String birthDate = req.getParameter("birthDate").strip();
+		String postcode = req.getParameter("postcode").strip();
+		String addr = req.getParameter("addr").strip();
+		String detailAddr = req.getParameter("detailAddr").strip();
+		String strpay = req.getParameter("pay").strip();
+		int pay = 0;
+		if (strpay != null && !strpay.equals("")) {
+			pay = Integer.parseInt(strpay.replace(",", ""));
+		}
+		String departures = req.getParameter("departures").strip();
+		String arrivals = req.getParameter("arrivals").strip();
+		String vehicles = req.getParameter("vehicles").strip();
+		String bank = req.getParameter("bank").strip();
+		String accountNumber = req.getParameter("accountNumber").strip();
+		String code = req.getParameter("code").strip();
+		HttpSession session = req.getSession();
+		User user;
+		
+		if (pwd == null || pwd.equals("")) {		// 비밀번호를 입력하지 않은 경우
+			user = new User(uid, "", "", "", nickname, email, tel, birthDate, postcode, addr, detailAddr, pay, departures, arrivals, vehicles, 0, bank, accountNumber, code);
+			userService.update(user, "");
+
+			session.setAttribute("nickname", nickname);
+			session.setAttribute("email", email);
+			session.setAttribute("tel", tel);
+			session.setAttribute("birthDate", birthDate);
+			session.setAttribute("postcode", postcode);
+			session.setAttribute("addr", addr);
+			session.setAttribute("detailAddr", detailAddr);
+			session.setAttribute("pay", pay);
+			session.setAttribute("departures", departures);
+			session.setAttribute("arrivals", arrivals);
+			session.setAttribute("vehicles", vehicles);
+			session.setAttribute("bank", bank);
+			session.setAttribute("accountNumber", accountNumber);
+			session.setAttribute("code", code);
+			return "redirect:/mypage/main";
+		}
+		 
+		else if (pwd.equals(pwd2)) {				// 비밀번호가 올바른 경우
+			user = new User(uid, "", "", pwd, nickname, email, tel, birthDate, postcode, addr, detailAddr, pay, departures, arrivals, vehicles, 0, bank, accountNumber, code);
+			userService.update(user, pwd);
+			
+			session.setAttribute("nickname", nickname);
+			session.setAttribute("email", email);
+			session.setAttribute("tel", tel);
+			session.setAttribute("birthDate", birthDate);
+			session.setAttribute("postcode", postcode);
+			session.setAttribute("addr", addr);
+			session.setAttribute("detailAddr", detailAddr);
+			session.setAttribute("pay", pay);
+			session.setAttribute("departures", departures);
+			session.setAttribute("arrivals", arrivals);
+			session.setAttribute("vehicles", vehicles);
+			session.setAttribute("bank", bank);
+			session.setAttribute("accountNumber", accountNumber);
+			session.setAttribute("code", code);
+			return "redirect:/mypage/main";
+		} 
+		
+		else {										// 비밀번호를 잘못 입력한 경우
+			model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+			model.addAttribute("url", "/user/update/{uid}");
+			return "user/alertMsg";
+		}
+	}
 	
 	/** 로그아웃 */
 	@GetMapping("/logout")
@@ -139,15 +206,16 @@ public class UserController {
 	}
 	
 	/** 회원탈퇴 */
-	@GetMapping("/delete/{id}")
-	public String delete(@PathVariable String id, Model model) {
-		model.addAttribute("id", id);
+	@GetMapping("/delete/{uid}")
+	public String delete(@PathVariable Long uid, Model model) {
+		UserDTO user = userService.findByUid(uid);
+		model.addAttribute("nickname", user.getNickname());
 		return "user/delete";
 	}
 	
-	@GetMapping("/deleteConfirm/{id}")
-	public String deleteConfirm(@PathVariable String id, HttpSession session) {
-		userService.delete(id);
+	@GetMapping("/deleteConfirm/{uid}")
+	public String deleteConfirm(@PathVariable Long uid, HttpSession session) {
+		userService.delete(uid);
 		return "redirect:/mate/list";
 	}
 }

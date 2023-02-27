@@ -23,7 +23,7 @@ import com.mulcam.finalproject.entity.CashImg;
 import com.mulcam.finalproject.service.CashService;
 import com.mulcam.finalproject.service.UserService;
 import com.mulcam.finalproject.util.CashOcrUtil;
-import com.mulcam.finalproject.util.ImageUpload;
+import com.mulcam.finalproject.util.ImageUploadUtil;
 
 @Controller
 @RequestMapping("/cash")
@@ -48,7 +48,7 @@ public class CashController {
 	private String location;
 
 	@Autowired
-	ImageUpload imageUpload;
+	ImageUploadUtil imageUpload;
 
 	/** 수입지출등록 **/
 	/* 수입지출 등록 front page띄우기 */

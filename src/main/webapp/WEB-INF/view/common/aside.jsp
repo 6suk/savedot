@@ -19,7 +19,7 @@
       <dt>조각메이트</dt>
       <dd><a href="#">2</a></dd>
     </dl>
-    <div class="btn btn-border font-12">정보수정</div>
+    <div class="btn btn-border font-12"><a href="/user/update/${user.uid}">정보수정</a></div>
   </div>
   <div class="multiple-btn pt-3 pb-5">
     <a class="icon-btn" href="#">

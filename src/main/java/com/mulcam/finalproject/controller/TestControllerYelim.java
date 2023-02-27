@@ -2,26 +2,22 @@ package com.mulcam.finalproject.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mulcam.finalproject.dto.ImageDTO;
 import com.mulcam.finalproject.dto.LocationDTO;
-import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.Cash;
 import com.mulcam.finalproject.entity.CashImg;
 import com.mulcam.finalproject.entity.User;
 import com.mulcam.finalproject.service.MateApplyService;
 import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.UserService;
-import com.mulcam.finalproject.util.ImageUpload;
+import com.mulcam.finalproject.util.ImageUploadUtil;
 import com.mulcam.finalproject.util.ReverseGeocodeUtil;
 
 @Controller
@@ -37,7 +33,7 @@ public class TestControllerYelim {
 	UserService userService;
 
 	@Autowired
-	ImageUpload imageUpload;
+	ImageUploadUtil imageUpload;
 
 	@Autowired
 	MateApplyService applyService;
