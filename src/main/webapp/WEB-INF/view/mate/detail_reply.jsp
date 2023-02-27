@@ -123,34 +123,25 @@
 							</div>
 						</div>
 					</c:if>
+					<!--  ======================================================================================== reply -->
+
 					<!--  댓글작성부분  -->
-					<div class = "mate-detail-reply-list">
-					<span class ="reply_num">
-					댓글
-					<strong>9</strong>
-					</span>
-					</div>
-					<div>
-					<form method="post" action="/mate/reply">
-						<input type="hidden" name="mid"  id ="mid" value="<c:out value="${mate.mid}"/>">
-						<input type="hidden" name="uid"  id ="rid"  value="${user.uid}}">
-						<input type="hidden" name="grp"  id ="grp" value >
-							<table class="table table-borderless mt-2">
-                                <tr class="d-flex">
-                                    <td class="col-1 text-end">
-                                        <label for="content"><p class="font-15 font-600" >${user.nickname }</p></label>
-                                    </td>
-                                    <td class="col-9">
-                                        <textarea class="form-control" id="content" name="content" rows="3" placeholder="댓글을 입력해주세요."></textarea>
-                                    </td>
-                                    <td class="col-2">
-                                        <button type="submit" class="btn btn-primary">등록</button>
-                                    </td>
-                                </tr>
-                            </table>
+
+					<form method="post" action="">
+
+						<p>
+							<label>작성자</label> <input type="text" name="nickname" id="nickname">
+						</p>
+						<p>
+							<textarea rows="5" cols="50" name="content"  id="content"></textarea>
+						</p>
+						<p>
+						<button class="btn btn-sub sm font-14" onclick="''">댓글 작성</button>
+						</p>
 					</form>
-					</div>
-						<!--  댓글작성부분  -->
+
+
+					<!--  ======================================================================================== reply -->
 				</div>
 			</section>
 		</div>
@@ -162,9 +153,8 @@
 				<h5>로그인 후 메이트를 신청해주세요!</h5>
 				<div class="question-btn">
 					<input type="button" class="btn btn-main full font-14"
-						onclick="location.href='/user/login'" value="로그인하러가기" />
-					<input type="button" class="closebtn btn btn-sub full font-14"
-						value="취소" />
+						onclick="location.href='/user/login'" value="로그인하러가기" /> <input
+						type="button" class="closebtn btn btn-sub full font-14" value="취소" />
 				</div>
 			</div>
 		</div>
@@ -179,8 +169,8 @@
 				<div class="question-btn">
 					<input type="button" class="btn btn-main full font-14"
 						onclick="location.href='/mate/delete/${mate.mid}'" value="삭제" />
-					<input type="button"
-						class="closebtn btn btn-sub full font-14" value="취소" />
+					<input type="button" class="closebtn btn btn-sub full font-14"
+						value="취소" />
 				</div>
 			</div>
 		</div>
@@ -249,7 +239,6 @@
 <script src="/js/apply.js"></script>
 <script src="/js/mate_detail.js"></script>
 <script src="/js/required.js"></script>
-<script src="/js/mate_reply.js"></script>
 <script>
 	var tooltipTriggerList = [].slice.call(document
 			.querySelectorAll('[data-bs-toggle="tooltip"]'));
