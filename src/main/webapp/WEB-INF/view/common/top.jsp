@@ -3,14 +3,14 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- //// COMMON - TOP //// -->
 
-<nav class="navbar navbar-expand navbar-light fixed-top">
+<nav class="navbar navbar-expand navbar-light fixed-top" id="main-nav">
   <div class="container-lg justify-content-lg-between">
     <ul class="navbar-nav">
-      <a class="navbar-brand" href="#">
-        <img src="/img/logo.png" class="logo" />
+      <a class="navbar-brand" href="/home">
+        <img src="/img/logo2.png" class="logo" />
       </a>
       <li class="nav-item">
-        <a class="nav-link main-nav" href="#">Home</a>
+        <a class="nav-link main-nav" href="/home">Home</a>
       </li>
       <li class="nav-item">
         <a class="nav-link main-nav" href="/mate/list">조각메이트</a>

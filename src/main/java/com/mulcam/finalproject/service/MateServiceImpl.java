@@ -17,7 +17,8 @@ import com.mulcam.finalproject.dto.MateSearchDTO;
 import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.Mate;
 import com.mulcam.finalproject.entity.MateImg;
-import com.mulcam.finalproject.util.ImageUpload;
+import com.mulcam.finalproject.entity.User;
+import com.mulcam.finalproject.util.ImageUploadUtil;
 
 @Service
 public class MateServiceImpl implements MateService {
@@ -31,7 +32,7 @@ public class MateServiceImpl implements MateService {
 	ModelMapper modelMapper;
 
 	@Autowired
-	ImageUpload imageUpload;
+	ImageUploadUtil imageUpload;
 
 	@Value("${spring.servlet.multipart.location}")
 	private String location;
