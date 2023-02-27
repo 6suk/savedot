@@ -1,6 +1,7 @@
 package com.mulcam.finalproject.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mulcam.finalproject.dao.ChartDAO;
 import com.mulcam.finalproject.dto.ImageDTO;
 import com.mulcam.finalproject.dto.LocationDTO;
 import com.mulcam.finalproject.entity.Cash;
@@ -16,6 +18,7 @@ import com.mulcam.finalproject.entity.CashImg;
 import com.mulcam.finalproject.entity.User;
 import com.mulcam.finalproject.service.MateApplyService;
 import com.mulcam.finalproject.service.MateService;
+import com.mulcam.finalproject.service.MypageService;
 import com.mulcam.finalproject.service.UserService;
 import com.mulcam.finalproject.util.ImageUploadUtil;
 import com.mulcam.finalproject.util.ReverseGeocodeUtil;
@@ -38,6 +41,12 @@ public class TestControllerYelim {
 	@Autowired
 	MateApplyService applyService;
 	
+	@Autowired
+	ChartDAO chartDAO;
+	
+	@Autowired
+	MypageService mypageService;
+	
 
 //	@GetMapping("/login/{uid}")
 //	public String loginTemp(@PathVariable String uid, HttpSession session) {
@@ -52,6 +61,8 @@ public class TestControllerYelim {
 //		return "redirect:/mypage/main";
 //	}
 
+
+	
 	@GetMapping("/cashsave/test")
 	public String datatestGet() {
 		return "cashsave/write";

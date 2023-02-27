@@ -19,8 +19,9 @@ import com.mulcam.finalproject.dto.UserDTO;
 @Component
 public class LoginFilter implements Filter {
 
-	private static final String[] whiteList = { "/user/*", "/", "/mate/list","/challenge/choice", "/mate/detail/*", "/login/", "/logout",
-			"/join", "/savedot/upload/*", "/savedot/display/*", "/info/news", "/css/*", "/js/*", "/img/*","/emoji/*" };
+	private static final String[] whiteList = { "/home", "/user/*", "/", "/mate/list", "/challenge/choice",
+			"/mate/detail/*", "/login/", "/logout", "/join", "/savedot/upload/*", "/savedot/display/*", "/info/news",
+			"/css/*", "/js/*", "/img/*", "/emoji/*", "/test", "/test/*" };
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -34,7 +35,7 @@ public class LoginFilter implements Filter {
 		if (isLoginCheckPath(requestURI)) {
 			HttpSession session = httpRequest.getSession(false);
 			if (isEmpty(session)) {
-				httpResponse.sendRedirect("/mate/list"); // 로그인 페이지로 이동
+				httpResponse.sendRedirect("/home"); // 로그인 페이지로 이동
 				return;
 			}
 		}
