@@ -54,7 +54,6 @@ public class ExchangeRateUtil {
 
 			// JSON 데이터를 파싱하여 배열로 추출
 			JSONArray items = (JSONArray) parser.parse(line);
-			System.out.println(items);
 
 			for (Object item2 : items) {
 				JSONObject item = (JSONObject) item2;

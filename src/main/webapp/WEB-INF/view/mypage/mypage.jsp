@@ -121,9 +121,9 @@
 							<h5 id="modal-cash-date"></h5>
 							<dl class="today-sum">
 								<dt>지출합계</dt>
-								<dd modal-plus></dd>
-								<dt>수입합계</dt>
 								<dd modal-minus></dd>
+								<dt>수입합계</dt>
+								<dd modal-plus></dd>
 							</dl>
 						</div>
 						<input type="button" id="closebtn" class="btn btn-sub mdi"
