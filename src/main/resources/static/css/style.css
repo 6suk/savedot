@@ -2447,3 +2447,57 @@ div.challenge-choice {
 }
 
 /* ////////////////////////////////////  MAIN-CONTENT //////////////////////////////////// */
+
+.mypage-card-chart {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding-block: 1.5rem;
+  align-items: flex-start;
+  padding-inline: 3rem;
+  user-select: none;
+  flex-direction: column;
+}
+
+.viewcard p {
+  margin-block: 8px;
+}
+
+.mypage-card-chart-top {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.mypage-card-chart-toptxt {
+  font-weight: 600;
+}
+
+.mypage-card-chart-toptxt:last-child {
+  font-weight: 400;
+  color: var(--lgray-color);
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.mypage-card-chart-bottomtxt {
+  color: #666;
+  font-size: 15px;
+}
+
+.mypage-card-chart .emojitxt {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 0.5rem;
+}
+
+.mypage-card-chart .emojitxt img {
+  height: 32px;
+}
+
+.mypage-card-chart .emojitxt span {
+  font-size: 1.65rem;
+  font-weight: 800;
+  white-space: nowrap;
+}

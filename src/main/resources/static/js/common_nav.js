@@ -12,12 +12,15 @@ $(function () {
 
   // Mypage Nav Active
   let mate = $('#mate_sub_category');
+  let chart = $('#chart_sub_category');
   $('.nav-link.mypage').each(function (index, item) {
     let mypage_nav_path = $(item).attr('href').split('/');
     if (path_box[1] == mypage_nav_path[1] && mypage_nav_path[2] === path_box[2]) {
       $(item).addClass('active');
       if (path_box[2] == 'mate') {
         $(mate).show();
+      } else if (path_box[2] == 'chart') {
+        $(chart).show();
       }
     }
   });
