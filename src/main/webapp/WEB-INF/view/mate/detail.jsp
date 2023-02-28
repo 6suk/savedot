@@ -123,6 +123,68 @@
 							</div>
 						</div>
 					</c:if>
+					<!--  댓글작성부분  -->
+					<div class = "mate-detail-reply-insert">
+					<span class ="reply_num">
+					댓글
+					</span>
+					</div>
+					<div>
+					<form method="post" action="/mate/reply/insert">
+						<input type="hidden" name="mid"  id="mid" value="<c:out value="${mate.mid}"/>">
+						<input type="hidden" name="uid"  id="rid"  value="${user.uid}">
+							<table class="table table-borderless mt-2">
+                                <tr class="d-flex">
+                                    <td class="col-1 text-end">
+                                        <label for="content"><p class="font-15 font-600" >${user.nickname }</p></label>
+                                    </td>
+                                    <td class="col-9">
+                                        <textarea class="form-control" id="content" name="content" rows="3" placeholder="댓글을 입력해주세요."></textarea>
+                                    </td>
+                                    <td class="col-2">
+                                        <button type="submit" class="btn btn-primary">등록</button>
+                                    </td>
+                                </tr>
+                            </table>
+					</form>
+					</div>
+					<!--  댓글작성부분  -->
+					<!-- 댓글리스트부분 -->
+					   <div class="col-12"><hr></div>
+                    <div class="col-12">
+                    <c:forEach var="reply" items="${replyList}">
+                      <c:if test="${reply.grps eq 0}">
+                        <div class="d-flex flex-row mt-1">
+                            <div class="card bg-light text-dark w-75">
+                                <div class="card-body" id="replyList">   
+                                   <strong>${reply.nickname}</strong>&nbsp;&nbsp;${fn:replace(reply.regDate, 'T', ' ')}<br>  
+                                    ${fn:replace(reply.content, newline, '<br>')}<br>   <!-- content -->
+                                	<c:if test="${mate.uid == user.uid}">
+                                	<a href="/mate/rereply/${reply.rid}/${reply.grp}">댓글달기</a>
+                                	</c:if>
+                                	<span>
+                                	<c:if test="${user.uid == reply.uid}">
+                            				<a href="/mate/reply/update/${reply.rid}">수정</a>
+ 			                 				<a onclick="deleteConfirm(${reply.rid},${reply.mid})" href="#" >삭제</a>
+ 			                   		</c:if>
+ 			                   		</span>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                     <c:if test="${reply.grps eq 1}">
+                        <div class="d-flex flex-row-reverse mt-1">
+                            <div class="card w-75">
+                                <div class="card-body text-end">
+                                    RE : <strong>${reply.nickname}</strong>&nbsp;&nbsp;${fn:replace(reply.regDate, 'T', ' ')}<br>  
+                                    ${fn:replace(reply.content, newline, '<br>')}  <!-- content -->
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                    </c:forEach>
+                    </div>
+					<!-- 댓글리스트부분 -->
 				</div>
 			</section>
 		</div>
@@ -221,6 +283,7 @@
 <script src="/js/apply.js"></script>
 <script src="/js/mate_detail.js"></script>
 <script src="/js/required.js"></script>
+<script src="/js/mate_reply.js"></script>
 <script>
 	var tooltipTriggerList = [].slice.call(document
 			.querySelectorAll('[data-bs-toggle="tooltip"]'));
@@ -228,5 +291,11 @@
 		return new bootstrap.Tooltip(tooltipTriggerEl);
 	});
 </script>
+<script>
+	function deleteConfirm(rid,mid) {
+		if(confirm("삭제하시겠습니까?"))
+		 	location.href = "/mate/reply/delete/" + rid + "/" + mid;
+	}
+</script>   	
 </html>
 

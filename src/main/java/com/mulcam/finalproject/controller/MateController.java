@@ -23,7 +23,9 @@ import com.mulcam.finalproject.dto.MateDTO;
 import com.mulcam.finalproject.dto.MateSearchDTO;
 import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.MateApply;
+import com.mulcam.finalproject.entity.MateReply;
 import com.mulcam.finalproject.service.MateApplyService;
+import com.mulcam.finalproject.service.MateReplyService;
 import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.UserService;
 import com.mulcam.finalproject.util.CalendarUtil;
@@ -44,6 +46,9 @@ public class MateController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	MateReplyService mateReplyService;
 
 	@Autowired
 	ReverseGeocodeUtil reverseGeocodeUtil;
@@ -70,9 +75,12 @@ public class MateController {
 			return "error/error_404";
 		} else {
 			model.addAttribute("mate", mateDTO);
+			
+			List<MateReply> replyList = mateReplyService.getReplies(mid);
+			model.addAttribute("replyList", replyList);
+			
 			return "mate/detail";
 		}
-
 	}
 
 	/** Mate Apply : 신청 */
