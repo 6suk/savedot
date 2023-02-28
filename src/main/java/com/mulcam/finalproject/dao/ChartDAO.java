@@ -8,9 +8,13 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface ChartDAO {
-	/** HOME : 조각메이트 - 원가 기준 평균 세이브 금액 */
+	/** HOME : 조각메이트 - 평균 세이브 금액 */
 	@Select("SELECT AVG(price2 * positionNum) AS saveprice FROM mate;")
 	public double homeMateSavePrice();
+	
+	/** HOME : 조각메이트 - 평균 세이브 금액 */
+	@Select("SELECT AVG(((price2 * positionNum) / price1) * 100) AS savePercentage FROM mate;")
+	public double homeMateSavePercentage();
 	
 	/** HOME : 조각메이트 - 거래가 가장 많이 올라오는 요일 */
 	@Select("SELECT case DAYOFWEEK(regDate)"

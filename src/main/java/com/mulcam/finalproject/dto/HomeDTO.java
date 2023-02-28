@@ -13,9 +13,13 @@ import lombok.ToString;
 @ToString
 @Builder
 public class HomeDTO {
-	// 원가 기준 평균 세이브 금액
+	// 평균 세이브 금액
 	private double matePrice_;	
-	private int matePrice;	
+	private int matePrice;
+	
+	// 원가 기준 평균 세이브율
+	private double matePercentage_;
+	private int matePercentage;
 	
 	// 거래가 가장 많이 올라오는 요일
 	private String mateTopDayofWeek;
@@ -39,6 +43,7 @@ public class HomeDTO {
 	
 	public HomeDTO setResultInt() {
 		this.matePrice = (int) matePrice_;
+		this.matePercentage = (int) matePercentage_;
 		this.challengeMonth = (int) challengeMonth_;
 		this.challengeToday = (int) challengeToday_;
 		return this;

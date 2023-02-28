@@ -31,6 +31,7 @@ public class HomeServiceImpl implements HomeService {
 				.matePrice_(chartDAO.homeMateSavePrice())
 				.mateTopArea(chartDAO.homeMateTopArea())
 				.mateTopDayofWeek(chartDAO.homeMateTopDayOfWeek())
+				.matePercentage_(chartDAO.homeMateSavePercentage())
 				.build();
 		return homeDTO.setResultInt();
 	}

@@ -5,7 +5,9 @@ $(function () {
   // Main Nav Active
   $('.nav-link.main-nav').each(function (index, item) {
     let nav_path = $(item).attr('href').split('/');
-    if (nav_path[1] === path_box[1]) {
+    if (path_box[1] === 'user' && nav_path[2] === path_box[2]) {
+      $(item).addClass('active');
+    } else if (path_box[1] !== 'user' && nav_path[1] === path_box[1]) {
       $(item).addClass('active');
     }
   });

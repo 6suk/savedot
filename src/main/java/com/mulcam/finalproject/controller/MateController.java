@@ -96,6 +96,7 @@ public class MateController {
 	@PostMapping("/apply/state-edit")
 	@ResponseBody
 	public MateApplyDTO applyStateEdit(@RequestBody MateApplyDTO applyDTO) {
+		System.out.println(applyDTO);
 		LocalDateTime modDateTime = applyService.editIsApply(applyDTO);
 		applyDTO.setModDate(modDateTime);
 		return applyDTO;
