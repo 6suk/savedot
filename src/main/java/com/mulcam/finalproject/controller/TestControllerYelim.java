@@ -1,7 +1,9 @@
 package com.mulcam.finalproject.controller;
 
 import java.util.List;
-import java.util.Map;
+
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,6 +65,11 @@ public class TestControllerYelim {
 
 
 	
+	@GetMapping("/test")
+	public String test(HttpSession ss) {
+		ss.setAttribute("user", userService.findById("sohee"));
+		return "redirect:/mypage/chart/challenge";
+	}
 	@GetMapping("/cashsave/test")
 	public String datatestGet() {
 		return "cashsave/write";

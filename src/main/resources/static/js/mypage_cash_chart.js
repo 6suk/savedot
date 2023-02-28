@@ -13,6 +13,7 @@ let cashMonth_Data = [];
 let cashToday_Data = [];
 let cashMonthAll_Data = [];
 let ageGroup = 0;
+let inputdata = '';
 
 let saveDotChart = '';
 const $addAllUser = $('#addAllUser');
@@ -23,15 +24,20 @@ $(function () {
     type: 'post',
     url: '/mypage/chart/cash',
     success: function (data) {
-      for (let i = 0; i < data.length; i++) {
-        let object = data[i];
-        let dateArr = object.date.split('-');
-        labels_main.push(dateArr[0] + '년 ' + dateArr[1] + '월');
-        cashMonth_Data.push(object.cashMonthUser);
-        cashToday_Data.push(object.cashTodayUser);
-        cashMonthAll_Data.push(object.cashMonthAll);
+      inputdata = data;
+      ageGroup = data.ageGroup;
+      delete data.ageGroup;
+
+      for (let i = 0; i < Object.keys(data).length; i++) {
+        let dateArr = Object.keys(data)[i].split('-');
+        let index = Object.values(data)[i].index;
+
+        labels_main[index] = dateArr[0] + '년 ' + dateArr[1] + '월';
+        cashMonth_Data[index] = Object.values(data)[i].data1;
+        cashToday_Data[index] = Object.values(data)[i].data2;
+        cashMonthAll_Data[index] = Object.values(data)[i].data3;
       }
-      ageGroup = data[0].ageGroup;
+
       config.data.datasets.push(cashMonth);
       config.data.datasets.push(cashToday);
       saveDotChart = new Chart(cash_ctx, config);
@@ -183,7 +189,7 @@ function setCard() {
   if (calc > 0) {
     $('#user-ver2').show();
     $('#user-price').text(calc.toLocaleString() + '원 덜 썼어요!');
-    $('#user-bottom').text('정말 대단해요!');
+    $('#user-bottom').text('비법이 뭔가요? 정말 대단해요!');
   }
   // ver1 : 더 썼어요!
   else {
@@ -200,13 +206,13 @@ function setCard() {
   if (All_calc > 0) {
     $('#all-ver2').show();
     $('#all-price').text(All_calc.toLocaleString() + '원 덜 썼어요!');
-    $('#all-bottom').text('정말 대단해요!');
+    $('#all-bottom').text('다른 유저들보다 적게 쓰는 편이에요! 대단해요!');
   }
   // ver1 : 더 썼어요!
   else {
     $('#all-ver2').show();
     $('#all-price').text(Math.abs(All_calc).toLocaleString() + '원 더 썼어요!');
-    $('#all-bottom').text('남은 시간동안 조금만 더 아껴보아요!');
+    $('#all-bottom').text('다른 유저들보다 많이 쓰는 편이에요!');
   }
 }
 
