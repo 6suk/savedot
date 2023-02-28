@@ -1,5 +1,6 @@
 package com.mulcam.finalproject.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,33 +10,12 @@ import lombok.ToString;
 @Getter @Setter
 @ToString
 @NoArgsConstructor
-@Builder
+@AllArgsConstructor
 public class ChartDTO {
-	private String date;
-	private String cashMonthUser_;
-	private String cashTodayUser_;
-	private String cashMonthAll_;
-	
-	private int cashMonthUser;
-	private int cashTodayUser;
-	private int cashMonthAll;
-	private int ageGroup;
-	
-
-	public ChartDTO(String date, String cashMonthUser_, String cashTodayUser_, String cashMonthAll_, int cashMonthUser,
-			int cashTodayUser, int cashMonthAll, int ageGroup) {
-		this.date = date;
-		this.cashMonthUser_ = cashMonthUser_;
-		this.cashTodayUser_ = cashTodayUser_;
-		this.cashMonthAll_ = cashMonthAll_;
-		this.ageGroup = ageGroup;
-		
-		this.cashMonthUser = Integer.parseInt(cashMonthUser_);
-		this.cashTodayUser = Integer.parseInt(cashTodayUser_);
-		double cashMonthAllAvg = Double.parseDouble(cashMonthAll_);
-		this.cashMonthAll = (int) Math.round(cashMonthAllAvg / 100) * 100;
-	}
-	
-	
-	
+	private int index;
+	private int data1 = 0;
+	private int data2 = 0;
+	private int data3 = 0;
+	private int data4 = 0;
+	private int data5 = 0;
 }
