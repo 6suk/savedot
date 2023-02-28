@@ -27,25 +27,29 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	/** 아이디 중복 검사 */
-	public String checkID(String id, String type) { 
-	   if(type.equals("user")) {
-	      return userDAO.checkIdUser(id);
-	   }else if(type.equals("com")) {
-	      return userDAO.checkIdCom(id);
-	   }
-	   return null;
+	@Override
+	public int idCheck(String id) {
+		int cnt = userDAO.idCheck(id);
+		return cnt;
+	}
+	
+	/** 닉네임 중복 검사 */
+	@Override
+	public int nicknameCheck(String nickname) {
+		int c = userDAO.nicknameCheck(nickname);
+		return c;
 	}
 	
 	/** 로그인 */
 	@Override
-	public int login(UserDTO user, HttpSession session) {//입렫뇓ㄴ 유저
-		UserDTO getUser = findById(user.getId());	// 디비 에서 가져온 유
+	public int login(UserDTO user, HttpSession session) {					// 입력한 유저
+		UserDTO getUser = findById(user.getId());							// DB에서 가져온 유저
 		
-		if (getUser != null && getUser.getId() != null) {		// id가 존재
-			if (BCrypt.checkpw(user.getPwd(), getUser.getPwd())) {	// 올바른 비밀번호
+		if (getUser != null && getUser.getId() != null) {					// id가 존재
+			if (BCrypt.checkpw(user.getPwd(), getUser.getPwd())) {			// 올바른 비밀번호
 				session.setAttribute("user", getUser);
 				return UserService.CORRECT_LOGIN;
-			} else {									// 틀린 비밀번호
+			} else {														// 틀린 비밀번호
 				return UserService.WRONG_PASSWORD;
 			} 
 		}
@@ -68,21 +72,24 @@ public class UserServiceImpl implements UserService {
 		if(user != null) {
 			UserDTO userDTO = modelMapper.map(user, UserDTO.class);
 			return userDTO;
-			
 		}
 		return null;
 	}
 	
-//	/** 회원정보 수정 */
-//	@Override
-//	public void update(User user) {
-//		userDAO.insert(user);
-//	}
+	/** 회원정보 수정 */
+	@Override
+	public void update(User user, String newPwd) {
+		if (newPwd.length() > 0) {
+			String cryptedPwd = BCrypt.hashpw(newPwd, BCrypt.gensalt());
+			user.setPwd(cryptedPwd);
+			userDAO.update(user);
+		} else
+			userDAO.updateWithoutPwd(user);
+	}
 	
 	/** 회원 탈퇴 */
 	@Override
-	public void delete(String id) {
-		userDAO.delete(id);
+	public void delete(Long uid) {
+		userDAO.delete(uid);
 	}
-
 }

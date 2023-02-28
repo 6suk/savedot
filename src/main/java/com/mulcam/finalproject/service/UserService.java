@@ -20,13 +20,18 @@ public interface UserService {
 	/** 회원가입 */
 	void join(User user);
 
-	/** 아이디 중복 검사 */
-	String checkID(String id, String type);
+	/** 아이디, 닉네임 중복 검사 */
+	int idCheck(String id);
+	int nicknameCheck(String nickname);
 
-//	/** 회원정보 수정 */
-//	void update(User user);
+	/** 회원정보 수정 */
+	void update(User user, String newPwd);
+	
+	/** 프로필 사진 */
 
+	
+	
 	/** 회원탈퇴 */
-	void delete(String id);
+	void delete(Long uid);
 
 }

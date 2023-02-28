@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,7 +27,6 @@ import com.mulcam.finalproject.service.MateApplyService;
 import com.mulcam.finalproject.service.MateReplyService;
 import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.UserService;
-import com.mulcam.finalproject.util.CalendarUtil;
 import com.mulcam.finalproject.util.ReverseGeocodeUtil;
 
 @Controller

@@ -20,12 +20,19 @@ public class User {
 	
 	// NULL
 	private String tel;
-	private String birthDate;
+	private String birthDate;		// not null
+	private String postcode;
 	private String addr;
+	private String detailAddr;
 	private int pay;
+	private int workIn;
+	private int workOut;
 	private String departures;
 	private String arrivals;
 	private String vehicles;
 	private int isDeleted;		// not null
+	private String bank;
+	private String accountNumber;
+	private String code;
 	
 }
