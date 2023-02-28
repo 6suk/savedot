@@ -180,8 +180,4 @@ public interface ChartDAO {
 			+ " AND TRUNCATE(ROUND((TO_DAYS(NOW()) - (TO_DAYS(u.birthDate))) / 365) + 1, -1)  = #{age}"
 			+ " GROUP BY c.cid;")
 	public List<Map<String, Object>> challengeTypeMonthAllGroupAge(int months, int age);
-	
-	
-	
-	
 }

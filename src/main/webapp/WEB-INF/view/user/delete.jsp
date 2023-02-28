@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!-- //// MYPAGE PAGE - MAIN //// -->
 
@@ -37,12 +36,12 @@
 					<div class="col-6">
 						<div class="card mt-3">
 							<div class="card-body">
-								<strong class="card-title">${id}님, 정말 탈퇴하시겠습니까?</strong>
-								<p>Save dot과의 추억을 간직해주세요&#128546;</p>
+								<strong class="card-title">${nickname}님, 정말 탈퇴하시겠습니까?</strong>
+								<p>Save dot에서의 추억을 간직해주세요&#128546;</p>
 								<p class="card-text text-center">
 									<br>
 									<button class="btn btn-secondary"
-										onclick="location.href='/user/deleteConfirm/${id}'">그래도 탈퇴하기</button>
+										onclick="location.href='/user/deleteConfirm/${uid}'">그래도 탈퇴하기</button>
 									<button class="btn btn-primary"
 										onclick="location.href='/mypage/main'">안할래요!</button>
 								</p>
