@@ -24,19 +24,33 @@ public class MateReply {
 	private int isMine; 
  	private int grp; // 댓글 참조번호 
 	private int grps; // 같은 댓글 그룹내 순서 
-	private int grpl;  // 댓글 들여쓰기 레벨  
-	private int isDeleted; // 댓글 삭제  여부
 
-	public MateReply(Long uid, Long mid, String nickname, String content,int grp,int isMine) {
+
+	public MateReply(Long uid, Long mid, String nickname, String content, int isMine) {
 		this.uid = uid;
 		this.mid = mid;
 		this.nickname = nickname;
 		this.content = content;
-		this.grp = grp;
 		this.isMine  = isMine;
-		
-	
 	}
+
+	public MateReply(Long uid, Long mid, String nickname, String content, int isMine, int grp) {
+		this.uid = uid;
+		this.mid = mid;
+		this.nickname = nickname;
+		this.content = content;
+		this.isMine = isMine;
+		this.grp = grp;
+	}
+
+	public MateReply(Long rid, String content) {
+		this.rid = rid;
+		this.content = content;
+	}
+	
+	
+
+
 	
 	
 
