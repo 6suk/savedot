@@ -26,7 +26,11 @@ public interface UserService {
 
 	/** 회원정보 수정 */
 	void update(User user, String newPwd);
+	
+	/** 프로필 사진 */
 
+	
+	
 	/** 회원탈퇴 */
 	void delete(Long uid);
 

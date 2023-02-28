@@ -15,7 +15,7 @@ public interface ChartDAO {
 			+ "		AND category = 0"
 			+ "	GROUP BY `date`"
 			+ "		HAVING `date` > date_format(DATE_SUB(NOW(), INTERVAL ${month} MONTH),'%Y-%m')"
-			+ "	ORDER BY regDate;")
+			+ "	ORDER BY `date`;")
 	public List<Map<String, Object>> findCashMonthSumByUid(int month, String uid);
 	
 	/** 유저 - n개월간 현재 날짜까지 지출 내역 */
@@ -50,7 +50,7 @@ public interface ChartDAO {
 			+ "	AND TRUNCATE(ROUND((TO_DAYS(NOW()) - (TO_DAYS(u.birthDate))) / 365) + 1, -1)  = #{age}"
 			+ "	GROUP BY `date`"
 			+ "		HAVING `date` > date_format(DATE_SUB(NOW(), INTERVAL ${month} MONTH),'%Y-%m')"
-			+ "	ORDER BY regDate;")
+			+ "	ORDER BY `date`;")
 	public List<Map<String, Object>> findCashMonthAvgAllByAgeGroup(int month, int age);
 	
 	

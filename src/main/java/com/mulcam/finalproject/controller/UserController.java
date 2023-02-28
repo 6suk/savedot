@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.User;
+import com.mulcam.finalproject.service.ProfileService;
 import com.mulcam.finalproject.service.UserService;
 
 @Controller
@@ -22,6 +23,7 @@ import com.mulcam.finalproject.service.UserService;
 public class UserController {
 
 	@Autowired private UserService userService;
+	@Autowired private ProfileService profileService;
 	
 	/** 회원가입 */
 	@GetMapping("/join")
@@ -54,6 +56,19 @@ public class UserController {
 		if (strpay != null && !strpay.equals("")) {
 			pay = Integer.parseInt(strpay.replace(",", ""));
 		}
+		
+		String strWorkIn = req.getParameter("workIn").strip();
+		int workIn = 0;
+		if (strWorkIn != null && !strWorkIn.equals("")) {
+			workIn = Integer.parseInt(strWorkIn.replace(",", ""));
+		}
+		
+		String strWorkOut = req.getParameter("workOut").strip();
+		int workOut = 0;
+		if (strWorkOut != null && !strWorkOut.equals("")) {
+			workOut = Integer.parseInt(strWorkOut.replace(",", ""));
+		}
+		
 		String departures = req.getParameter("departures").strip();
 		String arrivals = req.getParameter("arrivals").strip();
 		String vehicles = req.getParameter("vehicles").strip();
@@ -62,7 +77,7 @@ public class UserController {
 		String code = req.getParameter("code").strip();
 		 
 		if (pwd.equals(pwd2)) {
-			User user = new User(0L, uname, id, pwd, nickname, email, tel, birthDate, postcode, addr, detailAddr, pay, departures, arrivals, vehicles, 0, bank, accountNumber, code);
+			User user = new User(0L, uname, id, pwd, nickname, email, tel, birthDate, postcode, addr, detailAddr, pay, workIn, workOut, departures, arrivals, vehicles, 0, bank, accountNumber, code);
 			userService.join(user);
 			return "redirect:/user/login";
 		} else {
@@ -100,6 +115,7 @@ public class UserController {
 		
 		switch (result) {
 		case UserService.CORRECT_LOGIN:
+			profileService.setAsideValue(user.getId(), session);
 			return "redirect:/mypage/main";
 		case UserService.WRONG_PASSWORD:
 			model.addAttribute("msg", "잘못된 비밀번호입니다. 다시 입력해주세요.");
@@ -140,6 +156,17 @@ public class UserController {
 		if (strpay != null && !strpay.equals("")) {
 			pay = Integer.parseInt(strpay.replace(",", ""));
 		}
+		String strWorkIn = req.getParameter("workIn").strip();
+		int workIn = 0;
+		if (strWorkIn != null && !strWorkIn.equals("")) {
+			workIn = Integer.parseInt(strWorkIn.replace(":", ""));
+		}
+		
+		String strWorkOut = req.getParameter("workOut").strip();
+		int workOut = 0;
+		if (strWorkOut != null && !strWorkOut.equals("")) {
+			workOut = Integer.parseInt(strWorkOut.replace(":", ""));
+		}
 		String departures = req.getParameter("departures").strip();
 		String arrivals = req.getParameter("arrivals").strip();
 		String vehicles = req.getParameter("vehicles").strip();
@@ -150,7 +177,7 @@ public class UserController {
 		User user;
 		
 		if (pwd == null || pwd.equals("")) {		// 비밀번호를 입력하지 않은 경우
-			user = new User(uid, "", "", "", nickname, email, tel, birthDate, postcode, addr, detailAddr, pay, departures, arrivals, vehicles, 0, bank, accountNumber, code);
+			user = new User(uid, "", "", "", nickname, email, tel, birthDate, postcode, addr, detailAddr, pay, workIn, workOut, departures, arrivals, vehicles, 0, bank, accountNumber, code);
 			userService.update(user, "");
 
 			session.setAttribute("nickname", nickname);
@@ -161,6 +188,8 @@ public class UserController {
 			session.setAttribute("addr", addr);
 			session.setAttribute("detailAddr", detailAddr);
 			session.setAttribute("pay", pay);
+			session.setAttribute("workIn", workIn);
+			session.setAttribute("workOut", workOut);
 			session.setAttribute("departures", departures);
 			session.setAttribute("arrivals", arrivals);
 			session.setAttribute("vehicles", vehicles);
@@ -171,7 +200,7 @@ public class UserController {
 		}
 		 
 		else if (pwd.equals(pwd2)) {				// 비밀번호가 올바른 경우
-			user = new User(uid, "", "", pwd, nickname, email, tel, birthDate, postcode, addr, detailAddr, pay, departures, arrivals, vehicles, 0, bank, accountNumber, code);
+			user = new User(uid, "", "", pwd, nickname, email, tel, birthDate, postcode, addr, detailAddr, pay, workIn, workOut, departures, arrivals, vehicles, 0, bank, accountNumber, code);
 			userService.update(user, pwd);
 			
 			session.setAttribute("nickname", nickname);
@@ -182,6 +211,8 @@ public class UserController {
 			session.setAttribute("addr", addr);
 			session.setAttribute("detailAddr", detailAddr);
 			session.setAttribute("pay", pay);
+			session.setAttribute("workIn", workIn);
+			session.setAttribute("workOut", workOut);
 			session.setAttribute("departures", departures);
 			session.setAttribute("arrivals", arrivals);
 			session.setAttribute("vehicles", vehicles);
@@ -197,7 +228,7 @@ public class UserController {
 			return "user/alertMsg";
 		}
 	}
-	
+
 	/** 로그아웃 */
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {

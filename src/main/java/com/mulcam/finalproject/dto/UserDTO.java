@@ -26,6 +26,8 @@ public class UserDTO {
 	private String addr;
 	private String detailAddr;
 	private int pay;
+	private int workIn;
+	private int workOut;
 	private String departures;
 	private String arrivals;
 	private String vehicles;
@@ -41,5 +43,4 @@ public class UserDTO {
 			this.telFormat = tel.replaceAll(regEx, "$1-$2-$3");
 		}
 	}
-
 }

@@ -42,10 +42,12 @@
 				<strong>회원정보 수정</strong>
 			</h3>
 			<hr>
-			<!-- 일반 회원가입 폼 -->
+			<!-- 수정 폼 -->
 			<form action="/user/update" method="post">
 				<input type="hidden" name="uid" value="${user.uid}">
 				<legend>필수입력사항</legend>
+				
+			
 	
 					<!-- 이름 -->
 					<div>
@@ -129,6 +131,12 @@
 							placeholder="급여나 용돈을 입력해주세요">
 					</div>
 					
+					<!-- 출퇴근 시간 -->
+					<div class="input__block">
+						<input type="time" class="input" value="" name="workIn" placeholder="출근 시간">
+						<input type="time" class="input" value="" name="workOut" placeholder="퇴근 시간">
+					</div>
+					
 					<!-- 출발지 -->
 					<div>
 						<label>출발지</label> <br> <input class="form-control" value="${user.departures}"
@@ -209,5 +217,6 @@
 	<script src="/js/nicknameCheck.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="/js/findAddr.js"></script>
+	<script src="/js/profile.js"></script>
 </body>
 </html>

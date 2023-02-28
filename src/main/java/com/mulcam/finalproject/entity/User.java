@@ -25,6 +25,8 @@ public class User {
 	private String addr;
 	private String detailAddr;
 	private int pay;
+	private int workIn;
+	private int workOut;
 	private String departures;
 	private String arrivals;
 	private String vehicles;

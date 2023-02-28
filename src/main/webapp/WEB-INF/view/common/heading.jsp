@@ -9,5 +9,6 @@
 <script src="https://kit.fontawesome.com/354b0809a2.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="/js/common_nav.js"></script>
+<script src="/js/heading.js"></script>
 <link rel="stylesheet" href="/css/bootstrap.css" />
 <link rel="stylesheet" href="/css/style.css" />

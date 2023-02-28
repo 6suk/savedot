@@ -110,6 +110,12 @@
 			<div class="input__block">
 				<input type="number" value="" name="pay" placeholder="월 급여 or 용돈">
 			</div>
+			
+			<!-- 출퇴근 시간 -->
+			<div class="input__block">
+				<input type="time" class="input" value="" name="workIn" placeholder="출근 시간">
+				<input type="time" class="input" value="" name="workOut" placeholder="퇴근 시간">
+			</div>
 
 			<!-- 출발지 -->
 			<div class="input__block">
