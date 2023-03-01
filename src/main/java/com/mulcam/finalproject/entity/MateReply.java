@@ -17,6 +17,7 @@ public class MateReply {
 	
 	private Long rid; // 댓글 rid
 	private Long uid; // --> user.fk
+	private String id;
 	private Long mid; // --> mate.fk  // 글번호 
 	private String nickname; // --> user.fk
 	private String content;  // 댓글내용 
@@ -24,6 +25,7 @@ public class MateReply {
 	private int isMine; 
  	private int grp; // 댓글 참조번호 
 	private int grps; // 같은 댓글 그룹내 순서 
+	private int maxGrps;
 
 
 	public MateReply(Long uid, Long mid, String nickname, String content, int isMine) {

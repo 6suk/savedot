@@ -189,8 +189,12 @@
             </div>
             <div class="middle-content">
               <ul>
-                <li>원가 기준 평균 세이브 금액</li>
+                <li>평균 세이브 금액</li>
                 <li><span count-bottom="${home.matePrice }">0</span><span class="unit">원</span></li>
+              </ul>
+              <ul>
+                <li id="count-bottom">구매가 대비 평균 세이브율</li>
+                <li><span count-bottom="${home.matePercentage }">0</span><span class="unit">%</span></li>
               </ul>
               <ul>
                 <li>거래가 가장 많이 올라오는 요일</li>
@@ -199,10 +203,6 @@
               <ul>
                 <li>만남 거래가 가장 활발한 지역</li>
                 <li>${home.mateTopArea }</li>
-              </ul>
-              <ul>
-                <li id="count-bottom">한달 평균 조각메이트로 아낀 비용</li>
-                <li><span count-bottom="235420">0</span><span class="unit">원</span></li>
               </ul>
             </div>
           </div>

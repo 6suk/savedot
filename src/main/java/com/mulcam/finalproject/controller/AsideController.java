@@ -71,6 +71,9 @@ public class AsideController {
 	@GetMapping("/blob/{id}")
 	public void blob(@PathVariable String id, HttpServletResponse res) throws Exception {
 		Profile profile = profileService.getProfileById(id);
+		if(profile == null) {	// 예림 : 프로필 이미지 없는 사람 'NullPointerException' 제외
+			return;
+		}
 		int idx = profile.getFilename().lastIndexOf('.');
         String format = profile.getFilename().substring(idx + 1);
 		
@@ -83,5 +86,6 @@ public class AsideController {
 		res.setContentType(mimeType);
 		IOUtils.copy(is, res.getOutputStream());
 	}
+	
 	
 }

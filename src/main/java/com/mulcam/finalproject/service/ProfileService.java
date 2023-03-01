@@ -28,6 +28,7 @@ public class ProfileService {
 		Profile profile = profileDAO.getProfileById(id);
 		return profile;
 	}
+
 	
 	// 로그인할 경우 사용
 	public void setAsideValue(String id, HttpSession session) {

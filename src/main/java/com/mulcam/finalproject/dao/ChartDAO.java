@@ -8,9 +8,13 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface ChartDAO {
-	/** HOME : 조각메이트 - 원가 기준 평균 세이브 금액 */
+	/** HOME : 조각메이트 - 평균 세이브 금액 */
 	@Select("SELECT AVG(price2 * positionNum) AS saveprice FROM mate;")
 	public double homeMateSavePrice();
+	
+	/** HOME : 조각메이트 - 평균 세이브 금액 */
+	@Select("SELECT AVG(((price2 * positionNum) / price1) * 100) AS savePercentage FROM mate;")
+	public double homeMateSavePercentage();
 	
 	/** HOME : 조각메이트 - 거래가 가장 많이 올라오는 요일 */
 	@Select("SELECT case DAYOFWEEK(regDate)"
@@ -42,8 +46,7 @@ public interface ChartDAO {
 			+ "	FROM csuccess s"
 			+ " JOIN challenge c"
 			+ "	ON s.cid = c.cid"
-			+ " WHERE date_format(s.sucDate, '%Y-%m') > date_format(DATE_SUB(NOW(), INTERVAL 1 MONTH),'%Y-%m')"
-			+ " GROUP BY MONTH(s.sucDate);")
+			+ " WHERE s.sucDate >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)")
 	public double homeChallengeOneMonthAllUser();
 
 	/** HOME : 챌린지 - 전체 유저 하루동안 아낀 비용 평균 (NULL의 경우 전날 데이터 조회) */

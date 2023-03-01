@@ -2501,3 +2501,347 @@ div.challenge-choice {
   font-weight: 800;
   white-space: nowrap;
 }
+
+/* ////////////////////////////////////  MAIN-CONTENT //////////////////////////////////// */
+
+/* ////////////////////////////////////  얼마나 벌었지? //////////////////////////////////// */
+.pay-check-container {
+  height: calc(100vh - 290px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pay-check-title-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pay-check-btn-group {
+  display: flex;
+  height: min-content;
+  gap: 0.5rem;
+  padding-inline: 1rem;
+}
+.pay-check-btn-group button {
+  width: 50%;
+  border-radius: 100px;
+  aspect-ratio: 1/1;
+  font-size: 14px;
+}
+
+.pay-check-progress {
+  padding-top: 3rem;
+  padding-inline: 1rem;
+}
+
+.pay-check-progress a {
+  color: #999;
+  font-size: 14px;
+  text-align: right;
+  width: 100%;
+  display: block;
+  text-decoration: underline;
+  padding-top: 1rem;
+}
+
+.pay-check-progress a:hover {
+  opacity: 0.5;
+}
+
+.pay-time {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+}
+
+.pay-time p {
+  letter-spacing: 0.5px;
+  color: var(--main-color);
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.pay-check-label-group {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pay-check-label {
+  width: 1%;
+  text-align: right;
+  color: var(--main-color);
+  font-size: 24px;
+  font-weight: 800;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 0.2rem;
+}
+
+.pay-check-label::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50px;
+  background-color: var(--main-color);
+}
+
+#myProgress {
+  position: relative;
+  width: 100%;
+  height: 10px;
+  background-color: #eee;
+  border-radius: 100px;
+}
+#myBar {
+  position: absolute;
+  width: 1%;
+  height: 100%;
+  background-color: var(--main-color);
+  border-radius: 100px;
+}
+
+/* ////////////////////////////////////  얼마나 벌었지? //////////////////////////////////// */
+
+/* ////////////////////////////////////  Mate - 댓글 //////////////////////////////////// */
+
+.m-re-wrap .all {
+  margin-top: 3rem;
+}
+
+.m-re-write {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.m-re-write-top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 0.5rem;
+}
+
+.secret-tag input[type='radio'],
+.secret-tag input[type='checkbox'] {
+  display: none;
+}
+
+.secret-tag input[type='checkbox'] + label {
+  font-size: 14px;
+  cursor: pointer;
+  color: #999;
+  transition: all ease 0.3s 0s;
+}
+
+.secret-tag input[type='checkbox']:hover + label {
+  opacity: 0.8;
+}
+
+.secret-tag input[type='checkbox'] + label::before {
+  content: '\f3c1';
+  color: #999;
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 600;
+  font-size: 12px;
+  padding-right: 0.2rem;
+  transition: all ease 0.3s 0s;
+}
+
+.secret-tag input[type='checkbox']:checked + label {
+  transition: all ease 0.5s 0s;
+  color: #333;
+}
+
+.secret-tag input[type='checkbox']:checked + label::before {
+  content: '\f023';
+  color: #333;
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 600;
+  font-size: 12px;
+  padding-right: 0.2rem;
+  transition: all ease 0.5s 0s;
+}
+
+.m-re-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.m-re-thum {
+  width: 22px;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--sub-color);
+  border-radius: 100%;
+  aspect-ratio: 1/1;
+}
+
+.m-re-thum img {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  max-height: 100%;
+  min-width: 100%;
+}
+
+.m-re-name {
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.m-re-name.ismine {
+  color: #ff6b00;
+}
+
+.seller-tag {
+  opacity: 0.8;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  font-size: 12px;
+  /* border-radius: 50px; */
+  padding-inline: 0.5rem;
+  padding-block: 0.12rem;
+  border: 1px solid var(--main-color);
+  color: var(--main-color);
+  margin-left: 0.5rem;
+}
+
+.ismine .seller-tag {
+  opacity: 0.8;
+  border: 1px solid #ff6b00;
+  color: #ff6b00;
+}
+
+.m-re-write-area {
+  width: 100%;
+}
+
+.m-re-write-area textarea {
+  width: 100%;
+  height: 120px;
+}
+
+.m-re-write-area .input-btn-ele {
+  width: 10%;
+}
+
+.m-re-write-area .input-btn-ele:hover {
+  opacity: 0.8;
+}
+
+.m-re-comment-wrap {
+  margin-top: 2rem;
+}
+
+.re-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.re-comment-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.re-comment-box {
+  border-bottom: 1px solid #eee;
+}
+
+.re-comment-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding-block: 1.5rem;
+}
+
+.re-comment-item.hide {
+  display: none;
+}
+
+.re-desc {
+  font-size: 15px;
+  margin-bottom: 0.5rem;
+}
+
+.re-date {
+  font-size: 14px;
+  color: #999;
+}
+
+.re-btn {
+  display: flex;
+  font-size: 14px;
+}
+
+.re-btn a:not(:last-child)::after {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: 9px;
+  margin-inline: 0.4rem;
+  background-color: rgb(218, 220, 224);
+}
+
+.re-btn a {
+  cursor: pointer;
+}
+
+.re-btn a:hover {
+  color: #999 !important;
+}
+
+.re-reply-area {
+}
+
+.re-reply-area .re-comment-item {
+  padding-left: 3rem;
+}
+
+.re-reply-area .re-comment-box {
+  position: relative;
+}
+
+.re-reply-area .re-comment-box::before {
+  position: absolute;
+  top: 1.5rem;
+  left: 1rem;
+  content: '';
+  width: 1rem;
+  height: 1rem;
+  background-image: url('../emoji/subdirectory_arrow_right.svg');
+  background-repeat: no-repeat;
+  background-position: center left;
+  background-size: contain;
+}
+
+.re-reply-area-write {
+}
+
+.cancel-btn {
+  font-size: 14px;
+  cursor: pointer;
+  color: #999;
+  transition: all ease 0.3s 0s;
+}
+.cancel-btn::before {
+  content: '\58';
+  color: #999;
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 600;
+  font-size: 12px;
+  padding-right: 0.2rem;
+  margin-left: 0.5rem;
+  transition: all ease 0.5s 0s;
+}
