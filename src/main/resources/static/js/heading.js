@@ -1,5 +1,4 @@
 function editProfile(id) {
-	console.log(id)
 	$.ajax({
 		type: "GET",
         url: "/aside/profile/" + id,

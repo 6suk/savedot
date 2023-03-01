@@ -233,7 +233,7 @@ public class UserController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:/mate/list";
+		return "redirect:/home";
 	}
 	
 	/** 회원탈퇴 */
@@ -247,6 +247,6 @@ public class UserController {
 	@GetMapping("/deleteConfirm/{uid}")
 	public String deleteConfirm(@PathVariable Long uid, HttpSession session) {
 		userService.delete(uid);
-		return "redirect:/mate/list";
+		return "redirect:/home";
 	}
 }
