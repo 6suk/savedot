@@ -40,9 +40,9 @@
 								<p>Save dot에서의 추억을 간직해주세요&#128546;</p>
 								<p class="card-text text-center">
 									<br>
-									<button class="btn btn-secondary"
+									<button class="btn btn-gray me-1"
 										onclick="location.href='/user/deleteConfirm/${uid}'">그래도 탈퇴하기</button>
-									<button class="btn btn-primary"
+									<button class="btn btn-main"
 										onclick="location.href='/mypage/main'">안할래요!</button>
 								</p>
 							</div>
