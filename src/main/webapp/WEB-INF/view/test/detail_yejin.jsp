@@ -123,141 +123,71 @@
 							</div>
 						</div>
 					</c:if>
-					<!-- ////////////////////////////// 댓글 시작 //////////////////////////////////////// -->
-					<div class="m-re-wrap all">
-						<!-- // 댓글 입력 -->
+					<!--  댓글작성부분  -->
+					<div class="mate-detail-reply-insert">
+						<span class="reply_num"> 댓글 </span>
+					</div>
+					<div>
 						<form method="post" action="/mate/reply/insert">
-							<div class="m-re-write" id="reply_write">
-								<input type="hidden" name="mid" value="${mate.mid }" /> <input
-									type="hidden" name="uid" value="${user.uid }" />
-								<div class="m-re-write-top">
-									<c:if test="${not empty user }">
-										<div class="m-re-profile">
-											<div class="m-re-thum">
-												<img src="/aside/blob/${user.id}"
-													onError="this.style.visibility='hidden'" />
-											</div>
-											<div class="m-re-name">${user.nickname }</div>
+							<input type="hidden" name="mid" id="mid"
+								value="<c:out value="${mate.mid}"/>"> <input
+								type="hidden" name="uid" id="rid" value="${user.uid}">
+							<table class="table table-borderless mt-2">
+								<tr class="d-flex">
+									<td class="col-1 text-end"><label for="content"><p
+												class="font-15 font-600">${user.nickname }</p></label></td>
+									<td class="col-9"><textarea class="form-control"
+											id="content" name="content" rows="3"
+											placeholder="댓글을 입력해주세요."></textarea></td>
+									<td class="col-2">
+										<button type="submit" class="btn btn-primary">등록</button>
+									</td>
+								</tr>
+							</table>
+						</form>
+					</div>
+					<!--  댓글작성부분  -->
+					<!-- 댓글리스트부분 -->
+					<div class="col-12">
+						<hr>
+					</div>
+					<div class="col-12">
+						<c:forEach var="reply" items="${replyList}">
+							<c:if test="${reply.grps eq 0}">
+								<div class="d-flex flex-row mt-1">
+									<div class="card bg-light text-dark w-75">
+										<div class="card-body" id="replyList">
+											<strong>${reply.nickname}</strong>&nbsp;&nbsp;${fn:replace(reply.regDate, 'T', ' ')}<br>
+											${fn:replace(reply.content, newline, '<br>')}<br>
+											<!-- content -->
+											<c:if test="${mate.uid == user.uid}">
+												<a href="/mate/rereply/${reply.rid}/${reply.grp}">댓글달기</a>
+											</c:if>
+											<span> <c:if test="${user.uid == reply.uid}">
+													<a href="/mate/reply/update/${reply.rid}">수정</a>
+													<a onclick="deleteConfirm(${reply.rid},${reply.mid})"
+														href="#">삭제</a>
+												</c:if>
+											</span>
 										</div>
-										<div class="secret-tag">
-											<input class="hide" type="checkbox" name="secret"
-												value="true" id="secret-tag" /> <label for="secret-tag"
-												id="">비밀댓글</label> <a class="cancel-btn hide" cancel>취소</a>
-										</div>
-									</c:if>
-								</div>
-								<div class="m-re-write-area">
-									<div class="input-btn">
-										<textarea class="form-control" name="content"
-											placeholder="${not empty user ? '댓글을 입력해주세요.' : '로그인 후 이용 가능합니다!' }"
-											${not empty user ? 'required' : 'disabled' }></textarea>
-										<input type="submit" class="input-btn-ele" value="등록">
 									</div>
 								</div>
-							</div>
-						</form>
-						<!-- // 댓글 입력 -->
-
-						<div class="m-re-comment-wrap">
-							<ul class="re-list all">
-								<c:forEach var="reply" items="${replyList}">
-									<!-- 댓글 그룹 -->
-									<li class="re-comment-group"><c:if
-											test="${reply.grps eq 0 }">
-											<c:set var="group" value="${reply.grp }"></c:set>
-											<!-- // 원댓글 -->
-											<div class="re-comment-box">
-												<form method="post" action="/mate/reply/update">
-													<div class="re-comment-item update hide"></div>
-												</form>
-												<div class="re-comment-item" id="${reply.rid }">
-													<div class="m-re-profile">
-														<div class="m-re-thum">
-															<img src="/aside/blob/${reply.id}"
-																onError="this.style.visibility='hidden'" />
-														</div>
-														<div
-															class="m-re-name ${reply.uid eq user.uid ? 'ismine' : '' }">${reply.nickname}
-															<c:if test="${reply.isMine eq 1 }">
-																<p class="seller-tag">판매자</p>
-															</c:if>
-														</div>
-													</div>
-													<div class="re-desc">${fn:replace(reply.content, newline, '<br>')}</div>
-													<div class="re-date">${fn:replace(reply.regDate, 'T', ' ')}</div>
-													<div class="re-btn">
-														<c:if test="${not empty user}">
-															<a reply="${reply.grp }">답글</a>
-														</c:if>
-														<c:if test="${user.uid == reply.uid}">
-															<a update="${reply.rid }">수정</a>
-															<a onclick="deleteConfirm(${reply.rid},${reply.mid})"
-																href="">삭제</a>
-														</c:if>
-													</div>
-												</div>
-											</div>
-											<!-- 원댓글 // -->
-										</c:if>
-										<div class="re-reply-area">
-											<ul class="re-list">
-												<c:if test="${reply.grps > 0 and group eq reply.grp}">
-													<!-- // 대댓글 -->
-													<li class="re-comment-group">
-														<div class="re-comment-box">
-															<form method="post" action="/mate/reply/update">
-																<div class="re-comment-item update hide"></div>
-															</form>
-															<div class="re-comment-item" id="${reply.rid }">
-																<div class="m-re-profile">
-																	<div class="m-re-thum">
-																		<img src="/aside/blob/${reply.id}"
-																			onError="this.style.visibility='hidden'" />
-																	</div>
-																	<div
-																		class="m-re-name ${reply.uid eq user.uid ? 'ismine' : '' }">
-																		${reply.nickname}
-																		<c:if test="${reply.isMine eq 1 }">
-																			<p class="seller-tag">판매자</p>
-																		</c:if>
-																	</div>
-																</div>
-																<div class="re-desc">${fn:replace(reply.content, newline, '<br>')}</div>
-																<div class="re-date">${fn:replace(reply.regDate, 'T', ' ')}</div>
-																<div class="re-btn">
-																	<c:if test="${not empty user}">
-																		<a reply="${reply.grp }">답글</a>
-																	</c:if>
-																	<c:if test="${user.uid == reply.uid}">
-																		<a update="${reply.rid }">수정</a>
-																		<a onclick="deleteConfirm(${reply.rid},${reply.mid})"
-																			href="">삭제</a>
-																	</c:if>
-																</div>
-															</div>
-														</div>
-													</li>
-													<!-- // 대댓글 -->
-												</c:if>
-												<c:if
-													test="${group eq reply.grp and reply.grps eq reply.maxGrps }">
-													<!-- // 대댓글 작성 -->
-													<li class="re-comment-group write">
-														<form method="post" action="/mate/reply/${reply.grp}">
-															<div class="re-comment-box hide" grp="${reply.grp}">
-																<div class="m-re-wrap re-comment-item"></div>
-															</div>
-														</form>
-													</li>
-													<!-- // 대댓글 작성 -->
-												</c:if>
-											</ul>
-										</div></li>
-									<!-- 댓글 그룹 -->
-								</c:forEach>
-							</ul>
-						</div>
+							</c:if>
+							<c:if test="${reply.grps >= 1}">
+								<div class="d-flex flex-row-reverse mt-1">
+									<div class="card w-75">
+										<div class="card-body text-end">
+											RE : <strong>${reply.nickname}</strong>&nbsp;&nbsp;${fn:replace(reply.regDate, 'T', ' ')}<br>
+											${fn:replace(reply.content, newline, '<br>')}
+											<a href="/mate/rereply/${reply.rid}/${reply.grp}">댓글달기</a>
+											<!-- content -->
+										</div>
+									</div>
+								</div>
+							</c:if>
+						</c:forEach>
 					</div>
+					<!-- 댓글리스트부분 -->
 				</div>
 			</section>
 		</div>
@@ -364,9 +294,9 @@
 	});
 </script>
 <script>
-	function deleteConfirm(rid, mid) {
-		if (confirm("삭제하시겠습니까?"))
-			location.href = "/mate/reply/delete/" + rid + "/" + mid;
+	function deleteConfirm(rid,mid) {
+		if(confirm("삭제하시겠습니까?"))
+		 	location.href = "/mate/reply/delete/" + rid + "/" + mid;
 	}
 </script>
 </html>

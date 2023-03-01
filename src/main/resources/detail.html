@@ -187,6 +187,118 @@
                 <p class="mate-url-tag"><i class="fa-solid fa-location-arrow graytxt"></i> 문화전당역</p>
               </div>
             </div>
+            <div class="m-re-wrap">
+              <!-- // 댓글 입력 -->
+              <form method="post" action="/mate/reply/insert">
+                <div class="m-re-write" id="reply_write">
+                  <input type="hidden" name="mid" value="${mate.mid }" />
+                  <input type="hidden" name="uid" value="${user.uid }" />
+                  <div class="m-re-write-top">
+                    <div class="m-re-profile">
+                      <div class="m-re-thum">
+                        <img src="../resources/static/img/광주애견호텔유치원 소유펫.jpg" alt="" />
+                      </div>
+                      <div class="m-re-name">프로 알뜰러</div>
+                    </div>
+                    <div class="secret-tag">
+                      <input class="hide" type="checkbox" name="secret" value="0" id="secret-tag" />
+                      <label for="secret-tag" id="">비밀댓글</label>
+                      <a class="cancel-btn hide" cancel>취소</a>
+                    </div>
+                  </div>
+                  <div class="m-re-write-area">
+                    <div class="input-btn">
+                      <textarea class="form-control" name="" required></textarea>
+                      <input type="submit" class="input-btn-ele" value="등록" />
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <!-- // 댓글 입력 -->
+
+              <div class="m-re-comment-wrap">
+                <ul class="re-list all">
+                  <!-- 댓글 그룹 -->
+                  <li class="re-comment-group">
+                    <!-- // 원댓글 -->
+                    <div class="re-comment-box">
+                      <form method="post" action="/mate/reply/update">
+                        <div class="re-comment-item update hide"></div>
+                      </form>
+                      <div class="re-comment-item" id="23">
+                        <div class="m-re-profile">
+                          <div class="m-re-thum">
+                            <img src="../resources/static/img/광주애견호텔유치원 소유펫.jpg" alt="" />
+                          </div>
+                          <div class="m-re-name">프로 알뜰러</div>
+                        </div>
+                        <div class="re-desc">댓글 테스트댓글 테스트댓글 테스트댓글 테스트댓글 테스트</div>
+                        <div class="re-date">2023-02-28 21:37</div>
+                        <div class="re-btn"><a reply="0">답글</a><a update="23">수정</a><a href="">삭제</a></div>
+                      </div>
+                    </div>
+                    <!-- 원댓글 // -->
+                    <div class="re-reply-area">
+                      <ul class="re-list">
+                        <!-- // 대댓글 -->
+                        <li class="re-comment-group">
+                          <div class="re-comment-box">
+                            <div class="re-comment-item update hide"></div>
+                            <div class="re-comment-item" id="24">
+                              <div class="m-re-profile">
+                                <div class="m-re-thum">
+                                  <img src="../resources/static/img/광주애견호텔유치원 소유펫.jpg" alt="" />
+                                </div>
+                                <div class="m-re-name ismine">
+                                  프로 알뜰러
+                                  <p class="seller-tag">판매자</p>
+                                </div>
+                              </div>
+                              <div class="re-desc">댓글 테스트댓글 테스트댓글 테스트댓글 테스트댓글 테스트</div>
+                              <div class="re-date">2023-02-28 21:37</div>
+                              <div class="re-btn"><a reply="0">답글</a><a update="24">수정</a><a href="">삭제</a></div>
+                            </div>
+                          </div>
+                        </li>
+                        <!-- // 대댓글 -->
+                        <!-- // 대댓글 -->
+                        <li class="re-comment-group">
+                          <div class="re-comment-box">
+                            <form method="post" action="/mate/reply/update">
+                              <div class="re-comment-item update hide"></div>
+                            </form>
+                            <div class="re-comment-item" id="25">
+                              <div class="m-re-profile">
+                                <div class="m-re-thum">
+                                  <img src="../resources/static/img/광주애견호텔유치원 소유펫.jpg" alt="" />
+                                </div>
+                                <div class="m-re-name">프로 알뜰러</div>
+                              </div>
+                              <div class="re-desc">댓글 테스트댓글 테스트댓글 테스트댓글 테스트댓글 테스트</div>
+                              <div class="re-date">2023-02-28 21:37</div>
+                              <div class="re-btn"><a reply="0">답글</a><a update="25">수정</a><a href="">삭제</a></div>
+                            </div>
+                          </div>
+                        </li>
+                        <!-- 대댓글 // -->
+                        <!-- // 대댓글 작성 -->
+                        <li class="re-comment-group write">
+                          <form method="post" action="/mate/reply/${grp}">
+                            <div class="re-comment-box hide" grp="0">
+                              <div class="m-re-wrap re-comment-item"></div>
+                            </div>
+                          </form>
+                        </li>
+                        <!-- // 대댓글 작성 -->
+                      </ul>
+                    </div>
+                  </li>
+                  <!-- 댓글 그룹 -->
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+            </div>
           </div>
         </section>
       </div>
@@ -302,6 +414,7 @@
   <script src="../resources/static/js/apply.js"></script>
   <script src="../resources/static/js/mate_detail.js"></script>
   <script src="../resources/static/js/required.js"></script>
+  <script src="../resources/static/js/mate_reply.js"></script>
   <script>
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {

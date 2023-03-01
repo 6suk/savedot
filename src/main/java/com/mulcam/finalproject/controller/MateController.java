@@ -3,6 +3,7 @@ package com.mulcam.finalproject.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.modelmapper.ModelMapper;
@@ -44,13 +45,13 @@ public class MateController {
 
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	MateReplyService mateReplyService;
 
 	@Autowired
 	ReverseGeocodeUtil reverseGeocodeUtil;
-	
+
 	/** Mate Write */
 	@GetMapping("/write")
 	public String writeGet(HttpSession session) {
@@ -73,10 +74,10 @@ public class MateController {
 			return "error/error_404";
 		} else {
 			model.addAttribute("mate", mateDTO);
-			
+
 			List<MateReply> replyList = mateReplyService.getReplies(mid);
 			model.addAttribute("replyList", replyList);
-			
+
 			return "mate/detail";
 		}
 	}
@@ -102,7 +103,6 @@ public class MateController {
 	@PostMapping("/apply/state-edit")
 	@ResponseBody
 	public MateApplyDTO applyStateEdit(@RequestBody MateApplyDTO applyDTO) {
-		System.out.println(applyDTO);
 		LocalDateTime modDateTime = applyService.editIsApply(applyDTO);
 		applyDTO.setModDate(modDateTime);
 		return applyDTO;
@@ -145,6 +145,64 @@ public class MateController {
 	public String deleteMateGet(@PathVariable Long mid) {
 		mateService.delete(mid);
 		return "redirect:/mate/list";
+	}
+
+	/** Mate Reply : 댓글 작성 */
+	@PostMapping("/reply/insert")
+	public String insertReply(HttpServletRequest req, Model model, MateReply reply) {
+
+		long mid = Long.parseLong(req.getParameter("mid"));
+		long uid = Long.parseLong(req.getParameter("uid"));
+		String uid2 = req.getParameter("uid");
+		String content = req.getParameter("content");
+
+		HttpSession session = req.getSession();
+		UserDTO user = (UserDTO) session.getAttribute("user");
+		String nickname = user.getNickname();
+		String sessionUid = user.getId();
+		int isMine = (uid2.equals(sessionUid)) ? 1 : 0;
+
+		MateReply mateReply = new MateReply(uid, mid, nickname, content, isMine);
+		mateReplyService.insertReply(mateReply);
+
+		return "redirect:/mate/detail/" + mid;
+	}
+
+	/** Mate Reply : 대댓글 작성 */
+	@PostMapping("/reply/{grp}")
+	public String insertRereply(Model model, MateReply reply, HttpSession session) {
+		UserDTO user = (UserDTO) session.getAttribute("user");
+		MateDTO mate = mateService.findOneByMid(reply.getMid());
+		Long uid = user.getUid();
+		int isMine = mate.getUid() == uid ? 1 : 0;
+
+		reply.setUid(uid);
+		reply.setNickname(user.getNickname());
+		reply.setIsMine(isMine);
+
+		mateReplyService.insertReReply(reply);
+		Long rid = mateReplyService.findRid();
+		return "redirect:/mate/detail/" + reply.getMid() + "#" + rid;
+	}
+
+	/** Mate Reply : 댓글 수정 */
+	@PostMapping("/reply/update")
+	public String updateReply(HttpServletRequest req, Model model) {
+		long mid = Long.parseLong(req.getParameter("mid"));
+		long rid = Long.parseLong(req.getParameter("rid"));
+		String content = req.getParameter("content");
+
+		MateReply mateReply = new MateReply(rid, content);
+		mateReplyService.updateReply(mateReply);
+
+		return "redirect:/mate/detail/" + mid + "#" + rid;
+	}
+
+	/** Mate Reply : 댓글 삭제 */
+	@GetMapping("/reply/delete/{rid}/{mid}")
+	public String deleteReply(HttpServletRequest req, Model model, @PathVariable long rid, @PathVariable long mid) {
+		mateReplyService.deleteReply(rid);
+		return "redirect:/mate/detail/" + mid;
 	}
 
 }

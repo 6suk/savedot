@@ -46,8 +46,7 @@ public interface ChartDAO {
 			+ "	FROM csuccess s"
 			+ " JOIN challenge c"
 			+ "	ON s.cid = c.cid"
-			+ " WHERE date_format(s.sucDate, '%Y-%m') > date_format(DATE_SUB(NOW(), INTERVAL 1 MONTH),'%Y-%m')"
-			+ " GROUP BY MONTH(s.sucDate);")
+			+ " WHERE s.sucDate >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)")
 	public double homeChallengeOneMonthAllUser();
 
 	/** HOME : 챌린지 - 전체 유저 하루동안 아낀 비용 평균 (NULL의 경우 전날 데이터 조회) */

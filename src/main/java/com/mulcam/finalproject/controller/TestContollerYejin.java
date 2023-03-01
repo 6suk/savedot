@@ -42,8 +42,8 @@ public class TestContollerYejin {
 		/**
 		 *  조각메이트 댓글기능 
 		 */
-		
-		@PostMapping("/mate/reply/insert")
+		/** Mate Controller로 옮김 */
+//		@PostMapping("/mate/reply/insert")
 		public String insertReply(HttpServletRequest req, Model model,MateReply reply) {
 			
 			long mid = Long.parseLong(req.getParameter("mid")); 
@@ -66,14 +66,15 @@ public class TestContollerYejin {
 			return "redirect:/mate/detail/" + mid;
 		}
 		
-		
+		/** Mate Controller로 옮김 */
 		/* 댓글 삭제 */
-		@GetMapping("/mate/reply/delete/{rid}/{mid}")
+//		@GetMapping("/mate/reply/delete/{rid}/{mid}")
 		public String deleteReply(HttpServletRequest req,Model model, @PathVariable long rid, @PathVariable long mid) {
 			mateReplyService.deleteReply(rid);
 			return "redirect:/mate/detail/" + mid;
 		}
 		
+		/** 사용 X */
 		/* 대댓글달기 */
 		@GetMapping("/mate/rereply/{rid}/{grp}")
 		public String getRreplyform(HttpServletRequest req, Model model,@PathVariable long rid, @PathVariable int grp) {
@@ -82,7 +83,7 @@ public class TestContollerYejin {
 			return "mate/mate_rereply";
 		}
 		
-		
+		/** 사용 X */
 		@PostMapping("/mate/rereply")
 		public String insertRereply(HttpServletRequest req, Model model,MateReply reply) {
 			
@@ -104,6 +105,7 @@ public class TestContollerYejin {
 			return "redirect:/mate/detail/" + mid;
 		}
 		
+		/** 사용 X */
 		/* 댓글 수정 */
 		@GetMapping("/mate/reply/update/{rid}")
 		public String updateReplyform(HttpServletRequest req, Model model,@PathVariable long rid) {
@@ -112,7 +114,8 @@ public class TestContollerYejin {
 			return "mate/updateReply";
 		}
 		
-		@PostMapping("/mate/reply/update") 
+		/** Mate Controller로 옮김 */
+//		@PostMapping("/mate/reply/update") 
 		public String updateReply(HttpServletRequest req, Model model){
 			long mid = Long.parseLong(req.getParameter("mid"));
 			long rid = Long.parseLong(req.getParameter("rid"));

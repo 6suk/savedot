@@ -14,7 +14,10 @@ import com.mulcam.finalproject.entity.MateReply;
 public interface MateReplyDAO {
 	
 	/* 댓글리스트 가져오기 */
-	@Select("SELECT * FROM mate_reply WHERE mid=#{mid} ORDER BY grp, grps, regDate")
+	@Select("SELECT u.id, r.* FROM mate_reply r"
+			+ " JOIN user u"
+			+ " ON r.uid = u.uid"
+			+ " WHERE MID=#{mid} ORDER BY grp, grps, regDate")
 	public List<MateReply> getReplies(long mid); 
 	
 	/* 첫댓글 입력  */
@@ -27,8 +30,9 @@ public interface MateReplyDAO {
 	/* 댓글-댓글 입력 */
 	@Insert("INSERT INTO mate_reply Values (default , #{uid}, #{mid}, #{nickname}, #{content}, DEFAULT, #{isMine}, #{grp}, #{grps})")
 	void insertReReply(MateReply reply);
+	// 예림 수정 : 리댓글 여러개 가져오기 (List로 변경)
 	@Select("SELECT * FROM mate_reply where grp=#{grp} AND mid=#{mid}")
-	MateReply getReply(int grp,long mid); 
+	List<MateReply> getReply(int grp,long mid); 
 	@Select("SELECT * FROM mate_reply WHERE rid=#{rid} AND grp=#{grp}")
 	MateReply getGrp(long rid, int grp);
 	@Select("SELECT MAX(grps) FROM mate_reply where mid=#{mid} and grp=#{grp}")
@@ -45,4 +49,13 @@ public interface MateReplyDAO {
 	void updateReply(MateReply mateReply);	
 	@Select("Select * from mate_reply where rid=#{rid}")
 	MateReply getMateReply(long rid);
+	
+	/** 예림 추가 : grp + grps max 가져오기 */
+	@Select("SELECT grp, max(grps) AS `maxGrps` FROM mate_reply"
+			+ " WHERE `mid` = #{mid}"
+			+ " GROUP BY grp")
+	List<MateReply> findGrpAndGrpsMaxByMid(Long mid);
+	
+	@Select("SELECT LAST_INSERT_ID();")
+	public Long findRid();
 }

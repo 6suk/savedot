@@ -23,5 +23,8 @@ public interface MateReplyService {
 	/* 댓글 수정 */
 	void updateReply(MateReply mateReply);
 	MateReply getMateReply(long rid);
+	
+	/* 마지막 rid 가져오기 */
+	public Long findRid();
 
 }
