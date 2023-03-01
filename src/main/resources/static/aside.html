@@ -1,9 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!-- //// COMMON - ASIDE //// -->
-
-     <aside class="col-md-3">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #btn2 {
+        display : none;
+        }
+    </style>
+</head>
+<body>
+    <aside class="col-md-3">
         <div class="aside-img" >
             <c:if test="${empty sessionFilename}">
                 <img src="/img/bros_blank.jpg" width="100%">
@@ -27,27 +36,33 @@
             </dl>
 
             <!-- 정보 수정 -->
-            <div class="btn btn-border font-12">
-                <a href="/user/update/${user.uid}">정보 수정</a>
+            <div class="btn btn-border font-12" id="btn1">
+                <a href="/user/update/${user.uid}" onclick="toggleBtn1()">정보 수정</a>
             </div>
             <!-- 정보 수정 버튼 클릭 시 프로필 변경 오픈 -->
-            <div class="btn btn-border font-12">
-				<p onclick="editProfile('${user.id}')">프로필 변경</p>
+            <div class="btn btn-border font-12" id="btn2">
+				<label for="input" style="cursor:pointer;">
+					<p onclick="editProfile('${user.id}')">프로필 변경</p>
+				</label>
+				<input id="input" class="input" accept="image/*" type="file" multiple="true" hidden="true" name="img" />
+				<div class="preview" id="preview" hidden></div>
 			</div>
 
         </div>
         
-        <div class="mt-3 mb-5" id="hiddenProfile" style="display: none;">
+        <div class="mt-5 mb-5" id="hiddenProfile" style="display: none;">
             <form action="/aside/profile" method="post" enctype="multipart/form-data">
                 <table class="table table-borderless table-sm">
                     <tr class="d-flex">
-						<input class="form-control" type="file" name="image" id="image">
+                        <td class="col-10">
+							<input class="form-control" type="file" name="image" id="image">
+					</td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: center;">
-                            <button type="button" class="btn btn-main mdi me-1"
-                                onclick="editExecute('${user.id}')">등록</button>
-                            <button type="button" class="btn btn-gray mdi mt-1"
+                            <button type="button" class="btn btn-primary me-2"
+                                onclick="editExecute('${user.id}')">제출</button>
+                            <button type="button" class="btn btn-secondary"
                                 onclick="editCancel()">취소</button>
                         </td>
                     </tr>
@@ -70,3 +85,17 @@
             </a>
         </div>
     </aside>
+    <script>
+        function toggleBtn1() {
+  
+        // 토글 할 버튼 선택 (btn2)
+        const btn2 = document.getElementById('btn2');
+        
+        // btn2 보이기 (display: block)
+        if(btn2.style.display == 'none') {
+            btn2.style.display = 'block';
+        }
+    }
+    </script>
+</body>
+</html>
