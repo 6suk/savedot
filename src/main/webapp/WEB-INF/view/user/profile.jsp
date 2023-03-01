@@ -203,10 +203,9 @@
 							class="form-control" placeholder="계좌번호 (-)제외" value="${user.accountNumber }"></label>
 					</div>
 					<br>
-					
-					<a href="/user/delete/${uid}">회원탈퇴</a>
 					<div class="text-center">
-						<button type="submit" class="btn btn-primary">수정하기</button>
+						<a href="/user/delete/${uid}" style="float: left;">회원탈퇴</a>
+						<button type="submit" class="btn btn-main">수정하기</button>
 					</div>
 				</form>
 			</section>

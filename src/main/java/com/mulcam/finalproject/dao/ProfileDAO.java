@@ -13,9 +13,6 @@ public interface ProfileDAO {
 	@Insert("INSERT INTO profile VALUES (#{id}, #{image}, #{size}, #{filename})")
 	void insert(Profile profile);
 	
-//	@Select("SELECT * FROM profile WHERE uid=#{uid}")
-//	Profile getProfile(Long uid);
-	
 	@Select("SELECT * FROM profile WHERE id=#{id}")
 	Profile getProfileById(String id);
 	
