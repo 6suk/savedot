@@ -7,15 +7,13 @@ var hours = now.getHours();
 var minutes = now.getMinutes();
 var nowDate = new Date(year, month, day, hours, minutes);
 
-function SetPay(pay, sumNowExpense) {
+function SetPay(pay, sumNowExpense, goTime, leaveTime) {
   counter($('#sumNowExpense'), sumNowExpense);
 
   // 출근 시간
-  var goTime = [09, 00];
   var goDate = new Date(year, month, day, goTime[0], goTime[1]);
 
   // 퇴근시간
-  var leaveTime = [18, 00];
   var leaveDate = new Date(year, month, day, leaveTime[0], leaveTime[1]);
 
   // 현재까지 근무 시간
@@ -28,21 +26,28 @@ function SetPay(pay, sumNowExpense) {
   let calcSec = leaveDate.getTime() - goDate.getTime();
   let calcMinutes = calcSec / 1000 / 60;
 
-  // 퍼센트
-  let pc = Math.floor((workCalcMin / calcMinutes) * 100);
-  $('[num]').attr('num', pc);
-  console.log(pc);
-
   // 금액 입력
   // 월의 마지막 날짜 (28, 30, 31)
   let lastDate = new Date(year, month, 0).getDate();
 
-  // 1분당 페이 계산
-  let minitesPay = pay / lastDate / calcMinutes;
-  let nowPay = Math.floor(workCalcMin * minitesPay);
-  counter($('#nowPay'), nowPay);
-  console.log(nowPay);
+  let pc = 0;
+  let minitesPay = 0;
+  let nowPay = 0;
 
+  if (workSec > 0) {
+    // 퍼센트
+    pc = Math.floor((workCalcMin / calcMinutes) * 100);
+
+    // 1분당 페이 계산
+    minitesPay = pay / lastDate / calcMinutes;
+    nowPay = Math.floor(workCalcMin * minitesPay);
+  } else {
+    pc = 100;
+    nowPay = pay / lastDate;
+  }
+
+  $('[num]').attr('num', pc);
+  counter($('#nowPay'), nowPay);
   let total = nowPay - sumNowExpense;
   counter($('#total'), total);
 }
@@ -73,11 +78,33 @@ $(function () {
     type: 'post',
     url: '/pay',
     success: function (data) {
-      SetPay(data.pay, data.sumNowExpense);
-      move();
+      let pay = data.pay;
+      let sumNowExpense = data.sumNowExpense;
+
+      if (pay !== 0 && data.workIn !== null && data.workOut !== null) {
+        let goTime = data.workIn.split(':');
+        let leaveTime = data.workOut.split(':');
+        SetPay(pay, sumNowExpense, goTime, leaveTime);
+        move();
+      } else {
+        $('#modal_update').addClass('on');
+        staticValue();
+      }
+    },
+    error: function (error) {
+      $('#modal_login').addClass('on');
+      staticValue();
     },
   });
 });
+
+function staticValue() {
+  counter($('#nowPay'), 89000);
+  counter($('#sumNowExpense'), 8000);
+  counter($('#total'), 89000 - 8000);
+  $('[num]').attr('num', 48);
+  move();
+}
 
 // 숫자 카운트업
 const counter = ($counter, max) => {

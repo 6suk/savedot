@@ -162,7 +162,7 @@ public class UserController {
 		String strcode = req.getParameter("code").strip();
 		int code = 0;
 		if (strcode != null && !strcode.equals("")) {
-			pay = Integer.parseInt(strcode);
+			code = Integer.parseInt(strcode);
 		} 
 		HttpSession session = req.getSession();
 		User user;
@@ -187,6 +187,9 @@ public class UserController {
 			session.setAttribute("bank", bank);
 			session.setAttribute("accountNumber", accountNumber);
 			session.setAttribute("code", code);
+			
+			UserDTO userDTO = userService.findByUid(uid); // 업데이트 후 로그인 유저 세션도 업데이트 (예림)
+			session.setAttribute("user", userDTO);
 			return "redirect:/mypage/main";
 		}
 		 
@@ -210,6 +213,9 @@ public class UserController {
 			session.setAttribute("bank", bank);
 			session.setAttribute("accountNumber", accountNumber);
 			session.setAttribute("code", code);
+			
+			UserDTO userDTO = userService.findByUid(uid); // 업데이트 후 로그인 유저 세션도 업데이트 (예림)
+			session.setAttribute("user", userDTO);
 			return "redirect:/mypage/main";
 		} 
 		

@@ -22,7 +22,6 @@ public class PayCalcController {
 	@GetMapping("")
 	public String PayGet(HttpSession session) {
 		UserDTO user = (UserDTO) session.getAttribute("user");
-		System.out.println(user);
 		return "home/pay";
 	}
 	
