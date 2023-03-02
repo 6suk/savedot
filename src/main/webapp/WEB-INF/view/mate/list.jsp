@@ -160,9 +160,17 @@
 								<div class="top">
 									<p class="mate-card-tag position" ${mate.stateName }>${mate.positonApplyNum }
 											/ ${mate.positionNum }</p>
+									
+									<c:set var="likeType" value="0"></c:set>
+									<c:set var="likeUrl" value="likePress(${mate.mid})"></c:set>
 									<c:forEach var="like" items="${likelist }">
-									<span class="" onclick="likePress(${mate.mid})" LIKE ="${like.mid eq mate.mid ? '1' : '0'}" id="${mate.mid}"></span>
+									<c:if test="${like.mid eq mate.mid}">
+										<c:set var="likeType" value="1"></c:set>
+										<c:set var="likeUrl" value="likeDel(${mate.mid})"></c:set>
+									</c:if>
 									</c:forEach>
+									
+									<span class="" onclick="${likeUrl}" LIKE ="${likeType}" id="${mate.mid}"></span>
 
 								</div>
 								<c:set var="thumpath"
@@ -210,7 +218,6 @@
 	<script src="/js/mate_list.js"></script>
 	<script type="text/javascript">
 		function likePress(mid) {
-			console.log("***********", mid);
 			$.ajax({
 				
 				type : "GET",
@@ -220,12 +227,22 @@
 						$('#'+mid).attr('LIKE',1)
 					}
 				}
+			});
+		}
+	</script>
+	<script type="text/javascript">
+		function likeDel(mid) {
+			$.ajax({
+				type : "GET",
+				url : "/mate/delLike/" + mid,
+				success : function(data) {
+					if(data){
+						$('#'+mid).attr('LIKE',0)
+					}
+				}
 				
 			});
-			
-			
 		}
-	
 	</script>
 </body>
 </html>

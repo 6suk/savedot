@@ -23,8 +23,10 @@ import com.mulcam.finalproject.dto.MateDTO;
 import com.mulcam.finalproject.dto.MateSearchDTO;
 import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.MateApply;
+import com.mulcam.finalproject.entity.MateLike;
 import com.mulcam.finalproject.entity.MateReply;
 import com.mulcam.finalproject.service.MateApplyService;
+import com.mulcam.finalproject.service.MateLikeService;
 import com.mulcam.finalproject.service.MateReplyService;
 import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.UserService;
@@ -39,6 +41,9 @@ public class MateController {
 
 	@Autowired
 	MateService mateService;
+	
+	@Autowired
+	MateLikeService likeService;
 
 	@Autowired
 	MateApplyService applyService;
@@ -67,8 +72,9 @@ public class MateController {
 
 	/** Mate Detail */
 	@GetMapping("/detail/{mid}")
-	public String detail(@PathVariable Long mid, Model model) {
+	public String detail(@PathVariable Long mid, Model model,HttpSession session) {
 		MateDTO mateDTO = mateService.findOneByMid(mid);
+		UserDTO user = (UserDTO) session.getAttribute("user");
 		// 삭제된 게시물일 때 (추후 필터 또는 에러 페이지로 이동하는 로직 구현할 것)
 		if (mateDTO == null) {
 			return "error/error_404";
@@ -77,6 +83,12 @@ public class MateController {
 
 			List<MateReply> replyList = mateReplyService.getReplies(mid);
 			model.addAttribute("replyList", replyList);
+			
+			if(user != null) {
+				List<MateLike> likeList = likeService.GetLikeList(user.getUid());
+				model.addAttribute("likelist",likeList);
+				System.out.println(likeList);
+			}
 
 			return "mate/detail";
 		}
@@ -110,9 +122,17 @@ public class MateController {
 
 	/** Mate List */
 	@GetMapping("/list")
-	public String listSearchGet(MateSearchDTO mateSearchDTO, Model model) {
+	public String listSearchGet(MateSearchDTO mateSearchDTO, Model model, HttpSession session) {
 		List<MateDTO> mateDTO = mateService.findAllBySearch(mateSearchDTO);
+		UserDTO user = (UserDTO) session.getAttribute("user");
 		model.addAttribute("mate", mateDTO);
+		
+		if(user != null) {
+			List<MateLike> likeList = likeService.GetLikeList(user.getUid());
+			model.addAttribute("likelist",likeList);
+			System.out.println(likeList);
+		}
+		
 		return "mate/list";
 	}
 

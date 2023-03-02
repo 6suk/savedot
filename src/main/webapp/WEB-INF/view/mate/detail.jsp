@@ -41,7 +41,16 @@
 									<span>조회</span><span>${mate.viewCnt }</span>
 								</p>
 								<p>
-								<span><i class="" LIKE="0"></i></span><span>${mate.likeCnt }</span>
+									<c:set var="likeType" value="0"></c:set>
+									<c:set var="likeUrl" value="likePress(${mate.mid})"></c:set>
+									<c:forEach var="like" items="${likelist }">
+									<c:if test="${like.mid eq mate.mid}">
+										<c:set var="likeType" value="1"></c:set>
+										<c:set var="likeUrl" value="likeDel(${mate.mid})"></c:set>
+									</c:if>
+									</c:forEach>
+								<span><i class=""  onclick="${likeUrl}" LIKE ="${likeType}" id="${mate.mid}"></i></span>
+								<span>${mate.likeCnt }</span>
 								</p>
 							</div>
 						</div>
@@ -369,5 +378,33 @@
 			location.href = "/mate/reply/delete/" + rid + "/" + mid;
 	}
 </script>
+	<script type="text/javascript">
+		function likePress(mid) {
+			$.ajax({
+				
+				type : "GET",
+				url : "/mate/like/" + mid,
+				success : function(data) {
+					if(data){
+						$('#'+mid).attr('LIKE',1)
+					}
+				}
+			});
+		}
+	</script>
+	<script type="text/javascript">
+		function likeDel(mid) {
+			$.ajax({
+				type : "GET",
+				url : "/mate/delLike/" + mid,
+				success : function(data) {
+					if(data){
+						$('#'+mid).attr('LIKE',0)
+					}
+				}
+				
+			});
+		}
+	</script>
 </html>
 

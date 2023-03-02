@@ -78,7 +78,7 @@ public class TestContollerYejin {
 		
 		List<MateLike> likeList = likeService.GetLikeList(uid);
 		model.addAttribute("likelist",likeList);
-		
+		System.out.println(likeList);
 		return "";
 	}
 	
