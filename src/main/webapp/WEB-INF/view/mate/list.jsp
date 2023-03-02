@@ -160,8 +160,18 @@
 								<div class="top">
 									<p class="mate-card-tag position" ${mate.stateName }>${mate.positonApplyNum }
 											/ ${mate.positionNum }</p>
-									<span class="fa-regular fa-heart" LIKE none-like></span> <span
-										class="fa-solid fa-heart hide" LIKE select-like></span>
+									
+									<c:set var="likeType" value="0"></c:set>
+									<c:set var="likeUrl" value="likePress(${mate.mid})"></c:set>
+									<c:forEach var="like" items="${likelist }">
+									<c:if test="${like.mid eq mate.mid}">
+										<c:set var="likeType" value="1"></c:set>
+										<c:set var="likeUrl" value="likeDel(${mate.mid})"></c:set>
+									</c:if>
+									</c:forEach>
+									
+									<span class="" onclick="${likeUrl}" LIKE ="${likeType}" id="${mate.mid}"></span>
+
 								</div>
 								<c:set var="thumpath"
 									value="/savedot/upload/${mate.thum.saveDate }/${mate.thum.id }${mate.thum.ext }"></c:set>
@@ -175,7 +185,7 @@
 										<p>${mate.user.nickname }</p>
 										<div class="line d-flex" style="font-size: 12px;">
 											<p>
-												<span class="fa-solid fa-heart"></span><span>${mate.likeCnt }</span>
+												<span class="fa-solid fa-heart" id="like${mate.mid}">${mate.likeCnt }</span>
 											</p>
 											<p>
 												<span class="fa-regular fa-comment"></span><span>${mate.replyCnt }</span>
@@ -206,6 +216,34 @@
 		</div>
 	</div>
 	<script src="/js/mate_list.js"></script>
+	<script type="text/javascript">
+		function likePress(mid) {
+			$.ajax({
+				
+				type : "GET",
+				url : "/mate/like/" + mid,
+				success : function(data) {
+					if(data){
+						$('#'+mid).attr('LIKE',1)
+					}
+				}
+			});
+		}
+	</script>
+	<script type="text/javascript">
+		function likeDel(mid) {
+			$.ajax({
+				type : "GET",
+				url : "/mate/delLike/" + mid,
+				success : function(data) {
+					if(data){
+						$('#'+mid).attr('LIKE',0)
+					}
+				}
+				
+			});
+		}
+	</script>
 </body>
 </html>
 
