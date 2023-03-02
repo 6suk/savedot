@@ -41,7 +41,7 @@
 									<span>조회</span><span>${mate.viewCnt }</span>
 								</p>
 								<p>
-									<span><i class="fa-regular fa-heart"></i></span><span>${mate.likeCnt }</span>
+								<span><i class="" LIKE="0"></i></span><span>${mate.likeCnt }</span>
 								</p>
 							</div>
 						</div>

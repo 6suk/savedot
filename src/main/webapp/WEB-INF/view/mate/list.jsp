@@ -160,12 +160,10 @@
 								<div class="top">
 									<p class="mate-card-tag position" ${mate.stateName }>${mate.positonApplyNum }
 											/ ${mate.positionNum }</p>
-									<span class="fa-regular fa-heart" onclick="likePress(${mate.mid})" LIKE="0" id="${mate.mid}"></span>
-										<c:forEach var="like" items="${likelist }">
-										<c:if test="${like.mid eq mate.mid}">
-									<span class="fa-solid fa-heart hide" LIKE select-like></span>
-										</c:if>
+									<c:forEach var="like" items="${likelist }">
+									<span class="" onclick="likePress(${mate.mid})" LIKE ="${like.mid eq mate.mid ? '1' : '0'}" id="${mate.mid}"></span>
 									</c:forEach>
+
 								</div>
 								<c:set var="thumpath"
 									value="/savedot/upload/${mate.thum.saveDate }/${mate.thum.id }${mate.thum.ext }"></c:set>
