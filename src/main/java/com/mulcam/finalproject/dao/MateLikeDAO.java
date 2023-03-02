@@ -20,7 +20,7 @@ public interface MateLikeDAO {
 	void insertLike(MateLike mateLike); 
 	
 	@Update("UPDATE mate SET likeCnt = likeCnt+1 WHERE mid = #{mid}")
-	void plusLike(long mid);
+	void plusLike(long mid); 
 	
 	@Update("UPDATE mate SET likeCnt = likeCnt-1 WHERE mid = #{mid}")
 	void cancelLike(long mid);

@@ -12,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mulcam.finalproject.dto.UserDTO;
+import com.mulcam.finalproject.entity.Mate;
 import com.mulcam.finalproject.entity.MateLike;
 import com.mulcam.finalproject.entity.User;
 import com.mulcam.finalproject.service.CashListService;
@@ -41,34 +43,31 @@ public class TestContollerYejin {
 
 	@Value("${naver.secretKey}")
 	private String secretKey;
-
-	// entity - dao - service - serviceImpl - controller 
 	
+	@ResponseBody
 	@RequestMapping("/mate/like/{mid}")
-	public String like(@PathVariable long mid, Model model, HttpServletRequest req,MateLike mateLike) {
-		
+	public boolean like(@PathVariable int mid, HttpServletRequest req) {
 		HttpSession session = req.getSession();
-		User user = (User) session.getAttribute("user");
+		UserDTO user = (UserDTO) session.getAttribute("user");
 		Long uid = user.getUid();
-		
-		MateLike like = new MateLike(mid,uid);
-		likeService.insertLike(mateLike);
+		MateLike like = new MateLike(mid, uid);
+		likeService.insertLike(like);
 		likeService.plusLike(mid);
-	
-		return "redirect:/mate/detail/" + mid;
+		return true;
 	}
 	
+	@ResponseBody
 	@RequestMapping("/mate/delLike/{mid}")
-	public String likedel(@PathVariable int mid, Model model, HttpServletRequest req) {
+	public boolean likedel(@PathVariable int mid, HttpServletRequest req) {
 	
 		HttpSession session = req.getSession();
-		User user = (User) session.getAttribute("user");
+		UserDTO user = (UserDTO) session.getAttribute("user");
 		Long uid = user.getUid();
 		
 		likeService.deleteLike(mid, uid);
 		likeService.cancelLike(mid);
 	
-		return "redirect:/mate/detail/" + mid;
+		return true;
 	}
 	
 	@GetMapping("/mypage/mate/like")

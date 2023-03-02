@@ -16,4 +16,5 @@ public interface MateLikeService {
 	
 	void deleteLike(long mid,long uid);
 
+
 }

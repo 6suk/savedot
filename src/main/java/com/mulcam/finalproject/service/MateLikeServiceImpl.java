@@ -40,4 +40,6 @@ public class MateLikeServiceImpl implements MateLikeService {
 		likeDAO.plusLike(mid);
 	}
 
+
+
 }
