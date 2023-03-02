@@ -1,5 +1,7 @@
 package com.mulcam.finalproject.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.User;
+import com.mulcam.finalproject.service.KakaoService;
 import com.mulcam.finalproject.service.ProfileService;
 import com.mulcam.finalproject.service.UserService;
 
@@ -24,6 +27,9 @@ public class UserController {
 
 	@Autowired private UserService userService;
 	@Autowired private ProfileService profileService;
+	
+	@Autowired private KakaoService kakaoService;
+	
 	
 	/** 회원가입 */
 	@GetMapping("/join")
@@ -56,26 +62,22 @@ public class UserController {
 		if (strpay != null && !strpay.equals("")) {
 			pay = Integer.parseInt(strpay.replace(",", ""));
 		}
-		
-		String strWorkIn = req.getParameter("workIn").strip();
-		int workIn = 0;
-		if (strWorkIn != null && !strWorkIn.equals("")) {
-			workIn = Integer.parseInt(strWorkIn.replace(",", ""));
-		}
-		
-		String strWorkOut = req.getParameter("workOut").strip();
-		int workOut = 0;
-		if (strWorkOut != null && !strWorkOut.equals("")) {
-			workOut = Integer.parseInt(strWorkOut.replace(",", ""));
-		}
+		String workIn = req.getParameter("workIn").strip();
+		String workOut = req.getParameter("workOut").strip();
+
 		
 		String departures = req.getParameter("departures").strip();
 		String arrivals = req.getParameter("arrivals").strip();
 		String vehicles = req.getParameter("vehicles").strip();
 		String bank = req.getParameter("bank").strip();
 		String accountNumber = req.getParameter("accountNumber").strip();
-		String code = req.getParameter("code").strip();
-		 
+		String strcode = req.getParameter("code").strip();
+		int code = 0;
+		if (strcode != null && !strcode.equals("")) {
+			pay = Integer.parseInt(strcode);
+		} 
+		
+		
 		if (pwd.equals(pwd2)) {
 			User user = new User(0L, uname, id, pwd, nickname, email, tel, birthDate, postcode, addr, detailAddr, pay, workIn, workOut, departures, arrivals, vehicles, 0, bank, accountNumber, code);
 			userService.join(user);
@@ -129,6 +131,23 @@ public class UserController {
 			return "user/alertMsg";
 	}
 	
+	@GetMapping("/loginKakao")
+	public String loginKakao(@RequestParam("code") String code, HttpSession session) throws Exception {
+	    String access_Token = kakaoService.getAccessToken(code);
+	    UserDTO user =  kakaoService.getUserInfo(access_Token, session);
+	    
+	    return "redirect:/mypage/main";
+	}
+	
+	@GetMapping("/logoutKakao")
+	public String logoutKakao(HttpSession session) {
+		kakaoService.kakaoLogout((String)session.getAttribute("access_Token"));
+	    session.removeAttribute("access_Token");
+	    session.removeAttribute("userId");
+	    return "redirect:/home";
+	}
+
+
 	/** 회원정보 수정 */
 	
 	//수정하고자 하는 정보를 불러오는 메소드
@@ -156,23 +175,18 @@ public class UserController {
 		if (strpay != null && !strpay.equals("")) {
 			pay = Integer.parseInt(strpay.replace(",", ""));
 		}
-		String strWorkIn = req.getParameter("workIn").strip();
-		int workIn = 0;
-		if (strWorkIn != null && !strWorkIn.equals("")) {
-			workIn = Integer.parseInt(strWorkIn.replace(":", ""));
-		}
-		
-		String strWorkOut = req.getParameter("workOut").strip();
-		int workOut = 0;
-		if (strWorkOut != null && !strWorkOut.equals("")) {
-			workOut = Integer.parseInt(strWorkOut.replace(":", ""));
-		}
+		String workIn = req.getParameter("workIn").strip();
+		String workOut = req.getParameter("workOut").strip();
 		String departures = req.getParameter("departures").strip();
 		String arrivals = req.getParameter("arrivals").strip();
 		String vehicles = req.getParameter("vehicles").strip();
 		String bank = req.getParameter("bank").strip();
 		String accountNumber = req.getParameter("accountNumber").strip();
-		String code = req.getParameter("code").strip();
+		String strcode = req.getParameter("code").strip();
+		int code = 0;
+		if (strcode != null && !strcode.equals("")) {
+			code = Integer.parseInt(strcode);
+		} 
 		HttpSession session = req.getSession();
 		User user;
 		
@@ -196,6 +210,9 @@ public class UserController {
 			session.setAttribute("bank", bank);
 			session.setAttribute("accountNumber", accountNumber);
 			session.setAttribute("code", code);
+			
+			UserDTO userDTO = userService.findByUid(uid); // 업데이트 후 로그인 유저 세션도 업데이트 (예림)
+			session.setAttribute("user", userDTO);
 			return "redirect:/mypage/main";
 		}
 		 
@@ -219,6 +236,9 @@ public class UserController {
 			session.setAttribute("bank", bank);
 			session.setAttribute("accountNumber", accountNumber);
 			session.setAttribute("code", code);
+			
+			UserDTO userDTO = userService.findByUid(uid); // 업데이트 후 로그인 유저 세션도 업데이트 (예림)
+			session.setAttribute("user", userDTO);
 			return "redirect:/mypage/main";
 		} 
 		
@@ -249,4 +269,6 @@ public class UserController {
 		userService.delete(uid);
 		return "redirect:/home";
 	}
+	
+	
 }

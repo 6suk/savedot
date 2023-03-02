@@ -92,4 +92,9 @@ public class UserServiceImpl implements UserService {
 	public void delete(Long uid) {
 		userDAO.delete(uid);
 	}
+
+	@Override
+	public void join(UserDTO kakaoUser) {
+		userDAO.insert(kakaoUser);
+	}
 }

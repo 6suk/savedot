@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.User;
 
 @Mapper
@@ -18,6 +19,7 @@ public interface UserDAO {
 	
 	@Insert("INSERT INTO user VALUES(default, #{uname}, #{id}, #{pwd}, #{nickname}, #{email}, #{tel}, #{birthDate}, #{postcode}, #{addr}, #{detailAddr}, #{pay}, #{workIn}, #{workOut}, #{departures}, #{arrivals}, #{vehicles}, default, #{bank}, #{accountNumber}, #{code})")
 	void insert(User u);
+	void insert(UserDTO kakaoUser);
 	
 	/** 아이디 중복 검사 */
 	@Select("SELECT COUNT(id) FROM user WHERE id=#{id}")
@@ -45,5 +47,7 @@ public interface UserDAO {
 	/** 회원 탈퇴 */
 	@Update("UPDATE user SET isDeleted=1 WHERE uid=#{uid}")
 	public void delete(Long uid);
+
+	
 
 }

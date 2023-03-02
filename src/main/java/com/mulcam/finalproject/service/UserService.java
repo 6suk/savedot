@@ -19,6 +19,7 @@ public interface UserService {
 	
 	/** 회원가입 */
 	void join(User user);
+	void join(UserDTO kakaoUser);
 
 	/** 아이디, 닉네임 중복 검사 */
 	int idCheck(String id);
@@ -33,5 +34,6 @@ public interface UserService {
 	
 	/** 회원탈퇴 */
 	void delete(Long uid);
+	
 
 }
