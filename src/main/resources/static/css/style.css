@@ -1969,6 +1969,11 @@ div.challenge-choice {
   color: #eee;
 }
 
+.mate-top-info .top .fa-solid.like {
+  font-size: 20px;
+  color: red;
+}
+
 .category0::after {
   content: '조각메이트';
 }
