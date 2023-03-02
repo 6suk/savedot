@@ -20,31 +20,31 @@ public class ConsoleTest {
 //		});
 
 		/** 지출 랜덤 데이터 만들기 */
-//		String id[] = { "admin", "ko", "sohee" };
-//		int totalPrice[] = { 0, 0, 0 };
-//
-//		for (int i = 0; i < 100; i++) {
-//			int price = DataInputUtil.getPrice(1000,50000);
-//			LocalDate date = DataInputUtil.getRandomDate("20220201","20230227");
-//			int uid = DataInputUtil.getRandomNum(3, true);
-//			System.out.printf("(DEFAULT, 0, '%s', %d, 'test%d', 'test memo%d', '%s'),%n", date, price, i, i, id[uid]);
-//			totalPrice[uid] += price;
-//		}
-//
-//		System.out.println(totalPrice[0]);
-//		System.out.println(totalPrice[1]);
-//		System.out.println(totalPrice[2]);
-//		System.out.println(totalPrice[0] + totalPrice[1] + totalPrice[2]);
-
-		/** 챌린지 랜덤 데이터 만들기 */
-		String id[] = { "admin", "ko", "hyein", "hani", "haerin", "minji", "sohee" };
+		String id[] = { "admin", "ko", "sohee" };
+		int totalPrice[] = { 0, 0, 0 };
 
 		for (int i = 0; i < 5; i++) {
-			LocalDate date = DataInputUtil.getRandomDate("20221029", "20221031");
-			int cid = DataInputUtil.getRandomNum(3, false);
-			int uid = DataInputUtil.getRandomNum(id.length, true);
-			System.out.printf("(DEFAULT, '%s', %d, '%s'),%n", date, cid, id[6]);
+			int price = DataInputUtil.getPrice(1000,38000);
+			LocalDate date = DataInputUtil.getRandomDate("20230301","20230301");
+			int uid = DataInputUtil.getRandomNum(3, true);
+			System.out.printf("(DEFAULT, 0, '%s', %d, 'test%d', 'test memo%d', '%s'),%n", date, price, i, i, id[2]);
+			totalPrice[uid] += price;
 		}
+
+		System.out.println(totalPrice[0]);
+		System.out.println(totalPrice[1]);
+		System.out.println(totalPrice[2]);
+		System.out.println(totalPrice[0] + totalPrice[1] + totalPrice[2]);
+
+		/** 챌린지 랜덤 데이터 만들기 */
+//		String id[] = { "admin", "ko", "hyein", "hani", "haerin", "minji", "sohee" };
+//
+//		for (int i = 0; i < 5; i++) {
+//			LocalDate date = DataInputUtil.getRandomDate("20221029", "20221031");
+//			int cid = DataInputUtil.getRandomNum(3, false);
+//			int uid = DataInputUtil.getRandomNum(id.length, true);
+//			System.out.printf("(DEFAULT, '%s', %d, '%s'),%n", date, cid, id[6]);
+//		}
 
 	}
 }
