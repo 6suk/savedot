@@ -92,4 +92,15 @@ public class UserServiceImpl implements UserService {
 	public void delete(Long uid) {
 		userDAO.delete(uid);
 	}
+
+	@Override
+	public void join(UserDTO kakaoUser) {
+		userDAO.insert(kakaoUser);
+	}
+
+	@Override
+	public int loginKakao(UserDTO kakaoUser, HttpSession session) {
+		session.setAttribute("user", kakaoUser);
+		return UserService.CORRECT_LOGIN;
+	}
 }

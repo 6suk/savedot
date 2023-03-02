@@ -15,15 +15,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.User;
+import com.mulcam.finalproject.service.KakaoService;
 import com.mulcam.finalproject.service.ProfileService;
 import com.mulcam.finalproject.service.UserService;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
+	
 	@Autowired private UserService userService;
 	@Autowired private ProfileService profileService;
+	
+	@Autowired private KakaoService kakaoService;
+	
 	
 	/** 회원가입 */
 	@GetMapping("/join")
@@ -125,6 +129,23 @@ public class UserController {
 			return "user/alertMsg";
 	}
 	
+	@GetMapping("/loginKakao")
+	public String loginKakao(@RequestParam("code") String code, HttpSession session) throws Exception {
+	    String access_Token = kakaoService.getAccessToken(code);
+	    UserDTO user =  kakaoService.getUserInfo(access_Token, session);
+	    
+	    return "redirect:/mypage/main";
+	}
+	
+	@GetMapping("/logoutKakao")
+	public String logoutKakao(HttpSession session) {
+		kakaoService.kakaoLogout((String)session.getAttribute("access_Token"));
+	    session.removeAttribute("access_Token");
+	    session.removeAttribute("userId");
+	    return "redirect:/home";
+	}
+
+
 	/** 회원정보 수정 */
 	
 	//수정하고자 하는 정보를 불러오는 메소드
@@ -246,4 +267,6 @@ public class UserController {
 		userService.delete(uid);
 		return "redirect:/home";
 	}
+	
+	
 }
