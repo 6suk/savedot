@@ -24,7 +24,7 @@
 			<section id="section-content">
 				<!-- << 슬라이드 시작 -->
 				<c:if test="${fn:length(mate.imgInfo) ne 0 }">
-					<%@ include file="../mate/slide.jsp"%>
+					<%-- <%@ include file="../slide.jsp"%> --%>
 				</c:if>
 				<!-- 슬라이드 끝 >> -->
 
