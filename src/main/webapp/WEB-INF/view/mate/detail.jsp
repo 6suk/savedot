@@ -49,7 +49,7 @@
 										<c:set var="likeUrl" value="likeDel(${mate.mid})"></c:set>
 									</c:if>
 									</c:forEach>
-								<span><i class=""  onclick="${likeUrl}" LIKE ="${likeType}" id="${mate.mid}"></i></span>
+								<span><i class="" LIKE ="${likeType}" id="${mate.mid}"></i></span>
 								<span>${mate.likeCnt }</span>
 								</p>
 							</div>
@@ -378,33 +378,4 @@
 			location.href = "/mate/reply/delete/" + rid + "/" + mid;
 	}
 </script>
-	<script type="text/javascript">
-		function likePress(mid) {
-			$.ajax({
-				
-				type : "GET",
-				url : "/mate/like/" + mid,
-				success : function(data) {
-					if(data){
-						$('#'+mid).attr('LIKE',1)
-					}
-				}
-			});
-		}
-	</script>
-	<script type="text/javascript">
-		function likeDel(mid) {
-			$.ajax({
-				type : "GET",
-				url : "/mate/delLike/" + mid,
-				success : function(data) {
-					if(data){
-						$('#'+mid).attr('LIKE',0)
-					}
-				}
-				
-			});
-		}
-	</script>
 </html>
-

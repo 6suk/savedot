@@ -36,15 +36,44 @@ $('[area-ele]').click(function () {
 });
 
 $('[LIKE]').click(function (event) {
-  event.preventDefault();
-  event.stopPropagation();
+  // event.preventDefault();
+  // event.stopPropagation();
   let like = $(this).attr('LIKE');
+  let mid = $(this).attr('id');
+
   if (like === '0') {
-    $(this).attr('class', 'like fa-regular fa-heart');
-  } else {
     $(this).attr('class', 'like fa-solid fa-heart');
+    likePress(mid);
+  }
+  if (like === '1') {
+    $(this).attr('class', 'like fa-regular fa-heart');
+    likeDel(mid);
   }
 });
+
+function likePress(mid) {
+  $.ajax({
+    type: 'GET',
+    url: '/mate/like/' + mid,
+    success: function (data) {
+      if (data) {
+        $('#' + mid).attr('LIKE', 1);
+      }
+    },
+  });
+}
+
+function likeDel(mid) {
+  $.ajax({
+    type: 'GET',
+    url: '/mate/delLike/' + mid,
+    success: function (data) {
+      if (data) {
+        $('#' + mid).attr('LIKE', 0);
+      }
+    },
+  });
+}
 
 $(function () {
   // 썸네일 없을 때

@@ -319,7 +319,7 @@ uri="http://java.sun.com/jsp/jstl/fmt"%> <%@ taglib prefix="fn" uri="http://java
                       </c:if>
                     </c:forEach>
 
-                    <span class="" onclick="${likeUrl}" LIKE="${likeType}" id="${mate.mid}"></span>
+                    <span class="" LIKE="${likeType}" id="${mate.mid}"></span>
                   </div>
                   <c:set
                     var="thumpath"
@@ -334,9 +334,7 @@ uri="http://java.sun.com/jsp/jstl/fmt"%> <%@ taglib prefix="fn" uri="http://java
                     <div class="top">
                       <p>${mate.user.nickname }</p>
                       <div class="line d-flex" style="font-size: 12px">
-                        <p>
-                          <span class="fa-solid fa-heart" id="like${mate.mid}">${mate.likeCnt }</span>
-                        </p>
+                        <p><span class="fa-solid fa-heart" id="like${mate.mid}"></span><span>${mate.likeCnt }</span></p>
                         <p><span class="fa-regular fa-comment"></span><span>${mate.replyCnt }</span></p>
                       </div>
                     </div>
@@ -363,31 +361,5 @@ uri="http://java.sun.com/jsp/jstl/fmt"%> <%@ taglib prefix="fn" uri="http://java
       </div>
     </div>
     <script src="/js/mate_list.js"></script>
-    <script type="text/javascript">
-      function likePress(mid) {
-        $.ajax({
-          type: 'GET',
-          url: '/mate/like/' + mid,
-          success: function (data) {
-            if (data) {
-              $('#' + mid).attr('LIKE', 1);
-            }
-          },
-        });
-      }
-    </script>
-    <script type="text/javascript">
-      function likeDel(mid) {
-        $.ajax({
-          type: 'GET',
-          url: '/mate/delLike/' + mid,
-          success: function (data) {
-            if (data) {
-              $('#' + mid).attr('LIKE', 0);
-            }
-          },
-        });
-      }
-    </script>
   </body>
 </html>
