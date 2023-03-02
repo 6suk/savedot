@@ -12,17 +12,19 @@ import java.util.UUID;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.mulcam.finalproject.dto.KakaoProfile;
+import com.mulcam.finalproject.dto.KakaoProfileDTO;
 import com.mulcam.finalproject.dto.UserDTO;
 
 @Service
 public class KakaoService {
 	
+	@Value("${cosKey}") private String cosKey;
 	@Autowired private UserService userService;
 	
     public String getAccessToken (String authorize_code) {
@@ -86,7 +88,7 @@ public class KakaoService {
         
 //    요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
         ObjectMapper objectMapper = new ObjectMapper();
-        KakaoProfile kakaoProfile = null;
+        KakaoProfileDTO kakaoProfile = null;
         
         String reqURL = "https://kapi.kakao.com/v2/user/me";
 
@@ -110,13 +112,12 @@ public class KakaoService {
         }
         System.out.println("로그인 유저 정보 response body : " + result);
         
-        kakaoProfile = objectMapper.readValue(result, KakaoProfile.class);
+        kakaoProfile = objectMapper.readValue(result, KakaoProfileDTO.class);
 
         // User 오브젝트: uname, id, pwd, nickname, email, birthDate)
         System.out.println("유저 이름: " + kakaoProfile.getProperties().nickname);
         System.out.println("유저 아이디(회원번호): " + kakaoProfile.getId());
-        UUID garbagePwd = UUID.randomUUID();
-        System.out.println("유저 패스워드: " + garbagePwd);
+        System.out.println("유저 패스워드: " + cosKey);
         System.out.println("유저 닉네임: " + kakaoProfile.getProperties().nickname);
         System.out.println("유저 이메일: " + kakaoProfile.getKakao_account().email);
         System.out.println("유저 생일: " + kakaoProfile.getKakao_account().birthday);
@@ -125,7 +126,7 @@ public class KakaoService {
         UserDTO kakaoUser = UserDTO.builder()
         		.uname(kakaoProfile.getProperties().nickname)
         		.id(kakaoProfile.getId().toString())
-        		.pwd(garbagePwd.toString())
+        		.pwd(cosKey)
         		.nickname(kakaoProfile.getProperties().nickname)
         		.email(kakaoProfile.getKakao_account().email)
         		.birthDate("0000" + kakaoProfile.getKakao_account().birthday)
@@ -139,7 +140,7 @@ public class KakaoService {
         	userService.join(kakaoUser);
         }
         
-        userService.login(kakaoUser, session);
+        userService.loginKakao(kakaoUser, session);
         System.out.println("자동 로그인을 진행합니다.");
         // 로그인 처리 (세션 등록)
         

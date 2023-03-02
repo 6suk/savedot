@@ -13,11 +13,6 @@ $('[TradeType]').each(function (index, item) {
   }
 });
 
-$('[LIKE]').click(function (event) {
-  event.preventDefault();
-  event.stopPropagation();
-});
-
 // 카드 클릭 시 디테일 페이지 이동
 $('.mate-flex-item').click(function () {
   let mid = $(this).attr('mid');
@@ -40,7 +35,27 @@ $('[area-ele]').click(function () {
   }
 });
 
+$('[LIKE]').click(function (event) {
+  event.preventDefault();
+  event.stopPropagation();
+  let like = $(this).attr('LIKE');
+  if (like === '0') {
+    $(this).attr('class', 'like fa-regular fa-heart');
+  } else {
+    $(this).attr('class', 'like fa-solid fa-heart');
+  }
+});
+
 $(function () {
+  $('[LIKE]').each(function (index, item) {
+    let like = $(item).attr('LIKE');
+    if (like === '0') {
+      $(item).attr('class', 'like fa-regular fa-heart');
+    } else {
+      $(item).attr('class', 'like fa-solid fa-heart');
+    }
+  });
+
   let search = location.search;
   var params = new URLSearchParams(search);
 

@@ -33,14 +33,14 @@ public interface UserDAO {
 	// 비밀번호 수정했을 경우
 	@Update("UPDATE user SET pwd=#{pwd}, nickname=#{nickname}, email=#{email}, tel=#{tel}, birthDate=#{birthDate}, "
 			+ "	postcode=#{postcode}, addr=#{addr}, detailAddr=#{detailAddr}, pay=#{pay}, workIn=#{workIn}, workOut=#{workOut}, "
-			+ "	departures=#{departures}, arrivals=#{arrivals}, vehicles=#{vehicles}, bank=#{bank}, accountNumber=#{accountNumber}, "
+			+ "	departures=#{departures}, arrivals=#{arrivals}, vehicles=#{vehicles}, bank=#{bank}, accountNumber=#{accountNumber}, code=#{code}"
 			+ "	WHERE uid=#{uid}")
 	void update(User u);
 	
 	// 비밀번호 수정하지 않았을 경우
 	@Update("UPDATE user SET nickname=#{nickname}, email=#{email}, tel=#{tel}, birthDate=#{birthDate}, "
 			+ "	postcode=#{postcode}, addr=#{addr}, detailAddr=#{detailAddr}, pay=#{pay}, workIn=#{workIn}, workOut=#{workOut}, "
-			+ "	departures=#{departures}, arrivals=#{arrivals}, vehicles=#{vehicles}, bank=#{bank}, accountNumber=#{accountNumber}, "
+			+ "	departures=#{departures}, arrivals=#{arrivals}, vehicles=#{vehicles}, bank=#{bank}, accountNumber=#{accountNumber}, code=#{code}"
 			+ "	WHERE uid=#{uid}")
 	void updateWithoutPwd(User u);
 	

@@ -3,7 +3,7 @@ package com.mulcam.finalproject.dto;
 import lombok.Data;
 
 @Data
-public class KakaoProfile {
+public class KakaoProfileDTO {
 
 	public Long id;
 	public String connected_at;

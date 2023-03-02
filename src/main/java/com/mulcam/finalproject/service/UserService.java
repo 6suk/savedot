@@ -16,6 +16,7 @@ public interface UserService {
 	
 	/** 로그인 */
 	int login(UserDTO user, HttpSession session);
+	int loginKakao(UserDTO kakaoUser, HttpSession session);
 	
 	/** 회원가입 */
 	void join(User user);

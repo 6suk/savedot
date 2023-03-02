@@ -22,7 +22,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         <a class="nav-link main-nav" href="/info/news">알뜰정보</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link main-nav" href="#">얼마벌었지</a>
+        <a class="nav-link main-nav" href="/pay">얼마벌었지</a>
       </li>
     </ul>
     <c:set var="login" value=""></c:set>

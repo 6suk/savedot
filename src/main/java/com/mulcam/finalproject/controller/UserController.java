@@ -1,7 +1,5 @@
 package com.mulcam.finalproject.controller;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -24,7 +22,7 @@ import com.mulcam.finalproject.service.UserService;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
+	
 	@Autowired private UserService userService;
 	@Autowired private ProfileService profileService;
 	
