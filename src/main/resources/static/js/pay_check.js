@@ -34,7 +34,7 @@ function SetPay(pay, sumNowExpense, goTime, leaveTime) {
   let minitesPay = 0;
   let nowPay = 0;
 
-  if (workSec > 0) {
+  if (nowDate < leaveDate) {
     // 퍼센트
     pc = Math.floor((workCalcMin / calcMinutes) * 100);
 
@@ -58,7 +58,7 @@ function move() {
   var $label = $('#label');
   var $labelGroup = $('#label-group');
   var width = 0;
-  var id = setInterval(frame, 40);
+  var id = setInterval(frame, 30);
   let num = $label.attr('num');
 
   function frame() {

@@ -14,8 +14,8 @@ $('[TradeType]').each(function (index, item) {
 });
 
 // 카드 클릭 시 디테일 페이지 이동
-$('.mate-flex-item').click(function () {
-  let mid = $(this).attr('mid');
+$('.mate-info-group').click(function () {
+  let mid = $(this).parent().attr('mid');
   location.href = `/mate/detail/${mid}`;
 });
 
@@ -47,6 +47,19 @@ $('[LIKE]').click(function (event) {
 });
 
 $(function () {
+  // 썸네일 없을 때
+  $('.thum').each(function (index, item) {
+    let src = $(item).children().attr('src');
+
+    if (src === '') {
+      $(item).css('cursor', 'pointer');
+      $(item).click(function () {
+        let mid = $(item).closest('.mate-flex-item').attr('mid');
+        location.href = `/mate/detail/${mid}`;
+      });
+    }
+  });
+
   $('[LIKE]').each(function (index, item) {
     let like = $(item).attr('LIKE');
     if (like === '0') {

@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mulcam.finalproject.dao.AlertDAO;
 import com.mulcam.finalproject.dao.MateApplyDAO;
 import com.mulcam.finalproject.dto.MateApplyDTO;
 import com.mulcam.finalproject.dto.MateDTO;
@@ -21,6 +22,9 @@ public class MateApplyServiceImpl implements MateApplyService {
 
 	@Autowired
 	MateApplyDAO applyDAO;
+	
+	@Autowired
+	AlertDAO alertDAO;
 
 	@Autowired
 	MateService mateService;
@@ -37,6 +41,7 @@ public class MateApplyServiceImpl implements MateApplyService {
 	@Override
 	public void delete(Long aid) {
 		applyDAO.delete(aid);
+		alertDAO.delete(aid);
 	}
 
 	@Override
@@ -95,6 +100,12 @@ public class MateApplyServiceImpl implements MateApplyService {
 
 		return applyDAO.findEditTime(mateApplyDTO.getAid());
 	}
+	
+	public MateApplyDTO findOneByAid(Long aid) {
+		List<MateApply> list = new ArrayList<>();
+		list.add(applyDAO.findOneByAid(aid));
+		return mapperDTO(list).get(0);
+	}
 
 	public List<MateApplyDTO> mapperDTO(List<MateApply> list) {
 		List<MateApplyDTO> dtoList = new ArrayList<>();
@@ -107,6 +118,7 @@ public class MateApplyServiceImpl implements MateApplyService {
 			Long uid = entity.getUid();
 			MateDTO mateDTO = mateService.findOneByMid(mid);
 			UserDTO userDTO = userService.findByUid(uid);
+			userDTO.setPwd("");
 			applyDTO.setUser(userDTO);
 			applyDTO.setMate(mateDTO);
 			dtoList.add(applyDTO);
@@ -114,5 +126,6 @@ public class MateApplyServiceImpl implements MateApplyService {
 
 		return dtoList;
 	}
+	
 
 }

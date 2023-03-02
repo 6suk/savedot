@@ -58,4 +58,6 @@ public interface MateReplyDAO {
 	
 	@Select("SELECT LAST_INSERT_ID();")
 	public Long findRid();
+	
+
 }

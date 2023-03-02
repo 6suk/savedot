@@ -30,7 +30,6 @@ public interface MateApplyDAO {
 
 	
 	/** Apply 상태변경 */
-
 	@Update("UPDATE mate_apply"
 			+ "	SET isApply = #{isApply},"
 			+ "	modDate = DEFAULT"
@@ -43,7 +42,6 @@ public interface MateApplyDAO {
 
 	
 	/** Apply 전체리스트 조회 (사용안함) */
-
 	@Select("SELECT * FROM mate_apply WHERE isDel = 0 ORDER BY modDate DESC, regdate DESC;")
 	public List<MateApply> findAll();
 
@@ -74,7 +72,10 @@ public interface MateApplyDAO {
 			+ "	AND a.isDel = 0"
 			+ " AND m.uid = #{uid};")
 	public int findNewByGetUid(Long uid);
-
+	
+	@Select("SELECT * FROM mate_apply"
+			+ " WHERE aid = #{aid};")
+	public MateApply findOneByAid(Long aid);
 
 
 }

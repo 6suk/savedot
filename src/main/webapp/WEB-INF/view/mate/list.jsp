@@ -160,8 +160,7 @@
 								<div class="top">
 									<p class="mate-card-tag position" ${mate.stateName }>${mate.positonApplyNum }
 											/ ${mate.positionNum }</p>
-									<span class="fa-regular fa-heart" LIKE none-like></span> <span
-										class="fa-solid fa-heart hide" LIKE select-like></span>
+									<span><i class="" LIKE="0"></i></span>
 								</div>
 								<c:set var="thumpath"
 									value="/savedot/upload/${mate.thum.saveDate }/${mate.thum.id }${mate.thum.ext }"></c:set>

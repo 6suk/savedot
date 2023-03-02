@@ -20,8 +20,7 @@ public class PayCalcController {
 	private CashListService cashListService;
 	
 	@GetMapping("")
-	public String PayGet(HttpSession session) {
-		UserDTO user = (UserDTO) session.getAttribute("user");
+	public String PayGet() {
 		return "home/pay";
 	}
 	
