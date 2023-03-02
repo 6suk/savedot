@@ -56,26 +56,22 @@ public class UserController {
 		if (strpay != null && !strpay.equals("")) {
 			pay = Integer.parseInt(strpay.replace(",", ""));
 		}
-		
-		String strWorkIn = req.getParameter("workIn").strip();
-		int workIn = 0;
-		if (strWorkIn != null && !strWorkIn.equals("")) {
-			workIn = Integer.parseInt(strWorkIn.replace(",", ""));
-		}
-		
-		String strWorkOut = req.getParameter("workOut").strip();
-		int workOut = 0;
-		if (strWorkOut != null && !strWorkOut.equals("")) {
-			workOut = Integer.parseInt(strWorkOut.replace(",", ""));
-		}
+		String workIn = req.getParameter("workIn").strip();
+		String workOut = req.getParameter("workOut").strip();
+
 		
 		String departures = req.getParameter("departures").strip();
 		String arrivals = req.getParameter("arrivals").strip();
 		String vehicles = req.getParameter("vehicles").strip();
 		String bank = req.getParameter("bank").strip();
 		String accountNumber = req.getParameter("accountNumber").strip();
-		String code = req.getParameter("code").strip();
-		 
+		String strcode = req.getParameter("code").strip();
+		int code = 0;
+		if (strcode != null && !strcode.equals("")) {
+			pay = Integer.parseInt(strcode);
+		} 
+		
+		
 		if (pwd.equals(pwd2)) {
 			User user = new User(0L, uname, id, pwd, nickname, email, tel, birthDate, postcode, addr, detailAddr, pay, workIn, workOut, departures, arrivals, vehicles, 0, bank, accountNumber, code);
 			userService.join(user);
@@ -156,23 +152,18 @@ public class UserController {
 		if (strpay != null && !strpay.equals("")) {
 			pay = Integer.parseInt(strpay.replace(",", ""));
 		}
-		String strWorkIn = req.getParameter("workIn").strip();
-		int workIn = 0;
-		if (strWorkIn != null && !strWorkIn.equals("")) {
-			workIn = Integer.parseInt(strWorkIn.replace(":", ""));
-		}
-		
-		String strWorkOut = req.getParameter("workOut").strip();
-		int workOut = 0;
-		if (strWorkOut != null && !strWorkOut.equals("")) {
-			workOut = Integer.parseInt(strWorkOut.replace(":", ""));
-		}
+		String workIn = req.getParameter("workIn").strip();
+		String workOut = req.getParameter("workOut").strip();
 		String departures = req.getParameter("departures").strip();
 		String arrivals = req.getParameter("arrivals").strip();
 		String vehicles = req.getParameter("vehicles").strip();
 		String bank = req.getParameter("bank").strip();
 		String accountNumber = req.getParameter("accountNumber").strip();
-		String code = req.getParameter("code").strip();
+		String strcode = req.getParameter("code").strip();
+		int code = 0;
+		if (strcode != null && !strcode.equals("")) {
+			pay = Integer.parseInt(strcode);
+		} 
 		HttpSession session = req.getSession();
 		User user;
 		

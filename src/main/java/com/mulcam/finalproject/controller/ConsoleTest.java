@@ -25,7 +25,7 @@ public class ConsoleTest {
 
 		for (int i = 0; i < 5; i++) {
 			int price = DataInputUtil.getPrice(1000,38000);
-			LocalDate date = DataInputUtil.getRandomDate("20220301","20220301");
+			LocalDate date = DataInputUtil.getRandomDate("20230301","20230301");
 			int uid = DataInputUtil.getRandomNum(3, true);
 			System.out.printf("(DEFAULT, 0, '%s', %d, 'test%d', 'test memo%d', '%s'),%n", date, price, i, i, id[2]);
 			totalPrice[uid] += price;

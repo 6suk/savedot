@@ -26,15 +26,16 @@ public class UserDTO {
 	private String addr;
 	private String detailAddr;
 	private int pay;
-	private int workIn;
-	private int workOut;
+	private String workIn;
+	private String workOut;
 	private String departures;
 	private String arrivals;
 	private String vehicles;
 	private int isDeleted;		// not null
 	private String bank;
 	private String accountNumber;
-	private String code;
+	private int code;
+	private int sumNowExpense;
 
 	public void setTel(String tel) {
 		this.tel = tel;

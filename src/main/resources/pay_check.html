@@ -68,12 +68,13 @@
       <section class="pay-check-container">
         <div class="pay-check-title-flex">
           <div class="challenge-choice-title">
-            오늘 출근해서 <br /><b>43,000원</b> 벌고<br />지금까지 <b>3,000원</b> 썼어요.<br />
-            순이익은 <b class="maintxt">40,000원</b>이에요!
+            오늘 출근해서 <br /><b><span id="nowPay">0</span>원</b> 벌고<br />지금까지
+            <b><span id="sumNowExpense">0</span>원</b> 썼어요.<br />
+            순이익은 <b class="maintxt"><span id="total">0</span>원</b>이에요!
           </div>
           <div class="pay-check-btn-group">
-            <button class="btn btn-main">지출 등록</button>
-            <button class="btn btn-sub">급여 변경</button>
+            <button class="btn btn-main" onclick="location.href='/cash/write'">지출 등록</button>
+            <button class="btn btn-sub" onclick="location.href='/user/update/${user.uid}'">급여 변경</button>
           </div>
         </div>
         <div class="pay-check-progress">
