@@ -133,7 +133,7 @@ let config = {
           if (context.dataset.id === 0) {
             return -20;
           } else if (context.dataset.id === 1) {
-            return 15;
+            return -20;
           } else if (context.dataset.id === 2) {
             return 20;
           }

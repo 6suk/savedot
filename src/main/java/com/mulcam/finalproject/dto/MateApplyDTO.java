@@ -16,6 +16,7 @@ import lombok.ToString;
 public class MateApplyDTO {
 
 	private Long aid;
+	private Long uid;
 	private UserDTO user;
 	private Long mid;
 	private MateDTO mate;
@@ -35,6 +36,10 @@ public class MateApplyDTO {
 		this.tradeName = tradeNames[applyTradelType];
 	}
 
+	public void setAid(Long aid) {
+		this.aid = aid;
+	}
+	
 	public void setAid(String aid) {
 		this.aid = Long.parseLong(aid);
 	}

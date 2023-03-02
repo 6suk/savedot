@@ -39,7 +39,8 @@ public interface MateApplyService {
 
 	/** Apply : 거래중,거래완료 등 상태 변경 */
 	public LocalDateTime editIsApply(MateApplyDTO mateApplyDTO);
-
+	
+	public MateApplyDTO findOneByAid(Long aid);
 
 
 

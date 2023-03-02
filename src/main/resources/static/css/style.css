@@ -1935,6 +1935,7 @@ div.challenge-choice {
 }
 
 .mate-top-info .top {
+  cursor: default;
   padding-top: 1rem;
   width: 100%;
   position: absolute;
@@ -1983,12 +1984,14 @@ div.challenge-choice {
 }
 
 .mate-top-info .thum {
+  cursor: default;
   position: relative;
   padding: 0;
   height: 100%;
 }
 
 .mate-top-info .top [LIKE] {
+  cursor: pointer;
   font-size: 20px;
   color: #dcdcdc;
   /* box-shadow: 2px 4px 12px rgb(0 0 0 / 10%); */
@@ -2612,7 +2615,7 @@ div.challenge-choice {
 
 /* ////////////////////////////////////  Mate - 댓글 //////////////////////////////////// */
 
-.m-re-wrap .all {
+.m-re-wrap.all {
   margin-top: 3rem;
 }
 
@@ -2711,10 +2714,8 @@ div.challenge-choice {
 .seller-tag {
   opacity: 0.8;
   display: inline-block;
-  cursor: pointer;
   text-align: center;
   font-size: 12px;
-  /* border-radius: 50px; */
   padding-inline: 0.5rem;
   padding-block: 0.12rem;
   border: 1px solid var(--main-color);
@@ -2746,7 +2747,7 @@ div.challenge-choice {
 }
 
 .m-re-comment-wrap {
-  margin-top: 2rem;
+  margin-top: 0.5rem;
 }
 
 .re-list {

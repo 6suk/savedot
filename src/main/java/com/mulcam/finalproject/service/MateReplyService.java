@@ -27,4 +27,5 @@ public interface MateReplyService {
 	/* 마지막 rid 가져오기 */
 	public Long findRid();
 
+	
 }
