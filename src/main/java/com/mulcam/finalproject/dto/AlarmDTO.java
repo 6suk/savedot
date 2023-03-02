@@ -17,7 +17,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AlertDTO {
+public class AlarmDTO {
 	private Long id;
 	private int type; // 0:댓글알림 / 1:apply알림
 	private Long toUid; // 받는사람
@@ -25,7 +25,7 @@ public class AlertDTO {
 	private Long rid;
 	private Long mid;
 	private Long aid;
-	private LocalDateTime alertDate;
+	private LocalDateTime alarmDate;
 	private int read;
 
 	private MateDTO mate;
@@ -34,7 +34,7 @@ public class AlertDTO {
 	private MateApplyDTO apply;
 
 	/** 매칭 신청 시 : 글 작성자에게 알람 */
-	public void setApplyAlert(MateApplyDTO apply) {
+	public void setApplyAlarm(MateApplyDTO apply) {
 		this.apply = apply;
 		this.mate = apply.getMate();
 		this.type = 1;
@@ -46,7 +46,7 @@ public class AlertDTO {
 	}
 	
 	/** 매칭 상태 변경 시 : 신청자에게 알람 */
-	public void setApplyStateAlert(MateApplyDTO apply) {
+	public void setApplyStateAlarm(MateApplyDTO apply) {
 		this.apply = apply;
 		this.user = apply.getUser();
 		this.mate = apply.getMate();
@@ -59,7 +59,7 @@ public class AlertDTO {
 	}
 
 	/** 원 댓글 작성 시 : 글 작성자에게 알람 */
-	public void setMateAlert(MateDTO mate, MateReply reply) {
+	public void setMateAlarm(MateDTO mate, MateReply reply) {
 		this.mate = mate;
 		this.reply = reply;
 		this.type = 0;
@@ -71,7 +71,7 @@ public class AlertDTO {
 	}
 
 	/** 대댓글 작성 시 : 해당 그룹에 작성한 모두에게 알람(댓글 작성자 제외) */
-	public void setReplyAlert(MateDTO mate, MateReply reply) {
+	public void setReplyAlarm(MateDTO mate, MateReply reply) {
 		this.mate = mate;
 		this.reply = reply;
 		this.type = 0;

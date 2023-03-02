@@ -12,7 +12,7 @@ import lombok.ToString;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Alert {
+public class Alarm {
 	private Long id;
 	private int type; // 0:댓글알림 / 1:apply알림
 	private Long toUid;	// 받는사람
@@ -20,6 +20,6 @@ public class Alert {
 	private Long rid;
 	private Long mid;
 	private Long aid;
-	private LocalDateTime alertDate;
+	private LocalDateTime alarmDate;
 	private int read;
 }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mulcam.finalproject.dto.AlertDTO;
+import com.mulcam.finalproject.dto.AlarmDTO;
 import com.mulcam.finalproject.dto.LocationDTO;
 import com.mulcam.finalproject.dto.MateApplyDTO;
 import com.mulcam.finalproject.dto.MateDTO;
@@ -24,7 +24,7 @@ import com.mulcam.finalproject.dto.MateSearchDTO;
 import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.MateApply;
 import com.mulcam.finalproject.entity.MateReply;
-import com.mulcam.finalproject.service.AlertService;
+import com.mulcam.finalproject.service.AlarmService;
 import com.mulcam.finalproject.service.MateApplyService;
 import com.mulcam.finalproject.service.MateReplyService;
 import com.mulcam.finalproject.service.MateService;
@@ -51,7 +51,7 @@ public class MateController {
 	MateReplyService mateReplyService;
 
 	@Autowired
-	AlertService alertService;
+	AlarmService alarmService;
 
 	@Autowired
 	ReverseGeocodeUtil reverseGeocodeUtil;
@@ -94,9 +94,9 @@ public class MateController {
 		applyDTO.setAid(applyService.save(apply));
 		
 		/** 게시물 작성자에게 알람 */
-		AlertDTO alertDTO = new AlertDTO();
-		alertDTO.setApplyAlert(applyDTO);
-		alertService.save(alertDTO);
+		AlarmDTO alarmDTO = new AlarmDTO();
+		alarmDTO.setApplyAlarm(applyDTO);
+		alarmService.save(alarmDTO);
 		
 		return "redirect:/mypage/mate/apply/all";
 	}
@@ -116,9 +116,9 @@ public class MateController {
 		applyDTO = applyService.findOneByAid(applyDTO.getAid());
 		
 		/** 신청자에게 알람 */
-		AlertDTO alertDTO = new AlertDTO();
-		alertDTO.setApplyStateAlert(applyDTO);
-		alertService.save(alertDTO);
+		AlarmDTO alarmDTO = new AlarmDTO();
+		alarmDTO.setApplyStateAlarm(applyDTO);
+		alarmService.save(alarmDTO);
 		
 		return applyDTO;
 	}
@@ -176,9 +176,9 @@ public class MateController {
 		reply.setRid(mateReplyService.findRid());
 
 		/** 게시물 작성자에게 알림 */
-		AlertDTO alert = new AlertDTO();
-		alert.setMateAlert(mate, reply);
-		alertService.save(alert);
+		AlarmDTO alarm = new AlarmDTO();
+		alarm.setMateAlarm(mate, reply);
+		alarmService.save(alarm);
 		return "redirect:/mate/detail/" + reply.getMid() + "#" + reply.getRid();
 	}
 
@@ -198,9 +198,9 @@ public class MateController {
 		reply.setRid(mateReplyService.findRid());
 
 		/** 대댓글을 작성한 모두에게 알림(현 작성자 제외) */
-		AlertDTO alert = new AlertDTO();
-		alert.setReplyAlert(mate, reply);
-		alertService.ReplyGrpSave(alert);
+		AlarmDTO alarm = new AlarmDTO();
+		alarm.setReplyAlarm(mate, reply);
+		alarmService.ReplyGrpSave(alarm);
 
 		return "redirect:/mate/detail/" + reply.getMid() + "#" + reply.getRid();
 	}

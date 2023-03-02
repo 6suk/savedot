@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mulcam.finalproject.dao.ChartDAO;
+import com.mulcam.finalproject.dto.AlarmDTO;
 import com.mulcam.finalproject.dto.ImageDTO;
 import com.mulcam.finalproject.dto.LocationDTO;
+import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.Cash;
 import com.mulcam.finalproject.entity.CashImg;
 import com.mulcam.finalproject.entity.User;
+import com.mulcam.finalproject.service.AlarmService;
 import com.mulcam.finalproject.service.MateApplyService;
 import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.MypageService;
@@ -49,6 +52,9 @@ public class TestControllerYelim {
 	@Autowired
 	MypageService mypageService;
 	
+	@Autowired
+	private AlarmService alarmService;
+	
 
 //	@GetMapping("/login/{uid}")
 //	public String loginTemp(@PathVariable String uid, HttpSession session) {
@@ -63,13 +69,23 @@ public class TestControllerYelim {
 //		return "redirect:/mypage/main";
 //	}
 
-
 	
+	/** MyPage : 알림 */
 	@GetMapping("/test")
-	public String test(HttpSession ss) {
-		ss.setAttribute("user", userService.findById("sohee"));
-		return "redirect:/mypage/chart/challenge";
+	public String AlarmGet(HttpSession session) {
+		session.setAttribute("user", userService.findById("sohee"));
+		
+		UserDTO user = (UserDTO) session.getAttribute("user");
+		List<AlarmDTO> list = alarmService.findAlarmsByUid(user.getUid());
+		list.forEach(x -> System.out.println(x));
+		return null;
 	}
+	
+//	@GetMapping("/test")
+//	public String test(HttpSession ss) {
+//		ss.setAttribute("user", userService.findById("sohee"));
+//		return "redirect:/mypage/chart/challenge";
+//	}
 	@GetMapping("/cashsave/test")
 	public String datatestGet() {
 		return "cashsave/write";

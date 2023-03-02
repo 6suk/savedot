@@ -5,6 +5,7 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Tainted;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,16 +19,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mulcam.finalproject.dto.AlarmDTO;
 import com.mulcam.finalproject.dto.CalendarDTO;
 import com.mulcam.finalproject.dto.ChartDTO;
 import com.mulcam.finalproject.dto.MateApplyDTO;
 import com.mulcam.finalproject.dto.MypageSumDTO;
 import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.Cash;
+import com.mulcam.finalproject.service.AlarmService;
 import com.mulcam.finalproject.service.CSuccessService;
 import com.mulcam.finalproject.service.CashListService;
 import com.mulcam.finalproject.service.MateApplyService;
 import com.mulcam.finalproject.service.MypageService;
+import com.mulcam.finalproject.service.UserService;
 
 @Controller
 @RequestMapping("/mypage")
@@ -44,6 +48,12 @@ public class MypageController {
 
 	@Autowired
 	private CashListService cashListService;
+	
+	@Autowired
+	private AlarmService alarmService;
+	
+	
+
 
 	/** MyPage : 나의 절약 캘린더 */
 	@GetMapping("/main")
@@ -119,6 +129,8 @@ public class MypageController {
 		UserDTO user = (UserDTO) session.getAttribute("user");
 		return mypageService.getChallengeChart(user);
 	}
+	
+	
 
 	/** MyPage : 나의 수입/지출 */
 	@GetMapping(value = { "cash/list", "cash/list/{arrow}" })
