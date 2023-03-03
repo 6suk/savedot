@@ -79,12 +79,14 @@ public class UserServiceImpl implements UserService {
 	/** 회원정보 수정 */
 	@Override
 	public void update(User user, String newPwd) {
-		if (newPwd.length() > 0) {
-			String cryptedPwd = BCrypt.hashpw(newPwd, BCrypt.gensalt());
-			user.setPwd(cryptedPwd);
-			userDAO.update(user);
-		} else
-			userDAO.updateWithoutPwd(user);
+		if(user.getOauth() == null || user.getOauth().equals("")) {		// 일반 로그인 한 유저만 비번 수정 가능
+			if (newPwd.length() > 0) {
+				String cryptedPwd = BCrypt.hashpw(newPwd, BCrypt.gensalt());
+				user.setPwd(cryptedPwd);
+				userDAO.update(user);
+			} else
+				userDAO.updateWithoutPwd(user);
+		}
 	}
 	
 	/** 회원 탈퇴 */
@@ -93,10 +95,20 @@ public class UserServiceImpl implements UserService {
 		userDAO.delete(uid);
 	}
 
+	/** 카카오 로그인 */
 	@Override
 	public void join(UserDTO kakaoUser) {
 		userDAO.insert(kakaoUser);
 	}
+	
+//   	User kUser = userDAO.findByUid(kakaoUser.getUid());
+//		if (kUser == null) {
+//			return null;
+//		} else {
+//			UserDTO userDTO = modelMapper.map(kUser, UserDTO.class);
+//			return userDTO;
+//		}
+	
 
 	@Override
 	public int loginKakao(UserDTO kakaoUser, HttpSession session) {

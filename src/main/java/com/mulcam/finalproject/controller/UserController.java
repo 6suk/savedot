@@ -62,8 +62,6 @@ public class UserController {
 		}
 		String workIn = req.getParameter("workIn").strip();
 		String workOut = req.getParameter("workOut").strip();
-
-		
 		String departures = req.getParameter("departures").strip();
 		String arrivals = req.getParameter("arrivals").strip();
 		String vehicles = req.getParameter("vehicles").strip();
@@ -72,12 +70,13 @@ public class UserController {
 		String strcode = req.getParameter("code").strip();
 		int code = 0;
 		if (strcode != null && !strcode.equals("")) {
-			pay = Integer.parseInt(strcode);
+			code = Integer.parseInt(strcode);
 		} 
+		String oauth = req.getParameter("oauth").strip();
 		
 		
 		if (pwd.equals(pwd2)) {
-			User user = new User(0L, uname, id, pwd, nickname, email, tel, birthDate, postcode, addr, detailAddr, pay, workIn, workOut, departures, arrivals, vehicles, 0, bank, accountNumber, code);
+			User user = new User(0L, uname, id, pwd, nickname, email, tel, birthDate, postcode, addr, detailAddr, pay, workIn, workOut, departures, arrivals, vehicles, 0, bank, accountNumber, code, oauth);
 			userService.join(user);
 			return "redirect:/user/login";
 		} else {
@@ -129,16 +128,24 @@ public class UserController {
 			return "user/alertMsg";
 	}
 	
+	/** 카카오 로그인 */   
 	@GetMapping("/loginKakao")
-	public String loginKakao(@RequestParam("code") String code, HttpSession session) throws Exception {
+	public String oauthLogin(@RequestParam("code") String code, HttpSession session) throws Exception {
 	    String access_Token = kakaoService.getAccessToken(code);
 	    UserDTO user =  kakaoService.getUserInfo(access_Token, session);
-	    
+	    if (user.getId() == null) {
+	    	session.setAttribute("user", user);
+	    }
+	    else {
+	    	profileService.setAsideValue(user.getId(), session);
+	    	session.setAttribute("user", user);
+	    }
+	    System.out.println(user);
 	    return "redirect:/mypage/main";
 	}
 	
 	@GetMapping("/logoutKakao")
-	public String logoutKakao(HttpSession session) {
+	public String oauthlogout(HttpSession session) {
 		kakaoService.kakaoLogout((String)session.getAttribute("access_Token"));
 	    session.removeAttribute("access_Token");
 	    session.removeAttribute("userId");
@@ -185,11 +192,12 @@ public class UserController {
 		if (strcode != null && !strcode.equals("")) {
 			code = Integer.parseInt(strcode);
 		} 
+		String oauth = req.getParameter("oauth").strip();
 		HttpSession session = req.getSession();
 		User user;
 		
 		if (pwd == null || pwd.equals("")) {		// 비밀번호를 입력하지 않은 경우
-			user = new User(uid, "", "", "", nickname, email, tel, birthDate, postcode, addr, detailAddr, pay, workIn, workOut, departures, arrivals, vehicles, 0, bank, accountNumber, code);
+			user = new User(uid, "", "", "", nickname, email, tel, birthDate, postcode, addr, detailAddr, pay, workIn, workOut, departures, arrivals, vehicles, 0, bank, accountNumber, code, oauth);
 			userService.update(user, "");
 
 			session.setAttribute("nickname", nickname);
@@ -208,6 +216,7 @@ public class UserController {
 			session.setAttribute("bank", bank);
 			session.setAttribute("accountNumber", accountNumber);
 			session.setAttribute("code", code);
+			session.setAttribute("oauth", oauth);
 			
 			UserDTO userDTO = userService.findByUid(uid); // 업데이트 후 로그인 유저 세션도 업데이트 (예림)
 			session.setAttribute("user", userDTO);
@@ -215,7 +224,7 @@ public class UserController {
 		}
 		 
 		else if (pwd.equals(pwd2)) {				// 비밀번호가 올바른 경우
-			user = new User(uid, "", "", pwd, nickname, email, tel, birthDate, postcode, addr, detailAddr, pay, workIn, workOut, departures, arrivals, vehicles, 0, bank, accountNumber, code);
+			user = new User(uid, "", "", pwd, nickname, email, tel, birthDate, postcode, addr, detailAddr, pay, workIn, workOut, departures, arrivals, vehicles, 0, bank, accountNumber, code, oauth);
 			userService.update(user, pwd);
 			
 			session.setAttribute("nickname", nickname);
@@ -234,6 +243,7 @@ public class UserController {
 			session.setAttribute("bank", bank);
 			session.setAttribute("accountNumber", accountNumber);
 			session.setAttribute("code", code);
+			session.setAttribute("oauth", oauth);
 			
 			UserDTO userDTO = userService.findByUid(uid); // 업데이트 후 로그인 유저 세션도 업데이트 (예림)
 			session.setAttribute("user", userDTO);

@@ -1,6 +1,7 @@
 package com.mulcam.finalproject.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 public class User {
 	private Long uid;			// pri
 	private String uname;			
@@ -34,5 +36,6 @@ public class User {
 	private String bank;
 	private String accountNumber;
 	private int code;
+	private String oauth;
 	
 }

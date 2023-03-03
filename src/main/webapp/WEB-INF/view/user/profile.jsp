@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- //// MYPAGE PAGE - MAIN //// -->
 
@@ -48,8 +48,6 @@
 					<input type="hidden" name="uid" value="${user.uid}">
 					<legend>필수입력사항</legend>
 
-
-
 					<!-- 이름 -->
 					<div>
 						<label>* 이름</label> <br> <input class="form-control"
@@ -65,16 +63,32 @@
 					</div>
 
 					<!-- 비밀번호 -->
-					<div>
-						<label>* 비밀번호</label>
-						<p>영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.</p>
-						<input type="password" name="pwd" class="form-control"
-							placeholder="비밀번호" value="">
-					</div>
-					<div>
-						<label>* 비밀번호 확인</label> <br> <input type="password"
-							class="form-control" value="" name="pwd2" placeholder="비밀번호 확인">
-					</div>
+					<c:choose>
+						<c:when test="${empty user.oauth}">
+							<div>
+								<label>* 비밀번호</label>
+								<p>영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.</p>
+								<input type="password" name="pwd" class="form-control"
+									placeholder="비밀번호" value="">
+							</div>
+							<div>
+								<label>* 비밀번호 확인</label> <br> <input type="password"
+									class="form-control" value="" name="pwd2" placeholder="비밀번호 확인">
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div>
+								<label>* 비밀번호</label>
+								<p>영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.</p>
+								<input type="password" name="pwd" class="form-control"
+									placeholder="비밀번호" value="" readonly>
+							</div>
+							<div>
+								<label>* 비밀번호 확인</label> <br> <input type="password"
+									class="form-control" value="" name="pwd2" placeholder="비밀번호 확인" readonly>
+							</div>
+						</c:otherwise>
+					</c:choose>
 
 					<!-- 닉네임 -->
 					<div>
@@ -89,11 +103,22 @@
 					</div>
 
 					<!-- 이메일 -->
-					<div>
-						<label>* 이메일</label> <input type="email" class="form-control"
-							placeholder="ex) savedot@mulcam.com (@ 포함기입)" required
-							name="email" value="${user.email}">
-					</div>
+					<c:choose>
+						<c:when test="${empty user.oauth}">
+							<div>
+								<label>* 이메일</label> <input type="email" class="form-control"
+									placeholder="ex) savedot@mulcam.com (@ 포함기입)" required
+									name="email" value="${user.email}">
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div>
+								<label>* 이메일</label> <input type="email" class="form-control"
+									placeholder="ex) savedot@mulcam.com (@ 포함기입)" required
+									name="email" value="${user.email}" readonly>
+							</div>
+						</c:otherwise>
+					</c:choose>
 
 					<!-- 생년월일 -->
 					<div>
@@ -205,9 +230,18 @@
 								<option value="유진투자증권">유진투자증권</option>
 								<option value="한국투자증권">한국투자증권</option>
 						</select>
-						</label> <label><input type="number" name="accountNumber"
+						</label>
+						
+						<label><input type="number" name="accountNumber"
 							class="form-control" placeholder="계좌번호 (-)제외"
 							value="${user.accountNumber }"></label>
+							
+						<!-- 지역코드 임시 -->
+						<div class="input__block">
+							<input type="hidden" value="" name="code" placeholder="">
+							<input type="hidden" value="" name="oauth" placeholder="">
+						</div>
+				
 					</div>
 					<br>
 					<div class="text-center">
