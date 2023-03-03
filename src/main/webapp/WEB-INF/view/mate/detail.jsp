@@ -40,7 +40,9 @@
 								<p>
 									<span>조회</span><span>${mate.viewCnt }</span>
 								</p>
+								<!--  좋아요기능 (비로그인시 꽉찬하트로 보임) -->
 								<p>
+								<c:if test="${user.uid ne null }">
 									<c:set var="likeType" value="0"></c:set>
 									<c:set var="likeUrl" value="likePress(${mate.mid})"></c:set>
 									<c:forEach var="like" items="${likelist }">
@@ -49,9 +51,11 @@
 										<c:set var="likeUrl" value="likeDel(${mate.mid})"></c:set>
 									</c:if>
 									</c:forEach>
+									</c:if>
 								<span><i class="" LIKE ="${likeType}" id="${mate.mid}"></i></span>
 								<span>${mate.likeCnt }</span>
 								</p>
+							<!--  좋아요기능 끝 -->
 							</div>
 						</div>
 						<!-- Top 02 -->

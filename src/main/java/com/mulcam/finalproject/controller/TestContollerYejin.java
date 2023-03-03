@@ -46,10 +46,11 @@ public class TestContollerYejin {
 	
 	@ResponseBody
 	@RequestMapping("/mate/like/{mid}")
-	public boolean like(@PathVariable int mid, HttpServletRequest req) {
+	public boolean like(@PathVariable int mid, HttpServletRequest req,Model model) {
 		HttpSession session = req.getSession();
 		UserDTO user = (UserDTO) session.getAttribute("user");
 		Long uid = user.getUid();
+		model.addAttribute("uid",uid);
 		MateLike like = new MateLike(mid, uid);
 		likeService.insertLike(like);
 		likeService.plusLike(mid);
