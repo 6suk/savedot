@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.time.LocalDate;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,8 +17,10 @@ import com.mulcam.finalproject.dto.NewsDTO;
 @Service
 public class NewsUtil {
 
-	@Value("${clientId}") private String clientId;
-	@Value("${clientSecret}") private String clientSecret;
+	@Value("${clientId}")
+	private String clientId;
+	@Value("${clientSecret}")
+	private String clientSecret;
 
 	public NewsDTO getNews(String query) throws Exception {
 
@@ -56,9 +59,15 @@ public class NewsUtil {
 		String title = (String) item.get("title");
 		String link = (String) item.get("link");
 		String description = (String) item.get("description");
-		String pubDate = (String) item.get("pubDate");
+//		String pubDate = (String) item.get("pubDate");
+		String pubDate = LocalDate.now().toString();
 
-		NewsDTO news = new NewsDTO(title, link, description.replace("<b>", "").replace("</b>", "").replace("http*", ""), pubDate.substring(0,16), query);
+		String replace[] = "<b>,</b>,http*,△,▲,▽,▼,◁,◀,▷,▶".split(",");
+		for (String str : replace) {
+			description = description.replace(str, "");
+		}
+
+		NewsDTO news = new NewsDTO(title, link, description, pubDate, query);
 
 		return news;
 

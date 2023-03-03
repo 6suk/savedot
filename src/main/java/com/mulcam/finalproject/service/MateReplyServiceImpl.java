@@ -23,7 +23,6 @@ public class MateReplyServiceImpl implements MateReplyService {
 			maxGrp = mateReplyDAO.getMaxGrp(reply.getMid());
 		} catch (Exception e) {
 		}
-		System.out.println("maxGrp = " + maxGrp);
 		reply.setGrp(maxGrp + 1); // (새글일경우) grp 최대값의 + 1 해준다.
 		mateReplyDAO.insertReply(reply);
 	}

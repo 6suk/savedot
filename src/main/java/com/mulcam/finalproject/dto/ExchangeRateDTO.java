@@ -1,7 +1,10 @@
 package com.mulcam.finalproject.dto;
 
 import java.math.BigDecimal;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +25,7 @@ public class ExchangeRateDTO {
 	private String curNm;
 	private String dealBasR;
 	private LocalDate today;			// 예림 : 날짜 추가
+	private String todayOfWeek;			// 예림 : 날짜 추가
 	private String todayCurUnit;		// 통화코드
 	private String todayCurNm;			// 국가명
 	private String todayDealBasR;		// 오늘 매매기준율
@@ -32,6 +36,12 @@ public class ExchangeRateDTO {
 	private BigDecimal subDeal; 		// 전일대비
 	private BigDecimal fluctuationRate; 	// 등락률
 
+	
+	public void setToday(LocalDate today) {
+		DayOfWeek dayOfWeek = today.getDayOfWeek();
+		this.todayOfWeek = dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.KOREAN);
+	}
+	
 	public void setCalc() {
 		if (this.todayDealBasR == null || this.todayDealBasR == null || this.todayDealBasR == null) {
 			this.todayCurUnit = getYesterdayCurUnit();

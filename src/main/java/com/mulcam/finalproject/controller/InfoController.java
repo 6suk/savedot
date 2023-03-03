@@ -1,7 +1,12 @@
 package com.mulcam.finalproject.controller;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,12 +37,22 @@ public class InfoController {
 			list.add(n);
 		}
 		model.addAttribute("newsList", list);
+		model.addAttribute("now", getNowDateStr());
 
 		// 환율
 		List<ExchangeRateDTO> elist = exchangeRateUtil.getRate();
 		model.addAttribute("elist", elist);
 
         return "info/news";
+	}
+	
+	public String getNowDateStr() {
+		LocalDateTime now = LocalDateTime.now();
+		DayOfWeek dayOfWeek = now.getDayOfWeek();
+		String todayOfWeek = dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.KOREAN);
+		String tmp = now.toString().substring(0, 16);
+		String result = tmp.replace("T", "("+todayOfWeek+") ");
+		return result;
 	}
 }
 
