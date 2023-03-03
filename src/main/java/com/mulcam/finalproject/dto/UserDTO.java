@@ -37,6 +37,7 @@ public class UserDTO {
 	private String bank;
 	private String accountNumber;
 	private int code;
+	private String oauth;		// 카카오로 로그인 한 사람 확인용 
 	private int sumNowExpense;
 
 	public void setTel(String tel) {

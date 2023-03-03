@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -130,6 +129,7 @@ public class KakaoService {
         		.nickname(kakaoProfile.getProperties().nickname)
         		.email(kakaoProfile.getKakao_account().email)
         		.birthDate("0000" + kakaoProfile.getKakao_account().birthday)
+        		.oauth("kakao")		// kakao로 로그인 한 사람
         		.build();
         
         // 회원인지 비회원인지 체크해서 처리
@@ -140,9 +140,10 @@ public class KakaoService {
         	userService.join(kakaoUser);
         }
         
+        // 로그인 처리
         userService.loginKakao(kakaoUser, session);
+        System.out.println(userService.loginKakao(kakaoUser, session));
         System.out.println("자동 로그인을 진행합니다.");
-        // 로그인 처리 (세션 등록)
         
         return null;
     }
