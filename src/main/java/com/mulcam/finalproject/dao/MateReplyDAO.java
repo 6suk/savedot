@@ -59,5 +59,11 @@ public interface MateReplyDAO {
 	@Select("SELECT LAST_INSERT_ID();")
 	public Long findRid();
 	
+	@Update("UPDATE mate SET replyCnt = replyCnt+1 WHERE mid = #{mid}")
+	void plusReply(long mid); 
+	
+	@Update("UPDATE mate SET replyCnt = replyCnt-1 WHERE mid = #{mid}")
+	void delReply(long mid);
+
 
 }

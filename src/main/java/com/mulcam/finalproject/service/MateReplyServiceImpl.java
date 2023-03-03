@@ -81,4 +81,16 @@ public class MateReplyServiceImpl implements MateReplyService {
 		return mateReplyDAO.findRid();
 	}
 
+	@Override
+	public void plusReply(long mid) {
+		mateReplyDAO.plusReply(mid);
+		
+	}
+
+	@Override
+	public void delReply(long mid) {
+		mateReplyDAO.delReply(mid);
+		
+	}
+
 }

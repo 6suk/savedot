@@ -193,6 +193,7 @@ public class MateController {
 		reply.setNickname(user.getNickname());
 		reply.setIsMine(isMine);
 		mateReplyService.insertReply(reply);
+		mateReplyService.plusReply(reply.getMid());
 		reply.setRid(mateReplyService.findRid());
 
 		/** 게시물 작성자에게 알림 */
@@ -215,6 +216,7 @@ public class MateController {
 		reply.setIsMine(isMine);
 
 		mateReplyService.insertReReply(reply);
+		mateReplyService.plusReply(reply.getMid());
 		reply.setRid(mateReplyService.findRid());
 
 		/** 대댓글을 작성한 모두에게 알림(현 작성자 제외) */
@@ -242,6 +244,7 @@ public class MateController {
 	@GetMapping("/reply/delete/{rid}/{mid}")
 	public String deleteReply(HttpServletRequest req, Model model, @PathVariable long rid, @PathVariable long mid) {
 		mateReplyService.deleteReply(rid);
+		mateReplyService.delReply(mid);
 		return "redirect:/mate/detail/" + mid;
 	}
 

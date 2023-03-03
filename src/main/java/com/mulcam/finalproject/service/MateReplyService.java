@@ -12,6 +12,7 @@ public interface MateReplyService {
 	
 	/* 댓글 입력 */
 	void insertReply(MateReply reply);
+	void plusReply(long mid); 
 	
 	/* 댓글 - 댓글 입력 */
 	void insertReReply(MateReply reply);
@@ -19,6 +20,7 @@ public interface MateReplyService {
 	
 	/* 댓글 삭제 */
 	void deleteReply(Long rid);
+	void delReply(long mid);
 	
 	/* 댓글 수정 */
 	void updateReply(MateReply mateReply);
