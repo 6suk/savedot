@@ -11,14 +11,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.PatternMatchUtils;
 
 import com.mulcam.finalproject.dto.UserDTO;
+import com.mulcam.finalproject.service.AlarmService;
 import com.mulcam.finalproject.entity.User;
 
 @Component
 public class LoginFilter implements Filter {
+	@Autowired
+	AlarmService alarmService;
 
 	private static final String[] whiteList = { "/home", "/user/*", "/", "/mate/list", "/challenge/choice",
 			"/mate/detail/*", "/login/", "/logout", "/join", "/savedot/upload/*", "/savedot/display/*", "/info/news",

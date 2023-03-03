@@ -74,11 +74,7 @@ public class TestControllerYelim {
 	@GetMapping("/test")
 	public String AlarmGet(HttpSession session) {
 		session.setAttribute("user", userService.findById("sohee"));
-		
-		UserDTO user = (UserDTO) session.getAttribute("user");
-		List<AlarmDTO> list = alarmService.findAlarmsByUid(user.getUid());
-		list.forEach(x -> System.out.println(x));
-		return null;
+		return "test/test";
 	}
 	
 //	@GetMapping("/test")

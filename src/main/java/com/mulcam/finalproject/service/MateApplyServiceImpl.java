@@ -41,7 +41,7 @@ public class MateApplyServiceImpl implements MateApplyService {
 	@Override
 	public void delete(Long aid) {
 		applyDAO.delete(aid);
-		alertDAO.delete(aid);
+		alertDAO.deleteAlarmByAid(aid);
 	}
 
 	@Override
@@ -118,6 +118,7 @@ public class MateApplyServiceImpl implements MateApplyService {
 			Long uid = entity.getUid();
 			MateDTO mateDTO = mateService.findOneByMid(mid);
 			UserDTO userDTO = userService.findByUid(uid);
+			applyDTO.setIsApply(entity.getIsApply());
 			userDTO.setPwd("");
 			applyDTO.setUser(userDTO);
 			applyDTO.setMate(mateDTO);
