@@ -132,9 +132,14 @@ public class UserController {
 	@GetMapping("/loginKakao")
 	public String oauthLogin(@RequestParam("code") String code, HttpSession session) throws Exception {
 	    String access_Token = kakaoService.getAccessToken(code);
-	    System.out.println("access_Token: " + access_Token);
 	    UserDTO user =  kakaoService.getUserInfo(access_Token, session);
-//	    profileService.setAsideValue(user.getId(), session);
+	    if (user.getId() == null) {
+	    	session.setAttribute("user", user);
+	    }
+	    else {
+	    	profileService.setAsideValue(user.getId(), session);
+	    	session.setAttribute("user", user);
+	    }
 	    System.out.println(user);
 	    return "redirect:/mypage/main";
 	}

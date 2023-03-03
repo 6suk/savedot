@@ -17,7 +17,6 @@ import com.mulcam.finalproject.dto.MateSearchDTO;
 import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.Mate;
 import com.mulcam.finalproject.entity.MateImg;
-import com.mulcam.finalproject.entity.User;
 import com.mulcam.finalproject.util.ImageUploadUtil;
 
 @Service

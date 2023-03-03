@@ -100,6 +100,15 @@ public class UserServiceImpl implements UserService {
 	public void join(UserDTO kakaoUser) {
 		userDAO.insert(kakaoUser);
 	}
+	
+//   	User kUser = userDAO.findByUid(kakaoUser.getUid());
+//		if (kUser == null) {
+//			return null;
+//		} else {
+//			UserDTO userDTO = modelMapper.map(kUser, UserDTO.class);
+//			return userDTO;
+//		}
+	
 
 	@Override
 	public int loginKakao(UserDTO kakaoUser, HttpSession session) {

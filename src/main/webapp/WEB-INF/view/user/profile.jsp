@@ -63,18 +63,32 @@
 					</div>
 
 					<!-- 비밀번호 -->
-					<c:if test="${empty user.oauth}">
-					<div>
-						<label>* 비밀번호</label>
-						<p>영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.</p>
-						<input type="password" name="pwd" class="form-control"
-							placeholder="비밀번호" value="">
-					</div>
-					<div>
-						<label>* 비밀번호 확인</label> <br> <input type="password"
-							class="form-control" value="" name="pwd2" placeholder="비밀번호 확인">
-					</div>
-					</c:if>
+					<c:choose>
+						<c:when test="${empty user.oauth}">
+							<div>
+								<label>* 비밀번호</label>
+								<p>영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.</p>
+								<input type="password" name="pwd" class="form-control"
+									placeholder="비밀번호" value="">
+							</div>
+							<div>
+								<label>* 비밀번호 확인</label> <br> <input type="password"
+									class="form-control" value="" name="pwd2" placeholder="비밀번호 확인">
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div>
+								<label>* 비밀번호</label>
+								<p>영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.</p>
+								<input type="password" name="pwd" class="form-control"
+									placeholder="비밀번호" value="" readonly>
+							</div>
+							<div>
+								<label>* 비밀번호 확인</label> <br> <input type="password"
+									class="form-control" value="" name="pwd2" placeholder="비밀번호 확인" readonly>
+							</div>
+						</c:otherwise>
+					</c:choose>
 
 					<!-- 닉네임 -->
 					<div>
