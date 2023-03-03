@@ -13,7 +13,6 @@ public interface MateService {
 	public MateDTO findOneByMid(Long id);
 
 	/** write : 게시글 DB 저장 */
-
 	public Long save(MateDTO mateDTO);
 	
 	/** update : 게시글 수정 */

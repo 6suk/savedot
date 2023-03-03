@@ -191,7 +191,7 @@ let config = {
           if (context.dataset.id === 1) {
             return -20;
           } else if (context.dataset.id === 2) {
-            return 15;
+            return -20;
           } else if (context.dataset.id === 3) {
             return 20;
           }

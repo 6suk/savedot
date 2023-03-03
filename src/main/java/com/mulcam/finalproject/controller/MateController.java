@@ -1,6 +1,5 @@
 package com.mulcam.finalproject.controller;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,14 +16,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mulcam.finalproject.dto.AlarmDTO;
 import com.mulcam.finalproject.dto.LocationDTO;
 import com.mulcam.finalproject.dto.MateApplyDTO;
 import com.mulcam.finalproject.dto.MateDTO;
 import com.mulcam.finalproject.dto.MateSearchDTO;
 import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.MateApply;
+import com.mulcam.finalproject.entity.MateLike;
 import com.mulcam.finalproject.entity.MateReply;
+import com.mulcam.finalproject.service.AlarmService;
 import com.mulcam.finalproject.service.MateApplyService;
+import com.mulcam.finalproject.service.MateLikeService;
 import com.mulcam.finalproject.service.MateReplyService;
 import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.UserService;
@@ -39,6 +42,9 @@ public class MateController {
 
 	@Autowired
 	MateService mateService;
+	
+	@Autowired
+	MateLikeService likeService;
 
 	@Autowired
 	MateApplyService applyService;
@@ -48,6 +54,9 @@ public class MateController {
 
 	@Autowired
 	MateReplyService mateReplyService;
+
+	@Autowired
+	AlarmService alarmService;
 
 	@Autowired
 	ReverseGeocodeUtil reverseGeocodeUtil;
@@ -67,8 +76,9 @@ public class MateController {
 
 	/** Mate Detail */
 	@GetMapping("/detail/{mid}")
-	public String detail(@PathVariable Long mid, Model model) {
+	public String detail(@PathVariable Long mid, Model model,HttpSession session) {
 		MateDTO mateDTO = mateService.findOneByMid(mid);
+		UserDTO user = (UserDTO) session.getAttribute("user");
 		// 삭제된 게시물일 때 (추후 필터 또는 에러 페이지로 이동하는 로직 구현할 것)
 		if (mateDTO == null) {
 			return "error/error_404";
@@ -77,6 +87,12 @@ public class MateController {
 
 			List<MateReply> replyList = mateReplyService.getReplies(mid);
 			model.addAttribute("replyList", replyList);
+			
+			if(user != null) {
+				List<MateLike> likeList = likeService.GetLikeList(user.getUid());
+				model.addAttribute("likelist",likeList);
+				System.out.println(likeList);
+			}
 
 			return "mate/detail";
 		}
@@ -84,11 +100,16 @@ public class MateController {
 
 	/** Mate Apply : 신청 */
 	@PostMapping("/apply/{mid}")
-	public String applySave(@PathVariable Long mid, Long uid, MateApplyDTO applyDTO) {
+	public String applySave(MateApplyDTO applyDTO) {
+		applyDTO.setMate(mateService.findOneByMid(applyDTO.getMid()));
 		MateApply apply = modelMapper.map(applyDTO, MateApply.class);
-		apply.setUid(uid);
-		apply.setMid(mid);
-		applyService.save(apply);
+		applyDTO.setAid(applyService.save(apply));
+		
+		/** 게시물 작성자에게 알람 */
+		AlarmDTO alarmDTO = new AlarmDTO();
+		alarmDTO.setApplyAlarm(applyDTO);
+		alarmService.save(alarmDTO);
+		
 		return "redirect:/mypage/mate/apply/all";
 	}
 
@@ -103,16 +124,30 @@ public class MateController {
 	@PostMapping("/apply/state-edit")
 	@ResponseBody
 	public MateApplyDTO applyStateEdit(@RequestBody MateApplyDTO applyDTO) {
-		LocalDateTime modDateTime = applyService.editIsApply(applyDTO);
-		applyDTO.setModDate(modDateTime);
+		applyService.editIsApply(applyDTO);
+		applyDTO = applyService.findOneByAid(applyDTO.getAid());
+		
+		/** 신청자에게 알람 */
+		AlarmDTO alarmDTO = new AlarmDTO();
+		alarmDTO.setApplyStateAlarm(applyDTO);
+		alarmService.save(alarmDTO);
+		
 		return applyDTO;
 	}
 
 	/** Mate List */
 	@GetMapping("/list")
-	public String listSearchGet(MateSearchDTO mateSearchDTO, Model model) {
+	public String listSearchGet(MateSearchDTO mateSearchDTO, Model model, HttpSession session) {
 		List<MateDTO> mateDTO = mateService.findAllBySearch(mateSearchDTO);
+		UserDTO user = (UserDTO) session.getAttribute("user");
 		model.addAttribute("mate", mateDTO);
+		
+		if(user != null) {
+			List<MateLike> likeList = likeService.GetLikeList(user.getUid());
+			model.addAttribute("likelist",likeList);
+			System.out.println(likeList);
+		}
+		
 		return "mate/list";
 	}
 
@@ -149,23 +184,22 @@ public class MateController {
 
 	/** Mate Reply : 댓글 작성 */
 	@PostMapping("/reply/insert")
-	public String insertReply(HttpServletRequest req, Model model, MateReply reply) {
-
-		long mid = Long.parseLong(req.getParameter("mid"));
-		long uid = Long.parseLong(req.getParameter("uid"));
-		String uid2 = req.getParameter("uid");
-		String content = req.getParameter("content");
-
-		HttpSession session = req.getSession();
+	public String insertReply(Model model, MateReply reply, HttpSession session) {
 		UserDTO user = (UserDTO) session.getAttribute("user");
-		String nickname = user.getNickname();
-		String sessionUid = user.getId();
-		int isMine = (uid2.equals(sessionUid)) ? 1 : 0;
+		MateDTO mate = mateService.findOneByMid(reply.getMid());
+		Long uid = user.getUid();
+		
+		int isMine = mate.getUid() == uid ? 1 : 0;
+		reply.setNickname(user.getNickname());
+		reply.setIsMine(isMine);
+		mateReplyService.insertReply(reply);
+		reply.setRid(mateReplyService.findRid());
 
-		MateReply mateReply = new MateReply(uid, mid, nickname, content, isMine);
-		mateReplyService.insertReply(mateReply);
-
-		return "redirect:/mate/detail/" + mid;
+		/** 게시물 작성자에게 알림 */
+		AlarmDTO alarm = new AlarmDTO();
+		alarm.setMateAlarm(mate, reply);
+		alarmService.save(alarm);
+		return "redirect:/mate/detail/" + reply.getMid() + "#" + reply.getRid();
 	}
 
 	/** Mate Reply : 대댓글 작성 */
@@ -181,8 +215,14 @@ public class MateController {
 		reply.setIsMine(isMine);
 
 		mateReplyService.insertReReply(reply);
-		Long rid = mateReplyService.findRid();
-		return "redirect:/mate/detail/" + reply.getMid() + "#" + rid;
+		reply.setRid(mateReplyService.findRid());
+
+		/** 대댓글을 작성한 모두에게 알림(현 작성자 제외) */
+		AlarmDTO alarm = new AlarmDTO();
+		alarm.setReplyAlarm(mate, reply);
+		alarmService.ReplyGrpSave(alarm);
+
+		return "redirect:/mate/detail/" + reply.getMid() + "#" + reply.getRid();
 	}
 
 	/** Mate Reply : 댓글 수정 */

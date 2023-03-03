@@ -41,7 +41,16 @@
 									<span>조회</span><span>${mate.viewCnt }</span>
 								</p>
 								<p>
-									<span><i class="fa-regular fa-heart"></i></span><span>${mate.likeCnt }</span>
+									<c:set var="likeType" value="0"></c:set>
+									<c:set var="likeUrl" value="likePress(${mate.mid})"></c:set>
+									<c:forEach var="like" items="${likelist }">
+									<c:if test="${like.mid eq mate.mid}">
+										<c:set var="likeType" value="1"></c:set>
+										<c:set var="likeUrl" value="likeDel(${mate.mid})"></c:set>
+									</c:if>
+									</c:forEach>
+								<span><i class="" LIKE ="${likeType}" id="${mate.mid}"></i></span>
+								<span>${mate.likeCnt }</span>
 								</p>
 							</div>
 						</div>
@@ -370,4 +379,3 @@
 	}
 </script>
 </html>
-

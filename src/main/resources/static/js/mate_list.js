@@ -14,8 +14,8 @@ $('[TradeType]').each(function (index, item) {
 });
 
 // 카드 클릭 시 디테일 페이지 이동
-$('.mate-flex-item').click(function () {
-  let mid = $(this).attr('mid');
+$('.mate-info-group').click(function () {
+  let mid = $(this).parent().attr('mid');
   location.href = `/mate/detail/${mid}`;
 });
 
@@ -36,17 +36,59 @@ $('[area-ele]').click(function () {
 });
 
 $('[LIKE]').click(function (event) {
-  event.preventDefault();
-  event.stopPropagation();
+  // event.preventDefault();
+  // event.stopPropagation();
   let like = $(this).attr('LIKE');
+  let mid = $(this).attr('id');
+
   if (like === '0') {
-    $(this).attr('class', 'like fa-regular fa-heart');
-  } else {
     $(this).attr('class', 'like fa-solid fa-heart');
+    likePress(mid);
+  }
+  if (like === '1') {
+    $(this).attr('class', 'like fa-regular fa-heart');
+    likeDel(mid);
   }
 });
 
+function likePress(mid) {
+  $.ajax({
+    type: 'GET',
+    url: '/mate/like/' + mid,
+    success: function (data) {
+      if (data) {
+        $('#' + mid).attr('LIKE', 1);
+      }
+    },
+  });
+}
+
+function likeDel(mid) {
+  $.ajax({
+    type: 'GET',
+    url: '/mate/delLike/' + mid,
+    success: function (data) {
+      if (data) {
+        $('#' + mid).attr('LIKE', 0);
+      }
+    },
+  });
+}
+
 $(function () {
+  // 썸네일 없을 때
+  $('.thum').each(function (index, item) {
+    let src = $(item).children().attr('src');
+
+    if (src === '') {
+      $(item).css('cursor', 'pointer');
+      $(item).click(function () {
+        let mid = $(item).closest('.mate-flex-item').attr('mid');
+        location.href = `/mate/detail/${mid}`;
+      });
+    }
+  });
+
   $('[LIKE]').each(function (index, item) {
     let like = $(item).attr('LIKE');
     if (like === '0') {
