@@ -3066,3 +3066,175 @@ form .alarm-top {
 .mypage-mate-none-card.alarm {
   margin-top: 0;
 }
+
+/* ////////////////////////////////////  알림 //////////////////////////////////// */
+
+/* ////////////////////////////////////  간편경제뉴스 //////////////////////////////////// */
+
+/* ////////////////////////////////////  간편경제뉴스 //////////////////////////////////// */
+
+.n-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.n-content-wrap {
+}
+
+.n-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-inline: 1rem;
+}
+
+.n-title p {
+  color: #666;
+  font-size: 14px;
+  letter-spacing: 0.25px;
+}
+
+.n-card-group {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  height: 270px;
+}
+
+.n-card-group.ex {
+  height: 240px;
+}
+
+.ex .n-card-item {
+  cursor: default;
+}
+
+.n-card-item {
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 2px 4px 12px rgb(0 0 0 / 8%);
+  transition: all 0.3s cubic-bezier(0, 0, 0.5, 1);
+  gap: 1rem;
+  padding-inline: 2.25rem;
+  padding-block: 2rem;
+  flex: 1 0 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.n-card-item:hover {
+  box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.16);
+  transform: scale3d(1.01, 1.01, 1.01);
+}
+
+.n-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0.1 0 0;
+}
+
+.n-item-date {
+  font-size: 14px;
+  color: #666;
+}
+
+.n-item-tag {
+  padding-inline: 0.8rem;
+  padding-block: 0.3em;
+  background-color: var(--sub-color);
+  color: var(--main-color);
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.news-title {
+  flex: 0.6 0 0;
+}
+
+.news-desc {
+  font-size: 15px;
+  flex: 0.3 0 0;
+}
+
+.ex-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ex-title img {
+  width: 12%;
+}
+
+.ex-desc {
+  display: flex;
+  gap: 1rem;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.sub-comment {
+  font-size: 13px;
+  color: #999;
+  font-weight: 400;
+}
+
+.ex-desc ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ex-desc-left {
+  display: flex;
+  gap: 0.2rem;
+  flex-direction: column;
+}
+
+.ex-desc-right {
+  display: flex;
+  gap: 0.2rem;
+  flex-direction: column;
+  letter-spacing: 0.25px;
+}
+
+.ex-type {
+  display: flex;
+  position: relative;
+  padding-left: 1rem;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.2rem;
+}
+
+.ex-type::before {
+  position: absolute;
+  display: inline-block;
+  opacity: 1;
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  left: 0;
+}
+
+.ex-plus {
+  color: var(--main-color);
+}
+
+.ex-plus::before {
+  content: '\f0d8';
+  top: 2px;
+}
+
+.ex-minus {
+  color: #f05959;
+}
+
+.ex-minus::before {
+  content: '\f0d7';
+}

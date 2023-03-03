@@ -132,6 +132,7 @@ public class ExchangeRateUtil {
 					.today(today) // 예림 : 날짜 추가
 					.yesterday(yesterday) // 예림 : 날짜 추가
 					.build();
+			tmp.setToday(today);	// 요일 추가를 위해 추가
 
 			switch (todayCurUnit) {
 			case "USD":

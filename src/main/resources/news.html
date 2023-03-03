@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <!-- // HEADING -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../resources/static/css/bootstrap.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/354b0809a2.js" crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../resources/static/css/Style.css" />
+    <!-- HEADING // -->
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=dbe219346db7d2ef92284f7144059849&libraries=services"></script>
+    <title>FinalProject</title>
+  </head>
+  <body>
+    <!-- //TOP -->
+    <nav class="navbar navbar-expand navbar-light fixed-top">
+      <div class="container-lg justify-content-lg-between">
+        <ul class="navbar-nav">
+          <a class="navbar-brand" href="#">
+            <img src="../resources/static/img/logo.png" class="logo" />
+          </a>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">조각메이트</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">챌린지</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">알뜰정보</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">얼마벌었지</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link d-none" href="#">로그인</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link d-none" href="#">회원가입</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">지출등록</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">마이페이지</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">로그아웃</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- TOP// -->
+    <div class="container-lg">
+      <!-- content -->
+      <section class="n-wrap">
+        <!-- 간편경제뉴스 시작 -->
+        <div class="n-content-wrap">
+          <div class="n-title">
+            <h3>간편 경제 뉴스</h3>
+            <p>↻ 2023-03-03(금) 16:04</p>
+          </div>
+          <div class="n-card-group">
+            <div class="n-card-item" onclick="location.href='#'">
+              <div class="n-item-top">
+                <p class="n-item-date">2023-03-03</p>
+                <p class="n-item-tag">금리</p>
+              </div>
+              <h5 class="news-title">환율 급락해 1300원 초반…한풀 꺾인 강달러 흐름[외환마감]</h5>
+              <p class="news-desc">
+                백석현 신한은행 연구원은 “글로벌 외환시장에서 달러화 강세가 다소 주춤해 졌다”며 “그나마 미국채 금리가
+                오르면서 달러화 강세를 뒷받침하고 있었지만, 오늘 아시아장에서 10년물 금리가 조금 내려오는...
+              </p>
+            </div>
+            <div class="n-card-item" onclick="location.href='#'">
+              <div class="n-item-top">
+                <p class="n-item-date">2023-03-03</p>
+                <p class="n-item-tag">금리</p>
+              </div>
+              <h5 class="news-title">SH, 임대 주택 임대료 최대 5% 인상 추진…입주민들 "협의 없는 일방통보 위법...</h5>
+              <p class="news-desc">
+                임대주택 입주민들은 3일 진보당 서울시당, 공공임대&주거복지연합, 민달팽이유니온 등과 함께 서울시 중구
+                서울시청 앞에서 임대료 인상을 반대하는 기자회견을 열고 있다. ⓒ투데이신문 서울주택도시공사(이하 SH)가...
+              </p>
+            </div>
+            <div class="n-card-item" onclick="location.href='#'">
+              <div class="n-item-top">
+                <p class="n-item-date">2023-03-03</p>
+                <p class="n-item-tag">금리</p>
+              </div>
+              <h5 class="news-title">[투자 주의 종목] 디피코·꿈비 주가 상승…셀피글로벌·메디톡스 주가 하락</h5>
+              <p class="news-desc">
+                주식시장에서 투자주의 종목에 대한 관심이 모아지고 있다. 3일 한국거래소에 따르면 투자주의종목인 디피코
+                주가는 전 거래일 대비 14.95% 상승한 4345원에, 꿈비 주가는 전 거래일 대비 5.06% 오른 2만5950원에 장을...
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- 간편경제뉴스 끝 -->
+
+        <!-- 환율 시작 -->
+        <div class="n-content-wrap">
+          <div class="n-title">
+            <h3>국가별 환율</h3>
+            <p>↻ 2023-03-03(금)</p>
+          </div>
+          <div class="n-card-group ex">
+            <div class="n-card-item">
+              <div class="n-item-top">
+                <p class="n-item-date">2023-03-03</p>
+                <p class="n-item-tag">USD</p>
+              </div>
+              <div class="ex-title" city="USD">
+                <img src="../resources/static/emoji/" />
+                <h3></h3>
+              </div>
+              <div class="ex-desc">
+                <ul class="ex-desc-left">
+                  <li>매매기준율</li>
+                  <li>전일대비</li>
+                  <li>등락률</li>
+                </ul>
+                <ul class="ex-desc-right">
+                  <li class="bold">1,234.00</li>
+                  <li data-val="4.00">
+                    <p class="sub-comment">(2023-03-02 기준)</p>
+                  </li>
+                  <li data-val="0.33"></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="n-card-item" onclick="location.href='#'">
+              <div class="n-item-top">
+                <p class="n-item-date">2023-03-03</p>
+                <p class="n-item-tag">JPY</p>
+              </div>
+              <div class="ex-title" city="JPY">
+                <img src="../resources/static/emoji/sushi_1f363.png" />
+                <h3>일본</h3>
+              </div>
+              <div class="ex-desc">
+                <ul class="ex-desc-left">
+                  <li>매매기준율</li>
+                  <li>전일대비</li>
+                  <li>등락률</li>
+                </ul>
+                <ul class="ex-desc-right">
+                  <li class="bold">1,234.00</li>
+                  <li data-val="4.00">
+                    <p class="sub-comment">(2023-03-02 기준)</p>
+                  </li>
+                  <li data-val="0.33"></li>
+                </ul>
+              </div>
+            </div>
+            <div class="n-card-item">
+              <div class="n-item-top">
+                <p class="n-item-date">2023-03-03</p>
+                <p class="n-item-tag">EUR</p>
+              </div>
+              <div class="ex-title" city="EUR">
+                <img src="../resources/static/emoji/pretzel_1f968.png" />
+                <h3>유럽</h3>
+              </div>
+              <div class="ex-desc">
+                <ul class="ex-desc-left">
+                  <li>매매기준율</li>
+                  <li>전일대비</li>
+                  <li>등락률</li>
+                </ul>
+                <ul class="ex-desc-right">
+                  <li class="bold">1,234.00</li>
+                  <li data-val="-4.00">
+                    <p class="sub-comment">(2023-03-02 기준)</p>
+                  </li>
+                  <li data-val="0.33"></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 환율 끝 -->
+      </section>
+    </div>
+  </body>
+  <script src="../resources/static/js/savedot_news.js"></script>
+</html>

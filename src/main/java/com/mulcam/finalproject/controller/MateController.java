@@ -91,7 +91,6 @@ public class MateController {
 			if(user != null) {
 				List<MateLike> likeList = likeService.GetLikeList(user.getUid());
 				model.addAttribute("likelist",likeList);
-				System.out.println(likeList);
 			}
 
 			return "mate/detail";
@@ -145,7 +144,6 @@ public class MateController {
 		if(user != null) {
 			List<MateLike> likeList = likeService.GetLikeList(user.getUid());
 			model.addAttribute("likelist",likeList);
-			System.out.println(likeList);
 		}
 		
 		return "mate/list";
