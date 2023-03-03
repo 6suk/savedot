@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.mulcam.finalproject.entity.Alarm;
 import com.mulcam.finalproject.entity.MateReply;
@@ -14,7 +15,7 @@ import com.mulcam.finalproject.entity.MateReply;
 public interface AlarmDAO {
 	
 	@Insert("INSERT INTO alarm"
-			+ "	(id, `type`, toUid, fromUid, rid, `mid`, aid, alertDate, `read`)"
+			+ "	(id, `type`, toUid, fromUid, rid, `mid`, aid, alarmDate, `read`)"
 			+ "	VALUES (DEFAULT, #{type}, #{toUid}, #{fromUid}, #{rid}, #{mid}, #{aid}, DEFAULT, DEFAULT)")
 	public void save(Alarm alarm);
 	
@@ -27,10 +28,24 @@ public interface AlarmDAO {
 	
 	/** apply 신청 취소 시 알림 삭제 */
 	@Delete("DELETE FROM alarm WHERE aid = #{aid};")
-	public void delete(Long aid);
+	public void deleteAlarmByAid(Long aid);
 	
 	@Select("SELECT * FROM alarm"
 			+ " WHERE toUid = #{uid}"
 			+ " ORDER BY alarmDate DESC")
 	public List<Alarm> findAlarmsByUid(Long uid);
+	
+	@Update("UPDATE alarm SET `read`= 1"
+			+ "	WHERE id = #{id}"
+			+ "	AND `read` = 0")
+	public void editType(Alarm alarm);
+	
+	@Select("SELECT COUNT(*)"
+			+ "	FROM alarm"
+			+ "	WHERE toUid = #{uid}"
+			+ "	AND `read` = 0")
+	public int findAlarmCnt(Long uid);
+	
+	@Delete("DELETE FROM alarm WHERE id = #{id}")
+	public void deleteAlarm(Long id);
 }

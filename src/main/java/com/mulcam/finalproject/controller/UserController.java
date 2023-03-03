@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.User;
+import com.mulcam.finalproject.service.AlarmService;
 import com.mulcam.finalproject.service.KakaoService;
 import com.mulcam.finalproject.service.ProfileService;
 import com.mulcam.finalproject.service.UserService;
@@ -27,6 +28,9 @@ public class UserController {
 	@Autowired private ProfileService profileService;
 	
 	@Autowired private KakaoService kakaoService;
+	
+	@Autowired
+	private AlarmService alarmService;
 	
 	
 	/** 회원가입 */
@@ -116,6 +120,8 @@ public class UserController {
 		switch (result) {
 		case UserService.CORRECT_LOGIN:
 			profileService.setAsideValue(user.getId(), session);
+			UserDTO user_ = (UserDTO) session.getAttribute("user");
+			session.setAttribute("alarmCnt", alarmService.findAlarmCnt(user_));	//알림 카운트 세션 등록
 			return "redirect:/mypage/main";
 		case UserService.WRONG_PASSWORD:
 			model.addAttribute("msg", "잘못된 비밀번호입니다. 다시 입력해주세요.");

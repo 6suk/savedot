@@ -37,7 +37,7 @@ public class AlarmDTO {
 	public void setApplyAlarm(MateApplyDTO apply) {
 		this.apply = apply;
 		this.mate = apply.getMate();
-		this.type = 1;
+		this.type = 2;
 
 		this.toUid = mate.getUid();	// 작성자
 		this.fromUid = apply.getUid();	// 매칭 신청자
@@ -50,7 +50,7 @@ public class AlarmDTO {
 		this.apply = apply;
 		this.user = apply.getUser();
 		this.mate = apply.getMate();
-		this.type = 2;
+		this.type = 3;
 		
 		this.toUid = user.getUid();	// 신청자
 		this.fromUid = mate.getUid();	// 작성자
@@ -74,7 +74,7 @@ public class AlarmDTO {
 	public void setReplyAlarm(MateDTO mate, MateReply reply) {
 		this.mate = mate;
 		this.reply = reply;
-		this.type = 0;
+		this.type = 1;
 
 		this.fromUid = reply.getUid();
 		this.rid = reply.getRid();

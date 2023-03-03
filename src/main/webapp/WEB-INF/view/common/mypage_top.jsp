@@ -11,7 +11,7 @@
 			href="/mypage/cash/list">나의 수입/지출</a></li>
 		<li class="nav-item"><a class="nav-link mypage"
 			href="/mypage/chart">통계</a></li>
-		<li class="nav-item"><a class="nav-link mypage" href="#">알림</a></li>
+		<li class="nav-item"><a class="nav-link mypage" href="/mypage/alarm">알림</a></li>
 	</ul>
 </nav>
 <nav id="mate_sub_category" class="hide">

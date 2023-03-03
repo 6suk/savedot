@@ -2851,3 +2851,218 @@ div.challenge-choice {
   margin-left: 0.5rem;
   transition: all ease 0.5s 0s;
 }
+
+/* ////////////////////////////////////  Mate - 댓글 //////////////////////////////////// */
+
+/* ////////////////////////////////////  알림 //////////////////////////////////// */
+
+.alarm-top {
+  padding-bottom: 2rem;
+}
+
+form .alarm-top {
+  padding-top: 4rem;
+  justify-content: space-between;
+}
+
+.alarm-top input[type='submit'] {
+  background-color: transparent;
+  border: 0;
+  text-decoration: underline;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.alarm-top input[type='submit']:hover {
+  opacity: 0.6;
+}
+
+.alarm-count {
+  font-size: 14px;
+  font-weight: 600;
+  width: 25px;
+  line-height: 25px;
+  background-color: var(--main-color);
+  color: #fff;
+  border-radius: 50px;
+  aspect-ratio: 1/1;
+  text-align: center;
+}
+
+.alarm-count::after {
+  content: attr(data-count);
+}
+
+.alarm-wrap {
+}
+
+.alarm-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+[alarm-read] {
+  width: 8px;
+  border-radius: 50px;
+  aspect-ratio: 1/1;
+}
+
+[alarm-read='0'] {
+  background-color: var(--main-color);
+}
+
+[alarm-read='1'] {
+  background-color: var(--border-color);
+}
+
+[alarm-read='1'] + .flex > [alarm-type],
+[alarm-read='1'] + .flex .re-comment-item,
+[alarm-read='1'] + .flex .re-comment-item .m-re-name {
+  color: #999 !important;
+  background-color: #eee !important;
+}
+
+.alarm-item-top {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+
+.alarm-mate-title {
+  font-weight: 800;
+  padding-left: 0.2rem;
+}
+.alarm-mate-title::after {
+  content: ' 게시물에';
+  font-weight: 400;
+}
+
+.alarm-item {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-block: 1.5rem;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+}
+
+/* .alarm-item:last-child {
+  border: 0;
+} */
+
+.alarm-item:first-child {
+  border-top: 1px solid #eee;
+}
+
+.alarm-item .re-comment-item {
+  position: relative;
+  padding-left: 4rem;
+  padding-block: 0;
+  color: #666;
+}
+
+.alarm-item .re-comment-item.desc:before {
+  position: absolute;
+  top: 0;
+  left: 2rem;
+  content: '';
+  width: 1rem;
+  height: 1rem;
+  background-image: url('../emoji/subdirectory_arrow_right.svg');
+  background-repeat: no-repeat;
+  background-position: center left;
+  background-size: contain;
+}
+
+.alarm-item .re-comment-item.nickname {
+  background-color: #ffc10721;
+  padding-inline: 0.5rem;
+  padding-block: 0.3rem;
+  border-radius: 5px;
+  margin-inline: 0.3rem;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+[alarm-type] {
+  font-size: 14px;
+  font-weight: 600;
+  width: 50px;
+  height: 30px;
+  line-height: 30px;
+  background-color: var(--sub-color);
+  color: var(--main-color);
+  border-radius: 5px;
+  text-align: center;
+}
+
+[alarm-type='0']::after {
+  content: '댓글';
+}
+
+[alarm-type='1']::after {
+  content: '답글';
+}
+[alarm-type='2']::after {
+  content: '신청';
+}
+[alarm-type='3']::after {
+  content: '변경';
+}
+
+.alarm-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.alarm-content-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+[alarm-type='0'] ~ .alarm-content .alarm-comment::after {
+  content: '님께서 댓글을 달았어요.';
+}
+
+[alarm-type='1'] ~ .alarm-content .alarm-comment::after {
+  content: '님께서 답글을 달았어요.';
+}
+
+[alarm-type='2'] ~ .alarm-content .alarm-comment::after {
+  content: '님께서 메이트 요청을 보냈어요.';
+}
+
+[alarm-type='3'] ~ .alarm-content .alarm-comment {
+  margin-left: 0.3rem;
+}
+
+.alarmCnt {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 20px;
+  width: 20px;
+  background-color: var(--main-color);
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: 300;
+  margin-left: 0.2rem;
+  padding-bottom: 1re;
+}
+
+.mypage-mate-none-card.alarm {
+  margin-top: 0;
+}

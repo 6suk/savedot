@@ -25,6 +25,7 @@ public class MateApplyDTO {
 	private String tradeName;
 	private int beforeIsApply;
 	private int isApply;
+	private String isApplyName;
 	private int isDel;
 	private LocalDateTime modDate;
 	private LocalDate regDate;	// 등록일
@@ -34,6 +35,12 @@ public class MateApplyDTO {
 		String[] tradeNames = { null, "직접거래", "택배거래" };
 		this.applyTradelType = applyTradelType;
 		this.tradeName = tradeNames[applyTradelType];
+	}
+	
+	public void setIsApply(int isApply) {
+		String[] isApplyNames = { "대기중", "거래중", "거래완료" };
+		this.isApply = isApply;
+		this.isApplyName = isApplyNames[isApply];
 	}
 
 	public void setAid(Long aid) {

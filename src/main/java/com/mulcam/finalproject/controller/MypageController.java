@@ -5,7 +5,6 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Tainted;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,11 +16,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mulcam.finalproject.dto.AlarmDTO;
 import com.mulcam.finalproject.dto.CalendarDTO;
-import com.mulcam.finalproject.dto.ChartDTO;
 import com.mulcam.finalproject.dto.MateApplyDTO;
 import com.mulcam.finalproject.dto.MypageSumDTO;
 import com.mulcam.finalproject.dto.UserDTO;
@@ -31,7 +30,6 @@ import com.mulcam.finalproject.service.CSuccessService;
 import com.mulcam.finalproject.service.CashListService;
 import com.mulcam.finalproject.service.MateApplyService;
 import com.mulcam.finalproject.service.MypageService;
-import com.mulcam.finalproject.service.UserService;
 
 @Controller
 @RequestMapping("/mypage")
@@ -48,12 +46,32 @@ public class MypageController {
 
 	@Autowired
 	private CashListService cashListService;
-	
+
 	@Autowired
 	private AlarmService alarmService;
-	
-	
 
+	@GetMapping("/alarm")
+	public String alarmGet(Model model, HttpSession session) {
+		UserDTO user = (UserDTO) session.getAttribute("user");
+		// 알림 리스트 가져오기
+		List<AlarmDTO> list = alarmService.findAlarmsByUid(user.getUid());
+		model.addAttribute("alarmList", list);
+		alarmService.listCountBoolean(list, session);
+		
+		// 읽은 알림으로 변경
+		alarmService.editType(list);
+		
+		// 알림 카운트 변경
+		model.addAttribute("alarmBeforeCnt", session.getAttribute("alarmCnt"));
+		session.setAttribute("alarmCnt", alarmService.findAlarmCnt(user));
+		return "mypage/alarm";
+	}
+	
+	@PostMapping("/alarm/delete")
+	public String alarmDelete(@RequestParam List<Long> id) {
+		alarmService.deleteAlarm(id);
+		return "redirect:/mypage/alarm";
+	}
 
 	/** MyPage : 나의 절약 캘린더 */
 	@GetMapping("/main")
@@ -71,7 +89,7 @@ public class MypageController {
 		MypageSumDTO mypageSumDTO = css.getSum(user.getId());
 		return mypageSumDTO;
 	}
-	
+
 	/** MyPage : 나의 절약 캘린더 수입 지출 리스트 모달 */
 	@GetMapping("/main/cash/{date}")
 	@ResponseBody
@@ -80,7 +98,7 @@ public class MypageController {
 		List<Cash> list = cashListService.getList(user.getId(), date, date);
 		return list;
 	}
-	
+
 	/** MyPage : 나의 조각메이트 */
 	@GetMapping("/mate/apply/all")
 	public String applyGet(Model model, HttpSession session) {
@@ -97,7 +115,7 @@ public class MypageController {
 
 		return "mypage/apply_list_all";
 	}
-	
+
 	/** MyPage : 통계 */
 	@GetMapping("/chart")
 	public String ChartGet() {
@@ -115,22 +133,20 @@ public class MypageController {
 		UserDTO user = (UserDTO) session.getAttribute("user");
 		return mypageService.getCashChart(user);
 	}
-	
+
 	@GetMapping("/chart/challenge")
 	public String ChartChallengeGet(HttpSession session) {
 		UserDTO user = (UserDTO) session.getAttribute("user");
 		mypageService.getChallengeChart(user);
 		return "mypage/chart_challenge";
 	}
-	
+
 	@PostMapping("/chart/challenge")
 	@ResponseBody
 	public Map<String, Object> ChartChallengePost(HttpSession session) {
 		UserDTO user = (UserDTO) session.getAttribute("user");
 		return mypageService.getChallengeChart(user);
 	}
-	
-	
 
 	/** MyPage : 나의 수입/지출 */
 	@GetMapping(value = { "cash/list", "cash/list/{arrow}" })
@@ -220,7 +236,5 @@ public class MypageController {
 		model.addAttribute("map", map);
 		return "cash/list";
 	}
-
-	
 
 }
