@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.PatternMatchUtils;
 
 import com.mulcam.finalproject.dto.UserDTO;
+import com.mulcam.finalproject.entity.User;
 
 @Component
 public class LoginFilter implements Filter {
