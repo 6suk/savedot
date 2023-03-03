@@ -16,11 +16,11 @@
         <div class="aside-info border-bottom">
             <h4>${user.nickname }</h4>
             <dl>
-                <dt>챌린지</dt>
+                <dt>알림</dt>
                 <dd>
-                    <a href="#">12</a>
+                    <a href="/mypage/alarm">${alarmCnt }</a>
                 </dd>
-                <dt>조각메이트</dt>
+                <dt>좋아요</dt>
                 <dd>
                     <a href="#">2</a>
                 </dd>

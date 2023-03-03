@@ -5,10 +5,23 @@ $(function () {
   // Main Nav Active
   $('.nav-link.main-nav').each(function (index, item) {
     let nav_path = $(item).attr('href').split('/');
-    if (path_box[1] === 'user' && nav_path[2] === path_box[2]) {
-      $(item).addClass('active');
-    } else if (path_box[1] !== 'user' && nav_path[1] === path_box[1]) {
-      $(item).addClass('active');
+
+    switch (path_box[1]) {
+      case 'user':
+        if (nav_path[2] === path_box[2]) {
+          $(item).addClass('active');
+        }
+        break;
+      case 'mypage':
+        if (nav_path[2] === path_box[2]) {
+          $(item).addClass('active');
+        }
+        break;
+      default:
+        if (nav_path[1] === path_box[1]) {
+          $(item).addClass('active');
+        }
+        break;
     }
   });
 
