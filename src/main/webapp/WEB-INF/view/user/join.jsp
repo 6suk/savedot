@@ -34,61 +34,65 @@
  	<!-- TOP -->
 	<%@ include file="../common/top.jsp"%>
 	<!-- TOP -->
-	 
-    <div class="container">
-        <!-- Heading -->
-        <h1>Save.</h1>
-        
-        <!-- Links -->
-        <ul class="links">
-          <li>
-            <a href="/user/join" id="signup">회원가입</a>
-          </li>
-        </ul>
-        <!-- 회원가입 -->
-        <form action="/user/join" method="post">
-        
-       		<!-- 이름 -->
-            <div class="first-input input__block first-input__block">
+
+	<div class="container">
+		<!-- Heading -->
+		<h1>Save.</h1>
+
+		<!-- Links -->
+		<ul class="links">
+			<li><a href="/user/join" id="signup">회원가입</a></li>
+		</ul>
+		<!-- 회원가입 -->
+		<form action="/user/join" method="post">
+
+			<!-- 이름 -->
+			<div class="first-input input__block first-input__block">
 				<input value="" name="uname" placeholder="이름*" required>
 			</div>
-			
-            <!-- id -->
-            <div class="input__block">
-	            <input type="text" id="id" name="id" oninput="checkId()" placeholder="아이디*" value="" required>
-				<!-- id ajax 중복체크 -->
-				<span class="id_ok">사용 가능한 아이디입니다.</span>
-				<span class="id_already">이미 사용중인 아이디입니다.</span>
-            </div>
-            
-            <!-- password -->
-            <div class="input__block">
-                <input type="password" name="pwd" placeholder="비밀번호*" id="pwd" required />
-            </div>
-            
-            <!-- repeat password -->
-            <div class="input__block">
-                <input type="password" name="pwd2" placeholder="비밀번호 확인*" id="pwd2" required   />
-            </div>
-            
-            <!-- 닉네임 -->
+
+			<!-- id -->
 			<div class="input__block">
-				<input type="text" id="nickname" name="nickname" oninput="checkNickname()" placeholder="닉네임*" value="" required>
-				<!-- nickname ajax 중복체크 -->
-				<span class="nickname_ok">사용 가능한 닉네임입니다.</span>
-				<span class="nickname_already">이미 사용중인 닉네임입니다.</span>
+				<input type="text" id="id" name="id" oninput="checkId()"
+					placeholder="아이디*" value="" required>
+				<!-- id ajax 중복체크 -->
+				<span class="id_ok">사용 가능한 아이디입니다.</span> <span class="id_already">이미
+					사용중인 아이디입니다.</span>
 			</div>
-			
+
+			<!-- password -->
+			<div class="input__block">
+				<input type="password" name="pwd" placeholder="비밀번호*" id="pwd"
+					required />
+			</div>
+
+			<!-- repeat password -->
+			<div class="input__block">
+				<input type="password" name="pwd2" placeholder="비밀번호 확인*" id="pwd2"
+					required />
+			</div>
+
+			<!-- 닉네임 -->
+			<div class="input__block">
+				<input type="text" id="nickname" name="nickname"
+					oninput="checkNickname()" placeholder="닉네임*" value="" required>
+				<!-- nickname ajax 중복체크 -->
+				<span class="nickname_ok">사용 가능한 닉네임입니다.</span> <span
+					class="nickname_already">이미 사용중인 닉네임입니다.</span>
+			</div>
+
 			<!-- 이메일 -->
 			<div class="input__block">
-				<input type="email" placeholder="이메일*  ex) savedot@mulcam.com" required name="email" value="">
+				<input type="email" placeholder="이메일*  ex) savedot@mulcam.com"
+					required name="email" value="">
 			</div>
-			
+
 			<!-- 생년월일 -->
 			<div class="input__block">
-				<input type="number" value="" name="birthDate" placeholder="생년월일*  ex) 19990101" required>
+				<input type="number" value="" name="birthDate"
+					placeholder="생년월일*  ex) 19990101" required>
 			</div>
-			
+
 			<!-- 선택 항목 -->
 			<legend>선택입력사항</legend>
 			<!-- 연락처 -->
@@ -99,22 +103,26 @@
 			<!-- 주소 -->
 			<div class="input__block">
 				<p>'우편번호 찾기'를 클릭해 주세요.</p>
-				<input type="text" id="postcode" name="postcode" placeholder="우편번호" readonly>
-				<button type="button" onclick="daumPostcode()" value="">우편번호 찾기</button>
-				<input type="text"  name="addr" id="addr" placeholder="주소" value="" readonly><br>
-				<input type="text"  name="detailAddr" id="detailAddr" placeholder="상세주소" value=""><br>
-				<input type="hidden" id="extraAddr" placeholder="참고항목">
+				<input type="text" id="postcode" name="postcode" placeholder="우편번호"
+					readonly>
+				<button type="button" onclick="daumPostcode()" value="">우편번호
+					찾기</button>
+				<input type="text" name="addr" id="addr" placeholder="주소" value=""
+					readonly><br> <input type="text" name="detailAddr"
+					id="detailAddr" placeholder="상세주소" value=""><br> <input
+					type="hidden" id="extraAddr" placeholder="참고항목">
 			</div>
 
 			<!-- 급여 -->
 			<div class="input__block">
 				<input type="number" value="" name="pay" placeholder="월 급여 or 용돈">
 			</div>
-			
+
 			<!-- 출퇴근 시간 -->
 			<div class="input__block">
-				<input type="time" class="input" value="" name="workIn" placeholder="출근 시간">
-				<input type="time" class="input" value="" name="workOut" placeholder="퇴근 시간">
+				<input type="time" class="input" value="" name="workIn"
+					placeholder="출근 시간"> <input type="time" class="input"
+					value="" name="workOut" placeholder="퇴근 시간">
 			</div>
 
 			<!-- 출발지 -->
@@ -129,8 +137,7 @@
 
 			<!-- 교통수단 -->
 			<div class="input__block">
-				<label>교통수단</label><br>
-				<select name="vehicles" id="vehicles"
+				<label>교통수단</label><br> <select name="vehicles" id="vehicles"
 					class="form-select required font-14" style="flex: 0.2 0 0">
 					<option value="" selected>선택해주세요</option>
 					<option value="taxi">택시</option>
@@ -178,35 +185,22 @@
 						<option value="유진투자증권">유진투자증권</option>
 						<option value="한국투자증권">한국투자증권</option>
 				</select>
-				</label> <label><input type="number" name="accountNumber" placeholder="계좌번호 (-)제외" value=""></label>
+				</label> <label><input type="number" name="accountNumber"
+					placeholder="계좌번호 (-)제외" value=""></label>
+				
+				<!-- 지역코드, oauth 임시 -->
+				<div class="input__block">
+					<input type="hidden" value="" name="code" placeholder="">
+					<input type="hidden" value="" name="oauth" placeholder="">
+				</div>
+				
 			</div>
-            <br>
-            <!-- sign in button -->
-            <button type="submit" class="signin__btn">
-                가입하기
-            </button>
-        </form>
-        
-        <!-- separator -->
-        <div class="separator">
-          <p>OR</p>
-        </div>
-        
-        <!-- 카카오 로그인 -->
-        <button class="kakao__btn">
-          <i class="fa fa-kakao"></i>
-          카카오계정으로 회원가입
-        </button>
-      </div>
-      
-      <footer>
-        <p>
-          <i class="fa fa-heart"></i> 
-          <i class="fa fa-heart"></i> 
-          <i class="fa fa-heart"></i> 
-        </p>
-      </footer>
-      <!-- /container -->
+			<br>
+			<!-- sign in button -->
+			<button type="submit" class="signin__btn">가입하기</button>
+		</form>
+	</div>
+	<!-- /container -->
     <script src="/js/loginForm.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script src="/js/idCheck.js"></script>

@@ -7,10 +7,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,14 +18,20 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.mulcam.finalproject.dao.UserDAO;
 import com.mulcam.finalproject.dto.KakaoProfileDTO;
+import com.mulcam.finalproject.dto.MateDTO;
 import com.mulcam.finalproject.dto.UserDTO;
+import com.mulcam.finalproject.entity.Mate;
+import com.mulcam.finalproject.entity.User;
 
 @Service
 public class KakaoService {
 	
 	@Value("${cosKey}") private String cosKey;
 	@Autowired private UserService userService;
+	@Autowired private UserDAO userDAO;
+	@Autowired ModelMapper modelMapper;
 	
     public String getAccessToken (String authorize_code) {
         String access_Token = "";
@@ -130,6 +136,7 @@ public class KakaoService {
         		.nickname(kakaoProfile.getProperties().nickname)
         		.email(kakaoProfile.getKakao_account().email)
         		.birthDate("0000" + kakaoProfile.getKakao_account().birthday)
+        		.oauth("kakao")		// kakao로 로그인 한 사람
         		.build();
         
         // 회원인지 비회원인지 체크해서 처리
@@ -138,13 +145,16 @@ public class KakaoService {
         if(originUser == null) {
         	System.out.println("기존 회원이 아니므로 자동 회원가입을 진행합니다.");
         	userService.join(kakaoUser);
+        	UserDTO user = userService.findById(kakaoUser.getId());
+        	return user;
         }
         
-        userService.loginKakao(kakaoUser, session);
+        // 로그인 처리
+        userService.loginKakao(originUser, session);
+        System.out.println("login 성공: " + userService.loginKakao(originUser, session));
         System.out.println("자동 로그인을 진행합니다.");
-        // 로그인 처리 (세션 등록)
         
-        return null;
+        return originUser;
     }
     
     // 로그아웃
