@@ -53,11 +53,10 @@
           <p>OR</p>
         </div>
         <!-- 카카오 로그인 -->
-        <button class="kakao__btn">
-        <i class="fa fa-kakao"></i>
         <c:if test="${userId eq null}">
-        <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=1dd88828b878b6857e1d2f8e5cf50324&redirect_uri=http://localhost:8080/user/loginKakao&response_type=code">
-          카카오계정으로 시작하기</a>
+        <button class="kakao__btn" onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=1dd88828b878b6857e1d2f8e5cf50324&redirect_uri=http://localhost:8080/user/loginKakao&response_type=code'">
+        <i class="fa fa-kakao"></i>
+          카카오계정으로 시작하기
         </button>
         </c:if>
       </div>

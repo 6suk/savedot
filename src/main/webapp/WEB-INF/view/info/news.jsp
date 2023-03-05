@@ -70,7 +70,7 @@
 									<li data-val="${ex.subDeal }">
 										<p class="sub-comment">(${ex.yesterday } 기준)</p>
 									</li>
-									<li data-val="${ex.fluctuationRate }"></li>
+									<li data-val="${ex.fluctuationRate }">%</li>
 								</ul>
 							</div>
 						</div>

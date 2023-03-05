@@ -28,7 +28,7 @@
 
             <!-- 정보 수정 -->
             <div class="btn btn-border font-12">
-                <a href="/user/update/${user.uid}">정보 수정</a>
+                <a href="/user/update">정보 수정</a>
             </div>
             <!-- 정보 수정 버튼 클릭 시 프로필 변경 오픈 -->
             <div class="btn btn-border font-12">
