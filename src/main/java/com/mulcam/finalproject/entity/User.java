@@ -1,5 +1,7 @@
 package com.mulcam.finalproject.entity;
 
+import java.time.LocalDate;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,7 +24,7 @@ public class User {
 	
 	// NULL
 	private String tel;
-	private String birthDate;		// not null
+	private LocalDate birthDate;		// not null
 	private String postcode;
 	private String addr;
 	private String detailAddr;

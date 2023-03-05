@@ -144,6 +144,10 @@ public class MypageServiceImpl implements MypageService {
 		allData.put("data5", data5);
 		return allData;
 	}
+	
+	public int getAge(LocalDate inputAge) {
+		return getAge(inputAge.toString());
+	}
 
 	/** 나이대 구하기 */
 	public int getAge(String inputAge) {

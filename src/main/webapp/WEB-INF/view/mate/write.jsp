@@ -252,6 +252,7 @@
   <script src="/js/upload.js"></script>
   <script src="/js/mate.js"></script>
   <script src="/js/required.js"></script>
+  <script src="/js/saveDot_numberOnly.js"></script>
   <script>
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {

@@ -4,26 +4,28 @@ function requiredCheck(filelist) {
   Array.from(required).forEach((x) => {});
   let no_val = [];
 
-  // 1. radio 타입일 때
-  let radio_selected = new Array(0); // 선택된 Value Array
-  let radio = Array.from($('.required:radio'));
-  let tmp = '';
-  radio.forEach((x) => {
-    let name = $(x).attr('name');
-    if (tmp !== name) {
-      let radio_val = $('input[name=' + name + ']:checked');
-      tmp = name;
-      if (radio_val.length === 0) {
-        // value가 없을 경우
-        check = false;
-        no_val.push($(x));
-      } else {
-        // value가 있을 경우
-        radio_selected.push(radio_val); // 선택값 넣기
-        check = true;
+  if ($('.required:radio').length > 0) {
+    // 1. radio 타입일 때
+    let radio_selected = new Array(0); // 선택된 Value Array
+    let radio = Array.from($('.required:radio'));
+    let tmp = '';
+    radio.forEach((x) => {
+      let name = $(x).attr('name');
+      if (tmp !== name) {
+        let radio_val = $('input[name=' + name + ']:checked');
+        tmp = name;
+        if (radio_val.length === 0) {
+          // value가 없을 경우
+          check = false;
+          no_val.push($(x));
+        } else {
+          // value가 있을 경우
+          radio_selected.push(radio_val); // 선택값 넣기
+          check = true;
+        }
       }
-    }
-  });
+    });
+  }
 
   // 2. 나머지 타입일 때
   Array.from(required).forEach((x) => {
