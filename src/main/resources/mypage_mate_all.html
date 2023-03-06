@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../resources/static/css/bootstrap.css" />
+    <!-- <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    /> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/354b0809a2.js" crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <!-- 
+    <link rel="stylesheet" href="../resources/static/css/mainStyle.css" />
+    <link rel="stylesheet" href="../resources/static/css/card.css" /> -->
+    <link rel="stylesheet" href="../resources/static/css/style.css" />
+    <title>FinalProject</title>
+  </head>
+  <body>
+    <!-- TOP -->
+    <nav class="navbar navbar-expand navbar-light fixed-top">
+      <!-- <div class="container-fluid"> -->
+      <div class="container-lg justify-content-lg-between">
+        <ul class="navbar-nav">
+          <a class="navbar-brand" href="#">
+            <img src="logo.png" class="logo" />
+          </a>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">조각메이트</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">챌린지</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">알뜰정보</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">얼마벌었지</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link d-none" href="#">로그인</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link d-none" href="#">회원가입</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">지출등록</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">마이페이지</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">로그아웃</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- TOP -->
+    <!-- MYPAGE - TOP -->
+    <nav id="mypage_category">
+      <ul class="nav justify-content-center mypage-navbar">
+        <li class="nav-item">
+          <a class="nav-link mypage" id="nav_main" href="/mypage/main">나의 절약캘린더</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mypage" id="nav_mate" href="/mypage/mate/apply/${user.idAuto}/all">나의 조각메이트</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mypage" href="#">나의 수입/지출</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mypage" href="#">알림</a>
+        </li>
+      </ul>
+    </nav>
+    <nav id="mate_sub_category" class="hide">
+      <ul class="nav justify-content-center mypage-navbar sub">
+        <li class="nav-item">
+          <a class="nav-link mypage-sub" href="#">내가 작성한 글</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mypage-sub" href="/mypage/mate/apply/${user.idAuto}/all">신청 리스트 전체보기</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mypage-sub" href="#">신청 완료</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mypage-sub" href="#">거래 중</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mypage-sub" href="#">거래 완료</a>
+        </li>
+      </ul>
+    </nav>
+    <!-- MYPAGE - TOP -->
+
+    <div class="container-lg">
+      <div class="row">
+        <!-- // ASIDE -->
+        <aside class="col-md-2">
+          <div class="aside-img">
+            <!-- <img
+              width="80%"
+              src="https://emojipedia-us.s3.amazonaws.com/source/microsoft-teams/337/blue-heart_1f499.png"
+            /> -->
+          </div>
+          <div class="aside-info border-bottom">
+            <h4>짠돌쓰</h4>
+            <dl>
+              <dt>챌린지</dt>
+              <dd>
+                <a href="#">12</a>
+              </dd>
+              <dt>조각메이트</dt>
+              <dd><a href="#">2</a></dd>
+            </dl>
+            <div class="btn btn-border font-12">정보수정</div>
+          </div>
+          <div class="multiple-btn pt-3 pb-5">
+            <a class="icon-btn" href="#">
+              <i class="fa-solid fa-certificate mb-2"></i>
+              <p>챌린지</p>
+            </a>
+            <a class="icon-btn" href="#">
+              <i class="fa-solid fa-circle-plus mb-2"></i>
+              <p>지출등록</p>
+            </a>
+            <a class="icon-btn" href="#">
+              <i class="fa-solid fa-share-nodes mb-2"></i>
+              <p>공유하기</p>
+            </a>
+          </div>
+        </aside>
+        <!-- ASIDE// -->
+
+        <!-- content -->
+        <section class="col-md-8">
+          <!-- /////////////////// 보낸 조각메이트 /////////////////// -->
+          <div id="mate-card-1" class="mate_card">
+            <div class="mate-card-top">
+              <div class="d-flex align-items-center gap-2">
+                <p class="mate-card-top-notify"></p>
+                <h4>보낸 조각메이트 신청</h4>
+              </div>
+            </div>
+            <div class="mypage-mate-card-box all">
+              <!-- 카드 1 : 대기중 -->
+              <div class="mate-card-list all" onclick="location.href='naver.com'">
+                <div class="mate-card-item all">
+                  <div class="mate-card-top">
+                    <p class="mate-card-tag ver0"></p>
+                    <u><a href="#">신청취소</a></u>
+                  </div>
+                  <div class="mate-card-middle">
+                    <h5>대기중 테스트</h5>
+                    <div class="mate-card-middle-tb">
+                      <ul class="tb-title">
+                        <li>판매자</li>
+                        <li>연락수단</li>
+                        <li>거래방법</li>
+                        <li>신청일</li>
+                      </ul>
+                      <ul>
+                        <li>프로알뜰러</li>
+                        <li>
+                          <u><a href="">오픈채팅</a></u>
+                        </li>
+                        <li>만남거래</li>
+                        <li>2023-02-13</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 카드 1 : 대기중 끝 -->
+
+              <!-- 카드 1 : 진행중 -->
+              <div class="mate-card-list all" onclick="location.href='naver.com'">
+                <div class="mate-card-item all">
+                  <div class="mate-card-top">
+                    <p class="mate-card-tag ver1"></p>
+                    <u><a href="#">신청취소</a></u>
+                  </div>
+                  <div class="mate-card-middle">
+                    <h5>진행중 테스트진행중 테스트진행중 테스트진행중 테스트</h5>
+                    <div class="mate-card-middle-tb">
+                      <ul class="tb-title">
+                        <li>판매자</li>
+                        <li>연락수단</li>
+                        <li>거래방법</li>
+                        <li>신청일</li>
+                        <li>카카오뱅크</li>
+                      </ul>
+                      <ul>
+                        <li>프로알뜰러</li>
+                        <li>
+                          <u><a href="">오픈채팅</a></u>
+                        </li>
+                        <li>만남거래</li>
+                        <li>2023-02-13</li>
+                        <li>
+                          3333060419875
+                          <i
+                            class="fa-solid fa-circle-exclamation"
+                            style="color: var(--lgray-color); opacity: 0.5"
+                            data-bs-toggle="tooltip"
+                            data-bs-html="true"
+                            data-bs-placement="top"
+                            title="입금 전 더치트에 검색해 본다면<br>더욱 안전한 거래를 할 수 있어요!"
+                          ></i>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 카드 1 : 진행중 끝 -->
+
+              <!-- 카드 1 : 거래완료 -->
+              <div class="mate-card-list all" onclick="location.href='naver.com'">
+                <div class="mate-card-item all">
+                  <div class="mate-card-top">
+                    <p class="mate-card-tag ver2"></p>
+                  </div>
+                  <div class="mate-card-middle">
+                    <h5>진행중 테스트</h5>
+                    <div class="mate-card-middle-tb">
+                      <ul class="tb-title">
+                        <li>판매자</li>
+                        <li>신청일</li>
+                        <li>거래완료일</li>
+                      </ul>
+                      <ul>
+                        <li>프로알뜰러</li>
+                        <li>2023-02-13</li>
+                        <li>2023-02-13</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 카드 1 : 거래완료 끝 -->
+            </div>
+          </div>
+          <!-- /////////////////// 보낸 조각메이트 끝 /////////////////// -->
+        </section>
+      </div>
+    </div>
+
+    <script src="../resources/static/js/mypage_mate.js"></script>
+    <script src="../resources/static/js/mypage_nav.js"></script>
+    <script>
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+      var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+      });
+    </script>
+  </body>
+</html>

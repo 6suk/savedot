@@ -311,19 +311,19 @@ uri="http://java.sun.com/jsp/jstl/fmt"%> <%@ taglib prefix="fn" uri="http://java
                     </p>
                     <!--  좋아요 기능 (비로그인시 하트모양 안보임) -->
                     <c:if test="${user.uid ne null}">
-                    <c:set var="likeType" value="0"></c:set>
-                    <c:set var="likeUrl" value="likePress(${mate.mid})" ></c:set>
-                    <c:forEach var="like" items="${likelist }">
-                      <c:if test="${like.mid eq mate.mid}">
-                        <c:set var="likeType" value="1"></c:set>
-                        <c:set var="likeUrl" value="likeDel(${mate.mid})"></c:set>
-                      </c:if>
-                    </c:forEach>
-                    <span class="" LIKE="${likeType}" id="${mate.mid}"></span>
+                      <c:set var="likeType" value="0"></c:set>
+                      <c:set var="likeUrl" value="likePress(${mate.mid})"></c:set>
+                      <c:forEach var="like" items="${likelist }">
+                        <c:if test="${like.mid eq mate.mid}">
+                          <c:set var="likeType" value="1"></c:set>
+                          <c:set var="likeUrl" value="likeDel(${mate.mid})"></c:set>
+                        </c:if>
+                      </c:forEach>
+                      <span class="" LIKE="${likeType}" id="${mate.mid}"></span>
                     </c:if>
                     <!--  좋아요 기능 끝 -->
                   </div>
-              
+
                   <c:set
                     var="thumpath"
                     value="/savedot/upload/${mate.thum.saveDate }/${mate.thum.id }${mate.thum.ext }"
@@ -364,5 +364,6 @@ uri="http://java.sun.com/jsp/jstl/fmt"%> <%@ taglib prefix="fn" uri="http://java
       </div>
     </div>
     <script src="/js/mate_list.js"></script>
+    <script src="/js/mate_like.js"></script>
   </body>
 </html>

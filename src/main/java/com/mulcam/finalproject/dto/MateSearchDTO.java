@@ -7,6 +7,7 @@ import lombok.ToString;
 @Getter @Setter
 @ToString
 public class MateSearchDTO {
+	private Long uid;
 	private String category;
 	private String state;
 	private String area;

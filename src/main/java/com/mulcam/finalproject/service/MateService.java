@@ -29,5 +29,11 @@ public interface MateService {
 	
 	/** LIST : 검색 결과 조회 */
 	public List<MateDTO> findAllBySearch(MateSearchDTO mateSearchDTO);
+	
+	/** LIST : 내가 작성한 게시물 */
+	public List<MateDTO> findAllByUid(MateSearchDTO mateSearchDTO);
+	
+	/** LIST : 내가 좋아요한 게시물 */
+	public List<MateDTO> findLikeByUid(MateSearchDTO mateSearchDTO);
 
 }

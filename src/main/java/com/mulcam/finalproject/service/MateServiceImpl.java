@@ -92,6 +92,30 @@ public class MateServiceImpl implements MateService {
 		});
 		return mateDTOList;
 	}
+	
+	@Override
+	public List<MateDTO> findAllByUid(MateSearchDTO mateSearchDTO){
+		List<Mate> list = mateDAO.findAllByUid(mateSearchDTO);
+		List<MateDTO> mateDTOList = new ArrayList<>();
+		
+		list.forEach(mate -> {
+			MateDTO mateDTO = modelMapper.map(mate, MateDTO.class);
+			mateDTOList.add(UserAndImgsMapping(mateDTO));
+		});
+		return mateDTOList;
+	}
+	
+	@Override
+	public List<MateDTO> findLikeByUid(MateSearchDTO mateSearchDTO){
+		List<Mate> list = mateDAO.findLikeByUid(mateSearchDTO);
+		List<MateDTO> mateDTOList = new ArrayList<>();
+		
+		list.forEach(mate -> {
+			MateDTO mateDTO = modelMapper.map(mate, MateDTO.class);
+			mateDTOList.add(UserAndImgsMapping(mateDTO));
+		});
+		return mateDTOList;
+	}
 
 	@Override
 	public void update(MateDTO mateDTO) {
