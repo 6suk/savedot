@@ -2,6 +2,7 @@ package com.mulcam.finalproject.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -46,7 +47,7 @@ public interface CashDao{
 
 		/* 수입지출 전체리스트 가져오기 (오늘날짜부터 한달치) */
 		// 한달동안 list 뽑기 -> 날짜기준 -> 목록출력
-		@Select("SELECT a.category, a.content,a.amount,a.memo,a.regDate, b.fileName, b.ext, b.saveDate"
+		@Select("SELECT a.cid, a.category, a.content,a.amount,a.memo,a.regDate, b.fileName, b.ext, b.saveDate"
 				+ " FROM cash AS a"
 				+ " LEFT JOIN ocr_img AS b"
 				+ " ON a.cid = b.cid"
@@ -55,12 +56,25 @@ public interface CashDao{
 		List<Cash> getAllCashList(String uid);
 
 		/* 수입지출 전체리스트 날짜기준 -> 목록출력 */
-		@Select("SELECT a.category, a.content,a.amount,a.memo,a.regDate, b.fileName, b.ext, b.saveDate"
+		@Select("SELECT a.cid, a.category, a.content,a.amount,a.memo,a.regDate, b.fileName, b.ext, b.saveDate"
 				+ " FROM cash AS a"
 				+ " LEFT JOIN ocr_img AS b"
 				+ " ON a.cid = b.cid"
 				+ " WHERE uid=#{uid} AND regDate=#{regDate}"
 				+ " ORDER BY a.regDate DESC")
 		List<Cash> getCashListByDate(String uid,String regDate);
+		
+		@Select("UPDATE cash"
+				+ "	SET"
+				+ "		category=#{category},"
+				+ "		regDate=#{regDate},"
+				+ "		amount=#{amount},"
+				+ "		content=#{content},"
+				+ "		memo=#{memo}"
+				+ "	WHERE cid=#{cid}")
+		public void updateCash(Cash cash);
+		
+		@Delete("DELETE FROM cash WHERE cid=#{cid}")
+		public void deleteCash(int cid);
 		
 }

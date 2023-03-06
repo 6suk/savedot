@@ -115,7 +115,7 @@
 			</section>
 			<!-- // MODAL : 일자별 상세내역 -->
 			<div class="modalBg" id="modal-cash">
-				<div class="requestModal savedot-modal cash">
+				<div class="requestModal savedot-modal callendar">
 					<div class="close-button">
 						<div>
 							<h5 id="modal-cash-date"></h5>
