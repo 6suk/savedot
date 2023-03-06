@@ -109,7 +109,7 @@
 								<!-- A-3. 일자별 리스트 출력 -->
 								<!-- // A-4. ver0 : 지출 · ver1 : 수입 -->
 								<c:forEach var="cashList" items="${entry.value}">
-									<ul class="cash-item ver${cashList.category}">
+									<ul class="cash-item ver${cashList.category}" id="${cashList.cid }">
 										<li category></li>
 										<li cash-name>${cashList.content}</li>
 										<li cash-amount><fmt:formatNumber
@@ -140,7 +140,7 @@
 	</div>
 
 	<!-- // MODAL : 영수증 이미지 -->
-	<div class="modalBg">
+	<div class="modalBg receipt">
 		<div class="requestModal savedot-modal cash" style="opacity: 1">
 			<div class="close-button">
 				<input type="button" id="closebtn" class="btn btn-sub mdi"
@@ -151,9 +151,59 @@
 			</div>
 		</div>
 	</div>
-	<!-- // Apply Form -->
+	<!-- // MODAL : 영수증 이미지 -->
+	
+	<!-- // MODAL : 수정 페이지 -->
+    <div class="modalBg edit">
+      <div class="requestModal savedot-modal cashEdit">
+        <div class="close-button gap-1 pb-3">
+          <input type="button" id="editbtn_edit" class="btn btn-sub mdi" value="수정" />
+          <input type="button" id="submitbtn_edit" class="btn btn-main mdi hide" value="등록" />
+          <input type="button" id="deletebtn_edit" class="btn btn-sub mdi" value="삭제" />
+          <input type="button" id="closebtn_edit" class="btn btn-main mdi" value="닫기" />
+        </div>
+        <div class="cash-edit-item">
+          <form class="inputbox" id="cash-edit-form" method="post" action="/cash/edit">
+            <input type="hidden" name="cid" id="edit-cid" />
+            <select name="category" id="e-category" class="form-select text requiredModal" disabled>
+              <option value="0" id="e-category-ver0">지출</option>
+              <option value="1" id="e-category-ver1">수입</option>
+            </select>
+            <input class="requiredModal form-control text input-text" type="date" name="regDate" id="date" disabled />
+            <input
+              class="form-control text input-text requiredModal"
+              type="text"
+              name="amount"
+              id="amount"
+              placeholder="금액*"
+              disabled
+              price
+            />
+            <input
+              class="form-control text input-text requiredModal"
+              type="text"
+              name="content"
+              id="shopName"
+              placeholder="내역*"
+              disabled
+            />
+            <textarea
+              id="memo"
+              class="form-control"
+              name="memo"
+              cols="30"
+              rows="10"
+              placeholder="메모"
+              disabled
+            ></textarea>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- // MODAL : 수정 페이지 -->
 	<script src="/js/mypage_cash.js"></script>
 	<script src="/js/mypage_nav.js"></script>
 	<script src="/js/required.js"></script>
+    <script src="/js/saveDot_numberOnly.js"></script>
 </body>
 </html>

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,6 +50,20 @@ public class CashController {
 
 	@Autowired
 	ImageUploadUtil imageUpload;
+	
+	/** MyPage : 나의 수입/지출 수정 */
+	@PostMapping("/edit")
+	public String cashUpdate(Cash cash) {
+		cashService.updateCash(cash);
+		return "redirect:/mypage/cash/list#" + cash.getCid();
+	}
+	
+	/** MyPage : 나의 수입/지출 삭제 */
+	@GetMapping("/delete/{cid}")
+	public String cashDelete(@PathVariable int cid) {
+		cashService.deleteCash(cid);
+		return "redirect:/mypage/cash/list";
+	}
 
 	/** 수입지출등록 **/
 	/* 수입지출 등록 front page띄우기 */

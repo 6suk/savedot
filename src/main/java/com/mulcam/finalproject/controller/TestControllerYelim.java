@@ -23,6 +23,7 @@ import com.mulcam.finalproject.entity.Cash;
 import com.mulcam.finalproject.entity.CashImg;
 import com.mulcam.finalproject.entity.User;
 import com.mulcam.finalproject.service.AlarmService;
+import com.mulcam.finalproject.service.CashService;
 import com.mulcam.finalproject.service.MateApplyService;
 import com.mulcam.finalproject.service.MateService;
 import com.mulcam.finalproject.service.MypageService;
@@ -57,6 +58,8 @@ public class TestControllerYelim {
 	@Autowired
 	private AlarmService alarmService;
 	
+	@Autowired
+	CashService cashService;
 	
 
 

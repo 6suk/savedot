@@ -20,6 +20,8 @@ public interface CashService {
 
 	/* cash DB의 cid 구하기 --> img DB cid에 동일값을 넣어주기 위해서 */
 	int getRecentCid(String uid);
-
-
+	
+	public void updateCash(Cash cash);	// 수정
+	
+	public void deleteCash(int cid);	// 삭제
 }

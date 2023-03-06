@@ -31,6 +31,7 @@ import com.mulcam.finalproject.entity.MateLike;
 import com.mulcam.finalproject.service.AlarmService;
 import com.mulcam.finalproject.service.CSuccessService;
 import com.mulcam.finalproject.service.CashListService;
+import com.mulcam.finalproject.service.CashService;
 import com.mulcam.finalproject.service.MateApplyService;
 import com.mulcam.finalproject.service.MateLikeService;
 import com.mulcam.finalproject.service.MateService;
@@ -54,12 +55,13 @@ public class MypageController {
 
 	@Autowired
 	private CashListService cashListService;
-
+	
 	@Autowired
 	private AlarmService alarmService;
 	
 	@Autowired
 	private MateLikeService likeService;
+	
 
 	/** Mypage : 내가 작성한 글 */
 	@GetMapping("/mate/write/list")
@@ -205,7 +207,7 @@ public class MypageController {
 		UserDTO user = (UserDTO) session.getAttribute("user");
 		return mypageService.getChallengeChart(user);
 	}
-
+	
 	/** MyPage : 나의 수입/지출 */
 	@GetMapping(value = { "cash/list", "cash/list/{arrow}" })
 	public String getCashList(HttpServletRequest req, Model model, @PathVariable(required = false) String arrow) {

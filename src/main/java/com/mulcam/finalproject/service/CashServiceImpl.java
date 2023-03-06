@@ -23,6 +23,14 @@ public class CashServiceImpl implements CashService {
 
 	@Autowired
 	private CashDao cashDao;
+	
+	public void updateCash(Cash cash) {
+		cashDao.updateCash(cash);
+	}
+	
+	public void deleteCash(int cid) {
+		cashDao.deleteCash(cid);
+	}
 
 	@Override
 	public Cash getCash(int cid) {
