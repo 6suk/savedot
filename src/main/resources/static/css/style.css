@@ -3497,3 +3497,72 @@ p.check-none {
 
 .cash-edit {
 }
+
+.login-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.j-wrap.login {
+  margin-top: 9rem;
+}
+
+.login-title {
+  font-size: 3.2rem;
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.separator {
+  display: block;
+  text-align: center;
+  height: 40px;
+  position: relative;
+  color: rgba(15, 19, 42, 0.4);
+  font-size: 13px;
+  width: 100%;
+  max-width: 680px;
+  margin: 30px auto 10px;
+  background: transparent;
+}
+
+.separator::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 0px;
+  height: 1px;
+  width: 45%;
+  background: rgba(15, 19, 42, 0.2);
+}
+
+.separator::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  right: 0px;
+  height: 1px;
+  width: 45%;
+  background: rgba(15, 19, 42, 0.2);
+}
+
+.btn-kakao {
+  background: rgb(255, 228, 74);
+  color: #3a1d1d;
+}
+.btn-kakao:hover {
+  opacity: 0.8;
+}
+
+.login-btn {
+  border-radius: 8px;
+  font-size: 15px;
+  padding-block: 0.8rem !important;
+}
+
+.form-control.login {
+  background-color: rgba(137, 139, 147, 0.1);
+  border: 0;
+  border-radius: 8px;
+}

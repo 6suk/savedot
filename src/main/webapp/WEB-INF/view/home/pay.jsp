@@ -51,7 +51,7 @@
               <input
                 type="button"
                 class="btn btn-main full font-14"
-                onclick="location.href='/user/update/${user.uid}'"
+                onclick="location.href='/user/update'"
                 value="정보수정하러가기"
               />
               <input
