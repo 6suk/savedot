@@ -1099,7 +1099,7 @@ button > i {
 
 .mate-card-list.all {
   display: inline-block;
-  margin-top: 1rem;
+  margin-top: 0rem;
   width: 32%;
 }
 
@@ -3413,7 +3413,8 @@ p.check-none {
   transform: translate(-50%, -50%);
 }
 
-.form-control.text.mypage {
+.form-control.text.mypage,
+.form-select.text.mypage {
   height: 45px;
   max-width: 160px;
 }

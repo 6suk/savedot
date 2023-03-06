@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.mulcam.finalproject.dto.MateApplyDTO;
+import com.mulcam.finalproject.dto.MateSearchDTO;
 import com.mulcam.finalproject.entity.Mate;
 import com.mulcam.finalproject.entity.MateApply;
 import com.mulcam.finalproject.entity.User;
@@ -39,10 +40,10 @@ public interface MateApplyService {
 
 	/** Apply : 거래중,거래완료 등 상태 변경 */
 	public LocalDateTime editIsApply(MateApplyDTO mateApplyDTO);
-	
+
 	public MateApplyDTO findOneByAid(Long aid);
 
-
-
+	/** Apply : 전체 리스트(보낸 + 받은) 출력 */
+	public List<MateApplyDTO> findAllByUid(MateSearchDTO mateSearchDTO);
 
 }
