@@ -40,5 +40,7 @@ public class MateApply {
 
 	private int isApply;
 	
+	private String getUid;
+	
 	
 }

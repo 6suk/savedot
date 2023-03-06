@@ -30,6 +30,7 @@ public class MateApplyDTO {
 	private LocalDateTime modDate;
 	private LocalDate regDate;	// 등록일
 	private boolean newNotify;
+	private Long getUid;
 
 	public void setApplyTradelType(int applyTradelType) {
 		String[] tradeNames = { null, "직접거래", "택배거래" };

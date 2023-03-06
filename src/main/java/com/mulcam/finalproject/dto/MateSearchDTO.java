@@ -4,7 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter @Setter
+@Getter
+@Setter
 @ToString
 public class MateSearchDTO {
 	private Long uid;
@@ -12,11 +13,45 @@ public class MateSearchDTO {
 	private String state;
 	private String area;
 	private String query;
+	// apply
+	private String isApply;
+	private String sendBy;
 
 	private String categorySQL = "SELECT category";
 	private String stateSQL = "SELECT state";
 	private String areaSQL = "SELECT placeCode";
 	private String querySQL = "";
+	private String isApplySQL = "SELECT isApply";
+	private String sendBySQL;
+
+
+	public void setUid(Long uid) {
+		this.uid = uid;
+		if(this.sendBy != null) {
+			switch (this.sendBy) {
+			case "A":
+				this.sendBySQL = "m.uid = " + this.uid + " or a.uid = " + this.uid;
+				break;
+			case "0":
+				this.sendBySQL = "a.uid = " + this.uid;
+				break;
+			case "1":
+				this.sendBySQL = "m.uid = " + this.uid;
+				break;
+			default:
+				break;
+			}
+		}else {
+			this.sendBySQL = "m.uid = " + this.uid + " or a.uid = " + this.uid;
+		}
+	}
+
+	public void setIsApply(String isApply) {
+		this.isApply = isApply;
+		if (!isApply.equals("A")) {
+			this.isApplySQL = isApply;
+		}
+	}
 
 	public void setCategory(String category) {
 		this.category = category;

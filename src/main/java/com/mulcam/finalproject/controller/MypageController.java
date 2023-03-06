@@ -90,8 +90,8 @@ public class MypageController {
 	}
 
 	/** MyPage : 매칭 신청 리스트 */
-	@GetMapping("/mate/apply/all")
-	public String applyGet(Model model, HttpSession session) {
+	@GetMapping("/mate/apply/slide")
+	public String applySlideGet(Model model, HttpSession session) {
 		UserDTO user = (UserDTO) session.getAttribute("user");
 		Long uid = user.getUid();
 
@@ -103,6 +103,24 @@ public class MypageController {
 		model.addAttribute("getApply", getApply);
 		model.addAttribute("getNew", applyService.findNewByGetUid(uid)); // New Notify
 
+		return "mypage/apply_list_slide";
+	}
+	
+	@GetMapping("/mate/apply/view")
+	public String applyAllGet(Model model, HttpSession session) {
+		UserDTO user = (UserDTO) session.getAttribute("user");
+		List<MateApplyDTO> sendApply = applyService.findBySendUid(user.getUid());
+		
+		model.addAttribute("sendApply", sendApply);
+		return "mypage/apply_list_slide";
+	}
+	
+	@GetMapping("/mate/apply/all")
+	public String applyAllGet(MateSearchDTO mateSearchDTO, Model model, HttpSession session) {
+		UserDTO user = (UserDTO) session.getAttribute("user");
+		mateSearchDTO.setUid(user.getUid());
+		List<MateApplyDTO> apply = applyService.findAllByUid(mateSearchDTO);
+		model.addAttribute("applyList", apply);
 		return "mypage/apply_list_all";
 	}
 

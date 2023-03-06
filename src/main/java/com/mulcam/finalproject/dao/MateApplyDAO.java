@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.mulcam.finalproject.dto.MateSearchDTO;
 import com.mulcam.finalproject.entity.MateApply;
 
 @Mapper
@@ -76,6 +77,17 @@ public interface MateApplyDAO {
 	@Select("SELECT * FROM mate_apply"
 			+ " WHERE aid = #{aid};")
 	public MateApply findOneByAid(Long aid);
+	
+	/** APPLY : 받은, 보낸 조각메이트 신청 모두 받기 */
+	@Select("SELECT a.*, m.uid AS getUid FROM mate_apply AS a"
+			+ " JOIN mate AS m"
+			+ " ON a.`mid` = m.`mid`"
+			+ " WHERE a.isDel = 0"
+			+ " AND m.isDel = 0"
+			+ " AND a.isApply IN(${isApplySQL})"
+			+ " AND (${sendBySQL})"
+			+ " ORDER BY a.modDate DESC, a.regDate DESC;")
+	public List<MateApply> findAllByUid(MateSearchDTO mateSearchDTO);
 
 
 }

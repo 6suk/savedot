@@ -1,3 +1,70 @@
+$(function () {
+  let search = new URLSearchParams(location.search);
+  let search_state = search.get('isApply');
+  let search_sendBy = search.get('sendBy');
+  let $sendBy = $('input[name="sendBy"]');
+  let $state = $('select[name="state"] option');
+
+  if(search !== ''){
+    $sendBy.each(function(index, item){
+      if(search_sendBy === $(item).val()){
+        $(item).attr('checked', true);
+      }
+    })
+  
+    $state.each(function(index, item){
+      if(search_state === $(item).val()){
+        $(item).attr('selected', true)
+      }
+    })
+  }
+});
+
+$('input[name="sendBy"]').change(function (event) {
+  event.preventDefault();
+  let $sendBy_get = $('input[name="sendBy"]:checked').val();
+
+  let search = searchURL();
+  search.set('sendBy', $sendBy_get);
+
+  location.href = '?' + search;
+});
+
+$('select[name="state"]').change(function (event) {
+  event.preventDefault();
+  let $state_get = $('select[name="state"]').val();
+
+  let search = searchURL();
+  search.set('isApply', $state_get);
+
+  location.href = '?' + search;
+});
+
+// 기본 URL
+function searchURL() {
+  let search = new URLSearchParams(location.search);
+  let isApply = search.get('isApply');
+  let sendBy = search.get('sendBy');
+
+  if(isApply !== ''){
+    search.set('isApply', isApply);
+  }
+  
+  if(isApply === '' || isApply === null){
+    search.set('isApply', 'A');
+  }
+  
+  if(sendBy !== ''){
+    search.set('sendBy', sendBy);
+  }
+
+  if(isApply === '' || isApply === null){
+    search.set('sendBy', 'A');
+  }
+  
+  return search;
+}
+
 $('.btn.fa-chevron-right').click(function () {
   let mate_card = $(this).parents('.mate_card');
   let control_box = mate_card.find('.mypage-mate-card-box');

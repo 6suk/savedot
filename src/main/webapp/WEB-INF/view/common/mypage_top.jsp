@@ -21,8 +21,8 @@
 		<li class="nav-item"><a class="nav-link mypage-sub" href="/mypage/mate/like/list">내가
 				좋아요한 게시물</a></li>
 		<li class="nav-item"><a class="nav-link mypage-sub"
-			href="/mypage/mate/apply/all">매칭 신청 모아보기</a></li>
-		<li class="nav-item"><a class="nav-link mypage-sub" href="#">매칭 신청 전체보기</a></li>
+			href="/mypage/mate/apply/view">매칭 신청 모아보기</a></li>
+		<li class="nav-item"><a class="nav-link mypage-sub" href="/mypage/mate/apply/all">매칭 신청 전체보기</a></li>
 	</ul>
 </nav>
 

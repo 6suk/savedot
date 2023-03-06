@@ -12,6 +12,7 @@ import com.mulcam.finalproject.dao.AlarmDAO;
 import com.mulcam.finalproject.dao.MateApplyDAO;
 import com.mulcam.finalproject.dto.MateApplyDTO;
 import com.mulcam.finalproject.dto.MateDTO;
+import com.mulcam.finalproject.dto.MateSearchDTO;
 import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.Mate;
 import com.mulcam.finalproject.entity.MateApply;
@@ -101,10 +102,18 @@ public class MateApplyServiceImpl implements MateApplyService {
 		return applyDAO.findEditTime(mateApplyDTO.getAid());
 	}
 	
+	@Override
 	public MateApplyDTO findOneByAid(Long aid) {
 		List<MateApply> list = new ArrayList<>();
 		list.add(applyDAO.findOneByAid(aid));
 		return mapperDTO(list).get(0);
+	}
+	
+
+	@Override
+	public List<MateApplyDTO> findAllByUid(MateSearchDTO mateSearchDTO){
+		List<MateApply> list = applyDAO.findAllByUid(mateSearchDTO);
+		return mapperDTO(list);
 	}
 
 	public List<MateApplyDTO> mapperDTO(List<MateApply> list) {
