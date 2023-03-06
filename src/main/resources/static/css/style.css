@@ -1054,6 +1054,10 @@ button > i {
   scroll-behavior: smooth;
 }
 
+.mypage-mate-card-box.all {
+  flex-wrap: wrap;
+}
+
 @media (pointer: coarse) {
   .mypage-mate-card-box {
     overflow: scroll;
@@ -1093,6 +1097,12 @@ button > i {
   margin-top: 1rem;
 }
 
+.mate-card-list.all {
+  display: inline-block;
+  margin-top: 1rem;
+  width: 32%;
+}
+
 .mate-card-item {
   cursor: pointer;
   display: flex;
@@ -1106,6 +1116,10 @@ button > i {
   border-radius: 5px;
   padding-block: 1.8rem;
   transition: all ease 0.3s 0s;
+}
+
+.mate-card-item.all {
+  width: auto;
 }
 
 .mate-card-item:hover {
@@ -1918,6 +1932,11 @@ div.challenge-choice {
   aspect-ratio: 3/3.6;
 }
 
+.mate-flex-item.mypage {
+  min-width: 32%;
+  aspect-ratio: 1/1;
+}
+
 .mate-flex-item:hover {
   box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.05);
   transform: scale3d(1.01, 1.01, 1.01);
@@ -2120,6 +2139,8 @@ div.challenge-choice {
 @media screen and (max-width: 780px) {
   .mate-flex-item {
     max-width: 100%;
+    min-width: 100%;
+    aspect-ratio: 1/1;
   }
   .search-bar {
     width: 100%;
@@ -3109,6 +3130,7 @@ form .alarm-top {
 
 .ex .n-card-item {
   cursor: default;
+  min-height: 240px;
 }
 
 .n-card-item {
@@ -3124,6 +3146,7 @@ form .alarm-top {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-height: 270px;
 }
 
 .n-card-item:hover {
@@ -3388,4 +3411,9 @@ p.check-none {
   right: 5%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.form-control.text.mypage {
+  height: 45px;
+  max-width: 160px;
 }

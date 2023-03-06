@@ -88,7 +88,7 @@ public interface MateDAO {
 			+ "	WHERE `mid` = #{mid};")
 	public void updateCancelApply(Long mid);
 	
-	/** UPDATE : APPLY COUNT */
+	/** List : All */
 	@Select("SELECT * FROM mate"
 			+ "	 WHERE isDel = 0"
 			+ "	AND category IN(${categorySQL})"
@@ -97,6 +97,23 @@ public interface MateDAO {
 			+ "	AND title LIKE '%${querySQL}%'"
 			+ "	ORDER BY modDate DESC;")
 	public List<Mate> findAllBySearch(MateSearchDTO mateSearchDTO);
+	
+	@Select("SELECT * FROM mate"
+			+ " WHERE uid = #{uid}"
+			+ "	AND state IN(${stateSQL})"
+			+ "	AND title LIKE '%${querySQL}%'"
+			+ " ORDER BY modDate DESC")
+	public List<Mate> findAllByUid(MateSearchDTO mateSearchDTO);
+	
+	
+	@Select("SELECT * FROM mate m"
+			+ " JOIN mate_like l"
+			+ " ON m.`mid` = l.`mid`"
+			+ " WHERE l.uid = #{uid}"
+			+ " AND m.state IN(${stateSQL})"
+			+ " AND m.title LIKE '%${querySQL}%'"
+			+ " ORDER BY m.modDate DESC")
+	public List<Mate> findLikeByUid(MateSearchDTO mateSearchDTO);
 
 
 }

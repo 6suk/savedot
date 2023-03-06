@@ -42,7 +42,7 @@ public class MateController {
 
 	@Autowired
 	MateService mateService;
-	
+
 	@Autowired
 	MateLikeService likeService;
 
@@ -76,7 +76,7 @@ public class MateController {
 
 	/** Mate Detail */
 	@GetMapping("/detail/{mid}")
-	public String detail(@PathVariable Long mid, Model model,HttpSession session) {
+	public String detail(@PathVariable Long mid, Model model, HttpSession session) {
 		MateDTO mateDTO = mateService.findOneByMid(mid);
 		UserDTO user = (UserDTO) session.getAttribute("user");
 		// 삭제된 게시물일 때 (추후 필터 또는 에러 페이지로 이동하는 로직 구현할 것)
@@ -87,10 +87,10 @@ public class MateController {
 
 			List<MateReply> replyList = mateReplyService.getReplies(mid);
 			model.addAttribute("replyList", replyList);
-			
-			if(user != null) {
+
+			if (user != null) {
 				List<MateLike> likeList = likeService.GetLikeList(user.getUid());
-				model.addAttribute("likelist",likeList);
+				model.addAttribute("likelist", likeList);
 			}
 
 			return "mate/detail";
@@ -103,12 +103,12 @@ public class MateController {
 		applyDTO.setMate(mateService.findOneByMid(applyDTO.getMid()));
 		MateApply apply = modelMapper.map(applyDTO, MateApply.class);
 		applyDTO.setAid(applyService.save(apply));
-		
+
 		/** 게시물 작성자에게 알람 */
 		AlarmDTO alarmDTO = new AlarmDTO();
 		alarmDTO.setApplyAlarm(applyDTO);
 		alarmService.save(alarmDTO);
-		
+
 		return "redirect:/mypage/mate/apply/all";
 	}
 
@@ -125,12 +125,12 @@ public class MateController {
 	public MateApplyDTO applyStateEdit(@RequestBody MateApplyDTO applyDTO) {
 		applyService.editIsApply(applyDTO);
 		applyDTO = applyService.findOneByAid(applyDTO.getAid());
-		
+
 		/** 신청자에게 알람 */
 		AlarmDTO alarmDTO = new AlarmDTO();
 		alarmDTO.setApplyStateAlarm(applyDTO);
 		alarmService.save(alarmDTO);
-		
+
 		return applyDTO;
 	}
 
@@ -140,12 +140,12 @@ public class MateController {
 		List<MateDTO> mateDTO = mateService.findAllBySearch(mateSearchDTO);
 		UserDTO user = (UserDTO) session.getAttribute("user");
 		model.addAttribute("mate", mateDTO);
-		
-		if(user != null) {
+
+		if (user != null) {
 			List<MateLike> likeList = likeService.GetLikeList(user.getUid());
-			model.addAttribute("likelist",likeList);
+			model.addAttribute("likelist", likeList);
 		}
-		
+
 		return "mate/list";
 	}
 
@@ -186,7 +186,7 @@ public class MateController {
 		UserDTO user = (UserDTO) session.getAttribute("user");
 		MateDTO mate = mateService.findOneByMid(reply.getMid());
 		Long uid = user.getUid();
-		
+
 		int isMine = mate.getUid() == uid ? 1 : 0;
 		reply.setNickname(user.getNickname());
 		reply.setIsMine(isMine);
