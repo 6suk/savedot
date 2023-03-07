@@ -11,7 +11,7 @@
 <!-- // Heading -->
 <%@ include file="../common/heading.jsp"%>
 <!-- // Heading -->
-<title>챌린지 선택</title>
+<title>SAVE. : 챌린지 선택</title>
 </head>
 <body>
 	<!-- TOP -->

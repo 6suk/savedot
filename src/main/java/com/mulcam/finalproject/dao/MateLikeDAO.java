@@ -27,5 +27,9 @@ public interface MateLikeDAO {
 	
 	@Delete("DELETE FROM mate_like WHERE mid=#{mid} and uid=#{uid}")
 	void deleteLike(long mid,long uid);
+	
+	@Select("SELECT COUNT(*) FROM mate_like"
+			+ " WHERE uid = #{uid}")
+	int getLikeCount(Long uid);
 
 }

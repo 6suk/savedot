@@ -26,8 +26,8 @@ public class LoginFilter implements Filter {
 
 	private static final String[] whiteList = { "/home", "/", "/mate/list", "/challenge/choice", "/mate/detail/*",
 			"/user/login", "/user/loginKakao", "/user/logout", "/user/logoutKakao", "/user/join", "/user/join/*",
-			"/savedot/display/*","/savedot/upload/*", "/info/news", "/css/*", "/js/*", "/img/*", "/emoji/*", "/test", "/test/*", "/aside/*",
-			"/pay" };
+			"/savedot/display/*", "/savedot/upload/*", "/info/news", "/css/*", "/js/*", "/img/*", "/emoji/*",
+			"/favicon/*", "/test", "/test/*", "/aside/*", "/pay", "/logo/*" };
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

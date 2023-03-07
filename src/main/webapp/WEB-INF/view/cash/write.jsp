@@ -6,7 +6,7 @@
     <%@ include file="../common/heading.jsp"%>
     <!-- // Heading -->
 
-    <title>수입/지출 등록</title>
+    <title>SAVE. : 수입/지출 등록</title>
   </head>
   <body>
     <!-- //TOP -->
