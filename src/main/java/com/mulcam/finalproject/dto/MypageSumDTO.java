@@ -16,7 +16,6 @@ public class MypageSumDTO {
 	private int challengeToday;
 	private int challengeWeek;
 	private int challengeMonth;
-	private int mateToday;
-	private int mateWeek;
-	private int mateMonth;
+	private int mateSavePrice;
+	private int mateSum;
 }

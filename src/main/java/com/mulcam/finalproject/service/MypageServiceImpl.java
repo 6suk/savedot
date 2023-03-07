@@ -32,6 +32,15 @@ public class MypageServiceImpl implements MypageService {
 
 	@Autowired
 	ChartDAO chartDAO;
+	
+	
+	public int getSumSavePriceMate(Long uid){
+		return mypageDAO.getSumSavePriceMate(uid);
+	}
+	
+	public int getSumMate(Long uid) {
+		return mypageDAO.getSumMate(uid);
+	}
 
 	@Override
 	public CalendarDTO getCalendar(CalendarDTO calendarDTO) {

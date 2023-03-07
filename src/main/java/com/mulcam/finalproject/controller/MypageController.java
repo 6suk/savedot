@@ -155,6 +155,8 @@ public class MypageController {
 	public MypageSumDTO mypagePost(HttpSession session) {
 		UserDTO user = (UserDTO) session.getAttribute("user");
 		MypageSumDTO mypageSumDTO = css.getSum(user.getId());
+		mypageSumDTO.setMateSum(mypageService.getSumMate(user.getUid()));
+		mypageSumDTO.setMateSavePrice(mypageService.getSumSavePriceMate(user.getUid()));
 		return mypageSumDTO;
 	}
 

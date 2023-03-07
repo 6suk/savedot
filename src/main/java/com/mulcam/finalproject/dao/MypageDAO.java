@@ -28,4 +28,14 @@ public interface MypageDAO {
 			+ "	GROUP BY category, regDate;")
 	public List<Cash> getCashByUid(CalendarDTO calendarDTO);
 	
+	@Select("SELECT IFNULL(sum(price2 * positionNum),0) FROM mate"
+			+ " WHERE uid = #{uid}"
+			+ " AND positionNum = positonApplyNum;")	
+	public int getSumSavePriceMate(Long uid);
+	
+	@Select("SELECT IFNULL(COUNT(`mid`),0) FROM mate"
+			+ " WHERE uid = #{uid}"
+			+ " AND positionNum = positonApplyNum;")
+	public int getSumMate(Long uid);
+	
 }
