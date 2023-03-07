@@ -10,7 +10,7 @@
 <!-- // Heading -->
 <%@ include file="../common/heading.jsp"%>
 <!-- // Heading -->
-<title>FinalProject</title>
+<title>SAVE. : 게시물 수정 - ${mate.title }</title>
 </head>
 <body>
 	<!-- TOP -->

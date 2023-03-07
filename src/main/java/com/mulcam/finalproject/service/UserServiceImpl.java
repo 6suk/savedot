@@ -18,6 +18,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired private UserDAO userDAO ;
 	
+	@Autowired
+	private MateLikeService likeService;
+	
 	/** 회원가입 */
 	@Override
 	public void join(User user) {
@@ -47,6 +50,7 @@ public class UserServiceImpl implements UserService {
 		
 		if (getUser != null && getUser.getId() != null) {					// id가 존재
 			if (BCrypt.checkpw(user.getPwd(), getUser.getPwd())) {			// 올바른 비밀번호
+				getUser.setLikeCount(likeService.getLikeCount(getUser));
 				session.setAttribute("user", getUser);
 				return UserService.CORRECT_LOGIN;
 			} else {														// 틀린 비밀번호

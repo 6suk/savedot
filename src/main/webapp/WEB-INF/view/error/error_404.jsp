@@ -6,7 +6,7 @@
 <!-- // Heading -->
 <%@ include file="../common/heading.jsp"%>
 <!-- // Heading -->
-<title>FinalProject</title>
+<title>SAVE. : 404 Error</title>
 </head>
 <body>
 	<!-- TOP -->

@@ -47,6 +47,7 @@ public class UserDTO {
 	private String code_;
 	private String oauth; // 카카오로 로그인 한 사람 확인용
 	private int sumNowExpense;
+	private int likeCount;
 	
 	public void setBirthDate_(String birthDate_) {
 		this.birthDate_ = birthDate_;

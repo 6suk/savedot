@@ -8,7 +8,7 @@
     <!-- // Heading -->
     <%@ include file="../common/heading.jsp"%>
     <!-- // Heading -->
-    <title>FinalProject</title>
+    <title>SAVE. : 얼마나 벌었지?</title>
   </head>
   <body>
     <!-- TOP -->

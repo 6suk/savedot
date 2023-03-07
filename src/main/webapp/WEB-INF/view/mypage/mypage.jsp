@@ -12,7 +12,7 @@
 <%@ include file="../common/heading.jsp"%>
 <!-- // Heading -->
 <link rel="stylesheet" href="/css/calendar.css" />
-<title>Save. - Mypage</title>
+<title>SAVE. : 마이페이지</title>
 </head>
 <body>
 	<!-- //TOP -->

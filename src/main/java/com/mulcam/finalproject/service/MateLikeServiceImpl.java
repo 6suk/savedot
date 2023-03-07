@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mulcam.finalproject.dao.MateLikeDAO;
+import com.mulcam.finalproject.dto.UserDTO;
 import com.mulcam.finalproject.entity.MateLike;
 
 @Service
@@ -38,6 +39,16 @@ public class MateLikeServiceImpl implements MateLikeService {
 	@Override
 	public void plusLike(long mid) {
 		likeDAO.plusLike(mid);
+	}
+	
+	@Override
+	public int getLikeCount(UserDTO user) {
+		return likeDAO.getLikeCount(user.getUid());
+	}
+	
+	@Override
+	public int getLikeCount(Long uid) {
+		return likeDAO.getLikeCount(uid);
 	}
 
 

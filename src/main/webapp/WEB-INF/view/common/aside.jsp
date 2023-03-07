@@ -22,7 +22,7 @@
                 </dd>
                 <dt>좋아요</dt>
                 <dd>
-                    <a href="#">2</a>
+                    <a href="/mypage/mate/like/list">${user.likeCount }</a>
                 </dd>
             </dl>
 
@@ -56,17 +56,17 @@
         </div>
 
         <div class="multiple-btn pt-3 pb-5">
-            <a class="icon-btn" href="#">
+            <a class="icon-btn" href="/challenge/choice">
                 <i class="fa-solid fa-certificate mb-2"></i>
                 <p>챌린지</p>
             </a>
-            <a class="icon-btn" href="#">
+            <a class="icon-btn" href="/cash/write">
                 <i class="fa-solid fa-circle-plus mb-2"></i>
                 <p>지출등록</p>
             </a>
-            <a class="icon-btn" href="#">
-                <i class="fa-solid fa-share-nodes mb-2"></i>
-                <p>공유하기</p>
+            <a class="icon-btn" href="/pay">
+                <i class="fa-solid fa-dollar-sign mb-2"></i>
+                <p>얼마벌었지</p>
             </a>
         </div>
     </aside>

@@ -11,7 +11,7 @@
 <!-- // Heading -->
 <%@ include file="../common/heading.jsp"%>
 <!-- // Heading -->
-<title>FinalProject</title>
+<title>SAVE. : 마이페이지 - 조각메이트</title>
 </head>
 <body>
 	<!-- //TOP -->

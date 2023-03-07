@@ -9,7 +9,7 @@
 <!-- // Heading -->
 <%@ include file="../common/heading.jsp"%>
 <!-- // Heading -->
-<title>챌린지 확인 페이지</title>
+<title>SAVE. : 챌린지 확인</title>
 </head>
 <body>
 	<!-- TOP -->

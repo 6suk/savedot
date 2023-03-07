@@ -11,7 +11,7 @@
 <!-- // Heading -->
 <%@ include file="../common/heading.jsp"%>
 <!-- // Heading -->
-<title>회원정보 수정</title>
+<title>SAVE. : 마이페이지 - 정보수정</title>
 </head>
 <body>
 	<!-- //TOP -->

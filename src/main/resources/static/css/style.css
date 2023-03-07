@@ -72,8 +72,8 @@ nav + div {
 }
 
 .logo {
-  width: 50px;
-  filter: invert(48%) sepia(27%) saturate(1441%) hue-rotate(183deg) brightness(96%) contrast(95%);
+  width: 19px;
+  fill: var(--main-color);
 }
 
 /** btn */
@@ -161,7 +161,7 @@ aside {
 }
 .aside-info dt {
   display: inline-block;
-  margin-right: 5px;
+  /* margin-right: 5px; */
   font-weight: 400;
   color: var(--lgray-color);
 }
@@ -2544,11 +2544,11 @@ div.challenge-choice {
 }
 
 .main-slide-color-ver1 {
-  filter: invert(58%) sepia(100%) saturate(975%) hue-rotate(360deg) brightness(104%) contrast(110%);
+  fill: #ffa900;
 }
 
 .main-slide-color-ver0 {
-  filter: invert(18%) sepia(19%) saturate(5214%) hue-rotate(227deg) brightness(102%) contrast(63%);
+  fill: #672b9e;
 }
 
 /* ////////////////////////////////////  MAIN-CONTENT //////////////////////////////////// */

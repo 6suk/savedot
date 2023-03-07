@@ -11,7 +11,7 @@
 <!-- // Heading -->
 <%@ include file="../common/heading.jsp"%>
 <!-- // Heading -->
-<title>FinalProject</title>
+<title>SAVE. : HOME</title>
 </head>
 <body>
 	<!-- TOP -->

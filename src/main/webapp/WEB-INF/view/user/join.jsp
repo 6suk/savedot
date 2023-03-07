@@ -9,7 +9,7 @@
 <!-- // Heading -->
 <%@ include file="../common/heading.jsp"%>
 <!-- // Heading -->
-<title>FinalProject</title>
+<title>SAVE. : 회원가입</title>
 </head>
 <body>
 	<!-- TOP -->
