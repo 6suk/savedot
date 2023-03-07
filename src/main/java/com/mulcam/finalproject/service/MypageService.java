@@ -1,5 +1,6 @@
 package com.mulcam.finalproject.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.mulcam.finalproject.dto.CalendarDTO;
@@ -15,5 +16,11 @@ public interface MypageService {
 	
 	/** 챌린지 6개월간 통계 데이터 */
 	public Map<String, Object> getChallengeChart(UserDTO userDTO);
+	
+	/** 메이트 SavePrice Sum */
+	public int getSumSavePriceMate(Long uid);
+	
+	/** 메이트 지금까지 판매한 개수 */
+	public int getSumMate(Long uid);
 	
 }

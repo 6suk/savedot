@@ -2045,7 +2045,7 @@ div.challenge-choice {
   font-size: 12px;
   background-color: #eee;
   color: var(--lgray-color);
-  filter: drop-shadow(1px 1px 10px rgb(255 255 255 / 50%));
+  filter: drop-shadow(1px 1px 10px rgb(255 255 255 / 10%));
 }
 
 .mate-top-info .top .mate-card-tag.position[N] {

@@ -12,9 +12,8 @@ $(function () {
       challenge.push(data.challengeToday);
       challenge.push(data.challengeWeek);
       challenge.push(data.challengeMonth);
-      mate.push(data.mateToday);
-      mate.push(data.mateWeek);
-      mate.push(data.mateMonth);
+      mate.push(data.mateSavePrice);
+      mate.push(data.mateSum);
       challenge_change(challenge_ver++);
       mate_change(mate_ver++);
     },
@@ -28,7 +27,7 @@ $(function () {
   });
   $('#card2').click(function () {
     mate_change(mate_ver++);
-    if (mate_ver === 3) {
+    if (mate_ver === 2) {
       mate_ver = 0;
     }
     console.log(mate_ver);
@@ -58,21 +57,34 @@ function challenge_change(i) {
 }
 
 // 2. 데이터 가공 (메이트)
-const M_EMOJI = ['/emoji/hot-beverage_2615.png', '/emoji/pizza_1f355.png', '/emoji/laptop_1f4bb.png'];
-const M_MAIN_SUM = [4500, 20000, 1400000]; // 금액 기준
-const M_MAIN_LEFT = ['커피 ', '피자 ', ''];
-const M_MAIN_RIGHT = ['잔', '판', ' 맥북 Air'];
+const M_DATE = ['지금까지 아낀 비용', '지금까지 거래 완료한 건'];
+const M_RIGHT = ['몇건', '비용'];
+const M_EMOJI = ['/emoji/laptop_1f4bb.png', '/emoji/trophy_1f3c6.png'];
+const M_MAIN_SUM = [1400000, 4500, 20000]; // 금액 기준
+const M_MAIN_RIGHT = [' 맥북 Air', '건'];
 
 function mate_change(i) {
-  let top = '조각 메이트로 ' + DATE[i] + ' 아낀 비용';
-  let calc = Math.round((mate[i] / M_MAIN_SUM[i]) * 100) / 100;
-  let c_main_final = M_MAIN_LEFT[i] + calc + M_MAIN_RIGHT[i]; // main text 최종
-  let bottom = '약 ' + mate[i].toLocaleString('en-US') + '원을 아꼈어요!';
+  let top = '조각 메이트로 ';
+  let calc = '';
+  let c_main_final = '';
+  let bottom = mate[0].toLocaleString('en-US') + '원을 아꼈어요!';
+
+  switch (i) {
+    case 0:
+      top += M_DATE[i];
+      calc = Math.round((mate[i] / M_MAIN_SUM[i]) * 100) / 100;
+      c_main_final = calc + M_MAIN_RIGHT[i]; // main text 최종
+      break;
+    case 1:
+      top += M_DATE[i];
+      c_main_final = mate[i] + M_MAIN_RIGHT[i]; // main text 최종
+      break;
+  }
 
   // 3. 데이터 세팅
   $('#card2-top').text(top);
   $('img#card2-emoji').attr('src', M_EMOJI[i]);
   $('#card2-emoji-txt').text(c_main_final);
   $('#card2-bottom').text(bottom);
-  $('#card2-right').text(RIGHT[i]);
+  $('#card2-right').text(M_RIGHT[i]);
 }
