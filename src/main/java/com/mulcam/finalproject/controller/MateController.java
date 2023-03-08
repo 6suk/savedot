@@ -109,14 +109,14 @@ public class MateController {
 		alarmDTO.setApplyAlarm(applyDTO);
 		alarmService.save(alarmDTO);
 
-		return "redirect:/mypage/mate/apply/all";
+		return "redirect:/mypage/mate/apply/view";
 	}
 
 	/** Mate Apply : 신청취소 */
 	@GetMapping("/apply/cancel/{uid}/{aid}")
 	public String applyCancel(@PathVariable Long aid, @PathVariable Long uid) {
 		applyService.delete(aid);
-		return "redirect:/mypage/mate/apply/all";
+		return "redirect:/mypage/mate/apply/view";
 	}
 
 	/** Mate Apply : 상태변경 */

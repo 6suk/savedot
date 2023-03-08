@@ -45,7 +45,7 @@
 									value="/mate/detail/${alarm.mid }/#${alarm.rid }"></c:set>
 								<!-- TYPE 0, 1, 2 ALARM -->
 								<li class="alarm-item"
-									onclick="location.href='${alarm.type eq 2 ? '/mypage/mate/apply/all' : url}'">
+									onclick="location.href='${alarm.type eq 2 ? '/mypage/mate/apply/view' : url}'">
 									<div class="alarm-item-top">
 										<div class="flex">
 											<p alarm-read="0"></p>
@@ -78,7 +78,7 @@
 							<c:if test="${alarm.read eq 0 and alarm.type eq 3 }">
 								<!-- TYPE 3 ALARM -->
 								<li class="alarm-item"
-									onclick="location.href='/mypage/mate/apply/all'">
+									onclick="location.href='/mypage/mate/apply/view'">
 									<div class="alarm-item-top">
 										<div class="flex">
 											<p alarm-read="0"></p>
@@ -130,7 +130,7 @@
 										value="/mate/detail/${alarm.mid }/#${alarm.rid }"></c:set>
 									<!-- TYPE 0, 1, 2 ALARM -->
 									<li class="alarm-item"
-										onclick="location.href='${alarm.type eq 2 ? '/mypage/mate/apply/all' : url}'">
+										onclick="location.href='${alarm.type eq 2 ? '/mypage/mate/apply/view' : url}'">
 										<div class="alarm-item-top">
 											<div class="flex">
 												<p alarm-read="1"></p>
@@ -163,7 +163,7 @@
 								<c:if test="${alarm.read eq 1 and alarm.type eq 3 }">
 									<!-- TYPE 3 ALARM -->
 									<li class="alarm-item"
-										onclick="location.href='/mypage/mate/apply/all'">
+										onclick="location.href='/mypage/mate/apply/view'">
 										<div class="alarm-item-top">
 											<div class="flex">
 												<p alarm-read="1"></p>

@@ -64,7 +64,7 @@ public class MateDTO {
 	}
 
 	public void setTradeType(int tradeType) {
-		String[] tradeNames = { null, "직접거래", "택배거래", "직접거래 / 택배거래 모두 가능" };
+		String[] tradeNames = { null, "만남거래", "택배거래", "만남거래 / 택배거래 모두 가능" };
 		this.tradeType = tradeType;
 		this.tradeName = tradeNames[tradeType];
 	}

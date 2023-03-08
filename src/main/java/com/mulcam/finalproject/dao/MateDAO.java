@@ -102,6 +102,7 @@ public interface MateDAO {
 			+ " WHERE uid = #{uid}"
 			+ "	AND state IN(${stateSQL})"
 			+ "	AND title LIKE '%${querySQL}%'"
+			+ "	AND isDel = 0"
 			+ " ORDER BY modDate DESC")
 	public List<Mate> findAllByUid(MateSearchDTO mateSearchDTO);
 	
@@ -112,6 +113,7 @@ public interface MateDAO {
 			+ " WHERE l.uid = #{uid}"
 			+ " AND m.state IN(${stateSQL})"
 			+ " AND m.title LIKE '%${querySQL}%'"
+			+ "	AND isDel = 0"
 			+ " ORDER BY m.modDate DESC")
 	public List<Mate> findLikeByUid(MateSearchDTO mateSearchDTO);
 

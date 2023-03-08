@@ -33,7 +33,7 @@ public class MateApplyDTO {
 	private Long getUid;
 
 	public void setApplyTradelType(int applyTradelType) {
-		String[] tradeNames = { null, "직접거래", "택배거래" };
+		String[] tradeNames = { null, "만남거래", "택배거래" };
 		this.applyTradelType = applyTradelType;
 		this.tradeName = tradeNames[applyTradelType];
 	}
