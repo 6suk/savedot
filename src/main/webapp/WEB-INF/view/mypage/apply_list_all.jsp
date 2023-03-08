@@ -121,7 +121,7 @@
 														</c:choose>
 														<c:choose>
 															<c:when test="${apply.applyTradelType ne 0 }">
-																<li>${apply.applyTradelType }</li>
+																<li>${apply.tradeName }</li>
 															</c:when>
 															<c:otherwise>
 																<li>${apply.mate.tradeName }</li>

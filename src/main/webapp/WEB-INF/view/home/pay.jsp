@@ -26,7 +26,7 @@
           </div>
           <div class="pay-check-btn-group">
             <button class="btn btn-main" onclick="location.href='/cash/write'">지출 등록</button>
-            <button class="btn btn-sub" onclick="location.href='/user/update/${user.uid}'">급여 변경</button>
+            <button class="btn btn-sub" onclick="location.href='/user/update'">급여 변경</button>
           </div>
         </div>
         <div class="pay-check-progress">
