@@ -2,6 +2,7 @@
 
 - 🔔 **고예림(팀장)** / **최혜린** / **김예진**
 - 🏆 프로젝트 **최우수상** 시상
+- 🕒 **2023.01.09** 기획 시작 ~ **2023.03.07** 최종 발표
 - [🔗 팀 일정 관리 노션](https://6suk.notion.site/4a0edfef00094bb58c988680fa2a6409?v=63e66f848ed245958d3f6e480da2cbdf) / [🔗 회의록](https://6suk.notion.site/Final-Project-9be302a8ec994327afa07552f95ef6a9) / [🔗 Commit Log](https://6suk.notion.site/COMMIT-LOG-3a23a7ef9aa14de78eeedbee9bed75f3)
 - [🔗 팀 구글 드라이브](https://drive.google.com/drive/folders/1WpZgK5WWQ5NP9rQEYC8G4Mq16E_1F2SL?usp=sharing)
 - [🔗 발표 PPT](https://drive.google.com/file/d/1EkyhqVvH6fJbsrMsEDaciMEPrOSVLx9h/view?usp=sharing) / [🔗 최종 기획안](https://drive.google.com/file/d/1YQM6WvnMz4dKBI5FufW_JKSlifC1SWGJ/view?usp=sharing) / [🔗 시연 동영상](https://drive.google.com/file/d/1_Db7CiMFEwC6PscLZ59Iv0f6U1Ll3i-U/view?usp=sharing)
